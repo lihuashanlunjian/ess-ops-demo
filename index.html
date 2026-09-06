@@ -3,7 +3,7 @@
 <head data-page-node-id="4R3UKsQFEvh62YnVE15iLw">
 <meta charset="utf-8" data-page-node-id="M0owZIONJ00cT273oQbtMX" />
 <meta name="viewport" content="width=device-width,initial-scale=1" data-page-node-id="oCfAatH5krPB2C72zpB4RZ" />
-<title>储能电站智能运维系统 · 示范页面 v6</title>
+<title>储能电站智能运维系统 · 示范页面 v7</title>
 <style>
 :root{--blue:#2E6BE6;--blue2:#5B8DEF;--text:#1F2329;--text2:#4E5560;--muted:#9AA1AB;--bg:#F5F7FA;--card:#fff;--line:#E5E8EE;--linesoft:#EFF1F5;--green:#2BA471;--green-soft:#E8F6F0;--orange:#F7931E;--orange-soft:#FEF4E5;--red:#F0453B;--red-soft:#FDEEED;--blue-soft:#EBF2FD;--violet:#7B61E0;--shadow:0 1px 2px rgba(31,35,41,.04),0 4px 16px rgba(31,35,41,.06)}
 *{box-sizing:border-box}html,body{height:100%;margin:0;font-family:"Inter","PingFang SC","Microsoft YaHei",Arial,sans-serif;color:var(--text);background:var(--bg)}button,input,select{font:inherit}button{cursor:pointer;border:0}.num{font-family:"DIN Alternate","Roboto","Helvetica Neue",sans-serif;font-variant-numeric:tabular-nums}
@@ -231,6 +231,14 @@
 .gp-col>section:nth-child(2){animation-delay:.08s}
 @media(max-width:1000px){.kpis{grid-template-columns:repeat(2,1fr)}.grid2,.scr3,.grp3,.a-grid2,.gp-layout{grid-template-columns:1fr}.sidebar{width:210px}.sidebar.collapsed{width:64px}}
 
+/* ===== V7 新增：预警复核/详情弹窗 ===== */
+.amask{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:center;justify-content:center;z-index:200}
+.amodal{background:#fff;border-radius:14px;width:520px;max-width:92vw;box-shadow:0 20px 60px rgba(0,0,0,.25)}
+.amodal .am-h{padding:16px 20px;border-bottom:1px solid var(--line);font-weight:600;display:flex;justify-content:space-between;align-items:center}
+.amodal .am-b{padding:20px;max-height:70vh;overflow:auto}
+.amodal .am-f{padding:14px 20px;border-top:1px solid var(--line);display:flex;justify-content:flex-end;gap:10px;align-items:center}
+.kv2{display:flex;justify-content:space-between;gap:16px;padding:6px 0;font-size:13px;border-bottom:1px dashed var(--linesoft)}
+.kv2 span{color:var(--muted);flex:none}.kv2 b{text-align:right;font-weight:600}
 /* ===== V4 新增：嵌入新版页面（报告中心/运维中心/分析中心） ===== */
 .v4-embed{width:100%;border:0;display:block;height:calc(100vh - 128px);background:#fff;border-radius:12px;box-shadow:var(--shadow)}
 </style>
@@ -254,6 +262,31 @@
   </header>
   <main class="content" id="content" data-page-node-id="u2GbuILBGDwJZuyBqaRqZ8"></main>
 </section>
+</div>
+<!-- V7 预警复核弹窗 -->
+<div class="amask" id="revMask">
+  <div class="amodal">
+    <div class="am-h">预警复核 <span style="cursor:pointer;color:var(--muted)" onclick="closeAm()">✕</span></div>
+    <div class="am-b">
+      <div class="kv2"><span>预警名称</span><b id="rvName"></b></div>
+      <div class="kv2"><span>设备</span><b id="rvDev"></b></div>
+      <div class="kv2"><span>等级 / 类型</span><b id="rvLv"></b></div>
+      <div class="kv2"><span>开始时间</span><b id="rvTime"></b></div>
+      <div style="margin:14px 0 8px;font-size:13px;font-weight:600">复核结论</div>
+      <label style="display:flex;gap:8px;align-items:center;font-size:13px;margin-bottom:6px"><input type="radio" name="rc" value="true" checked> 属实 — 需要处置</label>
+      <label style="display:flex;gap:8px;align-items:center;font-size:13px"><input type="radio" name="rc" value="false"> 误报 — 忽略并记录</label>
+      <textarea id="rvNote" placeholder="复核说明（选填）" style="width:100%;margin-top:10px;height:64px;border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:13px;font-family:inherit;resize:none"></textarea>
+    </div>
+    <div class="am-f" id="rvFoot"></div>
+  </div>
+</div>
+<!-- V7 预警详情弹窗（含影响范围） -->
+<div class="amask" id="detMask">
+  <div class="amodal" style="width:560px">
+    <div class="am-h">预警详情 <span style="cursor:pointer;color:var(--muted)" onclick="closeAm()">✕</span></div>
+    <div class="am-b" id="detBody"></div>
+    <div class="am-f"><button class="secondary" onclick="closeAm()">关闭</button><button class="primary" onclick="closeAm();alarmReview(curIdx)">去复核</button></div>
+  </div>
 </div>
 <div class="drawer" id="drawer" data-page-node-id="EtvtiKB3ZFs1ctR7COZlwA">
   <div class="drawer-head" data-page-node-id="fqjanGhDUx96cK7yHTTh40"><h3 data-page-node-id="xlkIBwYnc5xwfWRnvQD1eG">字段映射 / 页面数据说明</h3><button class="secondary" id="closeDrawer" data-page-node-id="0HpOtIzlZBZ8t8Gbacbs44">关闭</button></div>
@@ -331,7 +364,7 @@ function screenPage(){
     </div>
     <div class="pan" style="margin-top:16px">
       <div class="pan-title">关键预警 <span class="edit">✎</span></div>
-      ${[['电芯馈电','10','个','var(--red)'],['电芯高温','12','个','var(--orange)'],['绝缘异常','15','次','var(--blue)'],['通信异常','102','次','var(--blue)'],['变压器高温','10','次','var(--red)'],['变压器高温','10','次','var(--red)'],['变压器高温','10','次','var(--red)']].map(r=>`<div class="kv-row"><span class="k"><span class="dotk" style="background:${r[3]}"></span>${r[0]}</span><span class="v num">${r[1]}<i>${r[2]}</i></span></div>`).join('')}
+      ${[['电芯馈电','10','个','var(--red)'],['电芯高温','12','个','var(--orange)'],['绝缘异常','15','次','var(--blue)'],['通信异常','102','次','var(--blue)'],['变压器高温','10','次','var(--red)'],['变压器高温','10','次','var(--red)'],['变压器高温','10','次','var(--red)']].map(r=>`<div class="kv-row" style="cursor:pointer" onclick="state.page='alarm';render()"><span class="k"><span class="dotk" style="background:${r[3]}"></span>${r[0]}</span><span class="v num">${r[1]}<i>${r[2]}</i></span></div>`).join('')}
     </div>
     <div class="pan" style="margin-top:16px">
       <div class="pan-title">运维中心</div>
@@ -394,6 +427,7 @@ function groupPage(){return `<div class="gp-wrap">
       <div class="sec-title">电站指标 <span class="edit">✎</span></div>
       <div class="kpi-grid">
         <div class="kpi-item"><div class="ico" style="background:var(--blue-soft);color:var(--blue)">电</div><div class="v num">423<i>个</i></div><div class="l">电站总数</div></div>
+        <div class="kpi-item"><div class="ico" style="background:var(--green-soft);color:var(--green)">率</div><div class="v num">98.6<i>%</i></div><div class="l">电站在线率</div></div>
         <div class="kpi-item"><div class="ico" style="background:var(--green-soft);color:var(--green)">安</div><div class="v num">1223<i>天</i></div><div class="l">安全运行时间</div></div>
         <div class="kpi-item"><div class="ico" style="background:var(--orange-soft);color:var(--orange)">容</div><div class="v num">61.23<i>GWh</i></div><div class="l">累计装机容量</div></div>
         <div class="kpi-item"><div class="ico" style="background:#F0EBFD;color:var(--violet)">功</div><div class="v num">25.23<i>GW</i></div><div class="l">累计装机功率</div></div>
@@ -413,15 +447,15 @@ function groupPage(){return `<div class="gp-wrap">
       <table class="alarm-table" style="margin-top:8px">
         <thead><tr><th>设备名称</th><th>告警标题</th><th>告警时间</th></tr></thead>
         <tbody>
-          <tr><td>BMS1</td><td>单体温度异常</td><td class="num">2026-06-23 10:17</td></tr>
-          <tr><td>BMS1</td><td>单体温度异常</td><td class="num">2026-06-23 10:17</td></tr>
-          <tr><td>BMS1</td><td>单体温度异常</td><td class="num">2026-06-23 10:17</td></tr>
-          <tr><td>BMS1</td><td>单体温度异常</td><td class="num">2026-06-21 10:09</td></tr>
-          <tr><td>BMS1</td><td>单体温度异常</td><td class="num">2026-06-21 10:07</td></tr>
-          <tr><td>BMS1</td><td>单体温度异常</td><td class="num">2026-06-21 10:07</td></tr>
-          <tr><td>BMS1</td><td>单体温度异常</td><td class="num">2026-06-21 10:07</td></tr>
-          <tr><td>BMS1</td><td>单体温度异常</td><td class="num">2026-06-21 10:07</td></tr>
-          <tr><td>BMS1</td><td>单体温度异常</td><td class="num">2026-06-21 10:07</td></tr>
+          <tr style="cursor:pointer" onclick="state.page='alarm';render()"><td>BMS1</td><td>单体温度异常</td><td class="num">2026-06-23 10:17</td></tr>
+          <tr style="cursor:pointer" onclick="state.page='alarm';render()"><td>BMS1</td><td>单体温度异常</td><td class="num">2026-06-23 10:17</td></tr>
+          <tr style="cursor:pointer" onclick="state.page='alarm';render()"><td>BMS1</td><td>单体温度异常</td><td class="num">2026-06-23 10:17</td></tr>
+          <tr style="cursor:pointer" onclick="state.page='alarm';render()"><td>BMS1</td><td>单体温度异常</td><td class="num">2026-06-21 10:09</td></tr>
+          <tr style="cursor:pointer" onclick="state.page='alarm';render()"><td>BMS1</td><td>单体温度异常</td><td class="num">2026-06-21 10:07</td></tr>
+          <tr style="cursor:pointer" onclick="state.page='alarm';render()"><td>BMS1</td><td>单体温度异常</td><td class="num">2026-06-21 10:07</td></tr>
+          <tr style="cursor:pointer" onclick="state.page='alarm';render()"><td>BMS1</td><td>单体温度异常</td><td class="num">2026-06-21 10:07</td></tr>
+          <tr style="cursor:pointer" onclick="state.page='alarm';render()"><td>BMS1</td><td>单体温度异常</td><td class="num">2026-06-21 10:07</td></tr>
+          <tr style="cursor:pointer" onclick="state.page='alarm';render()"><td>BMS1</td><td>单体温度异常</td><td class="num">2026-06-21 10:07</td></tr>
         </tbody>
       </table>
       <div class="pager">
@@ -721,20 +755,21 @@ function groupPage(){return `<div class="gp-wrap">
   <circle class="mk-ring" cx="580" cy="152" r="5"/><circle class="mk-core" cx="580" cy="152" r="4"/>
   <circle class="mk-ring" cx="653" cy="201" r="5"/><circle class="mk-core" cx="653" cy="201" r="4"/>
   <circle class="mk-ring" cx="702" cy="220" r="5"/><circle class="mk-core" cx="702" cy="220" r="4"/>
-  <circle class="mk-ring hot" cx="832" cy="182" r="5"/><circle class="mk-core hot" cx="832" cy="182" r="4.5"/>
-  <circle class="mk-ring" cx="816" cy="210" r="5"/><circle class="mk-core" cx="816" cy="210" r="4"/>
-  <circle class="mk-ring" cx="852" cy="163" r="5"/><circle class="mk-core" cx="852" cy="163" r="4"/>
+  <circle class="mk-ring hot" cx="832" cy="182" r="5" style="cursor:pointer" onclick="showStation(0)"/><circle class="mk-core hot" cx="832" cy="182" r="4.5" style="cursor:pointer" onclick="showStation(0)"/>
+  <circle class="mk-ring" cx="816" cy="210" r="5" style="cursor:pointer" onclick="showStation(1)"/><circle class="mk-core" cx="816" cy="210" r="4" style="cursor:pointer" onclick="showStation(1)"/>
+  <circle class="mk-ring" cx="852" cy="163" r="5" style="cursor:pointer" onclick="showStation(2)"/><circle class="mk-core" cx="852" cy="163" r="4" style="cursor:pointer" onclick="showStation(2)"/>
   <circle class="mk-ring" cx="888" cy="168" r="5"/><circle class="mk-core" cx="888" cy="168" r="4"/>
   <circle class="mk-ring" cx="788" cy="275" r="5"/><circle class="mk-core" cx="788" cy="275" r="4"/>
   <circle class="mk-ring" cx="577" cy="361" r="5"/><circle class="mk-core" cx="577" cy="361" r="4"/>
-  <circle class="mk-ring" cx="919" cy="385" r="5"/><circle class="mk-core" cx="919" cy="385" r="4"/>
+  <circle class="mk-ring" cx="919" cy="385" r="5" style="cursor:pointer" onclick="showStation(3)"/><circle class="mk-core" cx="919" cy="385" r="4" style="cursor:pointer" onclick="showStation(3)"/>
 </g></svg>
-      <div class="map-tip" style="left:52%;top:30%">
-        <div class="tt">宜兴中环 10MW/20MWh <span class="x">✕</span></div>
-        <div class="row"><span>电站类型</span><b>工商业储能电站</b></div>
-        <div class="row"><span>装机容量</span><b class="num">89 MWh</b></div>
-        <div class="row"><span>装机功率</span><b class="num">90 MW</b></div>
-        <div class="row"><span>投运时间</span><b class="num">2026-05-19</b></div>
+      <div class="map-tip" id="mapTip" style="left:52%;top:30%">
+        <div class="tt"><span id="mtName">华润曹妃甸储能电站</span> <span class="x" onclick="document.getElementById('mapTip').style.display='none'">✕</span></div>
+        <div class="row"><span>电站类型</span><b id="mtType">大型储能电站</b></div>
+        <div class="row"><span>装机容量</span><b class="num" id="mtCap">200 MWh</b></div>
+        <div class="row"><span>装机功率</span><b class="num" id="mtPow">100 MW</b></div>
+        <div class="row"><span>投运时间</span><b class="num" id="mtDate">2024-11-20</b></div>
+        <div class="row" style="margin-top:6px"><span></span><b style="color:var(--blue);cursor:pointer" onclick="state.page='screen';render()">进入电站 →</b></div>
       </div>
     </div>
   </div>
@@ -832,7 +867,7 @@ function deviceTab(key){
 }
 function alarmHome(){
   const rows=[
-   ['1','BMS','温度类','#2-1舱 BMS1','电芯温度异常升高','<span class="lv-tag lv-h">高风险</span>','08-27 12:03:36','—','<span class="ps ps-wait">未处理</span>','—','<span class="link">复核</span><span class="link">详情</span>'],
+   ['1','BMS','温度类','BMS #15（#2-1 舱）','温差高告警 · 温差 12.4℃','<span class="lv-tag lv-h">高风险</span>','08-27 12:03:36','—','<span class="ps ps-wait">未处理</span>','—','<span class="link">复核</span><span class="link">详情</span>'],
    ['2','液冷','绝缘类','#1-2舱 液冷机组','绝缘阻值低于阈值','<span class="lv-tag lv-h">高风险</span>','08-27 11:48:02','—','<span class="ps ps-doing">处理中</span>','—','<span class="link">复核</span><span class="link">详情</span>'],
    ['3','PCS','通信类','#3-1舱 PCS2','通信中断超 5 分钟','<span class="lv-tag lv-m">中风险</span>','08-27 11:20:15','—','<span class="ps ps-doing">处理中</span>','—','<span class="link">复核</span><span class="link">详情</span>'],
    ['4','电池簇','电压类','#2-4舱 簇3','单体压差持续扩大','<span class="lv-tag lv-m">中风险</span>','08-27 10:52:40','—','<span class="ps ps-wait">未处理</span>','—','<span class="link">复核</span><span class="link">详情</span>'],
@@ -1047,6 +1082,69 @@ function hydrateEmbeds(){document.querySelectorAll('iframe.v4-embed').forEach(f=
 const extMap={'dashboard-group':'group','dashboard-station':'screen','alarm-center':'alarm','report-inspection':'inspect','report-health':'health','report-statistics':'report','om-workorder':'ops-home','om-cell-recharge':'battery-swap','om-cooler':'cooler','om-soc-calibration':'soc-cal','om-ups':'ups','om-ota':'ota','analysis-trend':'trend','analysis-consistency':'consistency','analysis-custom':'custom'};
 window.addEventListener('hashchange',()=>{const id=location.hash.replace('#','');if(extMap[id]&&state.page!==extMap[id]){state.page=extMap[id];render()}});
 (function(){const id=location.hash.replace('#','');if(extMap[id])state.page=extMap[id]})();
+/* ============ V7：集团大屏站点浮窗 ============ */
+var STATIONS=[
+ ['华润曹妃甸储能电站','大型储能电站','200 MWh','100 MW','2024-11-20'],
+ ['宜兴中环 10MW/20MWh','工商业储能电站','89 MWh','90 MW','2026-05-19'],
+ ['大唐东营 120/240MWh','独立储能电站','240 MWh','120 MW','2025-08-12'],
+ ['粤水电巴楚 1 期','光储一体电站','45 MWh','25 MW','2025-12-03']];
+function showStation(i){var t=STATIONS[i];
+ document.getElementById('mtName').textContent=t[0];
+ document.getElementById('mtType').textContent=t[1];
+ document.getElementById('mtCap').textContent=t[2];
+ document.getElementById('mtPow').textContent=t[3];
+ document.getElementById('mtDate').textContent=t[4];
+ document.getElementById('mapTip').style.display='block';}
+
+/* ============ V7：预警复核 / 详情 / 转工单闭环（对齐演示剧本） ============ */
+var ALARMS=[
+ {name:'温差高告警 · 温差 12.4℃',dev:'BMS #15（#2-1 舱）',lv:'高风险',type:'温度类',time:'2026-08-27 12:03:36',th:'簇内温差 > 10℃ 持续 5 分钟',cur:'12.4℃（超阈值 24%）',impact:'影响 #2-1 舱 2 个电池簇 · 384 节电芯，当前出力受限 0.2MW；若继续扩大将触发舱级停机保护',sug:'2 小时内复核并转工单，现场检查 BMS 温度采样与液冷流量',act:'wo'},
+ {name:'绝缘阻值低于阈值',dev:'#1-2 舱 液冷机组',lv:'高风险',type:'绝缘类',time:'2026-08-27 11:48:02',th:'绝缘阻值 < 0.5 MΩ',cur:'0.32 MΩ',impact:'#1-2 舱液冷回路存在漏电风险，关联 1 台冷机与 1 个电池簇',sug:'立即停机检查冷却液电导率，更换滤芯后复测',act:'wo'},
+ {name:'通信中断超 5 分钟',dev:'#3-1 舱 PCS2',lv:'中风险',type:'通信类',time:'2026-08-27 11:20:15',th:'通信中断 > 300s',cur:'中断 412s 后自动恢复',impact:'#3-1 舱功率调度指令延迟，EMS 数据采集断点 7 分钟',sug:'检查 PCS2 通信板卡与交换机端口，纳入周巡检',act:'wo'},
+ {name:'单体压差持续扩大',dev:'#2-4 簇 3',lv:'中风险',type:'电压类',time:'2026-08-27 10:52:40',th:'簇内压差 > 50 mV',cur:'86 mV（超阈值 72%）',impact:'#2-4 簇容量利用率下降约 6%，长期将加速劣化',sug:'转电池维护建议执行电芯补电（155 号电芯，13.64kWh）',act:'recharge'},
+ {name:'SOC 估算漂移',dev:'#1-1 舱 BMS2',lv:'低风险',type:'SOC 类',time:'2026-08-27 09:31:08',th:'SOC 估算偏差 > 5%',cur:'+7.2%',impact:'剩余能量预测偏差约 0.3MWh，影响日前计划申报精度',sug:'转 SOC 标定任务，在低负载窗口执行',act:'soc'},
+ {name:'探测器离线',dev:'#1-4 舱 消防主机',lv:'低风险',type:'通信类',time:'2026-08-27 08:15:22',th:'心跳丢失 > 60s',cur:'离线 25 分钟后恢复',impact:'短时失去 #1-4 舱烟感监测，未影响联动回路',sug:'误报可能性高，重启后观察 48 小时',act:'wo'}];
+var curIdx=0;
+function closeAm(){document.getElementById('revMask').style.display='none';document.getElementById('detMask').style.display='none';}
+function alarmReview(i){curIdx=i;var a=ALARMS[i];
+ document.getElementById('rvName').textContent=a.name;
+ document.getElementById('rvDev').textContent=a.dev;
+ document.getElementById('rvLv').textContent=a.lv+' / '+a.type;
+ document.getElementById('rvTime').textContent=a.time;
+ document.getElementById('rvFoot').innerHTML='<button class="secondary" onclick="closeAm()">取消</button><button class="primary" onclick="confirmReview()">确认复核</button>';
+ document.getElementById('revMask').style.display='flex';}
+function confirmReview(){
+ var sure=document.querySelector('input[name=rc]:checked').value==='true';
+ var a=ALARMS[curIdx];
+ if(!sure){closeAm();return;}
+ var extra=a.act==='soc'?'<button class="secondary" style="color:var(--blue);border-color:var(--blue)" onclick="closeAm();location.hash=\'om-soc-calibration\'">转标定任务</button>'
+  :(a.act==='recharge'?'<button class="secondary" style="color:var(--blue);border-color:var(--blue)" onclick="closeAm();location.hash=\'om-cell-recharge\'">转电池维护建议</button>':'');
+ document.getElementById('rvFoot').innerHTML='<span style="margin-right:auto;color:var(--green);font-size:13px">已复核为「属实」</span>'+extra+'<button class="primary" onclick="alarmToWo()">转运维工单</button>';}
+function alarmToWo(){
+ var a=ALARMS[curIdx];var d=new Date();var p=function(n){return n<10?'0'+n:n;};
+ try{localStorage.setItem('v7_new_wo',JSON.stringify({no:'WO-20260904-019',title:a.name+'处置',dev:a.dev,time:'09-04 '+p(d.getHours())+':'+p(d.getMinutes())}));}catch(e){}
+ closeAm();location.hash='#om-workorder';}
+function alarmDetail(i){curIdx=i;var a=ALARMS[i];
+ var w=480,h=110,pl=8,pb=16,pt=8,pr=8,n=24,pts='';
+ for(var k=0;k<n;k++){var v=0.5+Math.sin(k/3.4)*0.2+(k>17?(k-17)*0.05:0);var x=pl+k/(n-1)*(w-pl-pr);var y=pt+(1-v)*(h-pt-pb);pts+=(k?'L':'M')+x.toFixed(1)+' '+y.toFixed(1)+' ';}
+ var svg='<svg viewBox="0 0 '+w+' '+h+'" style="width:100%;height:110px;display:block;background:#FAFBFC;border-radius:8px"><path d="'+pts+'" fill="none" stroke="#F0453B" stroke-width="2"/><text x="'+(w-8)+'" y="16" font-size="10" fill="#F0453B" text-anchor="end">'+a.cur+'</text></svg>';
+ document.getElementById('detBody').innerHTML=
+  '<div class="kv2"><span>预警名称</span><b>'+a.name+'</b></div>'+
+  '<div class="kv2"><span>触发阈值</span><b>'+a.th+'</b></div>'+
+  '<div class="kv2"><span>当前值</span><b style="color:var(--red)">'+a.cur+'</b></div>'+
+  '<div class="kv2"><span>影响范围</span><b style="font-weight:400;color:var(--text2)">'+a.impact+'</b></div>'+
+  '<div style="margin:14px 0 6px;font-size:13px;font-weight:600">近 24h 关联曲线</div>'+svg+
+  '<div class="callout" style="margin-top:12px">处置建议：'+a.sug+'</div>';
+ document.getElementById('detMask').style.display='flex';}
+/* 预警列表操作列事件委托（复核 / 复核记录 / 详情） */
+document.getElementById('content').addEventListener('click',function(e){
+ var t=e.target.closest?e.target.closest('.link'):null;
+ if(!t||state.page!=='alarm')return;
+ var tr=t.closest('tr');if(!tr)return;
+ var idx=Math.min(Math.max(tr.rowIndex-1,0),ALARMS.length-1);
+ if(t.textContent.indexOf('复核')>=0)alarmReview(idx);
+ else if(t.textContent.indexOf('详情')>=0)alarmDetail(idx);
+});
 render();
 </script>
 
@@ -1805,6 +1903,13 @@ var FLOW=[
 ];
 var tbody=document.getElementById('tbody');
 var woMask=document.getElementById('woMask');
+
+/* ===== V7：预警转工单联动（localStorage 传递，演示待办实时变化） ===== */
+var NEW_WO=null;
+try{NEW_WO=JSON.parse(localStorage.getItem('v7_new_wo')||'null');if(NEW_WO)localStorage.removeItem('v7_new_wo');}catch(e){}
+if(NEW_WO){
+  ROWS.unshift({no:NEW_WO.no,type:'运维工单',title:NEW_WO.title,dev:NEW_WO.dev,pri:'紧急',st:'待派单',src:'告警联动',sla:'<span class="sla-red">剩余 4.0h</span>',time:NEW_WO.time});
+}
 ROWS.forEach(function(r){
   var tr=document.createElement('tr');
   tr.innerHTML='<td style="font-variant-numeric:tabular-nums">'+r.no+'</td><td>'+r.type+'</td>'+
@@ -1832,6 +1937,16 @@ function openDetail(r){
   document.getElementById('dTrace').style.display=(r.src==='告警联动')?'inline-flex':'none';
   document.getElementById('dAction').textContent=(r.st==='待派单')?'派单':(r.st==='待验收'?'验收':'处理流转');
   woMask.style.display='flex';
+}
+if(NEW_WO){
+  var sv=document.querySelectorAll('.stats .stat .value');if(sv[0])sv[0].textContent='34';
+  var dt=document.querySelector('#donut text');if(dt)dt.textContent='34';
+  var pg=document.querySelector('.pagination span');if(pg)pg.textContent='共 34 条';
+  var tip=document.createElement('div');
+  tip.style.cssText='background:#E8FFEA;border:1px solid #B7EBC4;color:#00B42A;border-radius:8px;padding:10px 14px;margin-bottom:16px;font-size:13px';
+  tip.textContent='已由预警「'+NEW_WO.title+'」自动生成工单 '+NEW_WO.no+'（告警联动 · 紧急 · 待派单），本月工单 33 → 34。';
+  var pg0=document.querySelector('.page');pg0.insertBefore(tip,pg0.firstChild);
+  if(tbody&&tbody.firstChild)tbody.firstChild.style.background='#F0F7FF';
 }
 document.getElementById('dTrace').onclick=function(){woMask.style.display='none';go('alarm-center')};
 document.getElementById('dAction').onclick=function(){woMask.style.display='none'};
@@ -1914,6 +2029,10 @@ tbody tr:hover td:first-child{background:#F7F8FA}
   </div>
 
   <div class="card">
+    <div style="background:#F0F7FF;border:1px solid #BED4F7;border-radius:8px;padding:10px 14px;margin-bottom:14px;font-size:13px;color:#1D2129;line-height:1.7">
+      诊断证据链：#2-4 簇在一致性分析中压差 <b style="color:var(--red)">86mV</b>，超出 50mV 阈值 → 已生成补电建议（155 号电芯，建议电量 13.64kWh）。
+      <a style="color:var(--primary);cursor:pointer;font-weight:600" onclick="go('analysis-consistency')">查看一致性分析 →</a>
+    </div>
     <div class="card-t">电芯补电建议</div>
     <div class="filters" style="margin-bottom:16px">
       <div class="field"><label>电池舱</label><select><option>请选择电池舱</option><option>#15 电池舱</option><option>#08 电池舱</option><option>#07 电池舱</option><option>#12 电池舱</option></select></div>
@@ -2449,6 +2568,27 @@ document.getElementById('cfmOk').onclick=function(){
   cfmMask.style.display='none';
   btnCalib.textContent='已下发标定指令';
   btnCalib.disabled=true;
+  /* V7：执行后回写标定记录并跳转记录 Tab（执行→记录 闭环演示） */
+  var optText=mClu.options[mClu.selectedIndex].text;
+  var cluName=optText.split('（')[0];
+  var m0=optText.match(/SOC ([\d.]+)%/);var before=m0?parseFloat(m0[1]):0;
+  var after=parseFloat(mSoc.value)||0;
+  var dev=(after-before).toFixed(1);dev=(dev>0?'+':'')+dev;
+  var d=new Date();function p2(n){return n<10?'0'+n:n;}
+  var ts='2026-'+p2(d.getMonth()+1)+'-'+p2(d.getDate())+' '+p2(d.getHours())+':'+p2(d.getMinutes());
+  var tb=document.querySelector('#tab-record tbody');
+  if(tb){
+    var tr=document.createElement('tr');
+    tr.style.background='#F0F7FF';
+    tr.innerHTML='<td></td><td>华润曹妃甸</td><td>'+cluName+'</td><td><span class="tag tag-blue">手动标定</span></td><td>'+before.toFixed(1)+'%</td><td>'+after.toFixed(1)+'%</td><td>'+dev+'</td><td>售后用户</td><td>'+ts+'</td><td><span class="tag tag-green">已完成</span></td><td><a style="color:var(--primary);cursor:pointer">详情</a></td>';
+    tb.insertBefore(tr,tb.firstChild);
+    Array.prototype.forEach.call(tb.querySelectorAll('tr'),function(r,i){r.firstChild.textContent=i+1;});
+    var sv=document.querySelectorAll('#tab-record .stat .value');
+    if(sv[0])sv[0].textContent=parseInt(sv[0].textContent)+1;
+    if(sv[2])sv[2].textContent=parseInt(sv[2].textContent)+1;
+    var pg=document.querySelector('#tab-record .pagination span');if(pg)pg.textContent='共 '+(tb.querySelectorAll('tr').length)+' 条';
+  }
+  document.querySelector('.tabs .tab[data-t=record]').click();
 };
 
 /* 新增标定：需勾选安全确认 */
@@ -2856,11 +2996,22 @@ ROWS.forEach(function(r,idx){
 });
 fills=Array.prototype.slice.call(document.querySelectorAll('.fill'));
 
-/* 升级中任务每 5s 轮询推进进度（模拟） */
-setInterval(function(){
-  var f=fills[0];
+/* 升级中任务每 5s 轮询推进进度，走完自动闭环（模拟） */
+var otaTimer=setInterval(function(){
+  var f=fills[0];if(!f){clearInterval(otaTimer);return;}
   var w=parseFloat(f.style.width);
-  if(w<99){w+=1;f.style.width=w+'%';f.parentElement.nextElementSibling.textContent=w+'%';}
+  if(w<100){
+    w+=1;f.style.width=w+'%';f.parentElement.nextElementSibling.textContent=w+'%';
+    if(w>=100){
+      clearInterval(otaTimer);
+      var tr=f.closest('tr');
+      var tag=tr?tr.querySelector('.tag'):null;
+      if(tag){tag.className='tag tag-green';tag.textContent='升级成功';}
+      var sv=document.querySelectorAll('.stats .stat .value');
+      if(sv[1])sv[1].textContent='1';
+      if(sv[2])sv[2].textContent='20';
+    }
+  }
 },5000);
 
 function openDetail(r){
@@ -3242,13 +3393,14 @@ body{font-family:"PingFang SC","Microsoft YaHei","Helvetica Neue",Arial,sans-ser
         <span>簇间最大压差<b style="color:var(--red)">86 mV（#2-4 簇）</b></span>
         <span>阈值<b>50 mV</b></span>
         <span>评估<b style="color:var(--red)">超出阈值</b></span>
-        <span style="color:var(--orange)">建议：对 #2-4 簇执行整站均衡或电芯补电</span>
+        <span style="color:var(--orange)">建议：对 #2-4 簇执行电芯补电</span> <a style="color:var(--primary);cursor:pointer;font-weight:600" onclick="go('om-cell-recharge')">前往电池维护建议 →</a>
       </div>
     </div>
   </div>
 </div>
 
 <script>
+function go(id){ if(window.parent!==window){window.parent.location.hash='#'+id;} else { location.href=id+'.html'; } }
 /* Tab 切换 */
 Array.prototype.forEach.call(document.querySelectorAll('.tabs .tab'),function(t){
   t.addEventListener('click',function(){
