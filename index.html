@@ -3,7 +3,7 @@
 <head data-page-node-id="4R3UKsQFEvh62YnVE15iLw">
 <meta charset="utf-8" data-page-node-id="M0owZIONJ00cT273oQbtMX" />
 <meta name="viewport" content="width=device-width,initial-scale=1" data-page-node-id="oCfAatH5krPB2C72zpB4RZ" />
-<title>储能电站智能运维系统 · 示范页面 v4</title>
+<title>储能电站智能运维系统 · 示范页面 v6</title>
 <style>
 :root{--blue:#2E6BE6;--blue2:#5B8DEF;--text:#1F2329;--text2:#4E5560;--muted:#9AA1AB;--bg:#F5F7FA;--card:#fff;--line:#E5E8EE;--linesoft:#EFF1F5;--green:#2BA471;--green-soft:#E8F6F0;--orange:#F7931E;--orange-soft:#FEF4E5;--red:#F0453B;--red-soft:#FDEEED;--blue-soft:#EBF2FD;--violet:#7B61E0;--shadow:0 1px 2px rgba(31,35,41,.04),0 4px 16px rgba(31,35,41,.06)}
 *{box-sizing:border-box}html,body{height:100%;margin:0;font-family:"Inter","PingFang SC","Microsoft YaHei",Arial,sans-serif;color:var(--text);background:var(--bg)}button,input,select{font:inherit}button{cursor:pointer;border:0}.num{font-family:"DIN Alternate","Roboto","Helvetica Neue",sans-serif;font-variant-numeric:tabular-nums}
@@ -270,7 +270,7 @@ const menu=[
  {key:'dashboard',name:'大屏中心',items:[['screen','储能大屏'],['group','集团运维大屏']]},
  {key:'alarm',name:'预警中心',items:[['alarm','安全预警']]},
  {key:'report',name:'报告中心',items:[['inspect','巡检报告'],['health','体检报告'],['report','报表统计']]},
- {key:'ops',name:'运维中心',items:[['ops-home','运维首页'],['battery-swap','电池补换电'],['cooler','冷机检修'],['soc-cal','SOC标定'],['balance','整站均衡'],['ups','UPS故障处理'],['ota','OTA升级']]},
+ {key:'ops',name:'运维中心',items:[['ops-home','运维首页'],['battery-swap','电池维护建议'],['cooler','冷机检修'],['soc-cal','SOC标定'],['ups','UPS故障处理'],['ota','OTA升级']]},
  {key:'analysis',name:'分析中心',items:[['trend','趋势分析'],['consistency','一致性分析'],['custom','自定义曲线分析']]},
 ];
 const state={page:'screen', collapsed:false, groups:new Set(['dashboard','alarm','report','ops','analysis']), alarmTab:'home', trendTab:'温差曲线', consistencyTab:'整站监测', customTab:'电站曲线', station:'华润曹妃甸储能电站'};
@@ -395,8 +395,8 @@ function groupPage(){return `<div class="gp-wrap">
       <div class="kpi-grid">
         <div class="kpi-item"><div class="ico" style="background:var(--blue-soft);color:var(--blue)">电</div><div class="v num">423<i>个</i></div><div class="l">电站总数</div></div>
         <div class="kpi-item"><div class="ico" style="background:var(--green-soft);color:var(--green)">安</div><div class="v num">1223<i>天</i></div><div class="l">安全运行时间</div></div>
-        <div class="kpi-item"><div class="ico" style="background:var(--orange-soft);color:var(--orange)">容</div><div class="v num">6123<i>MWh</i></div><div class="l">累计装机容量</div></div>
-        <div class="kpi-item"><div class="ico" style="background:#F0EBFD;color:var(--violet)">功</div><div class="v num">2523<i>MW</i></div><div class="l">累计装机功率</div></div>
+        <div class="kpi-item"><div class="ico" style="background:var(--orange-soft);color:var(--orange)">容</div><div class="v num">61.23<i>GWh</i></div><div class="l">累计装机容量</div></div>
+        <div class="kpi-item"><div class="ico" style="background:#F0EBFD;color:var(--violet)">功</div><div class="v num">25.23<i>GW</i></div><div class="l">累计装机功率</div></div>
       </div>
     </section>
     <section>
@@ -433,9 +433,9 @@ function groupPage(){return `<div class="gp-wrap">
   <!-- 中栏 -->
   <div class="gp-col" style="gap:0">
     <div class="top-kpis">
-      <div class="top-kpi"><div class="line"></div><div class="v num">570<i>GWh</i></div><div class="l">累计充电量</div></div>
-      <div class="top-kpi"><div class="line"></div><div class="v num">515<i>GWh</i></div><div class="l">累计放电量</div></div>
-      <div class="top-kpi"><div class="line"></div><div class="v num">9000<i>万元</i></div><div class="l">累计收益</div></div>
+      <div class="top-kpi"><div class="line"></div><div class="v num">470<i>PWh</i></div><div class="l">累计充电量</div></div>
+      <div class="top-kpi"><div class="line"></div><div class="v num">410<i>PWh</i></div><div class="l">累计放电量</div></div>
+      <div class="top-kpi"><div class="line"></div><div class="v num">44.23<i>万次</i></div><div class="l">累计充放电次数</div></div>
     </div>
     <div class="map-wrap">
       <svg width="100%" height="640" viewBox="0 0 1000 560" preserveAspectRatio="xMidYMid meet"><defs><linearGradient id="g-land" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E2EAF5"/><stop offset="1" stop-color="#CFDDEE"/></linearGradient></defs><g fill="url(#g-land)" stroke="#FFFFFF" stroke-width="1.2">
@@ -751,18 +751,18 @@ function groupPage(){return `<div class="gp-wrap">
       </div>
     </section>
     <section>
-      <div class="sec-title">收益排名 <span class="edit">✎</span></div>
-      <div class="rev-row"><span class="rev-rank rk-1 num">1</span><span class="rev-name">张家界线路局</span><span class="rev-amt num">¥2,000,000 <i>元</i></span></div>
-      <div class="rev-row"><span class="rev-rank rk-2 num">2</span><span class="rev-name">宜兴中环10MW/20MWh 工商业…</span><span class="rev-amt num">¥1,900,000 <i>元</i></span></div>
-      <div class="rev-row"><span class="rev-rank rk-3 num">3</span><span class="rev-name">宜兴中环10MW/20MWh 工商业…</span><span class="rev-amt num">¥1,700,000 <i>元</i></span></div>
-      <div class="rev-row"><span class="rev-rank rk-n num">4</span><span class="rev-name">宜兴中环10MW/20MWh 工商业…</span><span class="rev-amt num">¥1,500,000 <i>元</i></span></div>
-      <div class="rev-row"><span class="rev-rank rk-n num">5</span><span class="rev-name">宜兴中环10MW/20MWh 工商业…</span><span class="rev-amt num">¥1,500,000 <i>元</i></span></div>
-      <div class="rev-row"><span class="rev-rank rk-n num">6</span><span class="rev-name">宜兴中环10MW/20MWh 工商业…</span><span class="rev-amt num">¥1,500,000 <i>元</i></span></div>
-      <div class="rev-row"><span class="rev-rank rk-n num">7</span><span class="rev-name">宜兴中环10MW/20MWh 工商业…</span><span class="rev-amt num">¥1,500,000 <i>元</i></span></div>
-      <div class="rev-row"><span class="rev-rank rk-n num">8</span><span class="rev-name">宜兴中环10MW/20MWh 工商业…</span><span class="rev-amt num">¥1,500,000 <i>元</i></span></div>
-      <div class="rev-row"><span class="rev-rank rk-n num">9</span><span class="rev-name">宜兴中环10MW/20MWh 工商业…</span><span class="rev-amt num">¥1,500,000 <i>元</i></span></div>
-      <div class="rev-row"><span class="rev-rank rk-n num">10</span><span class="rev-name">宜兴中环10MW/20MWh 工商业…</span><span class="rev-amt num">¥1,500,000 <i>元</i></span></div>
-      <div class="rev-row"><span class="rev-rank rk-n num">11</span><span class="rev-name">宜兴中环10MW/20MWh 工商业…</span><span class="rev-amt num">¥1,500,000 <i>元</i></span></div>
+      <div class="sec-title">充放电次数排名 <span class="edit">✎</span></div>
+      <div class="rev-row"><span class="rev-rank rk-1 num">1</span><span class="rev-name">大唐东营120/240MWh项目 </span><span class="rev-amt num">827 <i>次</i></span></div>
+      <div class="rev-row"><span class="rev-rank rk-2 num">2</span><span class="rev-name">宜兴中环10MW/20MWh </span><span class="rev-amt num">820 <i>次</i></span></div>
+      <div class="rev-row"><span class="rev-rank rk-3 num">3</span><span class="rev-name">粤水电巴楚1期45MWh</span><span class="rev-amt num">793 <i>次</i></span></div>
+      <div class="rev-row"><span class="rev-rank rk-n num">4</span><span class="rev-name">田心工业园5MWh项目 </span><span class="rev-amt num">758 <i>次</i></span></div>
+      <div class="rev-row"><span class="rev-rank rk-n num">5</span><span class="rev-name">宜兴中环10MW/20MWh …</span><span class="rev-amt num">747 <i>次</i></span></div>
+      <div class="rev-row"><span class="rev-rank rk-n num">6</span><span class="rev-name">宜兴中环10MW/20MWh …</span><span class="rev-amt num">747 <i>次</i></span></div>
+      <div class="rev-row"><span class="rev-rank rk-n num">7</span><span class="rev-name">宜兴中环10MW/20MWh …</span><span class="rev-amt num">747 <i>次</i></span></div>
+      <div class="rev-row"><span class="rev-rank rk-n num">8</span><span class="rev-name">宜兴中环10MW/20MWh …</span><span class="rev-amt num">747 <i>次</i></span></div>
+      <div class="rev-row"><span class="rev-rank rk-n num">9</span><span class="rev-name">宜兴中环10MW/20MWh …</span><span class="rev-amt num">747 <i>次</i></span></div>
+      <div class="rev-row"><span class="rev-rank rk-n num">10</span><span class="rev-name">宜兴中环10MW/20MWh …</span><span class="rev-amt num">747 <i>次</i></span></div>
+      <div class="rev-row"><span class="rev-rank rk-n num">11</span><span class="rev-name">宜兴中环10MW/20MWh …</span><span class="rev-amt num">747 <i>次</i></span></div>
     </section>
   </div>
 </div></div>`}
@@ -987,22 +987,51 @@ function alarmDash(){return `
     </div>
   </div>`}
 function alarmPage(){
-  const tabs=[['home','预警首页',''],['bat','电池预警','29'],['acu','冷机预警','2'],['rvt','变压器预警','4'],['pcs','PCS预警','4'],['dash','自定义预警看板','']];
+  const tabs=[['home','预警首页',''],['bat','电池预警','29'],['acu','冷机预警','2'],['rvt','变压器预警','4'],['pcs','PCS预警','4'],['dash','自定义预警看板',''],['version','满血版对比','']];
   let body='';
   if(state.alarmTab==='home')body=alarmHome();
   else if(state.alarmTab==='dash')body=alarmDash();
+  else if(state.alarmTab==='version')body=alarmVersion();
   else body=deviceTab(state.alarmTab);
   return baseHead('安全预警','39 项预警算法 · 7×24 实时监测 · 数据更新时间 2026-08-28 15:30')+`
   <div class="tabs">${tabs.map(t=>`<button class="tab ${state.alarmTab===t[0]?'active':''}" onclick="state.alarmTab='${t[0]}';render()">${t[1]}${t[2]?`<span class="cnt">${t[2]}</span>`:''}</button>`).join('')}</div>
   <div style="margin-top:16px">${body}</div>`}
+/* ============ V5 新增：满血版 vs 简化版 能力对比 ============ */
+function alarmVersion(){
+ const rows=[
+  ['预警算法覆盖','9 项基础算法（温度 / 电压 / SOC）','<b style="color:var(--blue)">39 项全量算法</b>（含绝缘、内阻、热失控特征识别）'],
+  ['监测设备范围','电池 + BMS','<b style="color:var(--blue)">7 类设备全覆盖</b>：电池舱 / BMS / PCS / 一体机 / 箱变 / 消防 / 液冷'],
+  ['预警级别与阈值','三级固定阈值','三级 + <b style="color:var(--blue)">自定义阈值</b> + 分设备差异化配置'],
+  ['预警复核与闭环','仅查看，无法处置','复核 + <b style="color:var(--blue)">一键转工单 / 转标定任务</b>，全程闭环追踪'],
+  ['自定义预警看板','—','支持按设备 / 算法自由组合专属看板'],
+  ['消息推送通道','页面内提醒','<b style="color:var(--blue)">短信 + 邮件 + APP</b> 多通道实时推送'],
+  ['历史数据回溯','近 7 天','<b style="color:var(--blue)">近 2 年</b> + 一键导出 Excel'],
+  ['AI 根因分析','—','预警自动关联历史工单与相似案例，给出处置建议'],
+  ['服务支持','社区文档自助','7×24 专属运维顾问 + <b style="color:var(--blue)">4 小时 SLA</b> 响应']
+ ];
+ return `
+ <div class="callout" style="border-color:var(--orange);background:var(--orange-soft);margin-bottom:16px">您当前使用的是<b>简化版</b>安全预警（9 项基础算法、电池+BMS 两类设备）。升级<b>满血版</b>即可解锁 39 项全量算法、7 类设备全覆盖与「预警 → 工单 → 闭环」全链路能力。</div>
+ <div class="kpis" style="grid-template-columns:repeat(3,minmax(0,1fr))">
+  <div class="kpi"><div class="label">预警准确率提升</div><div class="value" style="color:var(--blue)">+32%</div><div class="meta">满血版客户实测均值</div></div>
+  <div class="kpi" style="--c:var(--green)"><div class="label">故障发现平均提前</div><div class="value" style="color:var(--green)">4.2 h</div><div class="meta">热失控特征提前识别</div></div>
+  <div class="kpi"><div class="label">误报率降低</div><div class="value" style="color:var(--orange)">-58%</div><div class="meta">AI 根因分析过滤噪声</div></div>
+ </div>
+ <div class="card"><div class="card-head"><h3>简化版 vs 满血版 · 能力对比</h3><span class="hint">共 9 项核心能力</span></div>
+ ${table(['能力项','简化版（当前）','满血版（升级解锁）'],rows)}
+ </div>
+ <div class="card" style="text-align:center;padding:32px 20px">
+   <div style="font-size:17px;font-weight:700">升级到满血版，让每一度电都在掌控之中</div>
+   <div class="muted" style="margin:10px 0 18px">联系客户成功经理，获取专属报价与 14 天满血版演示环境</div>
+   <button class="primary" style="height:40px;padding:0 30px" onclick="alert('已记录您的意向，客户成功经理将在 1 个工作日内与您联系（演示）')">预约满血版演示</button>
+ </div>`}
 /* ============ 报告中心 ============ */
 function reportPage(type){const m={inspect:'tpl-report-inspection',health:'tpl-report-health',report:'tpl-report-statistics'};return embedPage(m[type])}
 /* ============ 运维中心 ============ */
-function opsPage(kind){const m={'ops-home':'tpl-om-workorder','battery-swap':'tpl-om-cell-recharge',cooler:'tpl-om-cooler','soc-cal':'tpl-om-soc-calibration',ups:'tpl-om-ups',ota:'tpl-om-ota'};if(m[kind])return embedPage(m[kind]);return baseHead('整站均衡','舱体之间 SOC 均衡')+`<div class="card"><div class="toolbar"><select><option>全部设备</option><option>BMS</option><option>PCS</option></select><select><option>待处理</option><option>执行中</option><option>已完成</option></select><button class="primary">查询</button></div><div class="page-empty"><div><div class="empty-icon">✓</div><div style="text-align:center;font-weight:600;color:#7C899A">示范操作台</div><div class="muted" style="margin-top:5px;text-align:center">此模块保留真实业务入口；按钮与审批链可按项目权限接入</div><div style="display:flex;justify-content:center;gap:8px;margin-top:14px"><button class="primary">创建任务</button><button class="secondary">查看记录</button></div></div></div></div>`}
+function opsPage(kind){const m={'ops-home':'tpl-om-workorder','battery-swap':'tpl-om-cell-recharge',cooler:'tpl-om-cooler','soc-cal':'tpl-om-soc-calibration',ups:'tpl-om-ups',ota:'tpl-om-ota'};return m[kind]?embedPage(m[kind]):pageEmpty('建设中')}
 /* ============ 分析中心 ============ */
 function analysisPage(kind){const m={trend:'tpl-analysis-trend',consistency:'tpl-analysis-consistency',custom:'tpl-analysis-custom'};return embedPage(m[kind])}
 /* ============ 路由渲染 ============ */
-function render(){navRender();const names={screen:['大屏中心','储能大屏'],group:['大屏中心','集团运维大屏'],alarm:['预警中心','安全预警'],inspect:['报告中心','巡检报告'],health:['报告中心','体检报告'],report:['报告中心','报表统计'],'ops-home':['运维中心','运维首页'],'battery-swap':['运维中心','电池补换电'],cooler:['运维中心','冷机检修'],'soc-cal':['运维中心','SOC标定'],balance:['运维中心','整站均衡'],ups:['运维中心','UPS故障处理'],ota:['运维中心','OTA升级'],trend:['分析中心','趋势分析'],consistency:['分析中心','一致性分析'],custom:['分析中心','自定义曲线分析']};document.getElementById('crumb').innerHTML=`${names[state.page][0]} <small>/ ${names[state.page][1]}</small>`;const c=document.getElementById('content');switch(state.page){case'screen':c.innerHTML=screenPage();break;case'group':c.innerHTML=groupPage();break;case'alarm':c.innerHTML=alarmPage();break;case'inspect':case'health':case'report':c.innerHTML=reportPage(state.page);break;case'ops-home':case'battery-swap':case'cooler':case'soc-cal':case'balance':case'ups':case'ota':c.innerHTML=opsPage(state.page);break;case'trend':case'consistency':case'custom':c.innerHTML=analysisPage(state.page);break;default:c.innerHTML=pageEmpty('建设中')}hydrateEmbeds()}
+function render(){navRender();const names={screen:['大屏中心','储能大屏'],group:['大屏中心','集团运维大屏'],alarm:['预警中心','安全预警'],inspect:['报告中心','巡检报告'],health:['报告中心','体检报告'],report:['报告中心','报表统计'],'ops-home':['运维中心','运维首页'],'battery-swap':['运维中心','电池维护建议'],cooler:['运维中心','冷机检修'],'soc-cal':['运维中心','SOC标定'],ups:['运维中心','UPS故障处理'],ota:['运维中心','OTA升级'],trend:['分析中心','趋势分析'],consistency:['分析中心','一致性分析'],custom:['分析中心','自定义曲线分析']};document.getElementById('crumb').innerHTML=`${names[state.page][0]} <small>/ ${names[state.page][1]}</small>`;const c=document.getElementById('content');switch(state.page){case'screen':c.innerHTML=screenPage();break;case'group':c.innerHTML=groupPage();break;case'alarm':c.innerHTML=alarmPage();break;case'inspect':case'health':case'report':c.innerHTML=reportPage(state.page);break;case'ops-home':case'battery-swap':case'cooler':case'soc-cal':case'ups':case'ota':c.innerHTML=opsPage(state.page);break;case'trend':case'consistency':case'custom':c.innerHTML=analysisPage(state.page);break;default:c.innerHTML=pageEmpty('建设中')}hydrateEmbeds()}
 function pageEmpty(t){return baseHead(t,'示范页面')+`<div class="page-empty"><div><div class="empty-icon">＋</div><div style="text-align:center;font-weight:600;color:#7C899A">示范内容待配置</div></div></div>`}
 function openDrawer(){document.getElementById('drawer').classList.add('open')}function closeDrawer(){document.getElementById('drawer').classList.remove('open')}
 document.getElementById('collapseBtn').onclick=()=>{state.collapsed=!state.collapsed;document.getElementById('sidebar').classList.toggle('collapsed',state.collapsed);document.getElementById('collapseBtn').textContent=state.collapsed?'☰　展开菜单':'☰　收起菜单'};
@@ -1297,31 +1326,56 @@ td{padding:0 10px;height:48px;border-bottom:1px solid var(--border);font-size:13
   <div class="card">
     <div class="card-t">整体表现总结</div>
     <div class="sumgrid">
-      <div class="sumitem"><div class="k">体检时间范围</div><div class="v" id="sRange" style="font-size:14px">~</div></div>
-      <div class="sumitem"><div class="k">整站健康评分</div><div class="v" id="sScore">-</div></div>
+      <div class="sumitem"><div class="k">体检时间范围</div><div class="v" id="sRange" style="font-size:14px">2026-08-04 ~ 2026-09-04</div></div>
+      <div class="sumitem"><div class="k">整站健康评分</div><div class="v" id="sScore" style="color:var(--green)">92</div></div>
       <div class="sumitem"><div class="k">当前选择的体检对象</div><div class="v" id="sObj" style="font-size:14px">整站</div></div>
-      <div class="sumitem"><div class="k">运行天数</div><div class="v" id="sDays">-</div></div>
-      <div class="sumitem"><div class="k">异常项点</div><div class="v" id="sAbn" style="color:var(--red)">0 项</div></div>
-      <div class="sumitem"><div class="k">总电池组数</div><div class="v" id="sBat">-</div></div>
-      <div class="sumitem"><div class="k">总容量</div><div class="v" id="sCap">-</div></div>
-      <div class="sumitem"><div class="k">风险等级</div><div class="v" id="sRisk">-</div></div>
+      <div class="sumitem"><div class="k">运行天数</div><div class="v" id="sDays">108</div></div>
+      <div class="sumitem"><div class="k">异常项点</div><div class="v" id="sAbn" style="color:var(--red)">2 项</div></div>
+      <div class="sumitem"><div class="k">总电池组数</div><div class="v" id="sBat">18 组</div></div>
+      <div class="sumitem"><div class="k">总容量</div><div class="v" id="sCap">4.8 MWh</div></div>
+      <div class="sumitem"><div class="k">风险等级</div><div class="v" id="sRisk"><span class="tag tag-green">低风险</span></div></div>
     </div>
+  </div>
+
+  <!-- V5 新增：健康评分环图 + 分项得分条形图 -->
+  <div class="card">
+    <div class="card-t">健康评分与分项表现</div>
+    <div style="display:grid;grid-template-columns:220px 1fr;gap:24px;align-items:center">
+      <div style="text-align:center"><svg viewBox="0 0 180 180" style="width:180px;height:180px">
+<circle cx="90" cy="90" r="76" fill="none" stroke="#F2F3F5" stroke-width="14"/>
+<circle cx="90" cy="90" r="76" fill="none" stroke="#00B42A" stroke-width="14" stroke-linecap="round" stroke-dasharray="477.3" stroke-dashoffset="38.2" transform="rotate(-90 90 90)"/>
+<text x="90" y="86" text-anchor="middle" font-size="34" font-weight="700" fill="#00B42A">92</text>
+<text x="90" y="110" text-anchor="middle" font-size="12" fill="#86909C">整站健康评分 / 100</text>
+<text x="90" y="130" text-anchor="middle" font-size="11" fill="#00B42A">低风险 · 环比 +1.8</text>
+</svg></div>
+      <div><div style="display:flex;align-items:center;gap:10px;padding:7px 0"><span style="width:90px;font-size:12px;color:var(--text2)">电池系统</span><span style="flex:1;height:8px;background:#F2F3F5;border-radius:4px;overflow:hidden"><i style="display:block;height:100%;width:94%;background:#2E6BE6;border-radius:4px"></i></span><b style="width:28px;text-align:right;font-variant-numeric:tabular-nums">94</b></div><div style="display:flex;align-items:center;gap:10px;padding:7px 0"><span style="width:90px;font-size:12px;color:var(--text2)">PCS 与电气</span><span style="flex:1;height:8px;background:#F2F3F5;border-radius:4px;overflow:hidden"><i style="display:block;height:100%;width:91%;background:#2E6BE6;border-radius:4px"></i></span><b style="width:28px;text-align:right;font-variant-numeric:tabular-nums">91</b></div><div style="display:flex;align-items:center;gap:10px;padding:7px 0"><span style="width:90px;font-size:12px;color:var(--text2)">液冷系统</span><span style="flex:1;height:8px;background:#F2F3F5;border-radius:4px;overflow:hidden"><i style="display:block;height:100%;width:89%;background:#2E6BE6;border-radius:4px"></i></span><b style="width:28px;text-align:right;font-variant-numeric:tabular-nums">89</b></div><div style="display:flex;align-items:center;gap:10px;padding:7px 0"><span style="width:90px;font-size:12px;color:var(--text2)">消防系统</span><span style="flex:1;height:8px;background:#F2F3F5;border-radius:4px;overflow:hidden"><i style="display:block;height:100%;width:96%;background:#00B42A;border-radius:4px"></i></span><b style="width:28px;text-align:right;font-variant-numeric:tabular-nums">96</b></div><div style="display:flex;align-items:center;gap:10px;padding:7px 0"><span style="width:90px;font-size:12px;color:var(--text2)">通信与采集</span><span style="flex:1;height:8px;background:#F2F3F5;border-radius:4px;overflow:hidden"><i style="display:block;height:100%;width:93%;background:#2E6BE6;border-radius:4px"></i></span><b style="width:28px;text-align:right;font-variant-numeric:tabular-nums">93</b></div><div style="display:flex;align-items:center;gap:10px;padding:7px 0"><span style="width:90px;font-size:12px;color:var(--text2)">结构与安防</span><span style="flex:1;height:8px;background:#F2F3F5;border-radius:4px;overflow:hidden"><i style="display:block;height:100%;width:95%;background:#00B42A;border-radius:4px"></i></span><b style="width:28px;text-align:right;font-variant-numeric:tabular-nums">95</b></div></div>
+    </div>
+  </div>
+
+  <!-- V5 新增：近 30 天健康度趋势 -->
+  <div class="card">
+    <div class="card-t">近 30 天健康度趋势<span style="margin-left:auto;font-size:12px;color:var(--text2);font-weight:400">均值 91.2 · 最高 93 · 最低 88</span></div>
+    <svg viewBox="0 0 760 220" style="width:100%;height:220px;display:block"><line x1="34" x2="726" y1="34.0" y2="34.0" stroke="#EEF1F5"/><line x1="34" x2="726" y1="72.0" y2="72.0" stroke="#EEF1F5"/><line x1="34" x2="726" y1="110.0" y2="110.0" stroke="#EEF1F5"/><line x1="34" x2="726" y1="148.0" y2="148.0" stroke="#EEF1F5"/><line x1="34" x2="726" y1="186.0" y2="186.0" stroke="#EEF1F5"/><text x="28" y="38.0" font-size="10" fill="#86909C" text-anchor="end">95</text><text x="28" y="76.0" font-size="10" fill="#86909C" text-anchor="end">93</text><text x="28" y="114.0" font-size="10" fill="#86909C" text-anchor="end">91</text><text x="28" y="152.0" font-size="10" fill="#86909C" text-anchor="end">89</text><text x="28" y="190.0" font-size="10" fill="#86909C" text-anchor="end">87</text><text x="28" y="228.0" font-size="10" fill="#86909C" text-anchor="end">85</text><polygon points="34,186 34.0,140.4 57.9,125.2 81.7,140.4 105.6,110.0 129.4,94.8 153.3,110.0 177.2,125.2 201.0,94.8 224.9,79.6 248.8,94.8 272.6,110.0 296.5,79.6 320.3,64.4 344.2,79.6 368.1,94.8 391.9,79.6 415.8,79.6 439.7,64.4 463.5,79.6 487.4,79.6 511.2,94.8 535.1,79.6 559.0,64.4 582.8,79.6 606.7,94.8 630.6,79.6 654.4,79.6 678.3,64.4 702.1,79.6 726.0,79.6 726,186" fill="#2E6BE6" opacity="0.08"/><polyline points="34.0,140.4 57.9,125.2 81.7,140.4 105.6,110.0 129.4,94.8 153.3,110.0 177.2,125.2 201.0,94.8 224.9,79.6 248.8,94.8 272.6,110.0 296.5,79.6 320.3,64.4 344.2,79.6 368.1,94.8 391.9,79.6 415.8,79.6 439.7,64.4 463.5,79.6 487.4,79.6 511.2,94.8 535.1,79.6 559.0,64.4 582.8,79.6 606.7,94.8 630.6,79.6 654.4,79.6 678.3,64.4 702.1,79.6 726.0,79.6" fill="none" stroke="#2E6BE6" stroke-width="2.5"/><circle cx="726.0" cy="79.6" r="4" fill="#2E6BE6"/><text x="718.0" y="69.6" font-size="11" fill="#2E6BE6" font-weight="600">92</text><text x="34" y="212" font-size="10" fill="#86909C">08-06</text><text x="726" y="212" font-size="10" fill="#86909C" text-anchor="end">09-04</text></svg>
   </div>
 
   <!-- 整体运维建议卡 -->
   <div class="card">
     <div class="card-t">整体运维建议</div>
-    <div class="advice" id="advice">电站体检无异常，暂时无需运维。</div>
+    <div class="advice" id="advice">本次体检覆盖 82 项点，发现 <b style="color:var(--red)">2 项异常</b>（均在 #2-1 舱电池系统：单体温度一致性偏差、#2-4 簇压差缓慢扩大）。建议：1）7 天内安排 #2-1 舱专项巡检并复核 BMS 温度采样；2）将 #2-4 簇加入一致性分析周观察清单；3）其余系统运行良好，维持现有周巡检频率。</div>
   </div>
 
   <!-- 整体健康明细卡 -->
   <div class="card">
     <div class="card-t">整体健康明细</div>
     <div id="detailBox">
-      <div class="empty">
-        <svg width="72" height="52" viewBox="0 0 72 52" fill="none"><rect x="8" y="10" width="56" height="34" rx="4" stroke="#C9CDD4" stroke-width="2"/><path d="M8 20h56" stroke="#C9CDD4" stroke-width="2"/><circle cx="16" cy="15" r="1.6" fill="#C9CDD4"/><path d="M26 32h20M26 38h12" stroke="#E5E6EB" stroke-width="2" stroke-linecap="round"/></svg>
-        <div>暂无数据（未执行体检）</div>
-      </div>
+      <table><thead><tr><th>体检项分类</th><th>项点数</th><th>正常</th><th>异常</th><th>得分</th><th>结论</th></tr></thead><tbody>
+      <tr><td>电池系统（温度 / 压差 / SOC / SOH）</td><td>28</td><td>26</td><td><b style="color:var(--red)">2</b></td><td>94</td><td><span class="tag tag-orange">注意</span></td></tr>
+      <tr><td>PCS 与电气（效率 / 绝缘 / 接地）</td><td>18</td><td>18</td><td>0</td><td>91</td><td><span class="tag tag-green">正常</span></td></tr>
+      <tr><td>液冷系统（温度 / 液位 / 流量）</td><td>12</td><td>12</td><td>0</td><td>89</td><td><span class="tag tag-green">正常</span></td></tr>
+      <tr><td>消防系统（探测器 / 联动 / 气灭）</td><td>8</td><td>8</td><td>0</td><td>96</td><td><span class="tag tag-green">正常</span></td></tr>
+      <tr><td>通信与采集（BMS / EMS 链路）</td><td>10</td><td>10</td><td>0</td><td>93</td><td><span class="tag tag-green">正常</span></td></tr>
+      <tr><td>结构与安防</td><td>6</td><td>6</td><td>0</td><td>95</td><td><span class="tag tag-green">正常</span></td></tr>
+      </tbody></table>
     </div>
   </div>
 </div>
@@ -1357,12 +1411,16 @@ btnRun.addEventListener('click',function(){
     document.getElementById('sBat').textContent='18 组';
     document.getElementById('sCap').textContent='4.8 MWh';
     document.getElementById('sRisk').innerHTML='<span class="tag tag-green">低风险</span>';
-    document.getElementById('advice').textContent='电站体检无异常，暂时无需运维。建议保持现有周巡检频率，关注 #2-1 舱温度趋势。';
+    document.getElementById('advice').innerHTML='本次体检覆盖 82 项点，发现 <b style="color:var(--red)">2 项异常</b>（均在 #2-1 舱电池系统）。建议 7 天内安排专项巡检并复核 BMS 温度采样，其余系统运行良好。';
+    document.getElementById('sAbn').textContent='2 项';
     document.getElementById('detailBox').innerHTML=
-      '<table><thead><tr><th>体检项分类</th><th>项点数</th><th>正常</th><th>异常</th><th>结论</th></tr></thead><tbody>'+
-      '<tr><td>电池系统（温度 / 压差 / SOC / SOH）</td><td>28</td><td>28</td><td>0</td><td><span class="tag tag-green">正常</span></td></tr>'+
-      '<tr><td>PCS 与电气（效率 / 绝缘 / 接地）</td><td>18</td><td>18</td><td>0</td><td><span class="tag tag-green">正常</span></td></tr>'+
-      '<tr><td>液冷与消防</td><td>12</td><td>12</td><td>0</td><td><span class="tag tag-green">正常</span></td></tr>'+
+      '<table><thead><tr><th>体检项分类</th><th>项点数</th><th>正常</th><th>异常</th><th>得分</th><th>结论</th></tr></thead><tbody>'+
+      '<tr><td>电池系统（温度 / 压差 / SOC / SOH）</td><td>28</td><td>26</td><td><b style="color:var(--red)">2</b></td><td>94</td><td><span class="tag tag-orange">注意</span></td></tr>'+
+      '<tr><td>PCS 与电气（效率 / 绝缘 / 接地）</td><td>18</td><td>18</td><td>0</td><td>91</td><td><span class="tag tag-green">正常</span></td></tr>'+
+      '<tr><td>液冷系统（温度 / 液位 / 流量）</td><td>12</td><td>12</td><td>0</td><td>89</td><td><span class="tag tag-green">正常</span></td></tr>'+
+      '<tr><td>消防系统（探测器 / 联动 / 气灭）</td><td>8</td><td>8</td><td>0</td><td>96</td><td><span class="tag tag-green">正常</span></td></tr>'+
+      '<tr><td>通信与采集（BMS / EMS 链路）</td><td>10</td><td>10</td><td>0</td><td>93</td><td><span class="tag tag-green">正常</span></td></tr>'+
+      '<tr><td>结构与安防</td><td>6</td><td>6</td><td>0</td><td>95</td><td><span class="tag tag-green">正常</span></td></tr>'+
       '</tbody></table>';
   },1200);
 });
@@ -1792,12 +1850,12 @@ document.getElementById('btnReset').onclick=function(){
 </template>
 <template id="tpl-om-cell-recharge">
 <!DOCTYPE html>
-<!-- 设计系统：储能电站智能运维系统 V1.0 · §4.8 电池补换电-电芯补电建议（示意图 0904_08，运维专属） -->
+<!-- 设计系统：储能电站智能运维系统 V1.0 · §4.8 电池维护建议-电芯补电建议（示意图 0904_08，运维专属） -->
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>电池补换电</title>
+<title>电池维护建议</title>
 <style>
 :root{--primary:#2E6BE6;--red:#F53F3F;--orange:#FF7D00;--info:#6B7FF0;--green:#00B42A;--bg:#F5F7FA;--text:#1D2129;--text2:#86909C;--border:#E5E6EB}
 *{margin:0;padding:0;box-sizing:border-box}
@@ -2018,6 +2076,8 @@ td{padding:0 10px;height:48px;border-bottom:1px solid var(--border);font-size:13
 .empty svg{margin-bottom:10px}
 .pagination{display:flex;justify-content:flex-end;align-items:center;gap:8px;margin-top:14px;color:var(--text2);font-size:12px}
 .pagination .pg{min-width:28px;height:28px;border:1px solid var(--border);border-radius:4px;display:flex;align-items:center;justify-content:center;background:#fff;padding:0 6px}
+.tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:12px;line-height:18px;white-space:nowrap}
+.tag-green{background:#E8FFEA;color:#00B42A}.tag-orange{background:#FFF7E8;color:#FF7D00}.tag-blue{background:#EBF2FD;color:#2E6BE6}
 /* 冷机状态卡片网格 */
 .cooler-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 .cooler{border:1px solid var(--border);border-radius:8px;padding:14px}
@@ -2050,7 +2110,7 @@ td{padding:0 10px;height:48px;border-bottom:1px solid var(--border);font-size:13
 
   <div class="stats">
     <div class="stat" style="--c:var(--primary)"><div class="label">在线冷机</div><div class="value">18</div><div class="sub">台 · 覆盖 18 个电池舱</div></div>
-    <div class="stat" style="--c:var(--orange)"><div class="label">待检修</div><div class="value">0</div><div class="sub">待检修 / 检修中</div></div>
+    <div class="stat" style="--c:var(--orange)"><div class="label">待检修</div><div class="value">2</div><div class="sub">1 待检修 · 1 检修中</div></div>
     <div class="stat" style="--c:var(--green)"><div class="label">本月完成</div><div class="value">6</div><div class="sub">计划完成率 100%</div></div>
     <div class="stat" style="--c:var(--red)"><div class="label">超期未检</div><div class="value">0</div><div class="sub">超期时红色闪烁提醒</div></div>
   </div>
@@ -2075,12 +2135,16 @@ td{padding:0 10px;height:48px;border-bottom:1px solid var(--border);font-size:13
         <thead><tr>
           <th>序号</th><th>冷机编号</th><th>所属电站</th><th>所属舱体</th><th>检修类型</th><th>计划时间</th><th>负责人</th><th>状态</th><th>操作</th>
         </tr></thead>
+        <tbody>
+        <tr><td>1</td><td>CL-01</td><td>华润曹妃甸</td><td>#1 电池舱</td><td>巡检</td><td>2026-09-08</td><td>张工</td><td><span class="tag tag-orange">待检修</span></td><td><a style="color:var(--primary);cursor:pointer">开始</a></td></tr>
+        <tr><td>2</td><td>CL-04</td><td>华润曹妃甸</td><td>#4 电池舱</td><td>维修（液位低）</td><td>2026-09-06</td><td>李工</td><td><span class="tag tag-blue">检修中</span></td><td><a style="color:var(--primary);cursor:pointer">详情</a></td></tr>
+        <tr><td>3</td><td>CL-02</td><td>华润曹妃甸</td><td>#2 电池舱</td><td>保养</td><td>2026-09-10</td><td>张工</td><td><span class="tag tag-orange">待检修</span></td><td><a style="color:var(--primary);cursor:pointer">开始</a></td></tr>
+        <tr><td>4</td><td>CL-03</td><td>华润曹妃甸</td><td>#3 电池舱</td><td>巡检</td><td>2026-09-02</td><td>王工</td><td><span class="tag tag-green">已完成</span></td><td><a style="color:var(--primary);cursor:pointer">记录</a></td></tr>
+        <tr><td>5</td><td>CL-05</td><td>宜兴中环 10MW/20MWh</td><td>#5 电池舱</td><td>保养</td><td>2026-08-28</td><td>李工</td><td><span class="tag tag-green">已完成</span></td><td><a style="color:var(--primary);cursor:pointer">记录</a></td></tr>
+        <tr><td>6</td><td>CL-06</td><td>华润曹妃甸</td><td>#6 电池舱</td><td>巡检</td><td>2026-08-25</td><td>王工</td><td><span class="tag tag-green">已完成</span></td><td><a style="color:var(--primary);cursor:pointer">记录</a></td></tr>
+        </tbody>
       </table>
-      <div class="empty">
-        <svg width="72" height="52" viewBox="0 0 72 52" fill="none"><rect x="8" y="10" width="56" height="34" rx="4" stroke="#C9CDD4" stroke-width="2"/><path d="M8 20h56" stroke="#C9CDD4" stroke-width="2"/><circle cx="16" cy="15" r="1.6" fill="#C9CDD4"/><path d="M26 32h20M26 38h12" stroke="#E5E6EB" stroke-width="2" stroke-linecap="round"/></svg>
-        <div>当前暂无数据</div>
-      </div>
-      <div class="pagination"><span>共 0 条</span><span class="pg">‹</span><span class="pg">1</span><span class="pg">›</span></div>
+      <div class="pagination"><span>共 6 条</span><span class="pg">‹</span><span class="pg">1</span><span class="pg">›</span></div>
     </div>
   </div>
 
@@ -2092,11 +2156,13 @@ td{padding:0 10px;height:48px;border-bottom:1px solid var(--border);font-size:13
         <thead><tr>
           <th>序号</th><th>冷机编号</th><th>检修类型</th><th>执行人</th><th>执行时间</th><th>结果</th><th>备注</th>
         </tr></thead>
+        <tbody>
+        <tr><td>1</td><td>CL-03</td><td>巡检</td><td>王工</td><td>2026-09-02 14:20</td><td><span class="tag tag-green">合格</span></td><td>完成 28 项点检查，无异常</td></tr>
+        <tr><td>2</td><td>CL-05</td><td>保养</td><td>李工</td><td>2026-08-28 10:05</td><td><span class="tag tag-green">合格</span></td><td>更换滤芯并补充冷却液 12L</td></tr>
+        <tr><td>3</td><td>CL-06</td><td>巡检</td><td>王工</td><td>2026-08-25 16:42</td><td><span class="tag tag-green">合格</span></td><td>完成 28 项点检查，无异常</td></tr>
+        <tr><td>4</td><td>CL-02</td><td>维修</td><td>张工</td><td>2026-08-15 09:30</td><td><span class="tag tag-green">合格</span></td><td>更换回液风扇轴承，试运行 2h 正常</td></tr>
+        </tbody>
       </table>
-      <div class="empty">
-        <svg width="72" height="52" viewBox="0 0 72 52" fill="none"><rect x="8" y="10" width="56" height="34" rx="4" stroke="#C9CDD4" stroke-width="2"/><path d="M8 20h56" stroke="#C9CDD4" stroke-width="2"/><circle cx="16" cy="15" r="1.6" fill="#C9CDD4"/><path d="M26 32h20M26 38h12" stroke="#E5E6EB" stroke-width="2" stroke-linecap="round"/></svg>
-        <div>暂无数据</div>
-      </div>
     </div>
   </div>
 
@@ -2214,6 +2280,8 @@ td{padding:0 10px;height:48px;border-bottom:1px solid var(--border);font-size:13
 .empty svg{margin-bottom:10px}
 .pagination{display:flex;justify-content:flex-end;align-items:center;gap:8px;margin-top:14px;color:var(--text2);font-size:12px}
 .pagination .pg{min-width:28px;height:28px;border:1px solid var(--border);border-radius:4px;display:flex;align-items:center;justify-content:center;background:#fff;padding:0 6px}
+.tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:12px;line-height:18px;white-space:nowrap}
+.tag-green{background:#E8FFEA;color:#00B42A}.tag-orange{background:#FFF7E8;color:#FF7D00}.tag-blue{background:#EBF2FD;color:#2E6BE6}
 /* 表单页 */
 .form-card{max-width:520px}
 .frow{margin-bottom:16px}
@@ -2256,9 +2324,9 @@ td{padding:0 10px;height:48px;border-bottom:1px solid var(--border);font-size:13
   <!-- Tab1：标定记录 -->
   <div id="tab-record">
     <div class="stats">
-      <div class="stat" style="--c:var(--primary)"><div class="label">本月标定次数</div><div class="value">0</div><div class="sub">统计周期 2026-09-01 ~ 2026-09-04</div></div>
+      <div class="stat" style="--c:var(--primary)"><div class="label">本月标定次数</div><div class="value">5</div><div class="sub">统计周期 2026-09-01 ~ 2026-09-04</div></div>
       <div class="stat" style="--c:var(--orange)"><div class="label">建议标定簇数</div><div class="value">3</div><div class="sub">SOC 偏差 &gt; 5% 的电池簇</div></div>
-      <div class="stat" style="--c:var(--green)"><div class="label">已标定</div><div class="value">0</div><div class="sub">本月完成标定的电池簇</div></div>
+      <div class="stat" style="--c:var(--green)"><div class="label">已标定</div><div class="value">5</div><div class="sub">本月完成标定的电池簇</div></div>
       <div class="stat" style="--c:var(--red)"><div class="label">超期未标定</div><div class="value" style="color:var(--red)">2</div><div class="sub">超过 30 天未标定</div></div>
     </div>
 
@@ -2267,7 +2335,7 @@ td{padding:0 10px;height:48px;border-bottom:1px solid var(--border);font-size:13
         <div class="field"><label>电站</label><select><option>全部</option><option>宜兴中环 10MW/20MWh</option><option>华润曹妃甸</option></select></div>
         <div class="field"><label>电池簇</label><input placeholder="请输入电池簇编号" id="prefillClu"></div>
         <div class="field"><label>标定类型</label><select><option>全部</option><option>手动标定</option><option>自动标定</option></select></div>
-        <div class="field"><label>时间</label><span style="display:flex;align-items:center;gap:6px"><input type="date" value="2026-09-01"><span style="color:var(--text2)">→</span><input type="date" value="2026-09-04"></span></div>
+        <div class="field"><label>时间</label><span style="display:flex;align-items:center;gap:6px"><input type="date" value="2026-08-01"><span style="color:var(--text2)">→</span><input type="date" value="2026-09-04"></span></div>
         <div class="field" style="margin-left:auto"><label>&nbsp;</label><span style="display:flex;gap:10px"><button class="btn" id="btnReset">重置</button><button class="btn btn-primary">查询</button></span></div>
       </div>
 
@@ -2281,12 +2349,15 @@ td{padding:0 10px;height:48px;border-bottom:1px solid var(--border);font-size:13
         <thead><tr>
           <th>序号</th><th>电站</th><th>电池簇</th><th>标定类型</th><th>标定前 SOC</th><th>标定后 SOC</th><th>偏差(%)</th><th>执行人</th><th>标定时间</th><th>状态</th><th>操作</th>
         </tr></thead>
+        <tbody>
+        <tr><td>1</td><td>华润曹妃甸</td><td>#1-1 簇</td><td><span class="tag tag-blue">手动标定</span></td><td>71.8%</td><td>79.0%</td><td>+7.2</td><td>张工</td><td>2026-09-03 02:10</td><td><span class="tag tag-green">已完成</span></td><td><a style="color:var(--primary);cursor:pointer">详情</a></td></tr>
+        <tr><td>2</td><td>华润曹妃甸</td><td>#2-4 簇</td><td><span class="tag tag-orange">自动标定</span></td><td>68.5%</td><td>74.2%</td><td>+5.7</td><td>系统</td><td>2026-09-02 03:00</td><td><span class="tag tag-green">已完成</span></td><td><a style="color:var(--primary);cursor:pointer">详情</a></td></tr>
+        <tr><td>3</td><td>宜兴中环 10MW/20MWh</td><td>#3-2 簇</td><td><span class="tag tag-blue">手动标定</span></td><td>74.1%</td><td>79.3%</td><td>+5.2</td><td>李工</td><td>2026-08-30 01:40</td><td><span class="tag tag-green">已完成</span></td><td><a style="color:var(--primary);cursor:pointer">详情</a></td></tr>
+        <tr><td>4</td><td>华润曹妃甸</td><td>#1-3 簇</td><td><span class="tag tag-orange">自动标定</span></td><td>80.2%</td><td>80.0%</td><td>-0.2</td><td>系统</td><td>2026-08-22 04:15</td><td><span class="tag tag-green">已完成</span></td><td><a style="color:var(--primary);cursor:pointer">详情</a></td></tr>
+        <tr><td>5</td><td>宜兴中环 10MW/20MWh</td><td>#2-2 簇</td><td><span class="tag tag-blue">手动标定</span></td><td>65.3%</td><td>72.8%</td><td>+7.5</td><td>张工</td><td>2026-08-18 02:30</td><td><span class="tag tag-green">已完成</span></td><td><a style="color:var(--primary);cursor:pointer">详情</a></td></tr>
+        </tbody>
       </table>
-      <div class="empty">
-        <svg width="72" height="52" viewBox="0 0 72 52" fill="none"><rect x="8" y="10" width="56" height="34" rx="4" stroke="#C9CDD4" stroke-width="2"/><path d="M8 20h56" stroke="#C9CDD4" stroke-width="2"/><circle cx="16" cy="15" r="1.6" fill="#C9CDD4"/><path d="M26 32h20M26 38h12" stroke="#E5E6EB" stroke-width="2" stroke-linecap="round"/></svg>
-        <div>当前暂无数据</div>
-      </div>
-      <div class="pagination"><span>共 0 条</span><span class="pg">‹</span><span class="pg">1</span><span class="pg">›</span></div>
+      <div class="pagination"><span>共 5 条</span><span class="pg">‹</span><span class="pg">1</span><span class="pg">›</span></div>
     </div>
   </div>
 
@@ -2825,7 +2896,7 @@ document.getElementById('btnReset').onclick=function(){
 </template>
 <template id="tpl-analysis-trend">
 <!DOCTYPE html>
-<!-- 设计系统：储能电站智能运维系统 V1.0 · §4.13 趋势分析（示意图 0904_13） -->
+<!-- 设计系统：储能电站智能运维系统 V6 · §4.13 趋势分析（同一监测点位 · 不同日期同时段对比） -->
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
@@ -2839,6 +2910,7 @@ body{font-family:"PingFang SC","Microsoft YaHei","Helvetica Neue",Arial,sans-ser
 .card{background:#fff;border-radius:8px;border:1px solid var(--border);padding:16px;margin-bottom:16px}
 .card-t{font-size:15px;font-weight:600;display:flex;align-items:center;gap:8px;margin-bottom:14px}
 .card-t::before{content:"";width:3px;height:14px;background:var(--primary);border-radius:2px}
+.card-t .sub{font-size:12px;color:var(--text2);font-weight:400}
 .btn{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 14px;border-radius:6px;border:1px solid var(--border);background:#fff;color:var(--text);font-size:13px;cursor:pointer;font-family:inherit}
 .btn-primary{background:var(--primary);border-color:var(--primary);color:#fff}
 .tabs{display:flex;gap:4px;border-bottom:1px solid var(--border);margin-bottom:16px}
@@ -2850,7 +2922,15 @@ body{font-family:"PingFang SC","Microsoft YaHei","Helvetica Neue",Arial,sans-ser
 .seg{display:inline-flex;background:#F2F3F5;border-radius:6px;padding:2px}
 .seg button{border:none;background:transparent;height:28px;padding:0 14px;border-radius:4px;cursor:pointer;font-size:13px;color:var(--text2);font-family:inherit}
 .seg button.active{background:var(--primary);color:#fff}
-.empty-chart{height:420px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--text2);border:1px dashed var(--border);border-radius:8px;background:#FAFBFC}
+.legend{display:flex;gap:18px;margin-bottom:8px;font-size:12px;flex-wrap:wrap}
+.legend .li{display:flex;align-items:center;gap:6px;cursor:pointer;user-select:none}
+.legend .li.off{opacity:.35}
+.legend .li i{width:14px;height:3px;border-radius:2px}
+.statbar{display:flex;gap:26px;border-top:1px dashed var(--border);padding-top:10px;margin-top:10px;font-size:12px;color:var(--text2);flex-wrap:wrap}
+.statbar b{color:var(--text);font-variant-numeric:tabular-nums;margin-left:3px}
+.statbar .dot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:4px}
+.tip{position:absolute;pointer-events:none;background:rgba(29,33,41,.92);color:#fff;font-size:11px;padding:6px 9px;border-radius:6px;display:none;white-space:nowrap;z-index:5;line-height:1.7}
+.chart-wrap{position:relative}
 .modal-mask{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:100}
 .modal{background:#fff;border-radius:12px;width:640px;max-width:92vw;max-height:88vh;display:flex;flex-direction:column}
 .modal-h{padding:16px 20px;border-bottom:1px solid var(--border);font-size:15px;font-weight:600;display:flex;justify-content:space-between;align-items:center}
@@ -2861,19 +2941,15 @@ body{font-family:"PingFang SC","Microsoft YaHei","Helvetica Neue",Arial,sans-ser
 .mcol h5{font-size:13px;margin-bottom:10px;color:var(--text2);font-weight:500}
 .mcol label{display:flex;align-items:center;gap:8px;padding:7px 8px;border-radius:6px;cursor:pointer;font-size:13px}
 .mcol label:hover{background:#F5F9FF}
-.legend{display:flex;gap:18px;margin-bottom:8px;font-size:12px}
-.legend .li{display:flex;align-items:center;gap:6px;cursor:pointer;user-select:none}
-.legend .li.off{opacity:.35}
-.legend .li i{width:14px;height:3px;border-radius:2px}
 </style>
 </head>
 <body>
 <div class="page">
   <div class="card" style="padding-bottom:0">
-    <div class="tabs">
-      <div class="tab active">温差曲线</div>
-      <div class="tab">压差曲线</div>
-      <div class="tab">流差曲线</div>
+    <div class="tabs" id="tabs">
+      <div class="tab active" data-t="0">温差曲线</div>
+      <div class="tab" data-t="1">压差曲线</div>
+      <div class="tab" data-t="2">流差曲线</div>
     </div>
   </div>
 
@@ -2891,12 +2967,13 @@ body{font-family:"PingFang SC","Microsoft YaHei","Helvetica Neue",Arial,sans-ser
       </div>
     </div>
 
-    <div id="chartArea">
-      <div class="empty-chart">
-        <svg width="88" height="60" viewBox="0 0 88 60" fill="none"><path d="M8 50 L24 34 L38 42 L54 20 L70 28 L82 12" stroke="#C9CDD4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 56h80" stroke="#E5E6EB" stroke-width="2" stroke-linecap="round"/></svg>
-        <div style="margin-top:10px">暂未查询：请先「选择指标」，再点击「查询」生成对比曲线</div>
-      </div>
+    <div class="card-t" id="chartTitle"></div>
+    <div class="legend" id="lg"></div>
+    <div class="chart-wrap" id="chartWrap">
+      <div id="chart"></div>
+      <div class="tip" id="tip"></div>
     </div>
+    <div class="statbar" id="statbar"></div>
   </div>
 </div>
 
@@ -2915,8 +2992,8 @@ body{font-family:"PingFang SC","Microsoft YaHei","Helvetica Neue",Arial,sans-ser
         </div>
         <div class="mcol"><h5>指标项</h5>
           <label><input type="checkbox" checked> 单体温度（℃）</label>
-          <label><input type="checkbox" checked> 单体电压（mV）</label>
-          <label><input type="checkbox"> 充放电电流（A）</label>
+          <label><input type="checkbox" checked> 单体压差（mV）</label>
+          <label><input type="checkbox" checked> 充放电电流（A）</label>
           <label><input type="checkbox"> SOC（%）</label>
           <label><input type="checkbox"> 绝缘阻值（MΩ）</label>
         </div>
@@ -2927,11 +3004,108 @@ body{font-family:"PingFang SC","Microsoft YaHei","Helvetica Neue",Arial,sans-ser
 </div>
 
 <script>
+/* ============ 确定性伪随机 & 高斯曲线 ============ */
+function rng(i,j){var x=Math.sin(i*12.9898+j*78.233)*43758.5453;return x-Math.floor(x);}
+function gauss(h,mu,sig){return Math.exp(-Math.pow(h-mu,2)/(2*sig*sig));}
+
+/* ============ 三个 Tab 的真实业务数据（同一点位 · 不同日期） ============ */
+var TABS=[
+ {tab:'温差曲线',point:'#1-1 舱 BMS1 · 单体温度',unit:'℃',dec:1,series:[
+   {name:'今日 09-04',color:'#2E6BE6',fn:function(h,i){return 26+6.8*gauss(h,13.5,3.4)+1.3*gauss(h,21,2)+(rng(i,1)-0.5)*0.5;}},
+   {name:'昨日 09-03',color:'#FF7D00',fn:function(h,i){return 26.9+7.4*gauss(h,14,3.4)+1.2*gauss(h,21,2)+(rng(i,2)-0.5)*0.5;}},
+   {name:'上周同日 08-28',color:'#00B42A',fn:function(h,i){return 25.2+5.6*gauss(h,13,3.6)+1.1*gauss(h,20.5,2)+(rng(i,3)-0.5)*0.5;}}]},
+ {tab:'压差曲线',point:'#2-4 簇 · 簇内单体压差',unit:'mV',dec:0,series:[
+   {name:'今日 09-04',color:'#F53F3F',fn:function(h,i){return 17+30*Math.pow(h/24,1.7)+(rng(i,4)-0.5)*2;}},
+   {name:'昨日 09-03',color:'#FF7D00',fn:function(h,i){return 15+16*Math.pow(h/24,1.7)+(rng(i,5)-0.5)*1.6;}},
+   {name:'上周同日 08-28',color:'#00B42A',fn:function(h,i){return 12+10*Math.pow(h/24,1.7)+(rng(i,6)-0.5)*1.4;}}]},
+ {tab:'流差曲线',point:'#1 电池舱 · 充放电电流',unit:'A',dec:0,series:[
+   {name:'今日 09-04',color:'#2E6BE6',fn:function(h,i){return -118*gauss(h,2.6,2.2)+152*gauss(h,12.5,2.8)+62*gauss(h,19,2.2)+(rng(i,7)-0.5)*7;}},
+   {name:'昨日 09-03',color:'#FF7D00',fn:function(h,i){return -110*gauss(h,2.4,2.2)+138*gauss(h,12,2.8)+55*gauss(h,18.6,2.2)+(rng(i,8)-0.5)*7;}},
+   {name:'上周同日 08-28',color:'#00B42A',fn:function(h,i){return -125*gauss(h,3,2.4)+160*gauss(h,13,3)+70*gauss(h,19.5,2.2)+(rng(i,9)-0.5)*7;}}]}
+];
+var cur=0, N=96, hidden={};
+
+function render(){
+  var cfg=TABS[cur];
+  var series=cfg.series.map(function(sp,j){var a=[];for(var i=0;i<N;i++){a.push(sp.fn(i/4,i));}return a;});
+  document.getElementById('chartTitle').innerHTML=cfg.tab+' · '+cfg.point+'<span class="sub">同一监测点位 · 不同日期同时段对比（15 分钟粒度 · '+cfg.unit+'）</span>';
+  var all=[];series.forEach(function(a){all=all.concat(a);});
+  var max=Math.max.apply(null,all),min=Math.min.apply(null,all);
+  var pad=(max-min)*0.12;max+=pad;min-=pad;
+  var w=980,h=380,pl=52,pr=16,pt=16,pb=34;
+  function X(i){return pl+i/(N-1)*(w-pl-pr);}
+  function Y(v){return pt+(1-(v-min)/(max-min))*(h-pt-pb);}
+  var svg='<svg viewBox="0 0 '+w+' '+h+'" style="width:100%;height:380px;display:block" id="csvg">';
+  for(var g=0;g<=4;g++){var gy=pt+g/4*(h-pt-pb),gv=max-g/4*(max-min);
+    svg+='<line x1="'+pl+'" y1="'+gy+'" x2="'+(w-pr)+'" y2="'+gy+'" stroke="#F2F3F5"/>'+
+         '<text x="'+(pl-8)+'" y="'+(gy+4)+'" font-size="10" fill="#86909C" text-anchor="end">'+gv.toFixed(cfg.dec)+'</text>';}
+  for(var t=0;t<N;t+=16){var hh=t/4;
+    svg+='<text x="'+X(t)+'" y="'+(h-10)+'" font-size="10" fill="#86909C" text-anchor="middle">'+(hh<10?'0':'')+hh+':00</text>';}
+  if(min<0&&max>0){svg+='<line x1="'+pl+'" y1="'+Y(0)+'" x2="'+(w-pr)+'" y2="'+Y(0)+'" stroke="#C9CDD4" stroke-dasharray="4 4"/>';}
+  series.forEach(function(a,si){
+    var line=a.map(function(v,i){return (i?'L':'M')+X(i).toFixed(1)+' '+Y(v).toFixed(1);}).join(' ');
+    svg+='<path class="sr s'+si+'" d="'+line+'" fill="none" stroke="'+cfg.series[si].color+'" stroke-width="2" stroke-linejoin="round"'+(hidden[si]?' style="display:none"':'')+'/>';
+  });
+  svg+='<line id="cxl" y1="'+pt+'" y2="'+(h-pb)+'" stroke="#86909C" stroke-width="1" stroke-dasharray="3 3" opacity="0"/>';
+  series.forEach(function(a,si){svg+='<circle id="cd'+si+'" r="3.5" fill="#fff" stroke="'+cfg.series[si].color+'" stroke-width="2" opacity="0"/>';});
+  svg+='</svg>';
+  document.getElementById('chart').innerHTML=svg;
+
+  /* 图例 */
+  document.getElementById('lg').innerHTML=cfg.series.map(function(sp,si){
+    return '<span class="li'+(hidden[si]?' off':'')+'" data-i="'+si+'"><i style="background:'+sp.color+'"></i>'+sp.name+'</span>';
+  }).join('');
+
+  /* 统计条 */
+  document.getElementById('statbar').innerHTML=cfg.series.map(function(sp,si){
+    var a=series[si],mx=Math.max.apply(null,a),mn=Math.min.apply(null,a),av=a.reduce(function(x,y){return x+y;},0)/a.length;
+    return '<span><i class="dot" style="background:'+sp.color+'"></i>'+sp.name+'：最高<b>'+mx.toFixed(cfg.dec)+' '+cfg.unit+'</b> 最低<b>'+mn.toFixed(cfg.dec)+' '+cfg.unit+'</b> 平均<b>'+av.toFixed(cfg.dec)+' '+cfg.unit+'</b></span>';
+  }).join('');
+
+  bindChart(cfg,series,X,Y);
+}
+
+function bindChart(cfg,series,X,Y){
+  Array.prototype.forEach.call(document.querySelectorAll('#lg .li'),function(li){
+    li.addEventListener('click',function(){
+      var i=li.dataset.i;hidden[i]=!hidden[i];
+      li.classList.toggle('off');
+      var p=document.querySelector('#chart .sr.s'+i);
+      if(p)p.style.display=li.classList.contains('off')?'none':'';
+    });
+  });
+  var el=document.getElementById('csvg'),tip=document.getElementById('tip');
+  el.addEventListener('mousemove',function(ev){
+    var r=el.getBoundingClientRect();
+    var idx=Math.round((ev.clientX-r.left)/r.width*(N-1));
+    idx=Math.max(0,Math.min(N-1,idx));
+    var hh=Math.floor(idx/4),mm=(idx%4)*15;
+    var html=(hh<10?'0':'')+hh+':'+(mm<10?'0':'')+mm;
+    cfg.series.forEach(function(sp,si){
+      if(hidden[si])return;
+      html+='<br><span style="color:'+sp.color+'">●</span> '+sp.name+' '+series[si][idx].toFixed(cfg.dec)+' '+cfg.unit;
+      var c=document.getElementById('cd'+si);
+      c.setAttribute('cx',X(idx));c.setAttribute('cy',Y(series[si][idx]));c.setAttribute('opacity','1');
+    });
+    tip.innerHTML=html;tip.style.display='block';
+    var box=document.getElementById('chartWrap').getBoundingClientRect();
+    tip.style.left=Math.min(Math.max(ev.clientX-box.left+12,4),box.width-190)+'px';
+    tip.style.top=(ev.clientY-box.top-30)+'px';
+    var xl=document.getElementById('cxl');
+    xl.setAttribute('x1',X(idx));xl.setAttribute('x2',X(idx));xl.setAttribute('opacity','.5');
+  });
+  el.addEventListener('mouseleave',function(){
+    tip.style.display='none';
+    document.getElementById('cxl').setAttribute('opacity','0');
+    cfg.series.forEach(function(_,si){document.getElementById('cd'+si).setAttribute('opacity','0');});
+  });
+}
+
 /* Tab 切换 */
-Array.prototype.forEach.call(document.querySelectorAll('.tabs .tab'),function(t){
+Array.prototype.forEach.call(document.querySelectorAll('#tabs .tab'),function(t){
   t.addEventListener('click',function(){
-    document.querySelector('.tabs .tab.active').classList.remove('active');
-    t.classList.add('active');
+    document.querySelector('#tabs .tab.active').classList.remove('active');
+    t.classList.add('active');cur=+t.dataset.t;hidden={};render();
   });
 });
 /* 时间维度 seg */
@@ -2941,52 +3115,23 @@ Array.prototype.forEach.call(document.querySelectorAll('.seg button'),function(b
     b.classList.add('active');
   });
 });
-
+/* 弹窗 */
 var mMask=document.getElementById('mMask');
-document.getElementById('btnMetric').onclick=function(){mMask.style.display='flex'};
+document.getElementById('btnMetric').onclick=function(){mMask.style.display='flex';};
 Array.prototype.forEach.call(document.querySelectorAll('[data-close]'),function(el){
-  el.addEventListener('click',function(){mMask.style.display='none'});
+  el.addEventListener('click',function(){mMask.style.display='none';});
 });
-mMask.onclick=function(e){if(e.target===mMask)mMask.style.display='none'};
+mMask.onclick=function(e){if(e.target===mMask)mMask.style.display='none';};
+document.getElementById('btnQuery').onclick=function(){hidden={};render();};
 
-/* 查询 → 渲染多序列对比曲线（模拟数据） */
-var COLORS=['#2E6BE6','#F53F3F','#00B42A'];
-var NAMES=['#1-1 舱 BMS1','#1-2 舱 BMS1','#2-1 舱 BMS1'];
-document.getElementById('btnQuery').onclick=function(){
-  var w=980,h=380,pl=46,pb=34,pt=16,pr=16,n=24;
-  function mk(base,amp){var a=[];for(var i=0;i<n;i++){a.push(base+Math.sin(i/3.1)*amp+Math.cos(i/1.7)*amp*0.5);}return a;}
-  var series=[mk(0,1),mk(0.4,1.1),mk(-0.35,0.9)];
-  var all=[];series.forEach(function(s){all=all.concat(s)});
-  var max=Math.max.apply(null,all),min=Math.min.apply(null,all);
-  function X(i){return pl+i/(n-1)*(w-pl-pr)}
-  function Y(v){return pt+(1-(v-min)/(max-min))*(h-pt-pb)}
-  var svg='<svg viewBox="0 0 '+w+' '+h+'" style="width:100%;height:380px;display:block">';
-  for(var g=0;g<=4;g++){var gy=pt+g/4*(h-pt-pb);
-    svg+='<line x1="'+pl+'" y1="'+gy+'" x2="'+(w-pr)+'" y2="'+gy+'" stroke="#F2F3F5"/>';}
-  for(var t=0;t<n;t+=3){svg+='<text x="'+X(t)+'" y="'+(h-10)+'" font-size="10" fill="#86909C" text-anchor="middle">'+(t<10?'0':'')+t+':00</text>';}
-  series.forEach(function(s,si){
-    var line=s.map(function(v,i){return (i?'L':'M')+X(i).toFixed(1)+' '+Y(v).toFixed(1)}).join(' ');
-    svg+='<path class="sr s'+si+'" d="'+line+'" fill="none" stroke="'+COLORS[si]+'" stroke-width="2" stroke-linejoin="round"/>';
-  });
-  svg+='</svg>';
-  var lg='<div class="legend">'+NAMES.map(function(nm,i){return '<span class="li" data-i="'+i+'"><i style="background:'+COLORS[i]+'"></i>'+nm+'</span>'}).join('')+'</div>';
-  document.getElementById('chartArea').innerHTML='<div class="card-t">温差对比曲线（15 分钟粒度 · 2026-09-04）</div>'+lg+svg;
-  Array.prototype.forEach.call(document.querySelectorAll('.legend .li'),function(li){
-    li.addEventListener('click',function(){
-      li.classList.toggle('off');
-      var p=document.querySelector('.sr.s'+li.dataset.i);
-      p.style.display=li.classList.contains('off')?'none':'';
-    });
-  });
-};
+render();
 </script>
 </body>
 </html>
-
 </template>
 <template id="tpl-analysis-consistency">
 <!DOCTYPE html>
-<!-- 设计系统：储能电站智能运维系统 V1.0 · §4.14 一致性分析（示意图 0904_14） -->
+<!-- 设计系统：储能电站智能运维系统 V6 · §4.14 一致性分析（同一时刻 · 不同点位的离散程度） -->
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
@@ -3000,6 +3145,7 @@ body{font-family:"PingFang SC","Microsoft YaHei","Helvetica Neue",Arial,sans-ser
 .card{background:#fff;border-radius:8px;border:1px solid var(--border);padding:16px;margin-bottom:16px}
 .card-t{font-size:15px;font-weight:600;display:flex;align-items:center;gap:8px;margin-bottom:14px}
 .card-t::before{content:"";width:3px;height:14px;background:var(--primary);border-radius:2px}
+.card-t .sub{font-size:12px;color:var(--text2);font-weight:400}
 .btn{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 14px;border-radius:6px;border:1px solid var(--border);background:#fff;color:var(--text);font-size:13px;cursor:pointer;font-family:inherit}
 .tabs{display:flex;gap:4px;border-bottom:1px solid var(--border);margin-bottom:16px}
 .tabs .tab{padding:10px 14px;cursor:pointer;color:var(--text2);border-bottom:2px solid transparent;margin-bottom:-1px;font-size:14px}
@@ -3011,10 +3157,10 @@ body{font-family:"PingFang SC","Microsoft YaHei","Helvetica Neue",Arial,sans-ser
 .chart-card .ct .btn{height:26px;padding:0 10px;font-size:12px}
 .lg-item{display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--text2);font-weight:400}
 .lg-item i{width:12px;height:3px;border-radius:2px}
-.statbar{display:flex;gap:24px;border-top:1px dashed var(--border);padding-top:10px;margin-top:8px;font-size:12px;color:var(--text2)}
+.statbar{display:flex;gap:24px;border-top:1px dashed var(--border);padding-top:10px;margin-top:8px;font-size:12px;color:var(--text2);flex-wrap:wrap}
 .statbar b{color:var(--text);font-variant-numeric:tabular-nums;font-size:14px;margin-left:4px}
 .tip{position:absolute;pointer-events:none;background:rgba(29,33,41,.92);color:#fff;font-size:11px;padding:5px 8px;border-radius:6px;display:none;white-space:nowrap;z-index:5;line-height:1.5}
-.legend{display:flex;gap:18px;margin-bottom:8px;font-size:12px}
+.legend{display:flex;gap:18px;margin-bottom:8px;font-size:12px;flex-wrap:wrap}
 .legend .li{display:flex;align-items:center;gap:6px;cursor:pointer;user-select:none}
 .legend .li.off{opacity:.35}
 .legend .li i{width:14px;height:3px;border-radius:2px}
@@ -3030,7 +3176,7 @@ body{font-family:"PingFang SC","Microsoft YaHei","Helvetica Neue",Arial,sans-ser
     </div>
   </div>
 
-  <!-- 整站监测：双图横排 -->
+  <!-- 整站监测：双图 + 压差分布柱状图 -->
   <div id="tab-site">
     <div class="two">
       <!-- 左图：最高/最低电压 -->
@@ -3054,23 +3200,50 @@ body{font-family:"PingFang SC","Microsoft YaHei","Helvetica Neue",Arial,sans-ser
         <div class="statbar"><span>最大值<b>29.0 A</b></span><span>最小值<b>5.0 A</b></span><span>平均值<b>23.2 A</b></span><span>极差<b style="color:var(--orange)">24.0 A</b></span></div>
       </div>
     </div>
+
+    <!-- V6 新增：同一时刻各舱压差分布（离散程度直方图） -->
+    <div class="card" style="margin-top:16px">
+      <div class="card-t">各电池舱压差分布 · 当前时刻 15:35<span class="sub">同一时间点 · 不同点位的离散程度（阈值 50mV）</span>
+        <span style="margin-left:auto;display:flex;gap:8px"><button class="btn">导出</button><button class="btn">刷新</button></span>
+      </div>
+      <div id="barChart"></div>
+      <div class="statbar">
+        <span>平均压差<b>29.3 mV</b></span>
+        <span>最大压差<b style="color:var(--red)">68 mV（#2 电池舱）</b></span>
+        <span>超阈值<b style="color:var(--red)">1 舱</b></span>
+        <span>离散系数<b>0.41</b></span>
+        <span style="color:var(--orange)">建议：#2 电池舱加入均衡观察清单</span>
+      </div>
+    </div>
   </div>
 
   <!-- 舱级监测 -->
   <div id="tab-cabin" style="display:none">
     <div class="card">
-      <div class="card-t">舱级一致性 · 各舱平均电压（点击曲线数据点可下钻簇级监测）</div>
+      <div class="card-t">舱级一致性 · 各舱平均电压（点击曲线可下钻簇级监测）</div>
       <div class="legend" id="cabLegend"></div>
       <div id="cabChart"></div>
+      <div class="statbar">
+        <span>舱间最大压差<b style="color:var(--red)">48 mV（#2 电池舱）</b></span>
+        <span>舱间平均压差<b>31 mV</b></span>
+        <span>离散系数<b>0.18</b></span>
+        <span>评估<b style="color:var(--orange)">轻度不一致</b></span>
+      </div>
     </div>
   </div>
 
   <!-- 簇级监测 -->
   <div id="tab-cluster" style="display:none">
     <div class="card">
-      <div class="card-t">簇级一致性 · #2-4 簇 各电池簇单体电压</div>
+      <div class="card-t">簇级一致性 · #2 电池舱各簇单体电压</div>
       <div class="legend" id="cluLegend"></div>
       <div id="cluChart"></div>
+      <div class="statbar">
+        <span>簇间最大压差<b style="color:var(--red)">86 mV（#2-4 簇）</b></span>
+        <span>阈值<b>50 mV</b></span>
+        <span>评估<b style="color:var(--red)">超出阈值</b></span>
+        <span style="color:var(--orange)">建议：对 #2-4 簇执行整站均衡或电芯补电</span>
+      </div>
     </div>
   </div>
 </div>
@@ -3086,8 +3259,9 @@ Array.prototype.forEach.call(document.querySelectorAll('.tabs .tab'),function(t)
     });
   });
 });
+function rng(i,j){var x=Math.sin(i*12.9898+j*78.233)*43758.5453;return x-Math.floor(x);}
 
-/* ===== 左图：最高/最低电压曲线，标注极值点 ===== */
+/* ===== 左图：最高/最低电压包络线，标注极值点 ===== */
 (function(){
   var w=470,h=220,pl=40,pb=28,pt=14,pr=12,n=20;
   var hi=[],lo=[];
@@ -3097,9 +3271,9 @@ Array.prototype.forEach.call(document.querySelectorAll('.tabs .tab'),function(t)
   }
   hi[n-1]=3.18; lo[n-1]=1.82;
   var max=3.3,min=1.7;
-  function X(i){return pl+i/(n-1)*(w-pl-pr)}
-  function Y(v){return pt+(1-(v-min)/(max-min))*(h-pt-pb)}
-  function path(a){return a.map(function(v,i){return (i?'L':'M')+X(i).toFixed(1)+' '+Y(v).toFixed(1)}).join(' ')}
+  function X(i){return pl+i/(n-1)*(w-pl-pr);}
+  function Y(v){return pt+(1-(v-min)/(max-min))*(h-pt-pb);}
+  function path(a){return a.map(function(v,i){return (i?'L':'M')+X(i).toFixed(1)+' '+Y(v).toFixed(1);}).join(' ');}
   var svg='<svg viewBox="0 0 '+w+' '+h+'" style="width:100%;height:220px;display:block">';
   for(var g=0;g<=3;g++){var gy=pt+g/3*(h-pt-pb);
     svg+='<line x1="'+pl+'" y1="'+gy+'" x2="'+(w-pr)+'" y2="'+gy+'" stroke="#F2F3F5"/>'+
@@ -3108,7 +3282,6 @@ Array.prototype.forEach.call(document.querySelectorAll('.tabs .tab'),function(t)
     svg+='<text x="'+X(li*(n-1)/4)+'" y="'+(h-8)+'" font-size="9" fill="#86909C" text-anchor="middle">'+lb+'</text>';});
   svg+='<path d="'+path(hi)+'" fill="none" stroke="#F53F3F" stroke-width="1.8"/>';
   svg+='<path d="'+path(lo)+'" fill="none" stroke="#2E6BE6" stroke-width="1.8"/>';
-  /* 极值标注 */
   svg+='<circle cx="'+X(n-1)+'" cy="'+Y(3.18)+'" r="4" fill="#F53F3F"/>'+
     '<text x="'+(X(n-1)-6)+'" y="'+(Y(3.18)-8)+'" font-size="10" fill="#F53F3F" text-anchor="end">最大 3.18V</text>';
   svg+='<circle cx="'+X(n-1)+'" cy="'+Y(1.82)+'" r="4" fill="#2E6BE6"/>'+
@@ -3117,16 +3290,16 @@ Array.prototype.forEach.call(document.querySelectorAll('.tabs .tab'),function(t)
   document.getElementById('voltChart').innerHTML=svg;
 })();
 
-/* ===== 右图：电流极差曲线 + tooltip（23:42 → 24.0A） ===== */
+/* ===== 右图：电流极差曲线 + tooltip ===== */
 (function(){
   var w=470,h=220,pl=40,pb=28,pt=14,pr=12,n=25;
   var data=[];
   for(var i=0;i<n;i++){data.push(18+Math.sin(i/2.6)*6+(i%5===0?4:0));}
-  data[15]=24.0; /* 23:42 附近 */
+  data[15]=24.0;
   var max=30,min=0;
-  function X(i){return pl+i/(n-1)*(w-pl-pr)}
-  function Y(v){return pt+(1-(v-min)/(max-min))*(h-pt-pb)}
-  var line=data.map(function(v,i){return (i?'L':'M')+X(i).toFixed(1)+' '+Y(v).toFixed(1)}).join(' ');
+  function X(i){return pl+i/(n-1)*(w-pl-pr);}
+  function Y(v){return pt+(1-(v-min)/(max-min))*(h-pt-pb);}
+  var line=data.map(function(v,i){return (i?'L':'M')+X(i).toFixed(1)+' '+Y(v).toFixed(1);}).join(' ');
   var svg='<svg viewBox="0 0 '+w+' '+h+'" style="width:100%;height:220px;display:block" id="curSvg">';
   for(var g=0;g<=3;g++){var gy=pt+g/3*(h-pt-pb);
     svg+='<line x1="'+pl+'" y1="'+gy+'" x2="'+(w-pr)+'" y2="'+gy+'" stroke="#F2F3F5"/>'+
@@ -3143,7 +3316,7 @@ Array.prototype.forEach.call(document.querySelectorAll('.tabs .tab'),function(t)
     var r=el.getBoundingClientRect();
     var idx=Math.round((ev.clientX-r.left)/r.width*(n-1));
     idx=Math.max(0,Math.min(n-1,idx));
-    var mins=Math.round(idx/(n-1)*(4*60+24)); /* 20:00 + 4h24m */
+    var mins=Math.round(idx/(n-1)*(4*60+24));
     var hh=20+Math.floor(mins/60),mm=mins%60;
     if(hh>=24)hh-=24;
     tip.style.display='block';
@@ -3162,25 +3335,50 @@ Array.prototype.forEach.call(document.querySelectorAll('.tabs .tab'),function(t)
   });
 })();
 
+/* ===== V6 新增：同一时刻各舱压差分布柱状图 ===== */
+(function(){
+  var bars=[['#1 舱',18],['#2 舱',68],['#3 舱',24],['#4 舱',22],['#5 舱',31],['#6 舱',26],['#7 舱',20],['#8 舱',25]];
+  var w=980,h=260,pl=44,pb=30,pt=18,pr=14,max=80,th=50;
+  function X(i){return pl+(i+0.5)/bars.length*(w-pl-pr);}
+  function Y(v){return pt+(1-v/max)*(h-pt-pb);}
+  var bw=(w-pl-pr)/bars.length*0.52;
+  var svg='<svg viewBox="0 0 '+w+' '+h+'" style="width:100%;height:260px;display:block">';
+  for(var g=0;g<=4;g++){var gy=pt+g/4*(h-pt-pb);
+    svg+='<line x1="'+pl+'" y1="'+gy+'" x2="'+(w-pr)+'" y2="'+gy+'" stroke="#F2F3F5"/>'+
+      '<text x="'+(pl-8)+'" y="'+(gy+4)+'" font-size="10" fill="#86909C" text-anchor="end">'+(max-g/4*max)+'</text>';}
+  svg+='<line x1="'+pl+'" y1="'+Y(th)+'" x2="'+(w-pr)+'" y2="'+Y(th)+'" stroke="#F53F3F" stroke-width="1.2" stroke-dasharray="5 4"/>'+
+    '<text x="'+(w-pr)+'" y="'+(Y(th)-6)+'" font-size="10" fill="#F53F3F" text-anchor="end">阈值 50mV</text>';
+  bars.forEach(function(b,i){
+    var over=b[1]>th;
+    svg+='<rect x="'+(X(i)-bw/2).toFixed(1)+'" y="'+Y(b[1]).toFixed(1)+'" width="'+bw.toFixed(1)+'" height="'+(Y(0)-Y(b[1])).toFixed(1)+'" rx="3" fill="'+(over?'#F53F3F':'#2E6BE6')+'" opacity="'+(over?'0.95':'0.82')+'"><title>'+b[0]+'：'+b[1]+' mV</title></rect>'+
+      '<text x="'+X(i)+'" y="'+(Y(b[1])-6)+'" font-size="11" font-weight="600" fill="'+(over?'#F53F3F':'#1D2129')+'" text-anchor="middle">'+b[1]+'</text>'+
+      '<text x="'+X(i)+'" y="'+(h-10)+'" font-size="10" fill="#86909C" text-anchor="middle">'+b[0]+'</text>';
+  });
+  svg+='<text x="'+(pl-30)+'" y="12" font-size="10" fill="#86909C">mV</text>';
+  svg+='</svg>';
+  document.getElementById('barChart').innerHTML=svg;
+})();
+
 /* ===== 舱级 / 簇级多线图 ===== */
-function multiLine(elId,legendId,series,names,colors,unit,drillable){
+function multiLine(elId,legendId,series,names,colors,drillable){
   var w=980,h=300,pl=44,pb=28,pt=14,pr=14,n=series[0].length;
-  var all=[];series.forEach(function(s){all=all.concat(s)});
+  var all=[];series.forEach(function(s){all=all.concat(s);});
   var max=Math.max.apply(null,all)*1.05,min=Math.min.apply(null,all)*0.95;
-  function X(i){return pl+i/(n-1)*(w-pl-pr)}
-  function Y(v){return pt+(1-(v-min)/(max-min))*(h-pt-pb)}
+  function X(i){return pl+i/(n-1)*(w-pl-pr);}
+  function Y(v){return pt+(1-(v-min)/(max-min))*(h-pt-pb);}
   var svg='<svg viewBox="0 0 '+w+' '+h+'" style="width:100%;height:300px;display:block">';
   for(var g=0;g<=4;g++){var gy=pt+g/4*(h-pt-pb);
-    svg+='<line x1="'+pl+'" y1="'+gy+'" x2="'+(w-pr)+'" y2="'+gy+'" stroke="#F2F3F5"/>';}
+    svg+='<line x1="'+pl+'" y1="'+gy+'" x2="'+(w-pr)+'" y2="'+gy+'" stroke="#F2F3F5"/>'+
+      '<text x="'+(pl-6)+'" y="'+(gy+3)+'" font-size="9" fill="#86909C" text-anchor="end">'+(max-g/4*(max-min)).toFixed(2)+'</text>';}
   for(var t=0;t<n;t+=4){svg+='<text x="'+X(t)+'" y="'+(h-8)+'" font-size="9" fill="#86909C" text-anchor="middle">'+(t<10?'0':'')+t+':00</text>';}
   series.forEach(function(s,si){
-    var line=s.map(function(v,i){return (i?'L':'M')+X(i).toFixed(1)+' '+Y(v).toFixed(1)}).join(' ');
+    var line=s.map(function(v,i){return (i?'L':'M')+X(i).toFixed(1)+' '+Y(v).toFixed(1);}).join(' ');
     svg+='<path class="sr s'+si+'" d="'+line+'" fill="none" stroke="'+colors[si]+'" stroke-width="1.8" style="cursor:'+(drillable?'pointer':'default')+'"><title>'+names[si]+'</title></path>';
   });
   svg+='</svg>';
   document.getElementById(elId).innerHTML=svg;
   var lg=document.getElementById(legendId);
-  lg.innerHTML=names.map(function(nm,i){return '<span class="li" data-i="'+i+'"><i style="background:'+colors[i]+'"></i>'+nm+'</span>'}).join('');
+  lg.innerHTML=names.map(function(nm,i){return '<span class="li" data-i="'+i+'"><i style="background:'+colors[i]+'"></i>'+nm+'</span>';}).join('');
   Array.prototype.forEach.call(lg.querySelectorAll('.li'),function(li){
     li.addEventListener('click',function(){
       li.classList.toggle('off');
@@ -3195,22 +3393,21 @@ function multiLine(elId,legendId,series,names,colors,unit,drillable){
     });
   }
 }
-function mkSeries(base,amp,n){var a=[];for(var i=0;i<n;i++){a.push(base+Math.sin(i/3+i)*amp+Math.cos(i/2.1)*amp*0.4);}return a;}
+function mkSeries(base,amp,n,j){var a=[];for(var i=0;i<n;i++){a.push(base+Math.sin(i/3+i)*amp*0.6+(rng(i,j)-0.5)*amp);}return a;}
 var C=['#2E6BE6','#F53F3F','#00B42A','#FF7D00','#6B7FF0'];
 multiLine('cabChart','cabLegend',
-  [mkSeries(3.25,0.04,24),mkSeries(3.22,0.05,24),mkSeries(3.28,0.03,24),mkSeries(3.20,0.06,24)],
-  ['#1 电池舱','#2 电池舱','#3 电池舱','#4 电池舱'],C,'V',true);
+  [mkSeries(3.25,0.04,24,1),mkSeries(3.20,0.05,24,2),mkSeries(3.28,0.03,24,3),mkSeries(3.24,0.04,24,4)],
+  ['#1 电池舱','#2 电池舱（压差 48mV）','#3 电池舱','#4 电池舱'],C,true);
 multiLine('cluChart','cluLegend',
-  [mkSeries(3.25,0.03,24),mkSeries(3.23,0.04,24),mkSeries(3.26,0.025,24),mkSeries(3.05,0.05,24),mkSeries(3.24,0.03,24)],
-  ['#2-1 簇','#2-2 簇','#2-3 簇','#2-4 簇（压差偏大）','#2-5 簇'],C,'V',false);
+  [mkSeries(3.25,0.03,24,5),mkSeries(3.23,0.04,24,6),mkSeries(3.26,0.025,24,7),mkSeries(3.05,0.05,24,8),mkSeries(3.24,0.03,24,9)],
+  ['#2-1 簇','#2-2 簇','#2-3 簇','#2-4 簇（压差 86mV 超阈值）','#2-5 簇'],C,false);
 </script>
 </body>
 </html>
-
 </template>
 <template id="tpl-analysis-custom">
 <!DOCTYPE html>
-<!-- 设计系统：储能电站智能运维系统 V1.0 · §4.15 自定义曲线分析（示意图 0904_15） -->
+<!-- 设计系统：储能电站智能运维系统 V6 · §4.15 自定义曲线分析（电站曲线 / 设备曲线，浅色卡片适配参考图布局） -->
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
@@ -3224,6 +3421,7 @@ body{font-family:"PingFang SC","Microsoft YaHei","Helvetica Neue",Arial,sans-ser
 .card{background:#fff;border-radius:8px;border:1px solid var(--border);padding:16px;margin-bottom:16px}
 .card-t{font-size:15px;font-weight:600;display:flex;align-items:center;gap:8px;margin-bottom:14px}
 .card-t::before{content:"";width:3px;height:14px;background:var(--primary);border-radius:2px}
+.card-t .sub{font-size:12px;color:var(--text2);font-weight:400}
 .btn{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 14px;border-radius:6px;border:1px solid var(--border);background:#fff;color:var(--text);font-size:13px;cursor:pointer;font-family:inherit}
 .btn-primary{background:var(--primary);border-color:var(--primary);color:#fff}
 .tabs{display:flex;gap:4px;border-bottom:1px solid var(--border);margin-bottom:16px}
@@ -3235,7 +3433,23 @@ body{font-family:"PingFang SC","Microsoft YaHei","Helvetica Neue",Arial,sans-ser
 .seg{display:inline-flex;background:#F2F3F5;border-radius:6px;padding:2px}
 .seg button{border:none;background:transparent;height:28px;padding:0 14px;border-radius:4px;cursor:pointer;font-size:13px;color:var(--text2);font-family:inherit}
 .seg button.active{background:var(--primary);color:#fff}
-.empty-chart{height:420px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--text2);border:1px dashed var(--border);border-radius:8px;background:#FAFBFC}
+.legend{display:flex;gap:18px;margin-bottom:8px;font-size:12px;flex-wrap:wrap;align-items:center}
+.legend .li{display:flex;align-items:center;gap:6px;cursor:pointer;user-select:none}
+.legend .li.off{opacity:.35}
+.legend .li i{width:14px;height:3px;border-radius:2px}
+.legend .pg{margin-left:auto;color:var(--text2);display:flex;gap:8px;align-items:center}
+.chart-wrap{position:relative}
+.tip{position:absolute;pointer-events:none;background:rgba(29,33,41,.92);color:#fff;font-size:11px;padding:6px 9px;border-radius:6px;display:none;white-space:nowrap;z-index:5;line-height:1.7}
+/* 指标管理表格（参考附图底部：指标 / 样式 / 显示 / 操作） */
+.mtable{width:100%;border-collapse:collapse}
+.mtable th{background:#F7F8FA;color:var(--text2);font-weight:500;font-size:13px;text-align:left;padding:0 10px;height:40px}
+.mtable td{padding:0 10px;height:46px;border-bottom:1px solid var(--border);font-size:13px}
+.mtable select{height:28px;border:1px solid var(--border);border-radius:5px;padding:0 8px;font-size:12px;background:#fff;font-family:inherit}
+.chk{width:16px;height:16px;border-radius:4px;border:1px solid var(--border);background:#fff;display:inline-block;cursor:pointer;position:relative;vertical-align:middle}
+.chk.on{background:var(--primary);border-color:var(--primary)}
+.chk.on::after{content:"";position:absolute;left:4px;top:1px;width:5px;height:9px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
+.del{color:var(--text2);cursor:pointer}
+.del:hover{color:var(--red)}
 .modal-mask{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:100}
 .modal{background:#fff;border-radius:12px;width:640px;max-width:92vw;max-height:88vh;display:flex;flex-direction:column}
 .modal-h{padding:16px 20px;border-bottom:1px solid var(--border);font-size:15px;font-weight:600;display:flex;justify-content:space-between;align-items:center}
@@ -3246,16 +3460,12 @@ body{font-family:"PingFang SC","Microsoft YaHei","Helvetica Neue",Arial,sans-ser
 .mcol h5{font-size:13px;margin-bottom:10px;color:var(--text2);font-weight:500}
 .mcol label{display:flex;align-items:center;gap:8px;padding:7px 8px;border-radius:6px;cursor:pointer;font-size:13px}
 .mcol label:hover{background:#F5F9FF}
-.legend{display:flex;gap:18px;margin-bottom:8px;font-size:12px}
-.legend .li{display:flex;align-items:center;gap:6px;cursor:pointer;user-select:none}
-.legend .li.off{opacity:.35}
-.legend .li i{width:14px;height:3px;border-radius:2px}
 </style>
 </head>
 <body>
 <div class="page">
   <div class="card" style="padding-bottom:0">
-    <div class="tabs">
+    <div class="tabs" id="tabs">
       <div class="tab active" data-t="station">电站曲线</div>
       <div class="tab" data-t="device">设备曲线</div>
     </div>
@@ -3275,13 +3485,21 @@ body{font-family:"PingFang SC","Microsoft YaHei","Helvetica Neue",Arial,sans-ser
       </div>
     </div>
 
-    <div id="chartArea">
-      <div class="empty-chart">
-        <svg width="88" height="60" viewBox="0 0 88 60" fill="none"><path d="M8 50 L24 34 L38 42 L54 20 L70 28 L82 12" stroke="#C9CDD4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 56h80" stroke="#E5E6EB" stroke-width="2" stroke-linecap="round"/></svg>
-        <div style="margin-top:10px">空态画布：选择指标并点击「查询」后渲染多序列折线图</div>
-        <div style="margin-top:4px;font-size:12px">保存的模板与「趋势分析」通用；支持跨 Tab 复制指标组合</div>
-      </div>
+    <div class="card-t" id="chartTitle"></div>
+    <div class="legend" id="lg"></div>
+    <div class="chart-wrap" id="chartWrap">
+      <div id="chart"></div>
+      <div class="tip" id="tip"></div>
     </div>
+  </div>
+
+  <!-- 指标管理表格（参考附图底部结构） -->
+  <div class="card">
+    <div class="card-t">已选指标<span class="sub">样式支持折线图 / 面积图；可控制显示或移除</span></div>
+    <table class="mtable">
+      <thead><tr><th style="width:46%">指标</th><th style="width:18%">样式</th><th style="width:14%">显示</th><th>操作</th></tr></thead>
+      <tbody id="mtBody"></tbody>
+    </table>
   </div>
 </div>
 
@@ -3291,19 +3509,19 @@ body{font-family:"PingFang SC","Microsoft YaHei","Helvetica Neue",Arial,sans-ser
     <div class="modal-h">选择指标<span class="x" data-close>×</span></div>
     <div class="modal-b">
       <div class="metric-cols">
-        <div class="mcol" id="devCol"><h5>对象（电站曲线 = 整站聚合；设备曲线 = 单台设备单点位）</h5>
+        <div class="mcol"><h5>对象（电站曲线 = 整站聚合；设备曲线 = 单台设备单点位）</h5>
           <label><input type="checkbox" checked> 整站聚合</label>
-          <label><input type="checkbox" checked> #1-1 舱 BMS1 · 单体电压</label>
-          <label><input type="checkbox" checked> #3-1 舱 PCS2 · 有功功率</label>
-          <label><input type="checkbox"> 液冷机组-1 · 出液温度</label>
-          <label><input type="checkbox"> 消防主机 · 状态量</label>
+          <label><input type="checkbox" checked> #2 储能单元#3 电池舱</label>
+          <label><input type="checkbox" checked> #3-1 舱 PCS2</label>
+          <label><input type="checkbox"> 液冷机组-1</label>
+          <label><input type="checkbox"> 消防主机</label>
         </div>
         <div class="mcol"><h5>指标项</h5>
           <label><input type="checkbox" checked> 有功功率（MW）</label>
-          <label><input type="checkbox" checked> SOC（%）</label>
-          <label><input type="checkbox" checked> 日充/放电量（MWh）</label>
+          <label><input type="checkbox" checked> 排气压力（kPa）</label>
+          <label><input type="checkbox" checked> 环境温度（℃）</label>
+          <label><input type="checkbox"> SOC（%）</label>
           <label><input type="checkbox"> 电压（V）</label>
-          <label><input type="checkbox"> 温度（℃）</label>
         </div>
       </div>
     </div>
@@ -3312,12 +3530,124 @@ body{font-family:"PingFang SC","Microsoft YaHei","Helvetica Neue",Arial,sans-ser
 </div>
 
 <script>
+function rng(i,j){var x=Math.sin(i*12.9898+j*78.233)*43758.5453;return x-Math.floor(x);}
+function gauss(h,mu,sig){return Math.exp(-Math.pow(h-mu,2)/(2*sig*sig));}
+var N=96;
+
+/* ============ 两个 Tab 的数据集（真实业务形态模拟） ============ */
+var DATA={
+ station:{title:'电站曲线 · 整站聚合指标',unit:'MW',dec:2,series:[
+   {name:'整站有功功率(MW)',color:'#2E6BE6',style:'line',show:true,fn:function(h,i){return -0.8*gauss(h,3,2.4)+1.05*gauss(h,12.5,3)+0.5*gauss(h,19,2.4)+(rng(i,1)-0.5)*0.04;}},
+   {name:'电网取用功率(MW)',color:'#00B42A',style:'line',show:true,fn:function(h,i){return 0.35+0.5*gauss(h,12,3.5)+0.28*gauss(h,19,2.5)+(rng(i,2)-0.5)*0.03;}},
+   {name:'计划功率(MW)',color:'#FF7D00',style:'area',show:true,fn:function(h,i){return (h>=10&&h<=15)?0.9:(h>=0&&h<=6?-0.7:0.15)+(rng(i,3)-0.5)*0.02;}}]},
+ device:{title:'设备曲线 · #2 储能单元#3 电池舱',unit:'kPa / ℃',dec:1,series:[
+   {name:'#2储能单元#3电池舱-2排气压力(kPa)',color:'#2E6BE6',style:'line',show:true,fn:function(h,i){return 658+(rng(i,4)-0.5)*6+2*gauss(h,13,5);}},
+   {name:'#2储能单元#3电池舱-1排气压力(kPa)',color:'#00B42A',style:'line',show:true,fn:function(h,i){return 21+(rng(i,5)-0.5)*5+3*gauss(h,13,4);}},
+   {name:'#2储能单元#3电池舱-环境温度(℃)',color:'#FF7D00',style:'line',show:true,fn:function(h,i){return 25+4.5*gauss(h,14,3.5)+(rng(i,6)-0.5)*0.8;}}]}
+};
 var curTab='station';
-Array.prototype.forEach.call(document.querySelectorAll('.tabs .tab'),function(t){
+
+function render(){
+  var cfg=DATA[curTab];
+  document.getElementById('chartTitle').innerHTML=cfg.title+'<span class="sub">15 分钟粒度 · 2026-09-04 · 单位 '+cfg.unit+'</span>';
+  var series=cfg.series.map(function(sp,j){var a=[];for(var i=0;i<N;i++){a.push(sp.fn(i/4,i));}return a;});
+  var vis=series.filter(function(_,i){return cfg.series[i].show;});
+  var all=[];vis.forEach(function(a){all=all.concat(a);});
+  if(!all.length){document.getElementById('chart').innerHTML='<div style="height:380px;display:flex;align-items:center;justify-content:center;color:var(--text2)">所有指标已隐藏，请在下方表格勾选「显示」</div>';renderLegend(cfg,[]);renderTable(cfg);return;}
+  var max=Math.max.apply(null,all),min=Math.min.apply(null,all);
+  var pad=(max-min)*0.12||1;max+=pad;min-=pad;
+  var w=980,h=380,pl=56,pr=16,pt=16,pb=34;
+  function X(i){return pl+i/(N-1)*(w-pl-pr);}
+  function Y(v){return pt+(1-(v-min)/(max-min))*(h-pt-pb);}
+  var svg='<svg viewBox="0 0 '+w+' '+h+'" style="width:100%;height:380px;display:block" id="csvg">';
+  for(var g=0;g<=4;g++){var gy=pt+g/4*(h-pt-pb),gv=max-g/4*(max-min);
+    svg+='<line x1="'+pl+'" y1="'+gy+'" x2="'+(w-pr)+'" y2="'+gy+'" stroke="#F2F3F5"/>'+
+         '<text x="'+(pl-8)+'" y="'+(gy+4)+'" font-size="10" fill="#86909C" text-anchor="end">'+gv.toFixed(cfg.dec)+'</text>';}
+  for(var t=0;t<N;t+=16){var hh=t/4;
+    svg+='<text x="'+X(t)+'" y="'+(h-10)+'" font-size="10" fill="#86909C" text-anchor="middle">'+(hh<10?'0':'')+hh+':00</text>';}
+  if(min<0&&max>0){svg+='<line x1="'+pl+'" y1="'+Y(0)+'" x2="'+(w-pr)+'" y2="'+Y(0)+'" stroke="#C9CDD4" stroke-dasharray="4 4"/>';}
+  series.forEach(function(a,si){
+    var sp=cfg.series[si];if(!sp.show)return;
+    var line=a.map(function(v,i){return (i?'L':'M')+X(i).toFixed(1)+' '+Y(v).toFixed(1);}).join(' ');
+    if(sp.style==='area'){
+      var area=line+' L '+X(N-1).toFixed(1)+' '+Y(Math.max(min,0)).toFixed(1)+' L '+X(0).toFixed(1)+' '+Y(Math.max(min,0)).toFixed(1)+' Z';
+      svg+='<path class="sr s'+si+'" d="'+area+'" fill="'+sp.color+'" opacity="0.15" stroke="none"/>';
+    }
+    svg+='<path class="sr s'+si+'" d="'+line+'" fill="none" stroke="'+sp.color+'" stroke-width="2" stroke-linejoin="round"/>';
+  });
+  svg+='<line id="cxl" y1="'+pt+'" y2="'+(h-pb)+'" stroke="#86909C" stroke-width="1" stroke-dasharray="3 3" opacity="0"/>';
+  series.forEach(function(a,si){if(cfg.series[si].show)svg+='<circle id="cd'+si+'" r="3.5" fill="#fff" stroke="'+cfg.series[si].color+'" stroke-width="2" opacity="0"/>';});
+  svg+='</svg>';
+  document.getElementById('chart').innerHTML=svg;
+  renderLegend(cfg,series);renderTable(cfg);bindChart(cfg,series,X,Y);
+}
+
+function renderLegend(cfg,series){
+  var html=cfg.series.map(function(sp,si){
+    return '<span class="li'+(sp.show?'':' off')+'" data-i="'+si+'"><i style="background:'+sp.color+'"></i>'+sp.name+'</span>';
+  }).join('')+'<span class="pg">‹ 1/1 ›</span>';
+  document.getElementById('lg').innerHTML=html;
+  Array.prototype.forEach.call(document.querySelectorAll('#lg .li'),function(li){
+    li.addEventListener('click',function(){
+      var i=+li.dataset.i;cfg.series[i].show=!cfg.series[i].show;render();
+    });
+  });
+}
+
+/* 指标管理表格：样式切换 / 显示开关 / 删除 */
+function renderTable(cfg){
+  var tb=document.getElementById('mtBody');
+  tb.innerHTML=cfg.series.map(function(sp,si){
+    return '<tr><td><i style="display:inline-block;width:10px;height:10px;border-radius:2px;background:'+sp.color+';margin-right:8px"></i>'+sp.name+'</td>'+
+      '<td><select data-i="'+si+'" class="stySel"><option value="line"'+(sp.style==='line'?' selected':'')+'>折线图</option><option value="area"'+(sp.style==='area'?' selected':'')+'>面积图</option></select></td>'+
+      '<td><span class="chk'+(sp.show?' on':'')+'" data-i="'+si+'"></span></td>'+
+      '<td><span class="del" data-i="'+si+'" title="移除指标">删 除</span></td></tr>';
+  }).join('');
+  Array.prototype.forEach.call(tb.querySelectorAll('.stySel'),function(sel){
+    sel.addEventListener('change',function(){cfg.series[+sel.dataset.i].style=sel.value;render();});
+  });
+  Array.prototype.forEach.call(tb.querySelectorAll('.chk'),function(c){
+    c.addEventListener('click',function(){var i=+c.dataset.i;cfg.series[i].show=!cfg.series[i].show;render();});
+  });
+  Array.prototype.forEach.call(tb.querySelectorAll('.del'),function(d){
+    d.addEventListener('click',function(){cfg.series.splice(+d.dataset.i,1);render();});
+  });
+}
+
+function bindChart(cfg,series,X,Y){
+  var el=document.getElementById('csvg');if(!el)return;
+  var tip=document.getElementById('tip');
+  el.addEventListener('mousemove',function(ev){
+    var r=el.getBoundingClientRect();
+    var idx=Math.round((ev.clientX-r.left)/r.width*(N-1));
+    idx=Math.max(0,Math.min(N-1,idx));
+    var hh=Math.floor(idx/4),mm=(idx%4)*15;
+    var html=(hh<10?'0':'')+hh+':'+(mm<10?'0':'')+mm;
+    cfg.series.forEach(function(sp,si){
+      if(!sp.show)return;
+      html+='<br><span style="color:'+sp.color+'">●</span> '+sp.name+' '+series[si][idx].toFixed(cfg.dec);
+      var c=document.getElementById('cd'+si);
+      if(c){c.setAttribute('cx',X(idx));c.setAttribute('cy',Y(series[si][idx]));c.setAttribute('opacity','1');}
+    });
+    tip.innerHTML=html;tip.style.display='block';
+    var box=document.getElementById('chartWrap').getBoundingClientRect();
+    tip.style.left=Math.min(Math.max(ev.clientX-box.left+12,4),box.width-230)+'px';
+    tip.style.top=(ev.clientY-box.top-30)+'px';
+    var xl=document.getElementById('cxl');
+    xl.setAttribute('x1',X(idx));xl.setAttribute('x2',X(idx));xl.setAttribute('opacity','.5');
+  });
+  el.addEventListener('mouseleave',function(){
+    tip.style.display='none';
+    var xl=document.getElementById('cxl');if(xl)xl.setAttribute('opacity','0');
+    cfg.series.forEach(function(_,si){var c=document.getElementById('cd'+si);if(c)c.setAttribute('opacity','0');});
+  });
+}
+
+/* Tab 切换 */
+Array.prototype.forEach.call(document.querySelectorAll('#tabs .tab'),function(t){
   t.addEventListener('click',function(){
-    document.querySelector('.tabs .tab.active').classList.remove('active');
-    t.classList.add('active');
-    curTab=t.dataset.t;
+    document.querySelector('#tabs .tab.active').classList.remove('active');
+    t.classList.add('active');curTab=t.dataset.t;render();
   });
 });
 Array.prototype.forEach.call(document.querySelectorAll('.seg button'),function(b){
@@ -3326,52 +3656,18 @@ Array.prototype.forEach.call(document.querySelectorAll('.seg button'),function(b
     b.classList.add('active');
   });
 });
-
 var mMask=document.getElementById('mMask');
-document.getElementById('btnMetric').onclick=function(){mMask.style.display='flex'};
+document.getElementById('btnMetric').onclick=function(){mMask.style.display='flex';};
 Array.prototype.forEach.call(document.querySelectorAll('[data-close]'),function(el){
-  el.addEventListener('click',function(){mMask.style.display='none'});
+  el.addEventListener('click',function(){mMask.style.display='none';});
 });
-mMask.onclick=function(e){if(e.target===mMask)mMask.style.display='none'};
+mMask.onclick=function(e){if(e.target===mMask)mMask.style.display='none';};
+document.getElementById('btnQuery').onclick=function(){render();};
 
-/* 查询 → 渲染多序列折线 */
-var COLORS=['#2E6BE6','#F53F3F','#00B42A'];
-document.getElementById('btnQuery').onclick=function(){
-  var names=curTab==='station'
-    ?['整站有功功率(MW)','整站 SOC(%)','日充电量(MWh)']
-    :['#1-1 舱 BMS1 单体电压','#3-1 舱 PCS2 有功功率','液冷机组-1 出液温度'];
-  var bases=curTab==='station'?[0,0.2,-0.15]:[0,0.3,-0.25];
-  var w=980,h=380,pl=46,pb=34,pt=16,pr=16,n=24;
-  function mk(base,amp){var a=[];for(var i=0;i<n;i++){a.push(base+Math.sin(i/3.1+base*4)*amp+Math.cos(i/1.7)*amp*0.5);}return a;}
-  var series=bases.map(function(b,i){return mk(b,0.8+i*0.12)});
-  var all=[];series.forEach(function(s){all=all.concat(s)});
-  var max=Math.max.apply(null,all),min=Math.min.apply(null,all);
-  function X(i){return pl+i/(n-1)*(w-pl-pr)}
-  function Y(v){return pt+(1-(v-min)/(max-min))*(h-pt-pb)}
-  var svg='<svg viewBox="0 0 '+w+' '+h+'" style="width:100%;height:380px;display:block">';
-  for(var g=0;g<=4;g++){var gy=pt+g/4*(h-pt-pb);
-    svg+='<line x1="'+pl+'" y1="'+gy+'" x2="'+(w-pr)+'" y2="'+gy+'" stroke="#F2F3F5"/>';}
-  for(var t=0;t<n;t+=3){svg+='<text x="'+X(t)+'" y="'+(h-10)+'" font-size="10" fill="#86909C" text-anchor="middle">'+(t<10?'0':'')+t+':00</text>';}
-  series.forEach(function(s,si){
-    var line=s.map(function(v,i){return (i?'L':'M')+X(i).toFixed(1)+' '+Y(v).toFixed(1)}).join(' ');
-    svg+='<path class="sr s'+si+'" d="'+line+'" fill="none" stroke="'+COLORS[si]+'" stroke-width="2" stroke-linejoin="round"/>';
-  });
-  svg+='</svg>';
-  var lg='<div class="legend">'+names.map(function(nm,i){return '<span class="li" data-i="'+i+'"><i style="background:'+COLORS[i]+'"></i>'+nm+'</span>'}).join('')+'</div>';
-  document.getElementById('chartArea').innerHTML=
-    '<div class="card-t">'+(curTab==='station'?'电站曲线':'设备曲线')+'（15 分钟粒度 · 2026-09-04）</div>'+lg+svg;
-  Array.prototype.forEach.call(document.querySelectorAll('.legend .li'),function(li){
-    li.addEventListener('click',function(){
-      li.classList.toggle('off');
-      var p=document.querySelector('.sr.s'+li.dataset.i);
-      p.style.display=li.classList.contains('off')?'none':'';
-    });
-  });
-};
+render();
 </script>
 </body>
 </html>
-
 </template>
 </body>
 </html>
