@@ -3,13 +3,105 @@
 <head data-page-node-id="4R3UKsQFEvh62YnVE15iLw">
 <meta charset="utf-8" data-page-node-id="M0owZIONJ00cT273oQbtMX" />
 <meta name="viewport" content="width=device-width,initial-scale=1" data-page-node-id="oCfAatH5krPB2C72zpB4RZ" />
-<title>储能电站智能运维系统 · 示范页面 v8.5</title>
+<title>储能电站智能运维系统 · 示范页面 v8.12</title>
 <style>
 :root{--blue:#2E6BE6;--blue2:#5B8DEF;--text:#1F2329;--text2:#4E5560;--muted:#9AA1AB;--bg:#F5F7FA;--card:#fff;--line:#E5E8EE;--linesoft:#EFF1F5;--green:#2BA471;--green-soft:#E8F6F0;--orange:#F7931E;--orange-soft:#FEF4E5;--red:#F0453B;--red-soft:#FDEEED;--blue-soft:#EBF2FD;--violet:#7B61E0;--shadow:0 1px 2px rgba(31,35,41,.04),0 4px 16px rgba(31,35,41,.06)}
+:root[data-theme="classic-white"]{--bg:#FFFFFF;--card:#FFFFFF;--line:#E8EBF1;--linesoft:#F2F4F8;--shadow:0 1px 2px rgba(31,35,41,.04),0 4px 14px rgba(31,35,41,.05)}
+:root[data-theme="mint"]{--bg:#F2F8F5;--card:#FFFFFF;--line:#DCEBE2;--linesoft:#E8F1EC;--green-soft:#E2F1E9;--orange-soft:#FCF1E3;--red-soft:#FBE7E6;--blue-soft:#E6EEFB;--shadow:0 1px 2px rgba(43,164,113,.06),0 4px 14px rgba(43,164,113,.08)}
+:root[data-theme="dark-night"]{--blue:#5B8DEF;--blue-soft:#1F2B4A;--text:#E6EAF2;--text2:#B3BCCB;--muted:#7A8497;--bg:#0F1626;--card:#1A2440;--line:#26334F;--linesoft:#1E2A45;--green:#3FCB95;--green-soft:#16362A;--orange:#FBA94C;--orange-soft:#3A2A14;--red:#F75C53;--red-soft:#3B1F1E;--violet:#9A85EE;--shadow:0 1px 2px rgba(0,0,0,.30),0 8px 24px rgba(0,0,0,.35)}
+:root[data-theme="soft-blue"]{--blue:#5B8DEF;--blue-soft:#1B294A;--text:#DCE4F2;--text2:#A8B3C9;--muted:#7A8699;--bg:#15203A;--card:#1E2A47;--line:#2A3858;--linesoft:#233252;--green:#3FCB95;--green-soft:#15302A;--orange:#FBA94C;--orange-soft:#3A2A14;--red:#F75C53;--red-soft:#3B1F1E;--violet:#9A85EE;--shadow:0 1px 2px rgba(0,0,0,.25),0 6px 20px rgba(0,0,0,.30)}
+:root[data-theme="classic-dark"]{--blue:#2E6BE6;--blue-soft:#14254A;--text:#FFFFFF;--text2:#D5DCEB;--muted:#8390A8;--bg:#0B1428;--card:#122040;--line:#243657;--linesoft:#1B2C4D;--green:#3FCB95;--green-soft:#10352A;--orange:#FBA94C;--orange-soft:#3A2A14;--red:#F75C53;--red-soft:#3B1F1E;--violet:#9A85EE;--shadow:0 1px 2px rgba(0,0,0,.30),0 6px 22px rgba(0,0,0,.40)}
+:root[data-theme="dark-night"] .topbar,:root[data-theme="soft-blue"] .topbar,:root[data-theme="classic-dark"] .topbar{background:var(--card)}
+:root[data-theme="dark-night"] .sidebar,:root[data-theme="soft-blue"] .sidebar,:root[data-theme="classic-dark"] .sidebar{background:var(--card);color:var(--text2)}
+:root[data-theme="dark-night"] .brand,:root[data-theme="soft-blue"] .brand,:root[data-theme="classic-dark"] .brand{color:var(--text);border-color:var(--linesoft)}
+:root[data-theme="dark-night"] .brand-mark,:root[data-theme="soft-blue"] .brand-mark,:root[data-theme="classic-dark"] .brand-mark{box-shadow:0 6px 16px rgba(91,141,239,.4)}
+:root[data-theme="dark-night"] .nav-item:hover,:root[data-theme="soft-blue"] .nav-item:hover,:root[data-theme="classic-dark"] .nav-item:hover{background:var(--linesoft);color:var(--text)}
+:root[data-theme="dark-night"] .select,:root[data-theme="soft-blue"] .select,:root[data-theme="classic-dark"] .select,
+:root[data-theme="dark-night"] .top-icon,:root[data-theme="soft-blue"] .top-icon,:root[data-theme="classic-dark"] .top-icon{background:var(--bg);border-color:var(--line);color:var(--text2)}
+:root[data-theme="dark-night"] .table th,:root[data-theme="soft-blue"] .table th,:root[data-theme="classic-dark"] .table th{background:var(--linesoft);color:var(--text2)}
+:root[data-theme="dark-night"] .table tr:hover td,:root[data-theme="soft-blue"] .table tr:hover td,:root[data-theme="classic-dark"] .table tr:hover td{background:var(--linesoft)}
+:root[data-theme="dark-night"] .table td,:root[data-theme="soft-blue"] .table td,:root[data-theme="classic-dark"] .table td{border-color:var(--linesoft)}
+:root[data-theme="dark-night"] .kv-row,:root[data-theme="soft-blue"] .kv-row,:root[data-theme="classic-dark"] .kv-row{border-color:var(--linesoft)}
+:root[data-theme="dark-night"] .tab,:root[data-theme="soft-blue"] .tab,:root[data-theme="classic-dark"] .tab{color:var(--muted)}
+:root[data-theme="dark-night"] .pan-title .edit,:root[data-theme="soft-blue"] .pan-title .edit,:root[data-theme="classic-dark"] .pan-title .edit{color:var(--muted)}
+:root[data-theme="dark-night"] .gp-aurora,:root[data-theme="soft-blue"] .gp-aurora,:root[data-theme="classic-dark"] .gp-aurora{background:radial-gradient(680px 200px at 28% 0%,rgba(91,141,239,.20),transparent 70%),radial-gradient(560px 180px at 54% 0%,rgba(91,141,239,.14),transparent 70%),radial-gradient(680px 200px at 82% 0%,rgba(91,141,239,.16),transparent 70%)}
+:root[data-theme="dark-night"] .collapse-btn,:root[data-theme="soft-blue"] .collapse-btn,:root[data-theme="classic-dark"] .collapse-btn{background:var(--linesoft);border-color:var(--line);color:var(--text2)}
+:root[data-theme="dark-night"] .tab.active,:root[data-theme="soft-blue"] .tab.active,:root[data-theme="classic-dark"] .tab.active{color:var(--blue)}
+/* ===== V8.8：主题切换弹层 ===== */
+.theme-pop{position:fixed;top:72px;right:20px;width:280px;background:var(--card);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);padding:14px;z-index:80;opacity:0;transform:translateY(-6px);pointer-events:none;transition:opacity .15s,transform .15s}
+.theme-pop.open{opacity:1;transform:none;pointer-events:auto}
+.theme-pop-h{display:flex;justify-content:space-between;align-items:center;font-size:14px;font-weight:600;margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid var(--linesoft)}
+.theme-pop-h .x{cursor:pointer;color:var(--muted);width:22px;height:22px;display:grid;place-items:center;border-radius:6px}
+.theme-pop-h .x:hover{background:var(--linesoft);color:var(--text)}
+.theme-list{display:flex;flex-direction:column;gap:2px;margin-bottom:12px}
+.theme-item{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:8px;cursor:pointer;font-size:13px;color:var(--text2)}
+.theme-item:hover{background:var(--linesoft);color:var(--text)}
+.theme-item.sel{background:var(--blue-soft);color:var(--blue);font-weight:600}
+.theme-swatch{width:18px;height:18px;border-radius:5px;border:1px solid var(--line);flex-shrink:0;box-shadow:inset 0 0 0 1px rgba(255,255,255,.06)}
+.theme-item .ck{margin-left:auto;color:var(--blue);font-weight:700;opacity:0}
+.theme-item.sel .ck{opacity:1}
+.theme-pop-f{display:flex;gap:8px;border-top:1px solid var(--linesoft);padding-top:10px}
+.theme-pop-f button{flex:1;height:32px;border-radius:8px;font-size:12px}
+.theme-pop-f .ghost{background:var(--linesoft);color:var(--text2)}
+.theme-pop-f .ghost:hover{background:var(--line);color:var(--text)}
+.theme-pop-f .ok{background:var(--blue);color:#fff}
+:root[data-theme="dark-night"] .theme-swatch,:root[data-theme="soft-blue"] .theme-swatch,:root[data-theme="classic-dark"] .theme-swatch{box-shadow:inset 0 0 0 1px rgba(255,255,255,.10)}
+/* ===== V8.9：预警简化版 vs 满血版可视化分级 ===== */
+.metric-row.pro-locked{opacity:.42;filter:grayscale(.6);border:1px dashed var(--line);border-radius:6px;padding-left:8px;padding-right:8px;margin:3px -2px;cursor:help;position:relative;color:var(--muted);transition:opacity .2s}
+.metric-row.pro-locked:hover{opacity:.92;filter:grayscale(.15)}
+.metric-row.pro-locked .m-name{color:var(--muted)}
+.metric-row.pro-locked .locked-cta{color:var(--blue);font-weight:500;cursor:pointer}
+.metric-row.pro-locked .locked-cta:hover{text-decoration:underline}
+.lock-badge{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;background:var(--line);color:var(--text2);font-size:10px;margin-left:6px;flex-shrink:0}
+.metric-head.pro-head .m-name,.metric-head.pro-head .m-value,.metric-head.pro-head .stt,.metric-head.pro-head .locked-cta{color:var(--muted)}
+.cat-head.pro-cat{padding-left:8px;border-left:3px solid var(--blue)}
+.cat-head.pro-cat .cnt{background:var(--blue-soft);color:var(--blue);border-color:transparent}
+.cat-head.pro-cat::after{content:"🔒 满血版独占";font-size:11px;color:var(--blue);background:var(--blue-soft);border-radius:6px;padding:1px 8px;margin-left:8px;font-weight:500}
+.locked-summary{display:inline-flex;align-items:center;gap:6px;color:var(--muted);font-size:12px;margin-left:10px}
+.locked-summary a{color:var(--blue);cursor:pointer}
+.locked-summary a:hover{text-decoration:underline}
+.pro-modal .am-b{padding:18px 20px}
+.pro-meta{background:var(--bg);border-radius:8px;padding:12px 14px;margin-bottom:14px}
+.pro-meta .row{display:flex;justify-content:space-between;padding:5px 0;font-size:13px;color:var(--text2);border-bottom:1px dashed var(--linesoft)}
+.pro-meta .row:last-child{border-bottom:none}
+.pro-meta .row b{color:var(--text);font-weight:600}
+.pro-desc{background:var(--blue-soft);border-left:3px solid var(--blue);border-radius:0 8px 8px 0;padding:10px 14px;color:var(--text2);font-size:13px;line-height:1.7;margin-bottom:14px}
+.pro-cta{text-align:center;padding:18px 0 4px}
+.pro-cta .t1{font-size:15px;font-weight:700}
+.pro-cta .t2{font-size:12px;color:var(--muted);margin:6px 0 14px}
+/* ===== V8.11：设备 Tab 右侧分类锚点导航 ===== */
+.device-tab-grid{display:grid;grid-template-columns:minmax(0,1fr) 220px;gap:16px;align-items:start}
+.device-tab-grid>div{min-width:0}
+.cat-rail{position:sticky;top:0;background:var(--card);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);padding:14px 12px;max-height:calc(100vh - 96px);overflow:auto}
+.cat-rail-h{font-size:13px;font-weight:600;color:var(--text);margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--linesoft);display:flex;justify-content:space-between;align-items:center}
+.cat-rail-h .sub{font-size:11px;color:var(--muted);font-weight:400}
+.cat-rail-list{display:flex;flex-direction:column;gap:2px}
+.cat-rail-item{display:flex;align-items:center;gap:8px;padding:7px 10px 7px 8px;border-radius:8px;color:var(--text2);font-size:13px;cursor:pointer;text-decoration:none;border-left:3px solid transparent;transition:background .15s,color .15s,border-color .15s}
+.cat-rail-item:hover{background:var(--linesoft);color:var(--text)}
+.cat-rail-item.active{background:var(--blue-soft);color:var(--blue);font-weight:600;border-left-color:var(--blue)}
+.cat-rail-emoji{font-size:14px;flex-shrink:0}
+.cat-rail-name{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cat-rail-item .cnt{background:var(--bg);color:var(--muted);border-radius:8px;padding:1px 7px;font-size:11px;font-weight:500;flex-shrink:0}
+.cat-rail-item.active .cnt{background:var(--blue);color:#fff}
+.cat-rail-item.pro{color:var(--muted)}
+.cat-rail-item .lock{font-size:10px;flex-shrink:0;color:var(--muted)}
+.cat-rail-empty{font-size:12px;color:var(--muted);text-align:center;padding:14px 0}
+/* ===== V8.12：指标分组手风琴自折叠 + 子项定位高亮 ===== */
+.cat-grp{display:block}
+.cat-rail-item .chev{margin-left:auto;color:var(--muted);font-size:11px;flex-shrink:0;transition:transform .2s ease}
+.cat-grp.open .cat-rail-item .chev{transform:rotate(90deg)}
+.cat-sub{display:grid;grid-template-rows:0fr;transition:grid-template-rows .25s ease}
+.cat-grp.open .cat-sub{grid-template-rows:1fr}
+.cat-sub-in{overflow:hidden;min-height:0}
+.cat-sub-item{display:block;padding:5px 8px 5px 30px;font-size:12px;color:var(--muted);border-radius:6px;cursor:pointer;text-decoration:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;border-left:3px solid transparent;transition:background .15s,color .15s}
+.cat-sub-item:hover{background:var(--linesoft);color:var(--text)}
+.cat-sub-item.active{color:var(--blue);font-weight:600}
+@keyframes rowFlash{0%{background:var(--blue-soft)}100%{background:transparent}}
+.metric-row.flash{animation:rowFlash 1.6s ease}
 *{box-sizing:border-box}html,body{height:100%;margin:0;font-family:"Inter","PingFang SC","Microsoft YaHei",Arial,sans-serif;color:var(--text);background:var(--bg)}button,input,select{font:inherit}button{cursor:pointer;border:0}.num{font-family:"DIN Alternate","Roboto","Helvetica Neue",sans-serif;font-variant-numeric:tabular-nums}
 .app{display:flex;height:100vh;overflow:hidden}
 /* ===== 白色侧边栏 ===== */
-.sidebar{width:248px;background:#fff;color:var(--text2);border-right:1px solid var(--line);transition:.2s;display:flex;flex-direction:column;flex:none}
+.sidebar{width:248px;background:var(--card);color:var(--text2);border-right:1px solid var(--line);transition:.2s;display:flex;flex-direction:column;flex:none}
 .sidebar.collapsed{width:72px}
 .brand{height:64px;padding:0 18px;display:flex;align-items:center;gap:12px;font-weight:700;color:var(--text);border-bottom:1px solid var(--linesoft)}
 .brand-mark{width:30px;height:30px;border-radius:10px;background:linear-gradient(135deg,#4d84ff,#7b5cff);display:grid;place-items:center;color:#fff;font-size:16px;box-shadow:0 6px 16px rgba(77,132,255,.35)}
@@ -31,11 +123,11 @@
 .collapse-btn{margin:8px 12px 14px;height:38px;border-radius:9px;background:#F5F7FA;border:1px solid var(--linesoft);color:#68788F}
 /* ===== 顶栏 / 布局 ===== */
 .main{min-width:0;flex:1;display:flex;flex-direction:column}
-.topbar{height:64px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:14px;padding:0 20px;flex:none}
+.topbar{height:64px;background:var(--card);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:14px;padding:0 20px;flex:none}
 .hamb{width:36px;height:36px;border-radius:8px;background:#F3F6FB;color:#51647E}
 .crumb{font-size:14px;font-weight:600}.crumb small{color:var(--muted);font-weight:400}
 .top-actions{margin-left:auto;display:flex;align-items:center;gap:10px}
-.select,.top-icon{height:36px;border:1px solid var(--line);background:#fff;border-radius:8px;color:#53647A;padding:0 11px}
+.select,.top-icon{height:36px;border:1px solid var(--line);background:var(--card);border-radius:8px;color:#53647A;padding:0 11px}
 .top-icon{width:36px;padding:0}
 .user{display:flex;align-items:center;gap:8px}
 .avatar{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#dfe9ff,#d9f1e8);display:grid;place-items:center;font-size:12px;color:#3F628F}
@@ -52,7 +144,7 @@
 .kpi:nth-child(2):before{background:var(--green)}.kpi:nth-child(3):before{background:var(--orange)}.kpi:nth-child(4):before{background:var(--red)}
 .kpi .label{color:#8390A2;font-size:12px}.kpi .value{font-size:28px;font-weight:700;margin-top:5px}.kpi .meta{font-size:12px;color:#94A1B3;margin-top:8px}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.card{background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);padding:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);padding:16px}
 .card h3{font-size:14px;margin:0 0 14px}
 .card-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
 .card-head h3{margin:0}.card-head .hint{color:var(--muted);font-size:12px}
@@ -90,7 +182,7 @@
 .drawer h3{margin:0}
 .map-node{padding:10px 12px;border:1px solid var(--line);border-radius:8px;margin:8px 0;background:#FBFCFE}
 /* ===== 大屏面板通用 ===== */
-.pan{background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);padding:16px}
+.pan{background:var(--card);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);padding:16px}
 .pan-title{font-size:14px;font-weight:600;display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
 .pan-title .edit{color:#C3CCD8;font-size:13px;font-weight:400;cursor:pointer}
 .kv-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--linesoft);font-size:13px}
@@ -151,7 +243,7 @@
 .cat-head .cnt{font-size:11px;font-weight:400;color:var(--muted);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:0 8px}
 .metric-head,.metric-row{display:grid;grid-template-columns:1.3fr .9fr .8fr .5fr;align-items:center;gap:10px}
 .metric-head{font-size:12px;color:var(--muted);padding:8px 4px;border-bottom:1px solid var(--line);background:#FAFBFC;border-radius:6px 6px 0 0}
-.metric-row{padding:9px 4px;border-bottom:1px solid var(--linesoft);background:#fff}
+.metric-row{padding:9px 4px;border-bottom:1px solid var(--linesoft);background:var(--card)}
 .metric-row:hover{background:#F5F7FA}
 .m-name{font-size:13px;color:var(--text)}
 .m-code{font-size:11px;color:var(--muted);font-family:monospace;margin-top:1px}
@@ -183,6 +275,20 @@
 .tb-bar i{display:block;height:100%;border-radius:4px}
 .tb-num{font-size:15px;font-weight:600;width:34px;text-align:right}
 .a-grid2{display:grid;grid-template-columns:340px 1fr;gap:16px;margin-top:16px}
+/* ===== V8.7：预警首页舱级极值柱状图（可编辑布局） ===== */
+.cabin-sec{margin-top:16px}
+.cabin-tt-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:end;margin-bottom:10px}
+.cabin-tt{font-size:16px;font-weight:600}
+.cabin-tt small{font-size:11px;color:var(--muted);font-weight:400;margin-left:8px}
+.cabin-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.cabin-card{transition:box-shadow .2s,outline-color .2s;outline:2px dashed transparent;outline-offset:-2px}
+.cabin-card .cc-hint{display:none;font-size:11px;color:var(--blue);font-weight:400}
+.cabin-grid.editing .cabin-card{cursor:move;outline-color:#BCD1FF}
+.cabin-grid.editing .cabin-card:hover{box-shadow:0 8px 24px rgba(46,107,230,.14)}
+.cabin-grid.editing .cabin-card.sel{outline-color:var(--blue);box-shadow:0 8px 24px rgba(46,107,230,.18)}
+.cabin-grid.editing .cc-hint{display:inline}
+.cabin-edit-tip{display:none;margin-bottom:10px;padding:8px 12px;border-radius:8px;background:var(--blue-soft);color:var(--blue);font-size:12px}
+.cabin-sec.editing .cabin-edit-tip{display:block}
 
 /* ===== 集团大屏（白色简约版） ===== */
 .gp-wrap{position:relative}
@@ -244,7 +350,7 @@
 .fit-vp{width:100%}
 .fit-box{margin:0 auto;position:relative}
 .fit-stage{transform-origin:top left;overflow:hidden}
-@media(max-width:1000px){.kpis{grid-template-columns:repeat(2,1fr)}.grid2,.a-grid2{grid-template-columns:1fr}.sidebar{width:210px}.sidebar.collapsed{width:64px}}
+@media(max-width:1000px){.kpis{grid-template-columns:repeat(2,1fr)}.grid2,.a-grid2,.cabin-grid,.cabin-tt-row,.device-tab-grid{grid-template-columns:1fr}.cat-rail{display:none}.sidebar{width:210px}.sidebar.collapsed{width:64px}}
 
 /* ===== V7 新增：预警复核/详情弹窗 ===== */
 .amask{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:center;justify-content:center;z-index:200}
@@ -261,7 +367,7 @@
 <body data-page-node-id="hJJ2PlO8XzNiH7DHYJIynY">
 <div class="app" data-page-node-id="HrK8nW18E4usvLwjzehzW9">
 <aside class="sidebar" id="sidebar" data-page-node-id="sDB4lvDjUj5gy1mDVKQqUa">
-  <div class="brand" data-page-node-id="UVqSZlAO6SLLbrgxVJzboy"><div class="brand-mark" data-page-node-id="zmg8CC8mIwrXkzvZcdPCB0">储</div><span data-page-node-id="o6i0Zv1flbNpXRD0CeGgQY">储能智能运维</span></div>
+  <div class="brand" data-page-node-id="UVqSZlAO6SLLbrgxVJzboy"><div class="brand-mark" data-page-node-id="zmg8CC8mIwrXkzvZcdPCB0">車</div><span data-page-node-id="o6i0Zv1flbNpXRD0CeGgQY">智能运维</span></div>
   <div class="nav" id="nav" data-page-node-id="ki56t3wo8Wln1YF9cTH21g"></div>
   <button class="collapse-btn" id="collapseBtn" data-page-node-id="CB1U2aydTJ9lPVyoYJOpzA">☰　收起菜单</button>
 </aside>
@@ -271,7 +377,7 @@
     <div class="crumb" id="crumb" data-page-node-id="WIp4SgjC5ELkbJo5qZ6K2W">大屏中心 <small data-page-node-id="ICyAreSQf09NCBu5NG052T">/ 储能大屏</small></div>
     <div class="top-actions" data-page-node-id="pu2o7k7PrJbEk7yi6IkyxI">
       <select class="select" id="stationSel" data-page-node-id="VvT8ptBlzwGNIBmlEAZcFr"><option data-page-node-id="dfolLroX7LKf2jb0Loh4Bc">华润曹妃甸储能电站</option><option data-page-node-id="xtkT4vvx5gx7kNaI99ugdP">华能江苏共享储能电站</option><option data-page-node-id="XFp6nAm9n36Q1RE1x1iTE9">粤港澳综合储能示范站</option></select>
-      <button class="top-icon" title="通知" data-page-node-id="YQEzUQZWaTjqiN4buSDScN">🔔</button><button class="top-icon" title="全屏" id="fullBtn" data-page-node-id="aiSMzNVQSvIpcCe7xgCGep">⛶</button>
+      <button class="top-icon" title="通知" data-page-node-id="YQEzUQZWaTjqiN4buSDScN">🔔</button><button class="top-icon" title="主题切换" id="themeBtn" onclick="themeOpen()" aria-haspopup="true">🎨</button><button class="top-icon" title="全屏" id="fullBtn" data-page-node-id="aiSMzNVQSvIpcCe7xgCGep">⛶</button>
       <div class="user" data-page-node-id="ZcLB1lVG4rAD1rNEYMykPf"><div class="avatar" data-page-node-id="kGAvsG0m90r6Ohr79GSKez">运</div><div style="font-size:12px;color:#51647A" data-page-node-id="WMCC3yqIHFx3dqxZFwNNJY">售后用户</div><span class="muted" data-page-node-id="kxqHbzkzIpBbu5hfZlQECm">⌄</span></div>
     </div>
   </header>
@@ -303,6 +409,18 @@
     <div class="am-f"><button class="secondary" onclick="closeAm()">关闭</button><button class="primary" onclick="closeAm();alarmReview(curIdx)">去复核</button></div>
   </div>
 </div>
+<div class="amask pro-modal" id="proMask" role="dialog" aria-modal="true" aria-labelledby="proH" onclick="if(event.target===this)closeProDetail()">
+  <div class="amodal" style="width:560px;max-width:92vw;max-height:86vh;display:flex;flex-direction:column">
+    <div class="am-h" id="proH">🔒 满血版专属预警 <span style="cursor:pointer;color:var(--muted)" onclick="closeProDetail()">✕</span></div>
+    <div class="am-b" id="proBody"></div>
+    <div class="am-f"><button class="secondary" onclick="closeProDetail()">关闭</button></div>
+  </div>
+</div>
+<div class="theme-pop" id="themePop" role="dialog" aria-label="主题设置">
+  <div class="theme-pop-h"><span>主题设置</span><span class="x" onclick="themeClose()" title="关闭">✕</span></div>
+  <div class="theme-list" id="themeList"></div>
+  <div class="theme-pop-f"><button class="ghost" onclick="themeReset()">恢复默认</button><button class="ok" onclick="themeClose()">应用</button></div>
+</div>
 <div class="drawer" id="drawer" data-page-node-id="EtvtiKB3ZFs1ctR7COZlwA">
   <div class="drawer-head" data-page-node-id="fqjanGhDUx96cK7yHTTh40"><h3 data-page-node-id="xlkIBwYnc5xwfWRnvQD1eG">字段映射 / 页面数据说明</h3><button class="secondary" id="closeDrawer" data-page-node-id="0HpOtIzlZBZ8t8Gbacbs44">关闭</button></div>
   <div class="callout" data-page-node-id="1fRnpXtME0SxCRiBEnhI1M">本示范页面的数据全部为模拟数据。页面指标字段用于演示未来接口落地时的组件映射。</div>
@@ -317,9 +435,10 @@
 const menu=[
  {key:'dashboard',name:'大屏中心',items:[['group','集团运维大屏'],['screen','储能大屏']]},
  {key:'alarm',name:'预警中心',items:[['alarm','安全预警']]},
- {key:'report',name:'报告中心',items:[['inspect','巡检报告'],['health','体检报告'],['report','报表统计']]},
- {key:'ops',name:'运维中心',items:[['ops-home','运维首页'],['battery-swap','电池维护建议'],['cooler','冷机检修'],['soc-cal','SOC标定'],['ups','UPS故障处理'],['ota','OTA升级']]},
  {key:'analysis',name:'分析中心',items:[['trend','趋势分析'],['consistency','一致性分析'],['custom','自定义曲线分析']]},
+ {key:'ops',name:'运维中心',items:[['ops-home','运维首页'],['battery-swap','电池维护建议'],['cooler','冷机检修'],['soc-cal','SOC标定'],['ups','UPS故障处理'],['ota','OTA升级']]},
+ {key:'report',name:'报告中心',items:[['inspect','巡检报告'],['health','体检报告'],['report','报表统计']]},
+
 ];
 const state={page:'group', collapsed:false, groups:new Set(['dashboard','alarm','report','ops','analysis']), alarmTab:'home', trendTab:'温差曲线', consistencyTab:'整站监测', customTab:'电站曲线', station:'华润曹妃甸储能电站'};
 function navRender(){const nav=document.getElementById('nav');nav.innerHTML='';menu.forEach(g=>{const wrap=document.createElement('div');wrap.className='group '+(state.groups.has(g.key)?'open':'');wrap.innerHTML=`<div class="group-title" data-group="${g.key}"><div class="g-left"><span class="dot"></span><span>${g.name}</span></div><span class="chev">⌄</span></div><div class="items">${g.items.map(([k,n])=>`<button class="nav-item ${state.page===k?'active':''}" data-page="${k}"><span>◦</span><span class="txt">${n}</span></button>`).join('')}</div>`;nav.appendChild(wrap)});document.querySelectorAll('.group-title').forEach(el=>el.onclick=()=>{const k=el.dataset.group;state.groups.has(k)?state.groups.delete(k):state.groups.add(k);navRender()});document.querySelectorAll('.nav-item').forEach(el=>el.onclick=()=>{state.page=el.dataset.page;render()})}
@@ -427,7 +546,7 @@ function screenPage(){
     <div class="pan" style="margin-top:16px">
       <div class="pan-title">故障排名</div>
       <div style="font-size:12px;color:var(--text2);font-weight:600;margin-bottom:4px">按设备TOP5</div>
-      ${[['1','BMS','89'],['2','PCS','82'],['3','消防','50'],['4','液冷','30'],['5','EMS','10']].map(r=>`<div class="kv-row"><span class="k"><span class="muted num" style="width:14px;display:inline-block">${r[0]}</span>${r[1]}</span><span class="v num">${r[2]}<i>个</i></span></div>`).join('')}
+      ${[['1','BMS','89'],['2','PCS','82'],['3','消防','50'],['4','冷机','30'],['5','EMS','10']].map(r=>`<div class="kv-row"><span class="k"><span class="muted num" style="width:14px;display:inline-block">${r[0]}</span>${r[1]}</span><span class="v num">${r[2]}<i>个</i></span></div>`).join('')}
       <div style="font-size:12px;color:var(--text2);font-weight:600;margin:12px 0 4px">按故障TOP5</div>
       ${[['1','电芯过温','89'],['2','电芯压差过大','82'],['3','通信故障','50'],['4','电压跳变','30'],['5','线束过温','10']].map(r=>`<div class="kv-row"><span class="k"><span class="muted num" style="width:14px;display:inline-block">${r[0]}</span>${r[1]}</span><span class="v num">${r[2]}<i>个</i></span></div>`).join('')}
     </div>
@@ -795,11 +914,11 @@ function groupPage(){return `<div class="gp-wrap">
     <section>
       <div class="sec-title">综合效率排名 <span class="edit">✎</span></div>
       <div class="eff-cluster">
-        <div class="eff-ring"><div class="eff-box"><svg width="128" height="128" viewBox="0 0 128 128"><circle cx="64" cy="64" r="54" fill="none" stroke="#EFF1F5" stroke-width="10"/><circle cx="64" cy="64" r="54" fill="none" stroke="#2E6BE6" stroke-width="10" stroke-linecap="round" stroke-dasharray="305.4 339.3" transform="rotate(-90 64 64)"/></svg><div class="pc"><div class="p num" style="font-size:24px;color:var(--blue)">90%</div><div class="r">TOP1</div></div></div><div class="eff-cap">张家界线路局</div></div>
-        <div class="eff-ring"><div class="eff-box"><svg width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="#EFF1F5" stroke-width="9"/><circle cx="50" cy="50" r="40" fill="none" stroke="#5B8DEF" stroke-width="9" stroke-linecap="round" stroke-dasharray="201.1 251.3" transform="rotate(-90 50 50)"/></svg><div class="pc"><div class="p num" style="font-size:18px;color:#5B8DEF">80%</div><div class="r">TOP2</div></div></div><div class="eff-cap">宜兴中环 12MW/20MWh 工商业</div></div>
-        <div class="eff-ring"><div class="eff-box"><svg width="84" height="84" viewBox="0 0 84 84"><circle cx="42" cy="42" r="34" fill="none" stroke="#EFF1F5" stroke-width="8"/><circle cx="42" cy="42" r="34" fill="none" stroke="#7FA8F3" stroke-width="8" stroke-linecap="round" stroke-dasharray="150.8 213.6" transform="rotate(-90 42 42)"/></svg><div class="pc"><div class="p num" style="font-size:14px;color:#7FA8F3">70.59%</div><div class="r">TOP3</div></div></div><div class="eff-cap">宜兴中环 10MW/20MWh</div></div>
-        <div class="eff-ring"><div class="eff-box"><svg width="78" height="78" viewBox="0 0 78 78"><circle cx="39" cy="39" r="31" fill="none" stroke="#EFF1F5" stroke-width="8"/><circle cx="39" cy="39" r="31" fill="none" stroke="#A3C0F7" stroke-width="8" stroke-linecap="round" stroke-dasharray="136.7 194.8" transform="rotate(-90 39 39)"/></svg><div class="pc"><div class="p num" style="font-size:13px;color:#A3C0F7">70.15%</div><div class="r">TOP4</div></div></div><div class="eff-cap">宜兴中环 10MW/20MWh</div></div>
-        <div class="eff-ring"><div class="eff-box"><svg width="72" height="72" viewBox="0 0 72 72"><circle cx="36" cy="36" r="28" fill="none" stroke="#EFF1F5" stroke-width="7"/><circle cx="36" cy="36" r="28" fill="none" stroke="#C7D8FA" stroke-width="7" stroke-linecap="round" stroke-dasharray="123.1 175.9" transform="rotate(-90 36 36)"/></svg><div class="pc"><div class="p num" style="font-size:12px;color:#A3BDF5">70%</div><div class="r">TOP5</div></div></div><div class="eff-cap">宜兴中环 10MW/20MWh 工商业</div></div>
+        <div class="eff-ring"><div class="eff-box"><svg width="128" height="128" viewBox="0 0 128 128"><circle cx="64" cy="64" r="54" fill="none" stroke="#EFF1F5" stroke-width="10"/><circle cx="64" cy="64" r="54" fill="none" stroke="#2E6BE6" stroke-width="10" stroke-linecap="round" stroke-dasharray="305.4 339.3" transform="rotate(-90 64 64)"/></svg><div class="pc"><div class="p num" style="font-size:24px;color:var(--blue)">89.1%</div><div class="r">TOP1</div></div></div><div class="eff-cap">株洲齿轮10/20MWh</div></div>
+        <div class="eff-ring"><div class="eff-box"><svg width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="#EFF1F5" stroke-width="9"/><circle cx="50" cy="50" r="40" fill="none" stroke="#5B8DEF" stroke-width="9" stroke-linecap="round" stroke-dasharray="201.1 251.3" transform="rotate(-90 50 50)"/></svg><div class="pc"><div class="p num" style="font-size:18px;color:#5B8DEF">88.89%</div><div class="r">TOP2</div></div></div><div class="eff-cap">东营120/240MWh项目</div></div>
+        <div class="eff-ring"><div class="eff-box"><svg width="84" height="84" viewBox="0 0 84 84"><circle cx="42" cy="42" r="34" fill="none" stroke="#EFF1F5" stroke-width="8"/><circle cx="42" cy="42" r="34" fill="none" stroke="#7FA8F3" stroke-width="8" stroke-linecap="round" stroke-dasharray="150.8 213.6" transform="rotate(-90 42 42)"/></svg><div class="pc"><div class="p num" style="font-size:14px;color:#7FA8F3">88.73%</div><div class="r">TOP3</div></div></div><div class="eff-cap">曹妃甸100/200MWh</div></div>
+        <div class="eff-ring"><div class="eff-box"><svg width="78" height="78" viewBox="0 0 78 78"><circle cx="39" cy="39" r="31" fill="none" stroke="#EFF1F5" stroke-width="8"/><circle cx="39" cy="39" r="31" fill="none" stroke="#A3C0F7" stroke-width="8" stroke-linecap="round" stroke-dasharray="136.7 194.8" transform="rotate(-90 39 39)"/></svg><div class="pc"><div class="p num" style="font-size:13px;color:#A3C0F7">88.59%</div><div class="r">TOP4</div></div></div><div class="eff-cap">疏附县70/140MWh</div></div>
+        <div class="eff-ring"><div class="eff-box"><svg width="72" height="72" viewBox="0 0 72 72"><circle cx="36" cy="36" r="28" fill="none" stroke="#EFF1F5" stroke-width="7"/><circle cx="36" cy="36" r="28" fill="none" stroke="#C7D8FA" stroke-width="7" stroke-linecap="round" stroke-dasharray="123.1 175.9" transform="rotate(-90 36 36)"/></svg><div class="pc"><div class="p num" style="font-size:12px;color:#A3BDF5">88.53%</div><div class="r">TOP5</div></div></div><div class="eff-cap">张家界线路局2.5/5MWh </div></div>
       </div>
     </section>
     <section>
@@ -821,116 +940,256 @@ function groupPage(){return `<div class="gp-wrap">
 /* ============ 预警中心（参考 预警中心-tab页面-v3） ============ */
 const DEVICES={
   bat:{name:"电池预警",groups:[
-    {cat:"🔋 异常衰减诊断",items:[
-      {code:"bat11101",name:"整站容量衰减",range:"容量保持率 ≥ 95%",val:"95.2",unit:"%",st:"ok"},
-      {code:"bat11201",name:"整舱容量衰减",range:"舱容量保持率 ≥ 95%",val:"94.6",unit:"%",st:"warn"},
-      {code:"bat15101",name:"整站效率衰减",range:"效率 ≥ 92%",val:"93.1",unit:"%",st:"ok"},
-      {code:"bat15201",name:"整舱效率衰减",range:"舱效率 ≥ 92%",val:"92.4",unit:"%",st:"ok"},
-      {code:"bat14101",name:"内阻不一致性",range:"内阻离散度 < 5%",val:"6.8",unit:"%",st:"warn"},
-      {code:"bat31101",name:"自放电异常",range:"自放电率 < 3%/月",val:"1.9",unit:"%/月",st:"ok"},
-      {code:"bat31201",name:"充高放低电芯检测",range:"异常电芯 0 个",val:"0",unit:"个",st:"ok"}]},
-    {cat:"🌡️ 不一致性预警",items:[
-      {code:"bat12101",name:"整站电池温度不一致",range:"温差 < 8 ℃",val:"4.2",unit:"℃",st:"ok"},
-      {code:"bat12201",name:"舱电池温度不一致",range:"舱温差 < 6 ℃",val:"3.1",unit:"℃",st:"ok"},
-      {code:"bat12301",name:"pack 温度不一致",range:"pack温差 < 5 ℃",val:"2.4",unit:"℃",st:"ok"},
-      {code:"bat12401",name:"电芯温度不一致",range:"电芯温差 < 5 ℃",val:"3.6",unit:"℃",st:"ok"},
-      {code:"bat13101",name:"整站电池电压不一致",range:"压差 < 150 mV",val:"92",unit:"mV",st:"ok"},
-      {code:"bat13201",name:"舱电池电压不一致",range:"舱压差 < 120 mV",val:"68",unit:"mV",st:"ok"},
-      {code:"bat13301",name:"pack 电压不一致",range:"pack压差 < 100 mV",val:"38",unit:"mV",st:"ok"},
-      {code:"bat13401",name:"电芯电压不一致",range:"电芯压差 < 50 mV",val:"21",unit:"mV",st:"ok"},
-      {code:"bat13601",name:"舱内簇电流不一致",range:"簇电流偏差 < 5%",val:"2.7",unit:"%",st:"ok"},
-      {code:"bat13701",name:"舱内簇 SOC 不一致",range:"SOC 偏差 < 5%",val:"3.3",unit:"%",st:"ok"}]},
-    {cat:"🔥 热滥用",items:[
-      {code:"bat12501",name:"电池持续高温",range:"温度 < 45 ℃",val:"38.5",unit:"℃",st:"ok"},
-      {code:"thb44501",name:"电池温升异常",range:"温升速率 < 1 ℃/min",val:"2.8",unit:"℃/min",st:"warn"},
-      {code:"thb44201",name:"电池超温运行",range:"运行温度 < 50 ℃",val:"41.2",unit:"℃",st:"ok"},
-      {code:"thb44301",name:"电池低温充电",range:"充电温度 > 0 ℃",val:"8.5",unit:"℃",st:"ok"}]},
-    {cat:"⚡ 电滥用",items:[
-      {code:"thb42101",name:"过充预警",range:"单体电压 < 3.65 V",val:"3.48",unit:"V",st:"ok"},
-      {code:"thb42501",name:"馈电预警",range:"单体电压 > 2.5 V",val:"3.12",unit:"V",st:"ok"},
-      {code:"thb42401",name:"过流预警",range:"电流 < 1.1 倍额定",val:"0.86",unit:"C",st:"ok"}]},
-    {cat:"☢️ 热失控",items:[
-      {code:"thb43101",name:"膨胀力预警",range:"膨胀力 < 阈值",val:"正常",unit:"",st:"ok"},
-      {code:"thc43101",name:"VOC 气体预警",range:"VOC < 检出限",val:"未检出",unit:"",st:"ok"},
-      {code:"thc43201",name:"烟雾预警",range:"烟雾浓度正常",val:"正常",unit:"",st:"ok"},
-      {code:"thc43301",name:"酯类预警",range:"酯类气体未检出",val:"未检出",unit:"",st:"ok"},
-      {code:"thc53101",name:"电芯喷阀预警",range:"无喷阀事件",val:"无",unit:"",st:"ok"}]}]},
-  acu:{name:"冷机预警",groups:[{cat:"❄️ 冷机监测",items:[
-      {code:"acu61101",name:"出回水压力异常",range:"压差 0.05~0.15 MPa",val:"0.09",unit:"MPa",st:"ok"},
-      {code:"acu61201",name:"冷凝温度异常",range:"冷凝温度 < 55 ℃",val:"47.3",unit:"℃",st:"ok"}]}]},
-  rvt:{name:"变压器预警",groups:[{cat:"🔌 变压器监测",items:[
-      {code:"rvt71101",name:"变压器温度预警",range:"油面温度 < 85 ℃",val:"68.4",unit:"℃",st:"ok"},
-      {code:"rvt71201",name:"变压器效率异常",range:"效率 ≥ 98%",val:"98.6",unit:"%",st:"ok"},
-      {code:"rvt71301",name:"高压断路器寿命预警",range:"动作次数 < 80% 寿命",val:"62",unit:"%",st:"warn"},
-      {code:"rvt71401",name:"使用工况横向对比",range:"预警得分排名",val:"第 3",unit:"名",st:"ok"}]}]},
-  pcs:{name:"PCS 预警",groups:[{cat:"🔁 PCS 监测",items:[
-      {code:"pcs81101",name:"直流电容温度异常",range:"电容温度 < 70 ℃",val:"58.2",unit:"℃",st:"ok"},
-      {code:"pcs81201",name:"PCS 模块散热异常",range:"散热温差 < 15 ℃",val:"9.6",unit:"℃",st:"ok"},
-      {code:"pcs81301",name:"PCS 绝缘异常",range:"绝缘电阻 > 1 MΩ",val:"1.4",unit:"MΩ",st:"ok"},
-      {code:"pcs81401",name:"使用工况横向对比",range:"预警得分排名",val:"第 5",unit:"名",st:"ok"}]}]},
-  fire:{name:"消防预警",banner:"<b>气灭系统：自动 · 布防中</b> ｜ 联动回路：正常 ｜ 上次消防巡检：2026-08-28 合格 ｜ 下次巡检：2026-09-28",groups:[
-    {cat:"💨 可燃气体监测",items:[
-      {code:"fir02101",src:"自研算法",name:"CO 浓度趋势异常",range:"CO < 50 ppm",val:"12",unit:"ppm",st:"ok"},
-      {code:"fir02201",src:"自研算法",name:"H₂ 浓度趋势异常",range:"H₂ < 100 ppm",val:"8",unit:"ppm",st:"ok"},
-      {code:"fir02301",src:"自研算法",name:"VOC 浓度趋势异常",range:"VOC < 200 ppm",val:"45",unit:"ppm",st:"ok"}]},
-    {cat:"🌡️ 温度与烟雾探测",items:[
-      {code:"fir03101",src:"自研算法",name:"温升速率异常",range:"< 1 ℃/min",val:"0.3",unit:"℃/min",st:"ok"},
-      {code:"fir03102",src:"设备原生",name:"舱内温感高温",range:"< 60 ℃",val:"31.2",unit:"℃",st:"ok"},
-      {code:"fir03201",src:"设备原生",name:"烟雾浓度报警",range:"< 5 %obs/m",val:"0.8",unit:"%obs/m",st:"ok"}]},
-    {cat:"🧯 气灭系统",items:[
-      {code:"fir04101",src:"设备原生",name:"瓶组压力低",range:"≥ 4.2 MPa",val:"4.8",unit:"MPa",st:"ok"},
-      {code:"fir04102",src:"设备原生",name:"电磁阀状态异常",range:"常闭",val:"关闭",unit:"",st:"ok"},
-      {code:"fir04201",src:"设备原生",name:"放气反馈信号",range:"无",val:"无",unit:"",st:"ok"}]},
-    {cat:"📡 消防主机与联动",items:[
-      {code:"fir05101",src:"设备原生",name:"主机心跳离线",range:"心跳 < 60 s",val:"离线 25 分钟",unit:"",st:"warn"},
-      {code:"fir05102",src:"设备原生",name:"联动回路故障",range:"回路正常",val:"正常",unit:"",st:"ok"},
-      {code:"fir05103",src:"设备原生",name:"手自动状态",range:"自动布防",val:"自动",unit:"",st:"ok"}]}]},
+    {cat:"🔋 异常衰减诊断",items:[{code:"bat11101",name:"整站容量衰减",range:"容量保持率 ≥ 95%",val:"95.2",unit:"%",st:"ok",pro:"pro"},{code:"bat11201",name:"整舱容量衰减",range:"舱容量保持率 ≥ 95%",val:"94.6",unit:"%",st:"warn",pro:"pro"},{code:"bat15101",name:"整站效率衰减",range:"效率 ≥ 92%",val:"93.1",unit:"%",st:"ok",pro:"pro"},{code:"bat15201",name:"整舱效率衰减",range:"舱效率 ≥ 92%",val:"92.4",unit:"%",st:"ok",pro:"pro"},{code:"bat14101",name:"内阻不一致性",range:"内阻离散度 < 5%",val:"6.8",unit:"%",st:"warn",pro:"pro"},{code:"bat31101",name:"自放电异常",range:"自放电率 < 3%/月",val:"1.9",unit:"%/月",st:"ok",pro:"pro"},{code:"bat31201",name:"充高放低电芯检测",range:"异常电芯 0 个",val:"0",unit:"个",st:"ok",pro:"pro"}]},
+    {cat:"🌡️ 不一致性预警",items:[{code:"bat12101",name:"整站电池温度不一致",range:"温差 < 8 ℃",val:"4.2",unit:"℃",st:"ok",pro:"lite"},{code:"bat12201",name:"舱电池温度不一致",range:"舱温差 < 6 ℃",val:"3.1",unit:"℃",st:"ok",pro:"lite"},{code:"bat12301",name:"pack 温度不一致",range:"pack温差 < 5 ℃",val:"2.4",unit:"℃",st:"ok",pro:"lite"},{code:"bat12401",name:"电芯温度不一致",range:"电芯温差 < 5 ℃",val:"3.6",unit:"℃",st:"ok",pro:"lite"},{code:"bat13101",name:"整站电池电压不一致",range:"压差 < 150 mV",val:"92",unit:"mV",st:"ok",pro:"lite"},{code:"bat13201",name:"舱电池电压不一致",range:"舱压差 < 120 mV",val:"68",unit:"mV",st:"ok",pro:"lite"},{code:"bat13301",name:"pack 电压不一致",range:"pack压差 < 100 mV",val:"38",unit:"mV",st:"ok",pro:"lite"},{code:"bat13401",name:"电芯电压不一致",range:"电芯压差 < 50 mV",val:"21",unit:"mV",st:"ok",pro:"pro"},{code:"bat13601",name:"舱内簇电流不一致",range:"簇电流偏差 < 5%",val:"2.7",unit:"%",st:"ok",pro:"pro"},{code:"bat13701",name:"舱内簇 SOC 不一致",range:"SOC 偏差 < 5%",val:"3.3",unit:"%",st:"ok",pro:"pro"}]},
+    {cat:"🔥 热滥用",items:[{code:"bat12501",name:"电池持续高温",range:"温度 < 45 ℃",val:"38.5",unit:"℃",st:"ok",pro:"pro"},{code:"thb44501",name:"电池温升异常",range:"温升速率 < 1 ℃/min",val:"2.8",unit:"℃/min",st:"warn",pro:"pro"},{code:"thb44201",name:"电池超温运行",range:"运行温度 < 50 ℃",val:"41.2",unit:"℃",st:"ok",pro:"pro"},{code:"thb44301",name:"电池低温充电",range:"充电温度 > 0 ℃",val:"8.5",unit:"℃",st:"ok",pro:"pro"}]},
+    {cat:"⚡ 电滥用",items:[{code:"thb42101",name:"过充预警",range:"单体电压 < 3.65 V",val:"3.48",unit:"V",st:"ok",pro:"pro"},{code:"thb42501",name:"馈电预警",range:"单体电压 > 2.5 V",val:"3.12",unit:"V",st:"ok",pro:"pro"},{code:"thb42401",name:"过流预警",range:"电流 < 1.1 倍额定",val:"0.86",unit:"C",st:"ok",pro:"pro"}]},
+    {cat:"☢️ 热失控",items:[{code:"thb43101",name:"膨胀力预警",range:"膨胀力 < 阈值",val:"正常",unit:"",st:"ok",pro:"pro"},{code:"thc43101",name:"VOC 气体预警",range:"VOC < 检出限",val:"未检出",unit:"",st:"ok",pro:"pro"},{code:"thc43201",name:"烟雾预警",range:"烟雾浓度正常",val:"正常",unit:"",st:"ok",pro:"pro"},{code:"thc43301",name:"酯类预警",range:"酯类气体未检出",val:"未检出",unit:"",st:"ok",pro:"pro"},{code:"thc53101",name:"电芯喷阀预警",range:"无喷阀事件",val:"无",unit:"",st:"ok",pro:"pro"}]}]},
+  bms:{name:"BMS预警",groups:[
+    {cat:"📡 采样与通信监测",items:[{code:"bms21101",name:"电压采样异常",range:"采样偏差 < 20 mV",val:"12",unit:"mV",st:"ok",pro:"lite"},{code:"bms21201",name:"温度采样异常",range:"采样偏差 < 2 ℃",val:"1.4",unit:"℃",st:"ok",pro:"pro"},{code:"bms21301",name:"通信丢包率异常",range:"丢包率 < 1 %",val:"0.4",unit:"%",st:"ok",pro:"pro"},{code:"bms21401",name:"CAN 通信中断",range:"中断 < 5 s",val:"中断 8 s",unit:"",st:"warn",pro:"pro"}]},
+    {cat:"🧮 SOC / SOH 估算",items:[{code:"soc10501",name:"SOC 估算漂移",range:"偏差 < 5 %",val:"+7.2",unit:"%",st:"warn",pro:"lite"},{code:"soc10602",name:"SOC 跳变检测",range:"跳变 < 3 %",val:"1.1",unit:"%",st:"ok",pro:"pro"},{code:"soh10601",name:"SOH 估算异常",range:"估算波动 < 2 %",val:"0.8",unit:"%",st:"ok",pro:"pro"}]},
+    {cat:"🔌 继电器与绝缘",items:[{code:"bms22101",name:"绝缘阻值低于阈值",range:"绝缘电阻 > 0.5 MΩ",val:"0.32",unit:"MΩ",st:"warn",pro:"pro"},{code:"bms22201",name:"主继电器粘连",range:"无粘连",val:"正常",unit:"",st:"ok",pro:"pro"},{code:"bms22301",name:"预充电路异常",range:"预充时间 < 3 s",val:"1.2",unit:"s",st:"ok",pro:"pro"},{code:"bms22401",name:"霍尔传感器零漂",range:"零漂 < 0.5 A",val:"0.2",unit:"A",st:"ok",pro:"pro"}]},
+    {cat:"⚖️ 均衡管理",items:[{code:"bms23101",name:"均衡回路失效",range:"均衡电流正常",val:"正常",unit:"",st:"ok",pro:"pro"},{code:"bms23201",name:"均衡模块过温",range:"温度 < 75 ℃",val:"58",unit:"℃",st:"ok",pro:"pro"},{code:"bms23301",name:"被动均衡效率低",range:"均衡效率 ≥ 85 %",val:"91",unit:"%",st:"ok",pro:"pro"}]}]},
+  acu:{name:"冷机预警",groups:[{cat:"❄️ 冷机监测",items:[{code:"acu61101",name:"出回水压力异常",range:"压差 0.05~0.15 MPa",val:"0.09",unit:"MPa",st:"ok",pro:"pro"},{code:"acu61201",name:"冷凝温度异常",range:"冷凝温度 < 55 ℃",val:"47.3",unit:"℃",st:"ok",pro:"pro"}]}]},
+  rvt:{name:"变压器预警",groups:[{cat:"🔌 变压器监测",items:[{code:"rvt71101",name:"变压器温度预警",range:"油面温度 < 85 ℃",val:"68.4",unit:"℃",st:"ok",pro:"pro"},{code:"rvt71201",name:"变压器效率异常",range:"效率 ≥ 98%",val:"98.6",unit:"%",st:"ok",pro:"pro"},{code:"rvt71301",name:"高压断路器寿命预警",range:"动作次数 < 80% 寿命",val:"62",unit:"%",st:"warn",pro:"pro"},{code:"rvt71401",name:"使用工况横向对比",range:"预警得分排名",val:"第 3",unit:"名",st:"ok",pro:"pro"}]}]},
+  pcs:{name:"PCS 预警",groups:[{cat:"🔁 PCS 监测",items:[{code:"pcs81101",name:"直流电容温度异常",range:"电容温度 < 70 ℃",val:"58.2",unit:"℃",st:"ok",pro:"pro"},{code:"pcs81201",name:"PCS 模块散热异常",range:"散热温差 < 15 ℃",val:"9.6",unit:"℃",st:"ok",pro:"pro"},{code:"pcs81301",name:"PCS 绝缘异常",range:"绝缘电阻 > 1 MΩ",val:"1.4",unit:"MΩ",st:"ok",pro:"pro"},{code:"pcs81401",name:"使用工况横向对比",range:"预警得分排名",val:"第 5",unit:"名",st:"ok",pro:"pro"}]}]},
+  fire:{name:"消防预警",banner:"<b>气灭系统：自动 · 布防中</b>  上次消防巡检：2026-08-28 合格 ",groups:[
+    {cat:"💨 可燃气体监测",items:[{code:"fir02101",src:"预警算法",name:"CO 浓度趋势异常",range:"CO < 50 ppm",val:"12",unit:"ppm",st:"ok",pro:"pro"},{code:"fir02201",src:"预警算法",name:"H₂ 浓度趋势异常",range:"H₂ < 100 ppm",val:"8",unit:"ppm",st:"ok",pro:"pro"},{code:"fir02301",src:"预警算法",name:"VOC 浓度趋势异常",range:"VOC < 200 ppm",val:"45",unit:"ppm",st:"ok",pro:"pro"}]},
+    {cat:"🌡️ 温度与烟雾探测",items:[{code:"fir03101",src:"预警算法",name:"温升速率异常",range:"< 1 ℃/min",val:"0.3",unit:"℃/min",st:"ok",pro:"pro"},{code:"fir03102",src:"设备故障",name:"舱内温感高温",range:"< 60 ℃",val:"31.2",unit:"℃",st:"ok",pro:"pro"},{code:"fir03201",src:"设备故障",name:"烟雾浓度报警",range:"< 5 %obs/m",val:"0.8",unit:"%obs/m",st:"ok",pro:"pro"}]},
+    {cat:"🧯 气灭系统",items:[{code:"fir04101",src:"设备故障",name:"瓶组压力低",range:"≥ 4.2 MPa",val:"4.8",unit:"MPa",st:"ok",pro:"pro"},{code:"fir04102",src:"设备故障",name:"电磁阀状态异常",range:"常闭",val:"关闭",unit:"",st:"ok",pro:"pro"},{code:"fir04201",src:"设备故障",name:"放气反馈信号",range:"无",val:"无",unit:"",st:"ok",pro:"pro"}]},
+    {cat:"📡 消防主机与联动",items:[{code:"fir05101",src:"设备故障",name:"主机心跳离线",range:"心跳 < 60 s",val:"离线 25 分钟",unit:"",st:"warn",pro:"pro"},{code:"fir05102",src:"设备故障",name:"联动回路故障",range:"回路正常",val:"正常",unit:"",st:"ok",pro:"pro"},{code:"fir05103",src:"设备故障",name:"手自动状态",range:"自动布防",val:"自动",unit:"",st:"ok",pro:"pro"}]}]},
 };
 const TOP5={
   bat:[["电芯高温","26%"],["内阻不一致","22%"],["容量衰减","20%"],["过充/馈电","17%"],["温升异常","15%"]],
+  bms:[["SOC 估算漂移","32%"],["通信中断/丢包","26%"],["绝缘阻值异常","18%"],["温度采样异常","14%"],["均衡回路失效","10%"]],
   acu:[["出回水压力","55%"],["冷凝温度","45%"]],
   rvt:[["温度预警","40%"],["断路器寿命","30%"],["效率异常","20%"],["工况排名","10%"]],
   pcs:[["绝缘异常","35%"],["电容温度","30%"],["模块散热","25%"],["工况排名","10%"]],
   fire:[["可燃气体浓度异常","28%"],["探测器离线/故障","24%"],["气灭压力低","18%"],["温升速率异常","16%"],["联动通信中断","14%"]]
 };
 function deviceTab(key){
-  const d=DEVICES[key];let total=0,ok=0,warn=0;
-  d.groups.forEach(g=>{total+=g.items.length;g.items.forEach(it=>it.st==='ok'?ok++:warn++)});
-  const top5=TOP5[key].map((t,i)=>`<div class="t"><span class="rk">TOP${i+1}</span><div class="nm">${t[0]}</div><div class="pc num">${t[1]}<i> 占比</i></div></div>`).join('');
-  const groups=d.groups.map(g=>`<div style="margin-bottom:18px"><div class="cat-head">${g.cat}<span class="cnt">${g.items.length} 项</span></div><div class="metric-head"><div>指标名称 / 编码</div><div>最差值</div><div>状态</div><div>详情</div></div>${g.items.map(it=>`<div class="metric-row"><div><div class="m-name">${it.name}</div><div class="m-code">${it.code}${it.src?' · '+it.src:''}</div></div><div class="m-value num">${it.val}<i>${it.unit}</i></div><div>${it.st==='ok'?'<span class="stt ok">正常</span>':'<span class="stt warn">预警</span>'}</div><div><span class="d-link">数据</span></div></div>`).join('')}</div>`).join('');
-  return `<div class="card"><div class="card-head"><h3>${d.name} · 结论</h3><span class="hint">共 ${total} 项指标 · <b style="color:var(--green)">正常 ${ok}</b> · <b style="color:var(--red)">预警 ${warn}</b></span></div><div class="top5">${top5}</div></div>${d.banner?`<div class="callout" style="margin-bottom:16px">${d.banner}</div>`:'<div style="height:16px"></div>'}<div class="card"><div class="card-head"><h3>实时预警指标清单</h3><span class="hint">当前值 / 状态 / 详情</span></div>${groups}</div>`;
+ const d=DEVICES[key];let total=0,ok=0,warn=0,locked=0;
+ d.groups.forEach(g=>{g.items.forEach(it=>{total++;if(it.pro==='pro')locked++;else{if(it.st==='ok')ok++;else warn++}})});
+ const top5=TOP5[key].map((t,i)=>`<div class="t"><span class="rk">TOP${i+1}</span><div class="nm">${t[0]}</div><div class="pc num">${t[1]}<i> 占比</i></div></div>`).join('');
+ const rail=d.groups.map((g,i)=>{
+   const pro=g.items.every(it=>it.pro==='pro');
+   const emo=(g.cat.match(/^[^\s]+/)||[''])[0];
+   const name=g.cat.replace(emo,'').trim();
+   const subs=g.items.map((it,j)=>{
+     return `<a class="cat-sub-item" data-row-target="mrow-${key}-${i}-${j}" href="#mrow-${key}-${i}-${j}" title="${it.name}">${it.name}</a>`;
+   }).join('');
+   return `<div class="cat-grp" data-grp="cat-${key}-${i}"><a class="cat-rail-item${pro?' pro':''}" data-cat-target="cat-${key}-${i}" href="#cat-${key}-${i}" aria-expanded="false"><span class="cat-rail-emoji">${emo}</span><span class="cat-rail-name">${name}</span>${pro?'<span class="lock">🔒</span>':`<span class="cnt">${g.items.length}</span>`}<span class="chev">▸</span></a><div class="cat-sub"><div class="cat-sub-in">${subs}</div></div></div>`;
+ }).join('');
+ const groups=d.groups.map((g,i)=>{
+   const gItems=g.items;
+   const grpLocked=gItems.every(it=>it.pro==='pro');
+   const grpLite=gItems.every(it=>it.pro==='lite');
+   const catCls=grpLocked?'cat-head pro-cat':'cat-head';
+   const headCls=grpLocked?'metric-head pro-head':'metric-head';
+   const rows=gItems.map((it,j)=>{
+     const pro=it.pro==='pro';
+     const cls='metric-row'+(pro?' pro-locked':'');
+     const tab=pro?' tabindex="0" role="button" aria-label="满血版专属，点击查看详情"':'';
+     const cta=pro?'<span class="locked-cta" onclick="event.stopPropagation();openProDetail(\''+key+'\',\''+it.code+'\')">升级解锁 →</span>':'<span class="d-link" onclick="openTabDetail(\''+key+'\',\''+it.code+'\')">数据</span>';
+     const badge=pro?'<span class="lock-badge" title="满血版专属">🔒</span>':'';
+     const evt=pro?' onclick="openProDetail(\''+key+'\',\''+it.code+'\')" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();openProDetail(\''+key+'\',\''+it.code+'\')}"':'';
+     return `<div id="mrow-${key}-${i}-${j}" class="${cls}"${tab}${evt}><div><div class="m-name">${it.name}${badge}</div><div class="m-code">${it.code}${it.src?' · '+it.src:''}</div></div><div class="m-value num">${it.val}<i>${it.unit}</i></div><div>${pro?'<span class="stt" style="color:var(--muted)">—</span>':(it.st==='ok'?'<span class="stt ok">正常</span>':'<span class="stt warn">预警</span>')}</div><div>${cta}</div></div>`
+   }).join('');
+   return `<div data-cat-anchor="cat-${key}-${i}" style="margin-bottom:18px"><div id="cat-${key}-${i}" class="${catCls}">${g.cat}<span class="cnt">${g.items.length} 项</span></div><div class="${headCls}"><div>指标名称 / 编码</div><div>最差值</div><div>状态</div><div>详情</div></div>${rows}</div>`}).join('');
+ const sumExtra=locked>0?'<span class="locked-summary">已锁定 <b style="color:var(--text);margin:0 4px">'+locked+'</b> 项 · <a onclick="state.alarmTab=\'version\';render()">查看升级权益 →</a></span>':'';
+ const left=`<div><div class="card"><div class="card-head"><h3>${d.name} · 结论</h3><span class="hint">共 ${total} 项指标 · <b style="color:var(--green)">正常 ${ok}</b> · <b style="color:var(--red)">预警 ${warn}</b>${sumExtra}</span></div><div class="top5">${top5}</div></div>${d.banner?`<div class="callout" style="margin-bottom:16px">${d.banner}</div>`:'<div style="height:16px"></div>'}<div class="card"><div class="card-head"><h3>实时预警指标清单</h3><span class="hint">当前值 / 状态 / 详情 · 灰色项为<b style="color:var(--blue)">满血版专属</b></span></div>${groups}</div></div>`;
+ const railHtml=`<aside class="cat-rail" aria-label="指标分组导航"><div class="cat-rail-h">指标分组<span class="sub">${d.groups.length} 组</span></div><div class="cat-rail-list">${rail||'<div class="cat-rail-empty">无分组</div>'}</div></aside>`;
+ return `<div class="device-tab-grid">${left}${railHtml}</div>`;
 }
+/* ============ V8.9：满血版专属指标说明（按 code 索引） ============ */
+const PRO_META={
+ bat12101:{src:'电池',type:'温度类',th:'温差 > 10 ℃ 持续 5 min',desc:'采集电芯温度数据，按簇内温差模型识别局部散热异常，结合冷却流量历史与上一周期基线，提前识别簇级热失控风险。',impact:'关联电池簇内所有电芯及液冷回路，监测当前整站电池温度不一致对簇容量利用率与电芯一致性的影响；若持续异常将触发保护动作。',sug:'建议结合近 7 天整站电池温度不一致曲线复核电芯状态与冷机流量，必要时转电池维护建议或 SOC 标定任务。'},
+ bat12201:{src:'电池',type:'温度类',th:'舱温差 > 6 ℃',desc:'基于全舱电芯温度分布，按空间拓扑聚类识别冷点/热点，辅助冷机调度与流量优化。',impact:'关联电池簇内所有电芯及液冷回路，监测当前舱电池温度不一致对簇容量利用率与电芯一致性的影响；若持续异常将触发保护动作。',sug:'建议结合近 7 天舱电池温度不一致曲线复核电芯状态与冷机流量，必要时转电池维护建议或 SOC 标定任务。'},
+ bat12301:{src:'电池',type:'温度类',th:'pack 温差 > 5 ℃',desc:'逐 pack 比对温度离散度，发现连接松动、采样异常或局部散热不良。',impact:'关联电池簇内所有电芯及液冷回路，监测当前pack 温度不一致对簇容量利用率与电芯一致性的影响；若持续异常将触发保护动作。',sug:'建议结合近 7 天pack 温度不一致曲线复核电芯状态与冷机流量，必要时转电池维护建议或 SOC 标定任务。'},
+ bat12401:{src:'电池',type:'温度类',th:'电芯温差 > 5 ℃',desc:'电芯级温差监测，定位电芯层级一致性劣化。',impact:'关联电池簇内所有电芯及液冷回路，监测当前电芯温度不一致对簇容量利用率与电芯一致性的影响；若持续异常将触发保护动作。',sug:'建议结合近 7 天电芯温度不一致曲线复核电芯状态与冷机流量，必要时转电池维护建议或 SOC 标定任务。'},
+ bat13101:{src:'电池',type:'电压类',th:'整站压差 > 150 mV',desc:'整站所有电芯电压压差分析，识别簇间容量不一致与连接电阻异常。',impact:'关联电池簇内所有电芯及液冷回路，监测当前整站电池电压不一致对簇容量利用率与电芯一致性的影响；若持续异常将触发保护动作。',sug:'建议结合近 7 天整站电池电压不一致曲线复核电芯状态与冷机流量，必要时转电池维护建议或 SOC 标定任务。'},
+ bat13201:{src:'电池',type:'电压类',th:'舱压差 > 120 mV',desc:'按舱聚合压差，定位问题舱与簇号。',impact:'关联电池簇内所有电芯及液冷回路，监测当前舱电池电压不一致对簇容量利用率与电芯一致性的影响；若持续异常将触发保护动作。',sug:'建议结合近 7 天舱电池电压不一致曲线复核电芯状态与冷机流量，必要时转电池维护建议或 SOC 标定任务。'},
+ bat13301:{src:'电池',type:'电压类',th:'pack 压差 > 100 mV',desc:'按 pack 聚合压差，识别早期 pack 内电芯一致性劣化。',impact:'关联电池簇内所有电芯及液冷回路，监测当前pack 电压不一致对簇容量利用率与电芯一致性的影响；若持续异常将触发保护动作。',sug:'建议结合近 7 天pack 电压不一致曲线复核电芯状态与冷机流量，必要时转电池维护建议或 SOC 标定任务。'},
+ bat13401:{src:'电池',type:'电压类',th:'电芯压差 > 50 mV',desc:'电芯级压差监测，提前识别内阻升高与漏电隐患。',impact:'关联电池簇内所有电芯及液冷回路，监测当前电芯电压不一致对簇容量利用率与电芯一致性的影响；若持续异常将触发保护动作。',sug:'建议结合近 7 天电芯电压不一致曲线复核电芯状态与冷机流量，必要时转电池维护建议或 SOC 标定任务。'},
+ bat13601:{src:'电池',type:'电流类',th:'簇电流偏差 > 5%',desc:'簇间电流偏差识别连接异常、簇容量差异或采样漂移。',impact:'关联电池簇内所有电芯及液冷回路，监测当前舱内簇电流不一致对簇容量利用率与电芯一致性的影响；若持续异常将触发保护动作。',sug:'建议结合近 7 天舱内簇电流不一致曲线复核电芯状态与冷机流量，必要时转电池维护建议或 SOC 标定任务。'},
+ bat13701:{src:'电池',type:'SOC 类',th:'SOC 偏差 > 5%',desc:'簇间 SOC 偏差识别 BMS 估算差异与自放电异常。',impact:'关联电池簇内所有电芯及液冷回路，监测当前舱内簇 SOC 不一致对簇容量利用率与电芯一致性的影响；若持续异常将触发保护动作。',sug:'建议结合近 7 天舱内簇 SOC 不一致曲线复核电芯状态与冷机流量，必要时转电池维护建议或 SOC 标定任务。'},
+ bat12501:{src:'电池',type:'温度类',th:'温度 > 45 ℃',desc:'持续高温监测，对接冷机调度与告警阈值。',impact:'关联电池簇内所有电芯及液冷回路，监测当前电池持续高温对簇容量利用率与电芯一致性的影响；若持续异常将触发保护动作。',sug:'建议结合近 7 天电池持续高温曲线复核电芯状态与冷机流量，必要时转电池维护建议或 SOC 标定任务。'},
+ thb44501:{src:'电池',type:'温度类',th:'温升速率 > 1 ℃/min',desc:'基于分钟级温度采样识别异常温升，提前预警热失控。',impact:'关联电池簇内所有电芯及液冷回路，监测当前电池温升异常对簇容量利用率与电芯一致性的影响；若持续异常将触发保护动作。',sug:'建议结合近 7 天电池温升异常曲线复核电芯状态与冷机流量，必要时转电池维护建议或 SOC 标定任务。'},
+ thb44201:{src:'电池',type:'温度类',th:'运行温度 > 50 ℃',desc:'满血版阈值更严苛，覆盖电池最佳运行区间。',impact:'关联电池簇内所有电芯及液冷回路，监测当前电池超温运行对簇容量利用率与电芯一致性的影响；若持续异常将触发保护动作。',sug:'建议结合近 7 天电池超温运行曲线复核电芯状态与冷机流量，必要时转电池维护建议或 SOC 标定任务。'},
+ thb44301:{src:'电池',type:'温度类',th:'充电温度 < 0 ℃',desc:'低温充电对锂离子电池有不可逆损伤，需主动降功率或停充。',impact:'关联电池簇内所有电芯及液冷回路，监测当前电池低温充电对簇容量利用率与电芯一致性的影响；若持续异常将触发保护动作。',sug:'建议结合近 7 天电池低温充电曲线复核电芯状态与冷机流量，必要时转电池维护建议或 SOC 标定任务。'},
+ thb42101:{src:'电池',type:'电压类',th:'单体电压 > 3.65 V',desc:'过充预警，结合 BMS 主动均衡触发保护。',impact:'关联电池簇内所有电芯及液冷回路，监测当前过充预警对簇容量利用率与电芯一致性的影响；若持续异常将触发保护动作。',sug:'建议结合近 7 天过充预警曲线复核电芯状态与冷机流量，必要时转电池维护建议或 SOC 标定任务。'},
+ thb42501:{src:'电池',type:'电压类',th:'单体电压 < 2.5 V',desc:'馈电预警，识别过放与保护板异常。',impact:'关联电池簇内所有电芯及液冷回路，监测当前馈电预警对簇容量利用率与电芯一致性的影响；若持续异常将触发保护动作。',sug:'建议结合近 7 天馈电预警曲线复核电芯状态与冷机流量，必要时转电池维护建议或 SOC 标定任务。'},
+ thb42401:{src:'电池',type:'电流类',th:'电流 > 1.1C 额定',desc:'过流识别，支持按额定倍率动态调整。',impact:'关联电池簇内所有电芯及液冷回路，监测当前过流预警对簇容量利用率与电芯一致性的影响；若持续异常将触发保护动作。',sug:'建议结合近 7 天过流预警曲线复核电芯状态与冷机流量，必要时转电池维护建议或 SOC 标定任务。'},
+ thb43101:{src:'电池',type:'热失控',th:'膨胀力 > 阈值',desc:'机械膨胀力监测，定位电芯鼓包。',impact:'关联电池簇内所有电芯及液冷回路，监测当前膨胀力预警对簇容量利用率与电芯一致性的影响；若持续异常将触发保护动作。',sug:'建议结合近 7 天膨胀力预警曲线复核电芯状态与冷机流量，必要时转电池维护建议或 SOC 标定任务。'},
+ thc43101:{src:'电池',type:'热失控',th:'VOC 检出',desc:'电解液挥发气体特征识别。',impact:'关联电池簇内所有电芯及液冷回路，监测当前VOC 气体预警对簇容量利用率与电芯一致性的影响；若持续异常将触发保护动作。',sug:'建议结合近 7 天VOC 气体预警曲线复核电芯状态与冷机流量，必要时转电池维护建议或 SOC 标定任务。'},
+ thc43201:{src:'电池',type:'热失控',th:'烟雾浓度异常',desc:'烟雾颗粒物检测，提前 4 小时预警热失控。',impact:'关联电池簇内所有电芯及液冷回路，监测当前烟雾预警对簇容量利用率与电芯一致性的影响；若持续异常将触发保护动作。',sug:'建议结合近 7 天烟雾预警曲线复核电芯状态与冷机流量，必要时转电池维护建议或 SOC 标定任务。'},
+ thc43301:{src:'电池',type:'热失控',th:'酯类气体检出',desc:'电解液酯类挥发物识别。',impact:'关联电池簇内所有电芯及液冷回路，监测当前酯类预警对簇容量利用率与电芯一致性的影响；若持续异常将触发保护动作。',sug:'建议结合近 7 天酯类预警曲线复核电芯状态与冷机流量，必要时转电池维护建议或 SOC 标定任务。'},
+ thc53101:{src:'电池',type:'热失控',th:'电芯喷阀事件',desc:'电芯泄压阀动作事件级告警。',impact:'关联电池簇内所有电芯及液冷回路，监测当前电芯喷阀预警对簇容量利用率与电芯一致性的影响；若持续异常将触发保护动作。',sug:'建议结合近 7 天电芯喷阀预警曲线复核电芯状态与冷机流量，必要时转电池维护建议或 SOC 标定任务。'},
+ bms21101:{src:'BMS',type:'采样类',th:'采样偏差 > 20 mV',desc:'单体电压采样精度监测，识别采样线漂移。',impact:'关联 BMS 主控板与对应电池簇，监测电压采样异常对电压/温度/电流采样精度与保护动作的影响；影响 EMS 数据采集连续性。',sug:'建议检查 BMS 板卡、采样线与通信端口，纳入周巡检；必要时转 BMS 维护工单。'},
+ bms21201:{src:'BMS',type:'采样类',th:'采样偏差 > 2 ℃',desc:'温度采样精度监测，识别 NTC 漂移。',impact:'关联 BMS 主控板与对应电池簇，监测温度采样异常对电压/温度/电流采样精度与保护动作的影响；影响 EMS 数据采集连续性。',sug:'建议检查 BMS 板卡、采样线与通信端口，纳入周巡检；必要时转 BMS 维护工单。'},
+ bms21301:{src:'BMS',type:'通信类',th:'丢包率 > 1%',desc:'通信丢包率异常，定位端口/交换机问题。',impact:'关联 BMS 主控板与对应电池簇，监测通信丢包率异常对电压/温度/电流采样精度与保护动作的影响；影响 EMS 数据采集连续性。',sug:'建议检查 BMS 板卡、采样线与通信端口，纳入周巡检；必要时转 BMS 维护工单。'},
+ bms21401:{src:'BMS',type:'通信类',th:'CAN 中断 > 5 s',desc:'CAN 总线中断告警，识别总线短路或节点离线。',impact:'关联 BMS 主控板与对应电池簇，监测CAN 通信中断对电压/温度/电流采样精度与保护动作的影响；影响 EMS 数据采集连续性。',sug:'建议检查 BMS 板卡、采样线与通信端口，纳入周巡检；必要时转 BMS 维护工单。'},
+ soc10602:{src:'BMS',type:'SOC 类',th:'SOC 跳变 > 3%',desc:'SOC 异常跳变识别采样或算法异常。',impact:'关联 BMS 主控板与对应电池簇，监测SOC 跳变检测对电压/温度/电流采样精度与保护动作的影响；影响 EMS 数据采集连续性。',sug:'建议检查 BMS 板卡、采样线与通信端口，纳入周巡检；必要时转 BMS 维护工单。'},
+ soh10601:{src:'BMS',type:'SOH 类',th:'SOH 波动 > 2%',desc:'电池健康度波动监测。',impact:'关联 BMS 主控板与对应电池簇，监测SOH 估算异常对电压/温度/电流采样精度与保护动作的影响；影响 EMS 数据采集连续性。',sug:'建议检查 BMS 板卡、采样线与通信端口，纳入周巡检；必要时转 BMS 维护工单。'},
+ bms22101:{src:'BMS',type:'绝缘类',th:'绝缘电阻 < 0.5 MΩ',desc:'绝缘阻值低于阈值，存在漏电风险，关联冷机/电池簇。',impact:'关联 BMS 主控板与对应电池簇，监测绝缘阻值低于阈值对电压/温度/电流采样精度与保护动作的影响；影响 EMS 数据采集连续性。',sug:'建议检查 BMS 板卡、采样线与通信端口，纳入周巡检；必要时转 BMS 维护工单。'},
+ bms22201:{src:'BMS',type:'继电器',th:'粘连',desc:'主继电器粘连识别。',impact:'关联 BMS 主控板与对应电池簇，监测主继电器粘连对电压/温度/电流采样精度与保护动作的影响；影响 EMS 数据采集连续性。',sug:'建议检查 BMS 板卡、采样线与通信端口，纳入周巡检；必要时转 BMS 维护工单。'},
+ bms22301:{src:'BMS',type:'预充',th:'预充时间 > 3 s',desc:'预充电路异常，识别电容/接触器问题。',impact:'关联 BMS 主控板与对应电池簇，监测预充电路异常对电压/温度/电流采样精度与保护动作的影响；影响 EMS 数据采集连续性。',sug:'建议检查 BMS 板卡、采样线与通信端口，纳入周巡检；必要时转 BMS 维护工单。'},
+ bms22401:{src:'BMS',type:'采样类',th:'霍尔零漂 > 0.5 A',desc:'霍尔传感器零漂识别。',impact:'关联 BMS 主控板与对应电池簇，监测霍尔传感器零漂对电压/温度/电流采样精度与保护动作的影响；影响 EMS 数据采集连续性。',sug:'建议检查 BMS 板卡、采样线与通信端口，纳入周巡检；必要时转 BMS 维护工单。'},
+ bms23101:{src:'BMS',type:'均衡',th:'均衡回路失效',desc:'均衡回路失效告警，定位故障电芯。',impact:'关联 BMS 主控板与对应电池簇，监测均衡回路失效对电压/温度/电流采样精度与保护动作的影响；影响 EMS 数据采集连续性。',sug:'建议检查 BMS 板卡、采样线与通信端口，纳入周巡检；必要时转 BMS 维护工单。'},
+ bms23201:{src:'BMS',type:'均衡',th:'模块温度 > 75 ℃',desc:'均衡模块过温保护。',impact:'关联 BMS 主控板与对应电池簇，监测均衡模块过温对电压/温度/电流采样精度与保护动作的影响；影响 EMS 数据采集连续性。',sug:'建议检查 BMS 板卡、采样线与通信端口，纳入周巡检；必要时转 BMS 维护工单。'},
+ bms23301:{src:'BMS',type:'均衡',th:'均衡效率 < 85%',desc:'被动均衡效率监测。',impact:'关联 BMS 主控板与对应电池簇，监测被动均衡效率低对电压/温度/电流采样精度与保护动作的影响；影响 EMS 数据采集连续性。',sug:'建议检查 BMS 板卡、采样线与通信端口，纳入周巡检；必要时转 BMS 维护工单。'},
+ acu61201:{src:'冷机',type:'温度类',th:'冷凝温度 > 55 ℃',desc:'冷凝温度异常，识别冷凝器散热不良或冷媒不足。',impact:'关联冷机机组与液冷主管路，监测冷凝温度异常对舱级散热效率与电池运行温度区间的影响。',sug:'建议检查冷凝器、冷媒压力与循环泵，必要时转冷机检修任务。'},
+ rvt71101:{src:'变压器',type:'温度类',th:'油面温度 > 85 ℃',desc:'变压器油面温度监测。',impact:'关联主变本体油温、效率与高压断路器机械寿命，监测变压器温度预警对并网稳定性与设备剩余寿命的影响。',sug:'建议结合变压器负荷曲线与油色谱结果复核，必要时安排停电检修。'},
+ rvt71201:{src:'变压器',type:'效率',th:'效率 < 98%',desc:'变压器效率异常监测。',impact:'关联主变本体油温、效率与高压断路器机械寿命，监测变压器效率异常对并网稳定性与设备剩余寿命的影响。',sug:'建议结合变压器负荷曲线与油色谱结果复核，必要时安排停电检修。'},
+ rvt71301:{src:'变压器',type:'寿命',th:'动作次数 > 80% 寿命',desc:'高压断路器机械寿命预测。',impact:'关联主变本体油温、效率与高压断路器机械寿命，监测高压断路器寿命预警对并网稳定性与设备剩余寿命的影响。',sug:'建议结合变压器负荷曲线与油色谱结果复核，必要时安排停电检修。'},
+ rvt71401:{src:'变压器',type:'对比',th:'预警得分排名',desc:'基于多工况横向对比，给出设备健康排名。',impact:'关联主变本体油温、效率与高压断路器机械寿命，监测使用工况横向对比对并网稳定性与设备剩余寿命的影响。',sug:'建议结合变压器负荷曲线与油色谱结果复核，必要时安排停电检修。'},
+ pcs81101:{src:'PCS',type:'温度类',th:'电容温度 > 70℃',desc:'直流电容温度监测，识别散热异常。',impact:'关联 PCS 模块、直流电容与绝缘监测回路，监测直流电容温度异常对功率调度与并网电能质量的影响。',sug:'建议检查 PCS 散热风扇、滤网与绝缘电阻，必要时安排 PCS 维护或 OTA 升级。'},
+ pcs81201:{src:'PCS',type:'散热',th:'模块温差 > 15℃',desc:'PCS 模块散热异常，定位风扇/滤网堵塞。',impact:'关联 PCS 模块、直流电容与绝缘监测回路，监测PCS 模块散热异常对功率调度与并网电能质量的影响。',sug:'建议检查 PCS 散热风扇、滤网与绝缘电阻，必要时安排 PCS 维护或 OTA 升级。'},
+ pcs81301:{src:'PCS',type:'绝缘',th:'绝缘电阻 < 1 MΩ',desc:'PCS 绝缘监测。',impact:'关联 PCS 模块、直流电容与绝缘监测回路，监测PCS 绝缘异常对功率调度与并网电能质量的影响。',sug:'建议检查 PCS 散热风扇、滤网与绝缘电阻，必要时安排 PCS 维护或 OTA 升级。'},
+ pcs81401:{src:'PCS',type:'对比',th:'预警得分排名',desc:'PCS 设备横向对比排名。',impact:'关联 PCS 模块、直流电容与绝缘监测回路，监测使用工况横向对比对功率调度与并网电能质量的影响。',sug:'建议检查 PCS 散热风扇、滤网与绝缘电阻，必要时安排 PCS 维护或 OTA 升级。'},
+ fir02101:{src:'消防',type:'气体',th:'CO > 50 ppm',desc:'可燃气体 CO 浓度趋势异常，识别热失控早期。',impact:'关联舱内消防主机、探测器与气灭系统，监测fir02101对早期火情识别与气灭联动的影响。',sug:'建议现场核查探测器与气灭压力回路，必要时重启主机并纳入月巡检。'},
+ fir02201:{src:'消防',type:'气体',th:'H₂ > 100 ppm',desc:'氢气浓度趋势异常监测。',impact:'关联舱内消防主机、探测器与气灭系统，监测fir02201对早期火情识别与气灭联动的影响。',sug:'建议现场核查探测器与气灭压力回路，必要时重启主机并纳入月巡检。'},
+ fir02301:{src:'消防',type:'气体',th:'VOC > 200 ppm',desc:'VOC 浓度趋势异常监测。',impact:'关联舱内消防主机、探测器与气灭系统，监测fir02301对早期火情识别与气灭联动的影响。',sug:'建议现场核查探测器与气灭压力回路，必要时重启主机并纳入月巡检。'},
+ fir03101:{src:'消防',type:'温度',th:'温升 > 1℃/min',desc:'舱内温度异常上升速率监测。',impact:'关联舱内消防主机、探测器与气灭系统，监测fir03101对早期火情识别与气灭联动的影响。',sug:'建议现场核查探测器与气灭压力回路，必要时重启主机并纳入月巡检。'},
+ fir03102:{src:'消防',type:'温度',th:'温度 > 60 ℃',desc:'舱内温感高温告警。',impact:'关联舱内消防主机、探测器与气灭系统，监测fir03102对早期火情识别与气灭联动的影响。',sug:'建议现场核查探测器与气灭压力回路，必要时重启主机并纳入月巡检。'},
+ fir03201:{src:'消防',type:'烟雾',th:'烟雾 > 5 %obs/m',desc:'烟雾浓度告警。',impact:'关联舱内消防主机、探测器与气灭系统，监测fir03201对早期火情识别与气灭联动的影响。',sug:'建议现场核查探测器与气灭压力回路，必要时重启主机并纳入月巡检。'},
+ fir04101:{src:'消防',type:'气灭',th:'压力 < 4.2 MPa',desc:'瓶组压力低告警。',impact:'关联舱内消防主机、探测器与气灭系统，监测fir04101对早期火情识别与气灭联动的影响。',sug:'建议现场核查探测器与气灭压力回路，必要时重启主机并纳入月巡检。'},
+ fir04102:{src:'消防',type:'气灭',th:'电磁阀非正常',desc:'电磁阀状态异常。',impact:'关联舱内消防主机、探测器与气灭系统，监测fir04102对早期火情识别与气灭联动的影响。',sug:'建议现场核查探测器与气灭压力回路，必要时重启主机并纳入月巡检。'},
+ fir04201:{src:'消防',type:'气灭',th:'放气反馈',desc:'气灭系统放气反馈信号。',impact:'关联舱内消防主机、探测器与气灭系统，监测fir04201对早期火情识别与气灭联动的影响。',sug:'建议现场核查探测器与气灭压力回路，必要时重启主机并纳入月巡检。'},
+ fir05101:{src:'消防',type:'主机',th:'心跳 > 60 s',desc:'消防主机心跳离线告警。',impact:'关联舱内消防主机、探测器与气灭系统，监测fir05101对早期火情识别与气灭联动的影响。',sug:'建议现场核查探测器与气灭压力回路，必要时重启主机并纳入月巡检。'},
+ fir05102:{src:'消防',type:'联动',th:'联动回路故障',desc:'联动回路状态监测。',impact:'关联舱内消防主机、探测器与气灭系统，监测fir05102对早期火情识别与气灭联动的影响。',sug:'建议现场核查探测器与气灭压力回路，必要时重启主机并纳入月巡检。'},
+ fir05103:{src:'消防',type:'联动',th:'手自动异常',desc:'手自动状态监测。',impact:'关联舱内消防主机、探测器与气灭系统，监测fir05103对早期火情识别与气灭联动的影响。',sug:'建议现场核查探测器与气灭压力回路，必要时重启主机并纳入月巡检。'}
+};
+const PRO_CMP=[
+ ['监测设备范围','电池 + BMS','<b style="color:var(--blue)">6 类设备全覆盖</b>：电池 / BMS / 消防 / 冷机 / PCS / 变压器'],
+ ['预警算法覆盖','仅基础 9 项','<b style="color:var(--blue)">39 项全量算法</b>：含绝缘、内阻、热失控特征'],
+ ['预警阈值','三级固定','三级 + <b style="color:var(--blue)">自定义阈值</b> + 分设备差异化配置'],
+ ['预警复核','仅查看','复核 + <b style="color:var(--blue)">一键转工单 / 转标定任务</b>'],
+ ['历史回溯','近 30天','<b style="color:var(--blue)">近 1 年</b> + 一键导出 Excel']
+];
+function _findItem(key,code){
+ var g=DEVICES[key];
+ for(var i=0;i<g.groups.length;i++){
+  for(var j=0;j<g.groups[i].items.length;j++){
+   if(g.groups[i].items[j].code===code)return g.groups[i].items[j];
+  }
+ }
+ return null}
+function openProDetail(key,code){
+ document.getElementById('detMask').style.display='none';
+ var it=_findItem(key,code);
+ if(!it)return;
+ var meta=PRO_META[code]||{src:DEVICES[key].name,type:'-',th:it.range||'-',desc:'满血版专属预警指标。'};
+ var cmpRows=PRO_CMP.map(r=>'<tr><td style="padding:9px 10px;color:var(--text2)">'+r[0]+'</td><td style="padding:9px 10px">'+r[1]+'</td><td style="padding:9px 10px">'+r[2]+'</td></tr>').join('');
+ document.getElementById('proBody').innerHTML=
+ '<div class="pro-meta">'+
+ '<div class="row"><span>预警编码</span><b>'+it.code+'</b></div>'+
+ '<div class="row"><span>预警类型</span><b>'+meta.type+'</b></div>'+
+ '<div class="row"><span>触发阈值</span><b>'+meta.th+'</b></div>'+
+ '<div class="row"><span>当前值（演示）</span><b>'+it.val+' '+it.unit+'</b></div>'+
+ '</div>'+
+ '<div style="font-size:13px;font-weight:600;margin-bottom:6px">算法说明</div>'+
+ '<div class="pro-desc">'+meta.desc+'</div>'+
+ '<div style="font-size:13px;font-weight:600;margin:14px 0 8px">简化版 vs 满血版 · 能力对比</div>'+
+ '<table style="width:100%;border-collapse:collapse;font-size:12px;border:1px solid var(--line);border-radius:8px;overflow:hidden">'+
+ '<thead><tr style="background:var(--linesoft)"><th style="padding:9px 10px;text-align:left;color:var(--text2);font-weight:600;width:28%">能力项</th><th style="padding:9px 10px;text-align:left;color:var(--text2);font-weight:600;width:36%">简化版</th><th style="padding:9px 10px;text-align:left;color:var(--blue);font-weight:600">满血版（升级解锁）</th></tr></thead>'+
+ '<tbody>'+cmpRows+'</tbody></table>'+
+ '<div class="pro-cta">'+
+ '<div class="t1">升级到满血版，让每一项指标都成为守护</div>'+
+ '<div class="t2">联系客户成功经理，获取专属报价与 14 天满血版演示环境</div>'+
+ '<div style="display:flex;justify-content:center;gap:10px">'+
+ '<button class="secondary" style="height:36px" onclick="closeProDetail();state.alarmTab=\'version\';render()">查看完整对比</button>'+
+ '<button class="primary" style="height:36px;padding:0 22px" onclick="closeProDetail();alert(\'已记录您的意向，客户成功经理将在 1 个工作日内与您联系（演示）\')">预约满血版演示</button>'+
+ '</div></div>';
+ document.getElementById('proMask').style.display='flex';
+ document.getElementById('proMask').dataset.key=key;document.getElementById('proMask').dataset.code=code}
+function closeProDetail(){document.getElementById('proMask').style.display='none'}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeProDetail()});
+/* ============ V8.7：舱级电芯极值柱状图（可编辑布局） ============ */
+function cabinBar(o){
+ var W=560,H=250,pl=46,pr=14,pt=20,pb=34;
+ var iw=W-pl-pr,ih=H-pt-pb,base=pt+ih;
+ var n=o.data.length,step=iw/n,bw=Math.min(38,step*0.52);
+ function Y(v){return base-(v-o.min)/(o.max-o.min)*ih}
+ var s='<svg viewBox="0 0 '+W+' '+H+'" style="width:100%;display:block">';
+ for(var i=0;i<=4;i++){var v=o.min+(o.max-o.min)*i/4,y=Y(v);
+  s+='<line x1="'+pl+'" y1="'+y+'" x2="'+(W-pr)+'" y2="'+y+'" stroke="#EFF1F5"/>';
+  s+='<text x="'+(pl-8)+'" y="'+(y+4)+'" font-size="10" fill="#9AA1AB" text-anchor="end">'+v.toFixed(o.dec)+'</text>';}
+ var ty=Y(o.th);
+ s+='<line x1="'+pl+'" y1="'+ty+'" x2="'+(W-pr)+'" y2="'+ty+'" stroke="#F0453B" stroke-width="1.2" stroke-dasharray="5 4"/>';
+ s+='<text x="'+(W-pr)+'" y="'+(ty-6)+'" font-size="10" fill="#F0453B" text-anchor="end">'+o.thLabel+'</text>';
+ o.data.forEach(function(d,i){
+  var cx=pl+step*(i+0.5),x=cx-bw/2,y=Y(d[1]),h=base-y,warn=d[2];
+  var col=warn?'#F0453B':'#2E6BE6';
+  s+='<rect x="'+x.toFixed(1)+'" y="'+y.toFixed(1)+'" width="'+bw.toFixed(1)+'" height="'+h.toFixed(1)+'" rx="4" fill="'+col+'" opacity="'+(warn?1:.85)+'"/>';
+  s+='<text x="'+cx.toFixed(1)+'" y="'+(y-6).toFixed(1)+'" font-size="10.5" font-weight="600" fill="'+(warn?'#F0453B':'#4E5560')+'" text-anchor="middle">'+d[1].toFixed(o.dec)+'</text>';
+  s+='<text x="'+cx.toFixed(1)+'" y="'+(base+18)+'" font-size="10.5" fill="'+(warn?'#F0453B':'#9AA1AB')+'" text-anchor="middle">'+d[0]+'</text>';});
+ return s+'</svg>'}
+function toggleCabinEdit(){
+ var sec=document.getElementById('cabinSec'),grid=document.getElementById('cabinGrid'),btn=document.getElementById('cabinEditBtn');
+ if(!sec)return;grid._sel=null;
+ var on=!sec.classList.contains('editing');
+ sec.classList.toggle('editing',on);grid.classList.toggle('editing',on);
+ btn.textContent=on?'完成编辑':'编辑布局';}
+function cabinPick(el){
+ var grid=document.getElementById('cabinGrid');
+ if(!grid||!grid.classList.contains('editing'))return;
+ if(grid._sel===el){el.classList.remove('sel');grid._sel=null;return}
+ if(grid._sel){grid._sel.classList.remove('sel');
+  var a=grid._sel,b=el,ph=document.createElement('div');
+  grid.insertBefore(ph,a);grid.insertBefore(a,b);grid.insertBefore(b,ph);ph.remove();
+  grid._sel=null;return}
+ grid._sel=el;el.classList.add('sel');}
 function alarmHome(){
   const rows=[
-   ['1','BMS','温度类','<span class="src-tag src-algo">自研算法</span>','BMS #15（#2-1 舱）','温差高告警 · 温差 12.4℃<div class="code-sub">bat12101</div>','<span class="lv-tag lv-h">高风险</span>','08-27 12:03:36','—','<span class="ps ps-wait">未处理</span>','—','<span class="link">复核</span><span class="link">详情</span>'],
-   ['2','液冷','绝缘类','<span class="src-tag src-algo">自研算法</span>','#1-2舱 液冷机组','绝缘阻值低于阈值<div class="code-sub">bat11401</div>','<span class="lv-tag lv-h">高风险</span>','08-27 11:48:02','—','<span class="ps ps-doing">处理中</span>','—','<span class="link">复核</span><span class="link">详情</span>'],
-   ['3','PCS','通信类','<span class="src-tag src-dev">设备原生</span>','#3-1舱 PCS2','通信中断超 5 分钟<div class="code-sub">PCS-COM-02 · 算法 bat11601 提前 1 天提示</div>','<span class="lv-tag lv-m">中风险</span>','08-27 11:20:15','—','<span class="ps ps-doing">处理中</span>','—','<span class="link">复核</span><span class="link">详情</span>'],
-   ['4','电池簇','电压类','<span class="src-tag src-algo">自研算法</span>','#2-4舱 簇3','单体压差持续扩大<div class="code-sub">bat11201 · <span style="color:var(--green)">✓ 已被设备告警确认</span></div>','<span class="lv-tag lv-m">中风险</span>','08-27 10:52:40','—','<span class="ps ps-wait">未处理</span>','—','<span class="link">复核</span><span class="link">详情</span>'],
-   ['5','BMS','SOC 类','<span class="src-tag src-algo">自研算法</span>','#1-1舱 BMS2','SOC 估算漂移<div class="code-sub">soc10501</div>','<span class="lv-tag lv-l">低风险</span>','08-27 09:31:08','08-27 10:12:44','<span class="ps ps-done">已确认</span>','属实 · 已转处置任务','<span class="link">复核记录</span><span class="link">详情</span>'],
-   ['6','消防','通信类','<span class="src-tag src-dev">设备原生</span>','#1-4舱 消防主机','探测器离线<div class="code-sub">FA-OFF-01</div>','<span class="lv-tag lv-l">低风险</span>','08-27 08:15:22','08-27 08:40:10','<span class="ps ps-skip">已忽略</span>','误报 · 重启后恢复','<span class="link">复核记录</span><span class="link">详情</span>']];
+   ['1','BMS','温度类','<span class="src-tag src-algo">预警算法</span>','BMS #15（#2-1 舱）','温差高告警 · 温差 12.4℃<div class="code-sub">bat12101</div>','<span class="lv-tag lv-h">高风险</span>','08-27 12:03:36','—','<span class="ps ps-wait">未处理</span>','—','<span class="link">复核</span><span class="link">详情</span>'],
+   ['2','冷机','绝缘类','<span class="src-tag src-algo">预警算法</span>','#1-2舱 冷机机组','绝缘阻值低于阈值<div class="code-sub">bat11401</div>','<span class="lv-tag lv-h">高风险</span>','08-27 11:48:02','—','<span class="ps ps-doing">处理中</span>','—','<span class="link">复核</span><span class="link">详情</span>'],
+   ['3','PCS','通信类','<span class="src-tag src-dev">设备故障</span>','#3-1舱 PCS2','通信中断超 5 分钟<div class="code-sub">PCS-COM-02 · 算法 bat11601 提前 1 天提示</div>','<span class="lv-tag lv-m">中风险</span>','08-27 11:20:15','—','<span class="ps ps-doing">处理中</span>','—','<span class="link">复核</span><span class="link">详情</span>'],
+   ['4','电池簇','电压类','<span class="src-tag src-algo">预警算法</span>','#2-4舱 簇3','单体压差持续扩大<div class="code-sub">bat11201 · <span style="color:var(--green)">✓ 已被设备告警确认</span></div>','<span class="lv-tag lv-m">中风险</span>','08-27 10:52:40','—','<span class="ps ps-wait">未处理</span>','—','<span class="link">复核</span><span class="link">详情</span>'],
+   ['5','BMS','SOC 类','<span class="src-tag src-algo">预警算法</span>','#1-1舱 BMS2','SOC 估算漂移<div class="code-sub">soc10501</div>','<span class="lv-tag lv-l">低风险</span>','08-27 09:31:08','08-27 10:12:44','<span class="ps ps-done">已确认</span>','属实 · 已转处置任务','<span class="link">复核记录</span><span class="link">详情</span>'],
+   ['6','消防','通信类','<span class="src-tag src-dev">设备故障</span>','#1-4舱 消防主机','探测器离线<div class="code-sub">FA-OFF-01</div>','<span class="lv-tag lv-l">低风险</span>','08-27 08:15:22','08-27 08:40:10','<span class="ps ps-skip">已忽略</span>','误报 · 重启后恢复','<span class="link">复核记录</span><span class="link">详情</span>']];
   return `
   <div class="card" style="padding:24px 28px">
     <div style="display:flex;align-items:center;gap:36px">
       <div style="flex:1;display:flex;gap:28px;flex-wrap:wrap">
         <div>
-          <div class="hc-grp-t">当前 · 实时状态</div>
+          <div class="hc-grp-t">警告分类</div>
           <div style="display:flex;gap:14px">
-            <div class="hc-item"><span class="hc-dot" style="background:var(--muted)"></span><div><div class="hc-num num">39</div><div class="hc-txt">监测算法 · 7×24 运行中</div></div></div>
-            <div class="hc-item"><span class="hc-dot" style="background:var(--green)"></span><div><div class="hc-num num" style="color:var(--green)">35</div><div class="hc-txt">设备正常</div></div></div>
-            <div class="hc-item"><span class="hc-dot" style="background:var(--orange)"></span><div><div class="hc-num num" style="color:var(--orange)">4</div><div class="hc-txt">当前预警</div></div></div>
+            <div class="hc-item"><span class="hc-dot" style="background:var(--orange)"></span><div><div class="hc-num num" style="color:var(--orange)">5/39</div><div class="hc-txt" >预警类</div></div></div>
+            <div class="hc-item"><span class="hc-dot" style="background:var(--red)"></span><div><div class="hc-num num" style="color:var(--red)">20/100</div><div class="hc-txt">故障类</div></div></div>
           </div>
         </div>
         <div>
-          <div class="hc-grp-t">本月 · 累计事件</div>
+          <div class="hc-grp-t">事件分类</div>
           <div style="display:flex;gap:14px">
-            <div class="hc-item hc-algo"><span class="hc-dot" style="background:var(--blue)"></span><div><div class="hc-num num" style="color:var(--blue)">126</div><div class="hc-txt">算法预警 · 占 61%</div></div></div>
-            <div class="hc-item hc-dev"><span class="hc-dot" style="background:#C9D2DE"></span><div><div class="hc-num num">80</div><div class="hc-txt">设备原生告警</div></div></div>
+            <div class="hc-item"><span class="hc-dot" style="background:var(--orange)"></span><div><div class="hc-num num" style="color:var(--orange)">50</div><div class="hc-txt">预警事件</div></div></div>
+            <div class="hc-item"><span class="hc-dot" style="background:var(--red)"></span><div><div class="hc-num num" style="color:var(--red)">200</div><div class="hc-txt">故障事件</div></div></div>
+          </div>
+        </div>
+		<div>
+          <div class="hc-grp-t">设备分类</div>
+          <div style="display:flex;gap:14px">
+            <div class="hc-item"><span class="hc-dot" style="background:var(--orange)"></span><div><div class="hc-num num" style="color:var(--orange)">25</div><div class="hc-txt">预警设备</div></div></div>
+            <div class="hc-item"><span class="hc-dot" style="background:var(--red)"></span><div><div class="hc-num num" style="color:var(--red)">45</div><div class="hc-txt">故障设备</div></div></div>
           </div>
         </div>
       </div>
-      <div style="text-align:right;flex-shrink:0"><div style="font-size:15px;font-weight:600">5 类设备全覆盖</div><div class="muted" style="font-size:12px;margin-top:4px">电池 29 · 变压器 4 · PCS 4 · 冷机 2 · 消防 4</div></div>
+      <div style="text-align:right;flex-shrink:0"><div style="font-size:15px;font-weight:600">6 类设备全覆盖</div><div class="muted" style="font-size:12px;margin-top:4px">电池 29 · BMS 126 · 变压器 4 · PCS 4 · 冷机 2 · 消防 4</div></div>
     </div>
-    <div style="margin-top:14px;padding-top:12px;border-top:1px dashed var(--linesoft);font-size:12px;color:var(--text2)">自研预警算法 39 项 · 本月算法预警平均提前 <b style="color:var(--blue)">4.2h</b> 发现 · 误报率 <b style="color:var(--green)">2.1%</b> · <a style="color:var(--blue);cursor:pointer;font-weight:600" onclick="alarmGotoConfirmed()">18 条已被设备原生告警确认</a>（点击查看清单）</div>
+  </div>
+  <div class="cabin-sec" id="cabinSec">
+    <div class="cabin-tt-row">
+      <div class="cabin-tt">各舱单体最低电压的柱状图<small>单位：V · 阈值 2.50V</small></div>
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:10px">
+        <div class="cabin-tt">各舱单体最高温度的柱状图<small>单位：℃ · 阈值 45℃</small></div>
+        <div style="display:flex;gap:10px;flex-shrink:0"><button class="secondary" style="height:32px" id="cabinEditBtn" onclick="toggleCabinEdit()">编辑布局</button><button class="primary" style="height:32px" onclick="alert('演示环境：满血版支持按设备 / 算法自由添加自定义图表')">+ 添加图表</button></div>
+      </div>
+    </div>
+    <div class="cabin-edit-tip">布局编辑模式：点击任意两个图表卡可互换位置，再次点击「完成编辑」退出。</div>
+    <div class="cabin-grid" id="cabinGrid">
+      <div class="card cabin-card" onclick="cabinPick(this)"><div class="card-head"><h3>各舱单体最低电压</h3><span class="hint">单位：V · 共 8 舱 <span class="cc-hint">· 点击选中后可换位</span></span></div>${cabinBar({min:2.4,max:3.4,dec:2,th:2.5,thLabel:'阈值 2.50V',data:[['#1-1舱',3.12],['#1-2舱',3.09],['#2-1舱',3.15],['#2-2舱',3.18],['#2-3舱',3.08],['#2-4舱',2.62,1],['#3-1舱',3.14],['#3-2舱',3.11]]})}</div>
+      <div class="card cabin-card" onclick="cabinPick(this)"><div class="card-head"><h3>各舱单体最高温度</h3><span class="hint">单位：℃ · 共 8 舱 <span class="cc-hint">· 点击选中后可换位</span></span></div>${cabinBar({min:0,max:50,dec:0,th:45,thLabel:'阈值 45℃',data:[['#1-1舱',31.2],['#1-2舱',33.5],['#2-1舱',42.6,1],['#2-2舱',34.8],['#2-3舱',32.1],['#2-4舱',30.9],['#3-1舱',33.2],['#3-2舱',31.6]]})}</div>
+    </div>
   </div>
   <div class="a-grid2">
     <div>
@@ -957,7 +1216,7 @@ function alarmHome(){
             <div class="pl-row"><span><i style="background:#F0453B"></i>温度类</span><b class="num">26%</b></div>
             <div class="pl-row"><span><i style="background:#F7931E"></i>电压类</span><b class="num">22%</b></div>
             <div class="pl-row"><span><i style="background:#2E6BE6"></i>通信类</span><b class="num">20%</b></div>
-            <div class="pl-row"><span><i style="background:#E9B949"></i>SOC 类</span><b class="num">17%</b></div>
+            <div class="pl-row"><span><i style="background:#E9B949"></i>电流类</span><b class="num">17%</b></div>
             <div class="pl-row"><span><i style="background:#2BA471"></i>其他</span><b class="num">15%</b></div>
           </div>
         </div>
@@ -967,12 +1226,12 @@ function alarmHome(){
       <div class="card-head"><h3>预警信息</h3></div>
       <div class="filter-bar">
         <select class="f-select"><option>储能单元：全部</option><option>1 号舱</option><option>2 号舱</option><option>3 号舱</option></select>
-        <select class="f-select"><option>设备类型：全部</option><option>BMS</option><option>PCS</option><option>液冷</option><option>电池簇</option><option>变压器</option><option>消防</option></select>
+        <select class="f-select"><option>设备类型：全部</option><option>BMS</option><option>PCS</option><option>冷机</option><option>电池</option><option>变压器</option><option>消防</option></select>
         <select class="f-select"><option>预警名称：全部</option><option>电芯温度异常升高</option><option>绝缘阻值低于阈值</option><option>通信中断超 5 分钟</option></select>
         <select class="f-select"><option>预警等级：全部</option><option>高风险</option><option>中风险</option><option>低风险</option></select>
         <select class="f-select"><option>预警类型：全部</option><option>温度类</option><option>电压类</option><option>绝缘类</option><option>通信类</option><option>SOC 类</option></select>
         <select class="f-select"><option>预警状态：全部</option><option>未处理</option><option>处理中</option><option>已确认</option><option>已忽略</option></select>
-        <select class="f-select"><option>预警来源：全部</option><option>自研算法</option><option>设备原生</option></select>
+        <select class="f-select"><option>预警来源：全部</option><option>预警算法</option><option>设备故障</option></select>
         <input class="f-date" value="预警开始时间  2026-07-27 → 2026-08-27" readonly>
       </div>
       <div style="display:flex;justify-content:flex-end;gap:10px;margin-bottom:14px"><button class="secondary" style="height:32px">重置</button><button class="primary" style="height:32px">查询</button></div>
@@ -1073,30 +1332,125 @@ function alarmDash(){return `
     </div>
   </div>`}
 function alarmPage(){
-  const tabs=[['home','预警首页',''],['bat','电池预警','29'],['acu','冷机预警','2'],['rvt','变压器预警','4'],['pcs','PCS预警','4'],['fire','消防预警','4'],['dash','自定义预警看板',''],['version','满血版对比','']];
-  let body='';
-  if(state.alarmTab==='home')body=alarmHome();
-  else if(state.alarmTab==='dash')body=alarmDash();
-  else if(state.alarmTab==='version')body=alarmVersion();
-  else body=deviceTab(state.alarmTab);
-  return baseHead('安全预警','39 项预警算法 · 7×24 实时监测 · 数据更新时间 2026-08-28 15:30')+`
-  <div class="tabs">${tabs.map(t=>`<button class="tab ${state.alarmTab===t[0]?'active':''}" onclick="state.alarmTab='${t[0]}';render()">${t[1]}${t[2]?`<span class="cnt">${t[2]}</span>`:''}</button>`).join('')}</div>
-  <div style="margin-top:16px">${body}</div>`}
+ const tabs=[['home','预警首页',''],['bat','电池预警','29'],['bms','BMS预警','14'],['acu','冷机预警','2'],['fire','消防预警','4'],['rvt','变压器预警','4'],['pcs','PCS预警','4'],['dash','自定义预警看板',''],['version','满血版对比','']];
+ let body='';
+ if(state.alarmTab==='home')body=alarmHome();
+ else if(state.alarmTab==='dash')body=alarmDash();
+ else if(state.alarmTab==='version')body=alarmVersion();
+ else body=deviceTab(state.alarmTab);
+ return baseHead('安全预警','预警算法 · 7×24 实时监测 · 数据更新时间 2026-08-28 15:30')+`
+ <div class="tabs">${tabs.map(t=>`<button class="tab ${state.alarmTab===t[0]?'active':''}" onclick="state.alarmTab='${t[0]}';render()">${t[1]}${t[2]?`<span class="cnt">${t[2]}</span>`:''}</button>`).join('')}</div>
+ <div style="margin-top:16px">${body}</div>`}
+/* ============ V8.12：设备 Tab 右侧分类锚点导航（手风琴自折叠 + scroll-spy + 子项定位高亮） ============ */
+var _catObs=null;
+function setupCatNav(){
+ if(_catObs){_catObs.disconnect();_catObs=null}
+ var rail=document.querySelector('.cat-rail');
+ var anchors=document.querySelectorAll('[data-cat-anchor]');
+ if(!rail||anchors.length===0)return;
+ var grps=rail.querySelectorAll('.cat-grp');
+ var items=rail.querySelectorAll('.cat-rail-item');
+ var subItems=rail.querySelectorAll('.cat-sub-item');
+ var scroller=document.querySelector('.content');
+ var _spyMuteUntil=0;
+ function muteSpy(ms){_spyMuteUntil=Date.now()+(ms||900);}
+ function scrollToEl(el,off){
+  if(!el)return;
+  if(scroller){
+   var top=el.getBoundingClientRect().top-scroller.getBoundingClientRect().top+scroller.scrollTop-(off||16);
+   scroller.scrollTo({top:Math.max(0,top),behavior:'smooth'});
+  }else{
+   var r=el.getBoundingClientRect();
+   window.scrollBy({top:r.top-(off||90),behavior:'smooth'});
+  }
+ }
+ function activate(id){
+  items.forEach(function(a){
+   var on=a.getAttribute('data-cat-target')===id;
+   a.classList.toggle('active',on);
+   a.setAttribute('aria-expanded',on?'true':'false');
+   if(!on)return;
+   try{
+    var r=a.getBoundingClientRect(),rr=rail.getBoundingClientRect();
+    if(r.top<rr.top+8||r.bottom>rr.bottom-8){a.scrollIntoView({block:'nearest',behavior:'smooth'})}
+   }catch(e){}
+  });
+  grps.forEach(function(g){
+   g.classList.toggle('open',g.getAttribute('data-grp')===id);
+  });
+ }
+ function activateSub(rowId){
+  subItems.forEach(function(s){
+   s.classList.toggle('active',s.getAttribute('data-row-target')===rowId);
+  });
+ }
+ items.forEach(function(a){
+  a.addEventListener('click',function(e){
+   e.preventDefault();
+   var id=a.getAttribute('data-cat-target');
+   var target=document.getElementById(id);
+   if(!target)return;
+   muteSpy();
+   scrollToEl(target,16);
+   activate(id);
+   activateSub('');
+  });
+  a.addEventListener('keydown',function(e){
+   if(e.key==='Enter'||e.key===' '){e.preventDefault();a.click();}
+  });
+ });
+ subItems.forEach(function(s){
+  s.addEventListener('click',function(e){
+   e.preventDefault();
+   e.stopPropagation();
+   var rowId=s.getAttribute('data-row-target');
+   var row=document.getElementById(rowId);
+   if(!row)return;
+   muteSpy();
+   var grp=s.closest('.cat-grp');
+   if(grp){activate(grp.getAttribute('data-grp'));}
+   activateSub(rowId);
+   scrollToEl(row,60);
+   row.classList.remove('flash');
+   void row.offsetWidth;
+   row.classList.add('flash');
+   row.addEventListener('animationend',function(){row.classList.remove('flash');},{once:true});
+  });
+ });
+ if('IntersectionObserver' in window){
+  _catObs=new IntersectionObserver(function(entries){
+   if(Date.now()<_spyMuteUntil)return;
+   if(scroller&&scroller.scrollTop<=2){
+    activate(anchors[0].getAttribute('data-cat-anchor'));
+    return;
+   }
+   if(scroller&&scroller.scrollTop+scroller.clientHeight>=scroller.scrollHeight-4){
+    activate(anchors[anchors.length-1].getAttribute('data-cat-anchor'));
+    return;
+   }
+   entries.forEach(function(en){
+    if(en.isIntersecting){activate(en.target.getAttribute('data-cat-anchor'));}
+   });
+  },{root:scroller||null,rootMargin:'-16px 0px -65% 0px',threshold:0});
+  anchors.forEach(function(a){_catObs.observe(a);});
+ }
+ activate(anchors[0]&&anchors[0].getAttribute('data-cat-anchor')||'');
+}
 /* ============ V5 新增：满血版 vs 简化版 能力对比 ============ */
 function alarmVersion(){
  const rows=[
   ['预警算法覆盖','9 项基础算法（温度 / 电压 / SOC）','<b style="color:var(--blue)">39 项全量算法</b>（含绝缘、内阻、热失控特征识别）'],
-  ['监测设备范围','电池 + BMS','<b style="color:var(--blue)">7 类设备全覆盖</b>：电池舱 / BMS / PCS / 一体机 / 箱变 / 消防 / 液冷'],
+  ['监测设备范围','电池 + BMS','<b style="color:var(--blue)">6 类设备全覆盖</b>：电池 / BMS / 消防 / 冷机 / PCS / 变压器 '],
   ['预警级别与阈值','三级固定阈值','三级 + <b style="color:var(--blue)">自定义阈值</b> + 分设备差异化配置'],
   ['预警复核与闭环','仅查看，无法处置','复核 + <b style="color:var(--blue)">一键转工单 / 转标定任务</b>，全程闭环追踪'],
   ['自定义预警看板','—','支持按设备 / 算法自由组合专属看板'],
-  ['消息推送通道','页面内提醒','<b style="color:var(--blue)">短信 + 邮件 + APP</b> 多通道实时推送'],
-  ['历史数据回溯','近 7 天','<b style="color:var(--blue)">近 2 年</b> + 一键导出 Excel'],
+  ['消息推送通道','页面内提醒','<b style="color:var(--blue)">短信 + 邮件 </b> 多通道实时推送'],
+  ['历史数据回溯','近 30 天','<b style="color:var(--blue)">近 1 年</b> + 一键导出 Excel'],
   ['AI 根因分析','—','预警自动关联历史工单与相似案例，给出处置建议'],
-  ['服务支持','社区文档自助','7×24 专属运维顾问 + <b style="color:var(--blue)">4 小时 SLA</b> 响应']
+  ['服务支持','文档自助','7×24 专属运维顾问 + <b style="color:var(--blue)">4 小时 SLA</b> 响应']
  ];
  return `
- <div class="callout" style="border-color:var(--orange);background:var(--orange-soft);margin-bottom:16px">您当前使用的是<b>简化版</b>安全预警（9 项基础算法、电池+BMS 两类设备）。升级<b>满血版</b>即可解锁 39 项全量算法、7 类设备全覆盖与「预警 → 工单 → 闭环」全链路能力。</div>
+ <div class="callout" style="border-color:var(--orange);background:var(--orange-soft);margin-bottom:16px">您当前使用的是<b>简化版</b>安全预警（9 项基础算法、电池+BMS 两类设备）。升级<b>满血版</b>即可解锁 39 项全量算法、6 类设备全覆盖与「预警 → 工单 → 闭环」全链路能力。</div>
  <div class="kpis" style="grid-template-columns:repeat(3,minmax(0,1fr))">
   <div class="kpi"><div class="label">预警准确率提升</div><div class="value" style="color:var(--blue)">+32%</div><div class="meta">满血版客户实测均值</div></div>
   <div class="kpi" style="--c:var(--green)"><div class="label">故障发现平均提前</div><div class="value" style="color:var(--green)">4.2 h</div><div class="meta">热失控特征提前识别</div></div>
@@ -1108,7 +1462,7 @@ function alarmVersion(){
  <div class="card" style="text-align:center;padding:32px 20px">
    <div style="font-size:17px;font-weight:700">升级到满血版，让每一度电都在掌控之中</div>
    <div class="muted" style="margin:10px 0 18px">联系客户成功经理，获取专属报价与 14 天满血版演示环境</div>
-   <button class="primary" style="height:40px;padding:0 30px" onclick="alert('已记录您的意向，客户成功经理将在 1 个工作日内与您联系（演示）')">预约满血版演示</button>
+   <button class="primary" style="height:40px;padding:0 30px" onclick="alert('已记录您的意向，客户经理将与您联系')">预约满血版</button>
  </div>`}
 /* ============ 报告中心 ============ */
 function reportPage(type){const m={inspect:'tpl-report-inspection',health:'tpl-report-health',report:'tpl-report-statistics'};return embedPage(m[type])}
@@ -1139,7 +1493,7 @@ function fitScreens(){
 window.addEventListener('resize',fitScreens);
 if(window.ResizeObserver){new ResizeObserver(function(){fitScreens()}).observe(document.getElementById('content'))}
 /* ============ 路由渲染 ============ */
-function render(){navRender();const names={screen:['大屏中心','储能大屏'],group:['大屏中心','集团运维大屏'],alarm:['预警中心','安全预警'],inspect:['报告中心','巡检报告'],health:['报告中心','体检报告'],report:['报告中心','报表统计'],'ops-home':['运维中心','运维首页'],'battery-swap':['运维中心','电池维护建议'],cooler:['运维中心','冷机检修'],'soc-cal':['运维中心','SOC标定'],ups:['运维中心','UPS故障处理'],ota:['运维中心','OTA升级'],trend:['分析中心','趋势分析'],consistency:['分析中心','一致性分析'],custom:['分析中心','自定义曲线分析']};document.getElementById('crumb').innerHTML=`${names[state.page][0]} <small>/ ${names[state.page][1]}</small>`;const c=document.getElementById('content');switch(state.page){case'screen':c.innerHTML=fitWrap(screenPage(),1600);break;case'group':c.innerHTML=fitWrap(groupPage(),1600);break;case'alarm':c.innerHTML=alarmPage();break;case'inspect':case'health':case'report':c.innerHTML=reportPage(state.page);break;case'ops-home':case'battery-swap':case'cooler':case'soc-cal':case'ups':case'ota':c.innerHTML=opsPage(state.page);break;case'trend':case'consistency':case'custom':c.innerHTML=analysisPage(state.page);break;default:c.innerHTML=pageEmpty('建设中')}hydrateEmbeds();fitScreens()}
+function render(){navRender();const names={screen:['大屏中心','储能大屏'],group:['大屏中心','集团运维大屏'],alarm:['预警中心','安全预警'],inspect:['报告中心','巡检报告'],health:['报告中心','体检报告'],report:['报告中心','报表统计'],'ops-home':['运维中心','运维首页'],'battery-swap':['运维中心','电池维护建议'],cooler:['运维中心','冷机检修'],'soc-cal':['运维中心','SOC标定'],ups:['运维中心','UPS故障处理'],ota:['运维中心','OTA升级'],trend:['分析中心','趋势分析'],consistency:['分析中心','一致性分析'],custom:['分析中心','自定义曲线分析']};document.getElementById('crumb').innerHTML=`${names[state.page][0]} <small>/ ${names[state.page][1]}</small>`;const c=document.getElementById('content');switch(state.page){case'screen':c.innerHTML=fitWrap(screenPage(),1600);break;case'group':c.innerHTML=fitWrap(groupPage(),1600);break;case'alarm':c.innerHTML=alarmPage();break;case'inspect':case'health':case'report':c.innerHTML=reportPage(state.page);break;case'ops-home':case'battery-swap':case'cooler':case'soc-cal':case'ups':case'ota':c.innerHTML=opsPage(state.page);break;case'trend':case'consistency':case'custom':c.innerHTML=analysisPage(state.page);break;default:c.innerHTML=pageEmpty('建设中')}hydrateEmbeds();fitScreens();if(state.page==='alarm'&&['bat','bms','acu','fire','rvt','pcs'].indexOf(state.alarmTab)>=0)setTimeout(setupCatNav,0);else if(_catObs){_catObs.disconnect();_catObs=null}}
 function pageEmpty(t){return baseHead(t,'示范页面')+`<div class="page-empty"><div><div class="empty-icon">＋</div><div style="text-align:center;font-weight:600;color:#7C899A">示范内容待配置</div></div></div>`}
 function openDrawer(){document.getElementById('drawer').classList.add('open')}function closeDrawer(){document.getElementById('drawer').classList.remove('open')}
 document.getElementById('collapseBtn').onclick=()=>{state.collapsed=!state.collapsed;document.getElementById('sidebar').classList.toggle('collapsed',state.collapsed);document.getElementById('collapseBtn').textContent=state.collapsed?'☰　展开菜单':'☰　收起菜单'};
@@ -1147,6 +1501,55 @@ document.getElementById('miniBtn').onclick=()=>{state.collapsed=!state.collapsed
 document.getElementById('stationSel').onchange=e=>{state.station=e.target.value;render()};
 document.getElementById('closeDrawer').onclick=closeDrawer;
 document.getElementById('fullBtn').onclick=()=>{document.documentElement.requestFullscreen?.()};
+/* ============ V8.8：背景主题切换 ============ */
+const THEMES=[
+ {id:'default',name:'使用默认',sw:['#F5F7FA','#FFFFFF','#2E6BE6']},
+ {id:'follow-system',name:'跟随系统',sw:['#F5F7FA','#0F1626','#2E6BE6']},
+ {id:'classic-white',name:'经典白',sw:['#FFFFFF','#FFFFFF','#2E6BE6']},
+ {id:'mint',name:'清新祖母',sw:['#F2F8F5','#FFFFFF','#2BA471']},
+ {id:'dark-night',name:'典雅暗夜',sw:['#0F1626','#1A2440','#5B8DEF']},
+ {id:'soft-blue',name:'轻柔深蓝',sw:['#15203A','#1E2A47','#5B8DEF']},
+ {id:'classic-dark',name:'经典深蓝',sw:['#0B1428','#122040','#2E6BE6']}];
+function _swSVG(sw){return 'background:linear-gradient(135deg,'+sw.join(' 50%,')+' 50%)'}
+function themeRender(){
+ var cur=document.documentElement.getAttribute('data-theme')||'default';
+ document.getElementById('themeList').innerHTML=THEMES.map(t=>'<div class="theme-item'+(t.id===cur?' sel':'')+'" data-id="'+t.id+'" onclick="themePick(\''+t.id+'\')"><span class="theme-swatch" style="'+_swSVG(t.sw)+'"></span><span>'+t.name+'</span><span class="ck">✓</span></div>').join('')}
+function themeApply(id){
+ if(id==='follow-system'){
+  var d=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;
+  id=d?'dark-night':'default';
+ }
+ document.documentElement.setAttribute('data-theme',id);
+ var btn=document.getElementById('themeBtn');
+ if(btn){
+   var t=THEMES.find(x=>x.id===id);
+   btn.textContent=(id==='dark-night'||id==='soft-blue'||id==='classic-dark')?'🌙':'🎨';
+   btn.setAttribute('title',t?'当前：'+t.name:'主题切换');
+ }
+ themeRender();}
+function themePick(id){
+ try{localStorage.setItem('v88_theme',id==='follow-system'?'':id)}catch(e){}
+ themeApply(id);setTimeout(themeClose,120)}
+function themeReset(){
+ try{localStorage.removeItem('v88_theme')}catch(e){}
+ themeApply('default');setTimeout(themeClose,120)}
+function themeOpen(){themeRender();document.getElementById('themePop').classList.add('open')}
+function themeClose(){document.getElementById('themePop').classList.remove('open')}
+document.addEventListener('click',function(e){
+ var p=document.getElementById('themePop'),b=document.getElementById('themeBtn');
+ if(!p||!p.classList.contains('open'))return;
+ if(p.contains(e.target)||(b&&b.contains(e.target)))return;
+ themeClose();});
+(function(){
+ var saved='';try{saved=localStorage.getItem('v88_theme')||''}catch(e){}
+ themeApply(saved||'default');
+ if(window.matchMedia){
+  var mq=window.matchMedia('(prefers-color-scheme: dark)');
+  mq.addEventListener&&mq.addEventListener('change',function(){
+   var cur=document.documentElement.getAttribute('data-theme')||'default';
+   try{var saved2=localStorage.getItem('v88_theme')}catch(e){var saved2=''}
+   if(!saved2&&(cur==='dark-night'||cur==='default'))themeApply('follow-system')});
+ }})();
 /* 集团大屏页头实时时钟 */
 setInterval(function(){var d=new Date(),p=function(n){return n<10?'0'+n:n},wk=['星期日','星期一','星期二','星期三','星期四','星期五','星期六'];var de=document.getElementById('d-date'),te=document.getElementById('d-time'),we=document.getElementById('d-week');if(de)de.textContent=d.getFullYear()+'.'+p(d.getMonth()+1)+'.'+p(d.getDate());if(te)te.textContent=p(d.getHours())+':'+p(d.getMinutes())+':'+p(d.getSeconds());if(we)we.textContent=wk[d.getDay()]},1000);
 /* ============ V4 新增：新版页面嵌入与路由联动 ============ */
@@ -1171,9 +1574,9 @@ function showStation(i){var t=STATIONS[i];
 
 /* ============ V7：预警复核 / 详情 / 转工单闭环（对齐演示剧本） ============ */
 var ALARMS=[
- {name:'温差高告警 · 温差 12.4℃',src:'algorithm',code:'bat12101',dev:'BMS #15（#2-1 舱）',lv:'高风险',type:'温度类',time:'2026-08-27 12:03:36',th:'簇内温差 > 10℃ 持续 5 分钟',cur:'12.4℃（超阈值 24%）',impact:'影响 #2-1 舱 2 个电池簇 · 384 节电芯，当前出力受限 0.2MW；若继续扩大将触发舱级停机保护',sug:'2 小时内复核并转工单，现场检查 BMS 温度采样与液冷流量',act:'wo'},
- {name:'绝缘阻值低于阈值',src:'algorithm',code:'bat11401',dev:'#1-2 舱 液冷机组',lv:'高风险',type:'绝缘类',time:'2026-08-27 11:48:02',th:'绝缘阻值 < 0.5 MΩ',cur:'0.32 MΩ',impact:'#1-2 舱液冷回路存在漏电风险，关联 1 台冷机与 1 个电池簇',sug:'立即停机检查冷却液电导率，更换滤芯后复测',act:'wo'},
- {name:'通信中断超 5 分钟',src:'device',code:'PCS-COM-02',chain:'08-26 09:40 算法 bat11601 提示通信质量劣化（提前 1 天）<br>08-27 11:20 设备原生告警 PCS-COM-02 触发',dev:'#3-1 舱 PCS2',lv:'中风险',type:'通信类',time:'2026-08-27 11:20:15',th:'通信中断 > 300s',cur:'中断 412s 后自动恢复',impact:'#3-1 舱功率调度指令延迟，EMS 数据采集断点 7 分钟',sug:'检查 PCS2 通信板卡与交换机端口，纳入周巡检',act:'wo'},
+ {name:'温差高告警 · 温差 12.4℃',src:'algorithm',code:'bat12101',dev:'BMS #15（#2-1 舱）',lv:'高风险',type:'温度类',time:'2026-08-27 12:03:36',th:'簇内温差 > 10℃ 持续 5 分钟',cur:'12.4℃（超阈值 24%）',impact:'影响 #2-1 舱 2 个电池簇 · 384 节电芯，当前出力受限 0.2MW；若继续扩大将触发舱级停机保护',sug:'2 小时内复核并转工单，现场检查 BMS 温度采样与冷机流量',act:'wo'},
+ {name:'绝缘阻值低于阈值',src:'algorithm',code:'bat11401',dev:'#1-2 舱 冷机机组',lv:'高风险',type:'绝缘类',time:'2026-08-27 11:48:02',th:'绝缘阻值 < 0.5 MΩ',cur:'0.32 MΩ',impact:'#1-2 舱冷机回路存在漏电风险，关联 1 台冷机与 1 个电池簇',sug:'立即停机检查冷却液电导率，更换滤芯后复测',act:'wo'},
+ {name:'通信中断超 5 分钟',src:'device',code:'PCS-COM-02',chain:'08-26 09:40 算法 bat11601 提示通信质量劣化（提前 1 天）<br>08-27 11:20 设备故障告警 PCS-COM-02 触发',dev:'#3-1 舱 PCS2',lv:'中风险',type:'通信类',time:'2026-08-27 11:20:15',th:'通信中断 > 300s',cur:'中断 412s 后自动恢复',impact:'#3-1 舱功率调度指令延迟，EMS 数据采集断点 7 分钟',sug:'检查 PCS2 通信板卡与交换机端口，纳入周巡检',act:'wo'},
  {name:'单体压差持续扩大',src:'algorithm',code:'bat11201',chain:'08-25 14:30 算法预警 bat11201 首次触发（提前 2 天）<br>08-27 10:58 设备告警 BMS-DV-07 触发确认（压差 86mV）',dev:'#2-4 簇 3',lv:'中风险',type:'电压类',time:'2026-08-27 10:52:40',th:'簇内压差 > 50 mV',cur:'86 mV（超阈值 72%）',impact:'#2-4 簇容量利用率下降约 6%，长期将加速劣化',sug:'转电池维护建议执行电芯补电（155 号电芯，13.64kWh）',act:'recharge'},
  {name:'SOC 估算漂移',src:'algorithm',code:'soc10501',dev:'#1-1 舱 BMS2',lv:'低风险',type:'SOC 类',time:'2026-08-27 09:31:08',th:'SOC 估算偏差 > 5%',cur:'+7.2%',impact:'剩余能量预测偏差约 0.3MWh，影响日前计划申报精度',sug:'转 SOC 标定任务，在低负载窗口执行',act:'soc'},
  {name:'探测器离线',src:'device',code:'FA-OFF-01',dev:'#1-4 舱 消防主机',lv:'低风险',type:'通信类',time:'2026-08-27 08:15:22',th:'心跳丢失 > 60s',cur:'离线 25 分钟后恢复',impact:'短时失去 #1-4 舱烟感监测，未影响联动回路',sug:'误报可能性高，重启后观察 48 小时',act:'wo'}];
@@ -1197,21 +1600,42 @@ function alarmToWo(){
  var a=ALARMS[curIdx];var d=new Date();var p=function(n){return n<10?'0'+n:n;};
  try{localStorage.setItem('v7_new_wo',JSON.stringify({no:'WO-20260904-019',title:a.name+'处置',dev:a.dev,time:'09-04 '+p(d.getHours())+':'+p(d.getMinutes())}));}catch(e){}
  closeAm();location.hash='#om-workorder';}
-function alarmDetail(i){curIdx=i;var a=ALARMS[i];
+function _detSvg(curLabel){
  var w=480,h=110,pl=8,pb=16,pt=8,pr=8,n=24,pts='';
  for(var k=0;k<n;k++){var v=0.5+Math.sin(k/3.4)*0.2+(k>17?(k-17)*0.05:0);var x=pl+k/(n-1)*(w-pl-pr);var y=pt+(1-v)*(h-pt-pb);pts+=(k?'L':'M')+x.toFixed(1)+' '+y.toFixed(1)+' ';}
- var svg='<svg viewBox="0 0 '+w+' '+h+'" style="width:100%;height:110px;display:block;background:#FAFBFC;border-radius:8px"><path d="'+pts+'" fill="none" stroke="#F0453B" stroke-width="2"/><text x="'+(w-8)+'" y="16" font-size="10" fill="#F0453B" text-anchor="end">'+a.cur+'</text></svg>';
- document.getElementById('detBody').innerHTML=
-  '<div class="kv2"><span>预警名称</span><b>'+a.name+'</b></div>'+
-  '<div class="kv2"><span>触发阈值</span><b>'+a.th+'</b></div>'+
-  '<div class="kv2"><span>当前值</span><b style="color:var(--red)">'+a.cur+'</b></div>'+
-  '<div class="kv2"><span>预警来源</span><b>'+(a.src==='algorithm'?'<span style="color:var(--blue)">自研算法</span> · '+a.code:'设备原生 · '+a.code)+'</b></div>'+
-  '<div class="kv2"><span>影响范围</span><b style="font-weight:400;color:var(--text2)">'+a.impact+'</b></div>'+
-  (a.chain?'<div style="margin:14px 0 6px;font-size:13px;font-weight:600">证据链</div><div style="font-size:12px;color:var(--text2);line-height:2;background:#FAFBFC;border-radius:8px;padding:10px 12px">'+a.chain+'</div>':'')+
-  '<div style="margin:14px 0 6px;font-size:13px;font-weight:600">近 24h 关联曲线</div>'+svg+
-  '<div class="callout" style="margin-top:12px">处置建议：'+a.sug+'</div>';
+ return '<svg viewBox="0 0 '+w+' '+h+'" style="width:100%;height:110px;display:block;background:#FAFBFC;border-radius:8px"><path d="'+pts+'" fill="none" stroke="#F0453B" stroke-width="2"/><text x="'+(w-8)+'" y="16" font-size="10" fill="#F0453B" text-anchor="end">'+curLabel+'</text></svg>'}
+function _detKvRows(d){
+ return '<div class="kv2"><span>预警名称</span><b>'+d.name+'</b></div>'+
+ '<div class="kv2"><span>触发阈值</span><b>'+d.th+'</b></div>'+
+ '<div class="kv2"><span>当前值</span><b style="color:var(--red)">'+d.cur+'</b></div>'+
+ '<div class="kv2"><span>预警来源</span><b>'+d.src+'</b></div>'+
+ '<div class="kv2"><span>影响范围</span><b style="font-weight:400;color:var(--text2)">'+d.impact+'</b></div>'+
+ (d.chain?'<div style="margin:14px 0 6px;font-size:13px;font-weight:600">证据链</div><div style="font-size:12px;color:var(--text2);line-height:2;background:#FAFBFC;border-radius:8px;padding:10px 12px">'+d.chain+'</div>':'')+
+ '<div style="margin:14px 0 6px;font-size:13px;font-weight:600">近 24h 关联曲线</div>'+_detSvg(d.cur)+
+ '<div class="callout" style="margin-top:12px">处置建议：'+d.sug+'</div>'}
+function alarmDetail(i){curIdx=i;var a=ALARMS[i];
+ document.getElementById('detBody').innerHTML=_detKvRows({
+  name:a.name,th:a.th,cur:a.cur,src:(a.src==='algorithm'?'<span style="color:var(--blue)">预警算法</span> · '+a.code:'设备故障 · '+a.code),
+  impact:a.impact,chain:a.chain,sug:a.sug});
+ var f=document.querySelector('#detMask .am-f');
+ if(f){var btns=f.querySelectorAll('button');if(btns[1]){btns[1].disabled=false;btns[1].title='';btns[1].onclick=function(){closeAm();alarmReview(curIdx)}}}
  document.getElementById('detMask').style.display='flex';}
-/* V8.5：点击"18 条已被设备原生告警确认"→ 滚动定位并高亮已确认行 */
+/* ============ V8.10：6 个设备 Tab 内「数据」点击预警详情 ============ */
+function openTabDetail(key,code){
+ document.getElementById('proMask').style.display='none';
+ var it=_findItem(key,code);if(!it)return;
+ var meta=PRO_META[code]||{};
+ var srcName=meta.src||DEVICES[key].name;
+ var srcLabel=(it.src==='预警算法'||it.src==='设备故障')?'<span style="color:var(--blue)">'+it.src+'</span> · '+code:srcName+' · '+code;
+ var impact=meta.impact||('监测 '+it.name+' 对舱级设备的影响；持续记录历史曲线。');
+ var sug=meta.sug||'建议结合近 24h 趋势复核，必要时转工单处置。';
+ document.getElementById('detBody').innerHTML=_detKvRows({name:it.name,th:meta.th||it.range,cur:it.val+' '+it.unit,src:srcLabel,impact:impact,sug:sug});
+ var f=document.querySelector('#detMask .am-f');
+ if(f){var btns=f.querySelectorAll('button');
+  var alarmIdx=ALARMS.findIndex(function(x){return x.code==code});
+  if(btns[1]){btns[1].disabled=alarmIdx<0;btns[1].title=alarmIdx<0?'当前指标项不在预警信息表中':'去复核';btns[1].onclick=alarmIdx<0?null:function(){closeAm();alarmReview(alarmIdx)}}}
+ document.getElementById('detMask').style.display='flex';}
+/* V8.5：点击"18 条已被设备故障告警确认"→ 滚动定位并高亮已确认行 */
 function alarmGotoConfirmed(){
  var rows=document.querySelectorAll('#content .table tr');
  Array.prototype.forEach.call(rows,function(tr){
@@ -1306,7 +1730,7 @@ tbody tr:hover td{background:#F7F8FA}
   <!-- 标准化巡检规则说明条 -->
   <div class="rule-bar">
     <span class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#2E6BE6" stroke-width="1.8"/><path d="M12 8v.5M12 11v5" stroke="#2E6BE6" stroke-width="1.8" stroke-linecap="round"/></svg></span>
-    <span><b>标准化巡检规则（内置，自动加载）</b>：周巡检每 7 天一次，覆盖电池温度、压差、SOC、SOH、连接件、线缆、液冷、消防等 28 项基础项；月巡检每 30 天一次，覆盖 PCS 效率、BMS 校准、绝缘电阻、接地电阻等 18 项深度项；特殊巡检由高温、台风、暴雨天气自动触发。项点阈值动态加载自【配置中心-基础项点】，规则变更自动同步。</span>
+    <span><b>标准化巡检规则（内置，自动加载）</b>：周巡检每 7 天一次，覆盖电池温度、压差、SOC、SOH、连接件、线缆、冷机、消防等 28 项基础项；月巡检每 30 天一次，覆盖 PCS 效率、BMS 校准、绝缘电阻、接地电阻等 18 项深度项；特殊巡检由高温、台风、暴雨天气自动触发。项点阈值动态加载自【配置中心-基础项点】，规则变更自动同步。</span>
   </div>
 
   <div class="card">
@@ -1378,7 +1802,7 @@ var ROWS=[
 ];
 var ABN_ITEMS=[
   ['#2-1 舱','电池温度','单体温 61.3℃，超阈值 55℃','未整改'],
-  ['#1-2 舱','液冷','冷却液液位低于下限','已整改'],
+  ['#1-2 舱','冷机','冷却液液位低于下限','已整改'],
   ['PCS-3','运行异响','散热风扇轴承磨损','整改中']
 ];
 var tbody=document.getElementById('tbody');
@@ -1532,7 +1956,7 @@ td{padding:0 10px;height:48px;border-bottom:1px solid var(--border);font-size:13
 <text x="90" y="110" text-anchor="middle" font-size="12" fill="#86909C">整站健康评分 / 100</text>
 <text x="90" y="130" text-anchor="middle" font-size="11" fill="#00B42A">低风险 · 环比 +1.8</text>
 </svg></div>
-      <div><div style="display:flex;align-items:center;gap:10px;padding:7px 0"><span style="width:90px;font-size:12px;color:var(--text2)">电池系统</span><span style="flex:1;height:8px;background:#F2F3F5;border-radius:4px;overflow:hidden"><i style="display:block;height:100%;width:94%;background:#2E6BE6;border-radius:4px"></i></span><b style="width:28px;text-align:right;font-variant-numeric:tabular-nums">94</b></div><div style="display:flex;align-items:center;gap:10px;padding:7px 0"><span style="width:90px;font-size:12px;color:var(--text2)">PCS 与电气</span><span style="flex:1;height:8px;background:#F2F3F5;border-radius:4px;overflow:hidden"><i style="display:block;height:100%;width:91%;background:#2E6BE6;border-radius:4px"></i></span><b style="width:28px;text-align:right;font-variant-numeric:tabular-nums">91</b></div><div style="display:flex;align-items:center;gap:10px;padding:7px 0"><span style="width:90px;font-size:12px;color:var(--text2)">液冷系统</span><span style="flex:1;height:8px;background:#F2F3F5;border-radius:4px;overflow:hidden"><i style="display:block;height:100%;width:89%;background:#2E6BE6;border-radius:4px"></i></span><b style="width:28px;text-align:right;font-variant-numeric:tabular-nums">89</b></div><div style="display:flex;align-items:center;gap:10px;padding:7px 0"><span style="width:90px;font-size:12px;color:var(--text2)">消防系统</span><span style="flex:1;height:8px;background:#F2F3F5;border-radius:4px;overflow:hidden"><i style="display:block;height:100%;width:96%;background:#00B42A;border-radius:4px"></i></span><b style="width:28px;text-align:right;font-variant-numeric:tabular-nums">96</b></div><div style="display:flex;align-items:center;gap:10px;padding:7px 0"><span style="width:90px;font-size:12px;color:var(--text2)">通信与采集</span><span style="flex:1;height:8px;background:#F2F3F5;border-radius:4px;overflow:hidden"><i style="display:block;height:100%;width:93%;background:#2E6BE6;border-radius:4px"></i></span><b style="width:28px;text-align:right;font-variant-numeric:tabular-nums">93</b></div><div style="display:flex;align-items:center;gap:10px;padding:7px 0"><span style="width:90px;font-size:12px;color:var(--text2)">结构与安防</span><span style="flex:1;height:8px;background:#F2F3F5;border-radius:4px;overflow:hidden"><i style="display:block;height:100%;width:95%;background:#00B42A;border-radius:4px"></i></span><b style="width:28px;text-align:right;font-variant-numeric:tabular-nums">95</b></div></div>
+      <div><div style="display:flex;align-items:center;gap:10px;padding:7px 0"><span style="width:90px;font-size:12px;color:var(--text2)">电池系统</span><span style="flex:1;height:8px;background:#F2F3F5;border-radius:4px;overflow:hidden"><i style="display:block;height:100%;width:94%;background:#2E6BE6;border-radius:4px"></i></span><b style="width:28px;text-align:right;font-variant-numeric:tabular-nums">94</b></div><div style="display:flex;align-items:center;gap:10px;padding:7px 0"><span style="width:90px;font-size:12px;color:var(--text2)">PCS 与电气</span><span style="flex:1;height:8px;background:#F2F3F5;border-radius:4px;overflow:hidden"><i style="display:block;height:100%;width:91%;background:#2E6BE6;border-radius:4px"></i></span><b style="width:28px;text-align:right;font-variant-numeric:tabular-nums">91</b></div><div style="display:flex;align-items:center;gap:10px;padding:7px 0"><span style="width:90px;font-size:12px;color:var(--text2)">冷机系统</span><span style="flex:1;height:8px;background:#F2F3F5;border-radius:4px;overflow:hidden"><i style="display:block;height:100%;width:89%;background:#2E6BE6;border-radius:4px"></i></span><b style="width:28px;text-align:right;font-variant-numeric:tabular-nums">89</b></div><div style="display:flex;align-items:center;gap:10px;padding:7px 0"><span style="width:90px;font-size:12px;color:var(--text2)">消防系统</span><span style="flex:1;height:8px;background:#F2F3F5;border-radius:4px;overflow:hidden"><i style="display:block;height:100%;width:96%;background:#00B42A;border-radius:4px"></i></span><b style="width:28px;text-align:right;font-variant-numeric:tabular-nums">96</b></div><div style="display:flex;align-items:center;gap:10px;padding:7px 0"><span style="width:90px;font-size:12px;color:var(--text2)">通信与采集</span><span style="flex:1;height:8px;background:#F2F3F5;border-radius:4px;overflow:hidden"><i style="display:block;height:100%;width:93%;background:#2E6BE6;border-radius:4px"></i></span><b style="width:28px;text-align:right;font-variant-numeric:tabular-nums">93</b></div><div style="display:flex;align-items:center;gap:10px;padding:7px 0"><span style="width:90px;font-size:12px;color:var(--text2)">结构与安防</span><span style="flex:1;height:8px;background:#F2F3F5;border-radius:4px;overflow:hidden"><i style="display:block;height:100%;width:95%;background:#00B42A;border-radius:4px"></i></span><b style="width:28px;text-align:right;font-variant-numeric:tabular-nums">95</b></div></div>
     </div>
   </div>
 
@@ -1555,7 +1979,7 @@ td{padding:0 10px;height:48px;border-bottom:1px solid var(--border);font-size:13
       <table><thead><tr><th>体检项分类</th><th>项点数</th><th>正常</th><th>异常</th><th>得分</th><th>结论</th></tr></thead><tbody>
       <tr><td>电池系统（温度 / 压差 / SOC / SOH）</td><td>28</td><td>26</td><td><b style="color:var(--red)">2</b></td><td>94</td><td><span class="tag tag-orange">注意</span></td></tr>
       <tr><td>PCS 与电气（效率 / 绝缘 / 接地）</td><td>18</td><td>18</td><td>0</td><td>91</td><td><span class="tag tag-green">正常</span></td></tr>
-      <tr><td>液冷系统（温度 / 液位 / 流量）</td><td>12</td><td>12</td><td>0</td><td>89</td><td><span class="tag tag-green">正常</span></td></tr>
+      <tr><td>冷机系统（温度 / 液位 / 流量）</td><td>12</td><td>12</td><td>0</td><td>89</td><td><span class="tag tag-green">正常</span></td></tr>
       <tr><td>消防系统（探测器 / 联动 / 气灭）</td><td>8</td><td>8</td><td>0</td><td>96</td><td><span class="tag tag-green">正常</span></td></tr>
       <tr><td>通信与采集（BMS / EMS 链路）</td><td>10</td><td>10</td><td>0</td><td>93</td><td><span class="tag tag-green">正常</span></td></tr>
       <tr><td>结构与安防</td><td>6</td><td>6</td><td>0</td><td>95</td><td><span class="tag tag-green">正常</span></td></tr>
@@ -1601,7 +2025,7 @@ btnRun.addEventListener('click',function(){
       '<table><thead><tr><th>体检项分类</th><th>项点数</th><th>正常</th><th>异常</th><th>得分</th><th>结论</th></tr></thead><tbody>'+
       '<tr><td>电池系统（温度 / 压差 / SOC / SOH）</td><td>28</td><td>26</td><td><b style="color:var(--red)">2</b></td><td>94</td><td><span class="tag tag-orange">注意</span></td></tr>'+
       '<tr><td>PCS 与电气（效率 / 绝缘 / 接地）</td><td>18</td><td>18</td><td>0</td><td>91</td><td><span class="tag tag-green">正常</span></td></tr>'+
-      '<tr><td>液冷系统（温度 / 液位 / 流量）</td><td>12</td><td>12</td><td>0</td><td>89</td><td><span class="tag tag-green">正常</span></td></tr>'+
+      '<tr><td>冷机系统（温度 / 液位 / 流量）</td><td>12</td><td>12</td><td>0</td><td>89</td><td><span class="tag tag-green">正常</span></td></tr>'+
       '<tr><td>消防系统（探测器 / 联动 / 气灭）</td><td>8</td><td>8</td><td>0</td><td>96</td><td><span class="tag tag-green">正常</span></td></tr>'+
       '<tr><td>通信与采集（BMS / EMS 链路）</td><td>10</td><td>10</td><td>0</td><td>93</td><td><span class="tag tag-green">正常</span></td></tr>'+
       '<tr><td>结构与安防</td><td>6</td><td>6</td><td>0</td><td>95</td><td><span class="tag tag-green">正常</span></td></tr>'+
@@ -1979,7 +2403,7 @@ var ST_TAG={'待派单':'tag-orange','处理中':'tag-blue','待验收':'tag-pur
 var ROWS=[
   {no:'WO-20260828-018',type:'运维工单',title:'2 号舱 BMS 温度采集异常处理',dev:'#2-1 舱 BMS1',pri:'紧急',st:'处理中',src:'告警联动',sla:'<span class="sla-red">剩余 18min</span>',time:'08-28 14:12'},
   {no:'WO-20260828-017',type:'检修工单',title:'PCS-3 散热风扇异响检修',dev:'PCS-3',pri:'高',st:'待派单',src:'告警联动',sla:'<span class="sla-red">剩余 2.5h</span>',time:'08-28 13:05'},
-  {no:'WO-20260828-016',type:'维护工单',title:'液冷机组补液维护',dev:'#1-2 舱 液冷机组',pri:'中',st:'已闭环',src:'MRO 导入',sla:'<span class="sla-green">按时完成</span>',time:'08-28 09:30'},
+  {no:'WO-20260828-016',type:'维护工单',title:'冷机机组补液维护',dev:'#1-2 舱 冷机机组',pri:'中',st:'已闭环',src:'MRO 导入',sla:'<span class="sla-green">按时完成</span>',time:'08-28 09:30'},
   {no:'WO-20260827-015',type:'运维工单',title:'2 号舱簇 3 压差偏大均衡处理',dev:'#2-4 簇 3',pri:'高',st:'处理中',src:'告警联动',sla:'<span class="sla-red">剩余 5.5h</span>',time:'08-27 16:40'},
   {no:'WO-20260827-014',type:'运维工单',title:'#1-4 舱消防主机探测器离线处置',dev:'#1-4 舱 消防主机',pri:'中',st:'已闭环',src:'MRO 导入',sla:'<span class="sla-green">按时完成</span>',time:'08-27 11:05'},
   {no:'WO-20260826-013',type:'保养工单',title:'PCS-1 功率模块除尘维护',dev:'PCS-1',pri:'低',st:'待验收',src:'人工创建',sla:'<span class="sla-green">按时完成</span>',time:'08-26 15:22'}
@@ -2997,7 +3421,7 @@ tbody tr{cursor:pointer}
         <div class="card-t">版本历史</div>
         <div class="vh-row"><span class="v">v2.4.0</span><span class="ds">当前线上版本 · 21 台已升级</span><span class="tag tag-green">已发布</span></div>
         <div class="vh-row"><span class="v">v2.3.2</span><span class="ds">修复消防联机 · 32 台</span><span class="tag tag-gray">历史版本</span></div>
-        <div class="vh-row"><span class="v">v2.3.1</span><span class="ds">优化液冷 PI · 30 台</span><span class="tag tag-gray">历史版本</span></div>
+        <div class="vh-row"><span class="v">v2.3.1</span><span class="ds">优化冷机 PI · 30 台</span><span class="tag tag-gray">历史版本</span></div>
         <div class="vh-row"><span class="v">v2.2.0</span><span class="ds">首个 OTA 批量版本 · 26 台</span><span class="tag tag-gray">历史版本</span></div>
       </div>
     </div>
@@ -3751,7 +4175,7 @@ body{font-family:"PingFang SC","Microsoft YaHei","Helvetica Neue",Arial,sans-ser
           <label><input type="checkbox" checked> 整站聚合</label>
           <label><input type="checkbox" checked> #2 储能单元#3 电池舱</label>
           <label><input type="checkbox" checked> #3-1 舱 PCS2</label>
-          <label><input type="checkbox"> 液冷机组-1</label>
+          <label><input type="checkbox"> 冷机机组-1</label>
           <label><input type="checkbox"> 消防主机</label>
         </div>
         <div class="mcol"><h5>指标项</h5>
