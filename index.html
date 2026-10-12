@@ -3,7 +3,7 @@
 <head data-page-node-id="4R3UKsQFEvh62YnVE15iLw">
 <meta charset="utf-8" data-page-node-id="M0owZIONJ00cT273oQbtMX" />
 <meta name="viewport" content="width=device-width,initial-scale=1" data-page-node-id="oCfAatH5krPB2C72zpB4RZ" />
-<title>储能电站智能运维系统 · 示范页面 v8.24</title>
+<title>储能电站智能运维系统 · 示范页面 v8.25</title>
 <style>
 :root{--blue:#2E6BE6;--blue2:#5B8DEF;--text:#1F2329;--text2:#4E5560;--muted:#9AA1AB;--bg:#F5F7FA;--card:#fff;--line:#E5E8EE;--linesoft:#EFF1F5;--green:#2BA471;--green-soft:#E8F6F0;--orange:#F7931E;--orange-soft:#FEF4E5;--red:#F0453B;--red-soft:#FDEEED;--blue-soft:#EBF2FD;--violet:#7B61E0;--shadow:0 1px 2px rgba(31,35,41,.04),0 4px 16px rgba(31,35,41,.06)}
 :root[data-theme="classic-white"]{--bg:#FFFFFF;--card:#FFFFFF;--line:#E8EBF1;--linesoft:#F2F4F8;--shadow:0 1px 2px rgba(31,35,41,.04),0 4px 14px rgba(31,35,41,.05)}
@@ -3480,7 +3480,7 @@ select{height:32px;border:1px solid var(--border);border-radius:6px;padding:0 10
 .cab-wrap::-webkit-scrollbar{width:8px}
 .cab-wrap::-webkit-scrollbar-thumb{background:#D8DCE3;border-radius:4px}
 .cab-wrap::-webkit-scrollbar-track{background:transparent}
-.cab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(238px,1fr));gap:12px}
+.cab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
 .cab-card{background:#fff;border:1px solid var(--border);border-radius:8px;padding:12px 14px 11px;display:flex;flex-direction:column;gap:9px;cursor:pointer;transition:border-color .15s,box-shadow .15s,transform .15s}
 .cab-card:hover{border-color:var(--primary);box-shadow:0 4px 14px rgba(46,107,230,.12);transform:translateY(-2px)}
 .cab-hd{display:flex;align-items:center;gap:8px}
@@ -3493,15 +3493,22 @@ select{height:32px;border:1px solid var(--border);border-radius:6px;padding:0 10
 .cab-soc .v i{font-style:normal;font-size:12px;font-weight:400;color:var(--text2);margin-left:2px}
 .socbar{flex:1;height:6px;border-radius:3px;background:#F2F3F5;overflow:hidden}
 .socbar i{display:block;height:100%;border-radius:3px}
-.cab-kv{display:grid;grid-template-columns:1fr 1fr;gap:5px 10px;font-size:11.5px;color:var(--text2)}
+.cab-kv{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:5px 8px;font-size:11px;color:var(--text2)}
 .cab-kv span{white-space:nowrap}
-.cab-kv b{color:var(--text);font-weight:600;font-variant-numeric:tabular-nums;margin-left:4px}
+.cab-kv b{color:var(--text);font-weight:600;font-variant-numeric:tabular-nums;margin-left:3px;white-space:nowrap}
+.cab-kv b small{font-size:9.5px;font-weight:400;color:var(--text2)}
 .cab-strip{display:flex;gap:3px}
 .cab-strip i{flex:1;height:13px;border-radius:2px;background:#9FE3BF}
 .cab-strip i.warn{background:#FFC27D}
 .cab-strip i.alarm{background:#F76560}
 .cab-strip i.idle{background:#D8DCE3}
 .cab-foot{display:flex;justify-content:space-between;font-size:11px;color:var(--text2);border-top:1px dashed var(--border);padding-top:8px}
+.cab-tools{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:12px;padding:10px 12px;background:#F7F9FC;border:1px solid var(--border);border-radius:8px}
+.cab-tools label{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text2)}
+.cab-tools select{height:30px;padding:0 8px;border:1px solid var(--border);border-radius:6px;background:#fff;color:var(--text);font-size:12px;font-family:inherit;cursor:pointer}
+.cab-tools select:focus-visible{outline:2px solid var(--primary);outline-offset:1px}
+.cab-tools .seg{margin-left:auto}
+.cab-tools .seg button{height:28px;padding:0 12px;font-size:12px}
 /* 浮窗 */
 #tip{position:fixed;z-index:99;display:none;background:#fff;border:1px solid var(--border);border-radius:8px;box-shadow:0 8px 26px rgba(31,35,41,.16);padding:10px 12px;font-size:12px;min-width:196px;pointer-events:none}
 #tip .tt{font-size:13px;font-weight:600;margin-bottom:6px;display:flex;align-items:center;gap:6px}
@@ -3518,7 +3525,7 @@ select{height:32px;border:1px solid var(--border);border-radius:6px;padding:0 10
 <div class="page">
 
   <div class="toolbar">
-    <span class="seg" id="viewSeg"><button class="active" data-v="sld">一次系统图</button><button data-v="grid">电池舱态势矩阵</button></span>
+    <span class="seg" id="viewSeg"><button class="active" data-v="sld">一次系统图</button><button data-v="grid">电池舱态势矩阵</button><button data-v="grid">PCS态势矩阵</button><button data-v="grid">箱变态势矩阵</button></span>
     <span class="tag tag-gray">数据刷新时间：2026-09-18 15:58:12</span>
     <span style="margin-left:auto;display:flex;gap:10px">
       <button class="btn">全屏</button>
@@ -3560,6 +3567,11 @@ select{height:32px;border:1px solid var(--border);border-radius:6px;padding:0 10
       <span class="more" onclick="alert('导出态势快照')">导出快照 ›</span>
     </div>
     <div class="alert-inline" id="cabChips" style="margin-bottom:12px"></div>
+    <div class="cab-tools">
+      <label>预警状态 <select id="cabFilter"><option value="">请选择</option><option value="ok">正常</option><option value="warn">预警</option><option value="alarm">故障</option></select></label>
+      <label>排序维度 <select id="cabSort"><option value="">请选择</option><option value="soc">SOC</option><option value="cur">电池舱总电流</option><option value="tMax">电芯最高温度</option><option value="tMin">电芯最低温度</option><option value="vMax">电芯最高电压</option><option value="vMin">电芯最低电压</option></select></label>
+      <span class="seg" id="cabOrder"><button class="active" data-o="desc">降序 ↓</button><button data-o="asc">升序 ↑</button></span>
+    </div>
     <div class="cab-wrap"><div class="cab-grid" id="cabGrid"></div></div>
   </div>
 
@@ -3677,76 +3689,110 @@ var UMAX=5, DMIN=6;
   });
 })();
 
-/* ================= 电池舱态势矩阵（V8.24：平铺卡 · 双通道状态） ================= */
+/* ================= 电池舱态势矩阵（V8.25：平铺卡 + 状态筛选 + 指标排序） ================= */
 (function(){
   var HCOL={ok:'#00B42A',warn:'#FF7D00',alarm:'#F53F3F',stop:'#86909C'};
   var HTXT={ok:'正常',warn:'预警',alarm:'故障',stop:'停机'};
   var OTAG={chg:['充电','tag-blue'],dis:['放电','tag-green'],idle:['待机','tag-gray'],stop:['停机','tag-gray'],warn:['预警','tag-orange'],alarm:['故障','tag-red']};
-  var box=document.getElementById('cabGrid'), chips=document.getElementById('cabChips'), html='';
-  var total=0, hCnt={warn:0,alarm:0,stop:0}, oCnt={};
+  /* 1) 数据层：一次性派生，卡片排序 / 筛选都读它 */
+  var CAB=[];
   LINES.forEach(function(L,li){
     L.units.forEach(function(u,j){
       var idx=li*4+j;
       var stp=u.s==='stop';
       var h=u.s==='warn'?'warn':u.s==='alarm'?'alarm':stp?'stop':'ok';
-      /* 演示派生值：总电流由有功/线电压换算，温度电压按确定性扰动展开 */
-      var cur=stp?0:Math.round(u.p*1000/1.732/u.u);
-      var tMax=stp?0:33+(idx%4)+(u.s==='warn'?6:u.s==='alarm'?8:0);
-      var tMin=stp?0:tMax-4-(u.s==='warn'?6:u.s==='alarm'?9:2);
-      var vMax=stp?0:3418+(idx%3)*2;
-      var vMin=stp?0:(u.s==='warn'?3129+(idx%7):3340-(idx%5)*6);
-      total++; if(h!=='ok')hCnt[h]++; oCnt[u.s]=(oCnt[u.s]||0)+1;
-      var strip='';
-      for(var k=0;k<10;k++){
-        var sc='';
-        if(stp)sc='idle';
-        else if(u.s==='alarm'&&(k===4||k===5))sc='alarm';
-        else if(u.s==='warn'&&(k===3||k===7))sc='warn';
-        strip+='<i class="'+sc+'"></i>';
-      }
-      var socTxt=stp?'--':u.soc.toFixed(1), socW=stp?0:u.soc;
-      html+='<div class="cab-card" data-t="'+L.tx+'|电池舱-'+u.n+'|'+OTAG[u.s][0]+'|'+HTXT[h]+'|'+u.p+'|'+u.u+'|'+socTxt+'" data-u="'+u.n+'">'
-        +'<div class="cab-hd"><i class="cab-dot" style="background:'+HCOL[h]+'"></i><span class="cab-name">电池舱 '+u.n+'</span><span class="tag '+OTAG[u.s][1]+'">'+OTAG[u.s][0]+'</span></div>'
-        +'<div class="cab-soc"><span class="l">SOC</span><span class="v">'+socTxt+'<i>%</i></span><span class="socbar"><i style="width:'+socW+'%;background:'+(socW<20?'#F53F3F':socW<50?'#FF7D00':'#00B42A')+'"></i></span></div>'
-        +'<div class="cab-kv"><span>电池舱总电流<b>'+(stp?'--':cur)+' A</b></span>'
-        +'<span>电芯最高温度<b>'+(stp?'--':tMax)+' ℃</b></span>'
-        +'<span>电芯最低温度<b>'+(stp?'--':tMin)+' ℃</b></span>'
-        +'<span>电芯最高电压<b>'+(stp?'--':vMax)+' mV</b></span>'
-        +'<span>电芯最低电压<b>'+(stp?'--':vMin)+' mV</b></span></div>'
-        +'<div class="cab-strip">'+strip+'</div>'
-        +'<div class="cab-foot"><span>'+L.name.replace('35kV 中压馈线','')+'</span><span>PCS-'+u.n+'</span></div>'
-        +'</div>';
+      CAB.push({
+        line:L, u:u, idx:idx, h:h, stp:stp,
+        soc:u.soc, cur:stp?0:Math.round(u.p*1000/1.732/u.u),
+        tMax:stp?0:33+(idx%4)+(u.s==='warn'?6:u.s==='alarm'?8:0),
+        tMin:stp?0:33+(idx%4)-2-(u.s==='warn'?6:u.s==='alarm'?9:2),
+        vMax:stp?0:3418+(idx%3)*2,
+        vMin:stp?0:(u.s==='warn'?3129+(idx%7):3340-(idx%5)*6)
+      });
     });
   });
-  box.innerHTML=html;
-  chips.innerHTML='<span class="chip">总览 <b>'+total+'</b></span>'
+  var box=document.getElementById('cabGrid'), chips=document.getElementById('cabChips');
+  var tip=document.getElementById('tip');
+  function cardHtml(c){
+    var u=c.u, stp=c.stp;
+    var strip='';
+    for(var k=0;k<10;k++){
+      var sc='';
+      if(stp)sc='idle';
+      else if(u.s==='alarm'&&(k===4||k===5))sc='alarm';
+      else if(u.s==='warn'&&(k===3||k===7))sc='warn';
+      strip+='<i class="'+sc+'"></i>';
+    }
+    var socTxt=stp?'--':c.soc.toFixed(1), socW=stp?0:c.soc;
+    return '<div class="cab-card" data-t="'+c.line.tx+'|电池舱-'+u.n+'|'+OTAG[u.s][0]+'|'+HTXT[c.h]+'|'+u.p+'|'+u.u+'|'+socTxt+'" data-u="'+u.n+'">'
+      +'<div class="cab-hd"><i class="cab-dot" style="background:'+HCOL[c.h]+'"></i><span class="cab-name">电池舱 '+u.n+'</span><span class="tag '+OTAG[u.s][1]+'">'+OTAG[u.s][0]+'</span></div>'
+      +'<div class="cab-soc"><span class="l">SOC</span><span class="v">'+socTxt+'<i>%</i></span><span class="socbar"><i style="width:'+socW+'%;background:'+(socW<20?'#F53F3F':socW<50?'#FF7D00':'#00B42A')+'"></i></span></div>'
+      +'<div class="cab-kv"><span>电池舱总电流<b>'+(stp?'--':c.cur+'<small> A</small>')+'</b></span>'
+      +'<span>电芯最高温度<b>'+(stp?'--':c.tMax+'<small> ℃</small>')+'</b></span>'
+      +'<span>电芯最低温度<b>'+(stp?'--':c.tMin+'<small> ℃</small>')+'</b></span>'
+      +'<span>电芯最高电压<b>'+(stp?'--':c.vMax+'<small> mV</small>')+'</b></span>'
+      +'<span>电芯最低电压<b>'+(stp?'--':c.vMin+'<small> mV</small>')+'</b></span></div>'
+      +'<div class="cab-strip">'+strip+'</div>'
+      +'<div class="cab-foot"><span>'+c.line.name.replace('35kV 中压馈线','')+'</span><span>PCS-'+u.n+'</span></div>'
+      +'</div>';
+  }
+  function bindCards(){
+    box.querySelectorAll('.cab-card').forEach(function(el){
+      el.addEventListener('mouseenter',function(){
+        var d=el.dataset.t.split('|');
+        tip.innerHTML='<div class="tt">'+d[1]+(d[3]!=='正常'?' <span class="tag tag-'+(d[3]==='故障'?'red':'orange')+'">'+d[3]+'</span>':'')+'</div>'
+          +'<div class="r"><span>所属箱变</span><b>'+d[0]+'</b></div>'
+          +'<div class="r"><span>运行状态</span><b>'+d[2]+'</b></div>'
+          +'<div class="r"><span>健康状态</span><b>'+d[3]+'</b></div>'
+          +'<div class="r"><span>有功功率</span><b>'+d[4]+' MW</b></div>'
+          +'<div class="r"><span>交流线电压</span><b>'+d[5]+' kV</b></div>'
+          +'<div class="r"><span>SOC</span><b>'+d[6]+' %</b></div>';
+        tip.style.display='block';
+      });
+      el.addEventListener('mousemove',function(e){
+        tip.style.left=Math.min(e.clientX+14,window.innerWidth-230)+'px';
+        tip.style.top=(e.clientY+14)+'px';
+      });
+      el.addEventListener('mouseleave',function(){tip.style.display='none'});
+      el.addEventListener('click',function(){go('monitor-cabin')});
+    });
+  }
+  /* 2) 渲染层：筛选 → 排序 → 渲染 */
+  var F={f:'', sort:'', order:'desc'};
+  function renderCab(){
+    var list=CAB.filter(function(c){return !F.f||(F.f==='ok'?c.h==='ok':c.h===F.f)});
+    if(F.sort){
+      var asc=F.order==='asc'?1:-1;
+      list=list.slice().sort(function(a,b){
+        if(a.stp!==b.stp)return a.stp?1:-1;   /* 停机舱恒沉底 */
+        return (a[F.sort]-b[F.sort])*asc;
+      });
+    }
+    box.innerHTML=list.map(cardHtml).join('')||'<div style="padding:30px;text-align:center;color:var(--text2)">当前筛选条件下暂无电池舱</div>';
+    bindCards();
+    var shown=document.getElementById('cabShown');if(shown)shown.textContent=list.length;
+  }
+  /* 3) 统计徽标（总量静态 + 当前显示动态） */
+  var oCnt={},hCnt={warn:0,alarm:0,stop:0};
+  CAB.forEach(function(c){oCnt[c.u.s]=(oCnt[c.u.s]||0)+1;if(c.h!=='ok')hCnt[c.h]++});
+  chips.innerHTML='<span class="chip">总览 <b>'+CAB.length+'</b></span>'
     +'<span class="chip" style="border-color:#BFCEFB;background:#F0F5FF;color:#2458C4">充电中 <b>'+(oCnt.chg||0)+'</b></span>'
     +'<span class="chip" style="border-color:#B7E9CE;background:#F0FBF4;color:#0A7D45">放电中 <b>'+(oCnt.dis||0)+'</b></span>'
     +'<span class="chip">待机 <b>'+(oCnt.idle||0)+'</b></span>'
     +(hCnt.warn?'<span class="chip o">预警 <b>'+hCnt.warn+'</b></span>':'')
     +(hCnt.alarm?'<span class="chip r">故障 <b>'+hCnt.alarm+'</b></span>':'')
     +(hCnt.stop?'<span class="chip">停机 <b>'+hCnt.stop+'</b></span>':'')
+    +'<span class="chip" style="border-color:var(--primary);color:var(--primary)">当前显示 <b id="cabShown">'+CAB.length+'</b></span>'
     +'<span style="margin-left:auto" class="legend"><span><i style="background:#00B42A;border-radius:50%"></i>正常</span><span><i style="background:#FF7D00;border-radius:50%"></i>预警</span><span><i style="background:#F53F3F;border-radius:50%"></i>故障</span><span><i style="background:#86909C;border-radius:50%"></i>停机</span></span>';
-  var tip=document.getElementById('tip');
-  box.querySelectorAll('.cab-card').forEach(function(el){
-    el.addEventListener('mouseenter',function(){
-      var d=el.dataset.t.split('|');
-      tip.innerHTML='<div class="tt">'+d[1]+(d[3]!=='正常'?' <span class="tag tag-'+(d[3]==='故障'?'red':'orange')+'">'+d[3]+'</span>':'')+'</div>'
-        +'<div class="r"><span>所属箱变</span><b>'+d[0]+'</b></div>'
-        +'<div class="r"><span>运行状态</span><b>'+d[2]+'</b></div>'
-        +'<div class="r"><span>健康状态</span><b>'+d[3]+'</b></div>'
-        +'<div class="r"><span>有功功率</span><b>'+d[4]+' MW</b></div>'
-        +'<div class="r"><span>交流线电压</span><b>'+d[5]+' kV</b></div>'
-        +'<div class="r"><span>SOC</span><b>'+d[6]+' %</b></div>';
-      tip.style.display='block';
+  document.getElementById('cabFilter').addEventListener('change',function(){F.f=this.value;renderCab()});
+  document.getElementById('cabSort').addEventListener('change',function(){F.sort=this.value;renderCab()});
+  document.getElementById('cabOrder').querySelectorAll('button').forEach(function(b){
+    b.addEventListener('click',function(){
+      document.getElementById('cabOrder').querySelector('.active').classList.remove('active');
+      b.classList.add('active');F.order=b.dataset.o;renderCab();
     });
-    el.addEventListener('mousemove',function(e){
-      tip.style.left=Math.min(e.clientX+14,window.innerWidth-230)+'px';
-      tip.style.top=(e.clientY+14)+'px';
-    });
-    el.addEventListener('mouseleave',function(){tip.style.display='none'});
-    el.addEventListener('click',function(){go('monitor-cabin')});
   });
+  renderCab();
 })();
 
 /* ================= 视图切换 ================= */
