@@ -3,7 +3,7 @@
 <head data-page-node-id="4R3UKsQFEvh62YnVE15iLw">
 <meta charset="utf-8" data-page-node-id="M0owZIONJ00cT273oQbtMX" />
 <meta name="viewport" content="width=device-width,initial-scale=1" data-page-node-id="oCfAatH5krPB2C72zpB4RZ" />
-<title>储能电站智能运维系统 · 示范页面 v8.25</title>
+<title>储能电站智能运维系统 · 示范页面 v8.26</title>
 <style>
 :root{--blue:#2E6BE6;--blue2:#5B8DEF;--text:#1F2329;--text2:#4E5560;--muted:#9AA1AB;--bg:#F5F7FA;--card:#fff;--line:#E5E8EE;--linesoft:#EFF1F5;--green:#2BA471;--green-soft:#E8F6F0;--orange:#F7931E;--orange-soft:#FEF4E5;--red:#F0453B;--red-soft:#FDEEED;--blue-soft:#EBF2FD;--violet:#7B61E0;--shadow:0 1px 2px rgba(31,35,41,.04),0 4px 16px rgba(31,35,41,.06)}
 :root[data-theme="classic-white"]{--bg:#FFFFFF;--card:#FFFFFF;--line:#E8EBF1;--linesoft:#F2F4F8;--shadow:0 1px 2px rgba(31,35,41,.04),0 4px 14px rgba(31,35,41,.05)}
@@ -3525,7 +3525,7 @@ select{height:32px;border:1px solid var(--border);border-radius:6px;padding:0 10
 <div class="page">
 
   <div class="toolbar">
-    <span class="seg" id="viewSeg"><button class="active" data-v="sld">一次系统图</button><button data-v="grid">电池舱态势矩阵</button><button data-v="grid">PCS态势矩阵</button><button data-v="grid">箱变态势矩阵</button></span>
+    <span class="seg" id="viewSeg"><button class="active" data-v="sld">一次系统图</button><button data-v="grid">电池舱态势矩阵</button><button data-v="pcs">PCS态势矩阵</button><button data-v="rvt">箱变态势矩阵</button></span>
     <span class="tag tag-gray">数据刷新时间：2026-09-18 15:58:12</span>
     <span style="margin-left:auto;display:flex;gap:10px">
       <button class="btn">全屏</button>
@@ -3573,6 +3573,34 @@ select{height:32px;border:1px solid var(--border);border-radius:6px;padding:0 10
       <span class="seg" id="cabOrder"><button class="active" data-o="desc">降序 ↓</button><button data-o="asc">升序 ↑</button></span>
     </div>
     <div class="cab-wrap"><div class="cab-grid" id="cabGrid"></div></div>
+  </div>
+
+  <!-- PCS态势矩阵（V8.26） -->
+  <div class="card" id="viewPcs" style="display:none">
+    <div class="card-t">PCS 态势矩阵 <span class="cnt">全场站 24 台 PCS 平铺 · 铺不下可向下滚动查看</span>
+      <span class="more" onclick="alert('导出态势快照')">导出快照 ›</span>
+    </div>
+    <div class="alert-inline" id="pcsChips" style="margin-bottom:12px"></div>
+    <div class="cab-tools">
+      <label>预警状态 <select id="pcsFilter"><option value="">请选择</option><option value="ok">正常</option><option value="warn">预警</option><option value="alarm">故障</option></select></label>
+      <label>排序维度 <select id="pcsSort"><option value="">请选择</option><option value="rank">运行状态</option><option value="pKw">有功功率</option><option value="qKvar">无功功率</option><option value="dcV">直流电压</option><option value="igbt">IGBT 最高温度</option></select></label>
+      <span class="seg" id="pcsOrder"><button class="active" data-o="desc">降序 ↓</button><button data-o="asc">升序 ↑</button></span>
+    </div>
+    <div class="cab-wrap"><div class="cab-grid" id="pcsGrid"></div></div>
+  </div>
+
+  <!-- 箱变态势矩阵（V8.26） -->
+  <div class="card" id="viewRvt" style="display:none">
+    <div class="card-t">箱变态势矩阵 <span class="cnt">全场站 6 台储能单元箱变平铺 · 铺不下可向下滚动查看</span>
+      <span class="more" onclick="alert('导出态势快照')">导出快照 ›</span>
+    </div>
+    <div class="alert-inline" id="rvtChips" style="margin-bottom:12px"></div>
+    <div class="cab-tools">
+      <label>预警状态 <select id="rvtFilter"><option value="">请选择</option><option value="ok">正常</option><option value="warn">预警</option><option value="alarm">故障</option></select></label>
+      <label>排序维度 <select id="rvtSort"><option value="">请选择</option><option value="tW">绕组最高温度</option><option value="ia">交流电流 IA</option><option value="ib">交流电流 IB</option><option value="ic">交流电流 IC</option></select></label>
+      <span class="seg" id="rvtOrder"><button class="active" data-o="desc">降序 ↓</button><button data-o="asc">升序 ↑</button></span>
+    </div>
+    <div class="cab-wrap"><div class="cab-grid" id="rvtGrid"></div></div>
   </div>
 
   <!-- 运行趋势 -->
@@ -3795,14 +3823,166 @@ var UMAX=5, DMIN=6;
   renderCab();
 })();
 
+/* ================= PCS / 箱变态势矩阵（V8.26 · 共享矩阵工厂） ================= */
+(function(){
+  var HCOL={ok:'#00B42A',warn:'#FF7D00',alarm:'#F53F3F',stop:'#86909C'};
+  var HTXT={ok:'正常',warn:'预警',alarm:'故障',stop:'停机'};
+  var OTAG={chg:['充电','tag-blue'],dis:['放电','tag-green'],idle:['待机','tag-gray'],stop:['停机','tag-gray'],warn:['预警','tag-orange'],alarm:['故障','tag-red']};
+  var ORANK={chg:3,dis:2,idle:1,warn:0.6,alarm:0.5,stop:0};
+
+  /* ---------- 数据派生 ---------- */
+  var PCS=[];
+  LINES.forEach(function(L,li){
+    L.units.forEach(function(u,j){
+      var idx=li*4+j, stp=u.s==='stop';
+      var h=u.s==='warn'?'warn':u.s==='alarm'?'alarm':stp?'stop':'ok';
+      PCS.push({L:L,u:u,idx:idx,h:h,stp:stp,rank:ORANK[u.s],
+        pKw:stp?0:Math.round(u.p*1000),
+        qKvar:stp?0:Math.round(u.p*300)+(idx%3)*7,
+        dcV:stp?0:1458+(idx%7)*8+(u.s==='warn'?-62:u.s==='alarm'?-88:0),
+        igbt:stp?0:62+(idx%5)*2+(u.s==='warn'?9:u.s==='alarm'?14:0)});
+    });
+  });
+  var RVT=[];
+  LINES.forEach(function(L,i){
+    var h=i===2?'alarm':i===1?'warn':'ok';
+    var base=1348+i*23;
+    RVT.push({L:L,i:i,h:h,stp:false,
+      tW:h==='alarm'?118:h==='warn'?96:86+(i%4)*2,
+      ia:base, ib:base+(h==='alarm'?Math.round(base*0.06):12+i*3), ic:base-(8+i*2),
+      spot:L.txT});
+  });
+
+  /* ---------- 通用矩阵工厂：筛选 → 排序 → 渲染 → 绑定 ---------- */
+  function makeMatrix(cfg){
+    var box=document.getElementById(cfg.grid), tip=document.getElementById('tip');
+    var F={f:'',sort:'',order:'desc'};
+    function bind(){
+      box.querySelectorAll('.cab-card').forEach(function(el){
+        el.addEventListener('mouseenter',function(){
+          var d=el.dataset.t.split('|');
+          tip.innerHTML='<div class="tt">'+d[0]+(d[3]!=='正常'?' <span class="tag tag-'+(d[3]==='故障'?'red':'orange')+'">'+d[3]+'</span>':'')+'</div>'
+            +'<div class="r"><span>所属馈线</span><b>'+d[1]+'</b></div>'
+            +'<div class="r"><span>运行状态</span><b>'+d[2]+'</b></div>'
+            +'<div class="r"><span>健康状态</span><b>'+d[3]+'</b></div>'
+            +'<div class="r"><span>说明</span><b>'+d[4]+'</b></div>';
+          tip.style.display='block';
+        });
+        el.addEventListener('mousemove',function(e){
+          tip.style.left=Math.min(e.clientX+14,window.innerWidth-230)+'px';
+          tip.style.top=(e.clientY+14)+'px';
+        });
+        el.addEventListener('mouseleave',function(){tip.style.display='none'});
+        el.addEventListener('click',function(){go(cfg.goto)});
+      });
+    }
+    function render(){
+      var list=cfg.data.filter(function(c){return !F.f||(F.f==='ok'?c.h==='ok':c.h===F.f)});
+      if(F.sort){
+        var asc=F.order==='asc'?1:-1;
+        list=list.slice().sort(function(a,b){
+          if(a.stp!==b.stp)return a.stp?1:-1;
+          return (a[F.sort]-b[F.sort])*asc;
+        });
+      }
+      box.innerHTML=list.map(cfg.cardFn).join('')||'<div style="padding:30px;text-align:center;color:var(--text2)">当前筛选条件下暂无设备</div>';
+      bind();
+      var shown=document.getElementById(cfg.shown);if(shown)shown.textContent=list.length;
+    }
+    document.getElementById(cfg.filter).addEventListener('change',function(){F.f=this.value;render()});
+    document.getElementById(cfg.sort).addEventListener('change',function(){F.sort=this.value;render()});
+    document.getElementById(cfg.order).querySelectorAll('button').forEach(function(b){
+      b.addEventListener('click',function(){
+        document.getElementById(cfg.order).querySelector('.active').classList.remove('active');
+        b.classList.add('active');F.order=b.dataset.o;render();
+      });
+    });
+    render();
+  }
+
+  /* ---------- 卡片骨架（复用 .cab-* 样式体系） ---------- */
+  function strip(h,stp,alarm2){
+    var o='';
+    for(var k=0;k<10;k++){
+      var sc='';
+      if(stp)sc='idle';
+      else if(h==='alarm'&&(k===4||k===5))sc='alarm';
+      else if(h==='warn'&&(k===3||k===7))sc='warn';
+      o+='<i class="'+sc+'"></i>';
+    }
+    return o;
+  }
+  function hero(lbl,val,unit,pct){
+    return '<div class="cab-soc"><span class="l">'+lbl+'</span><span class="v">'+val+'<i>'+unit+'</i></span>'
+      +'<span class="socbar"><i style="width:'+Math.min(100,Math.max(0,pct))+'%;background:'+(pct>86?'#F53F3F':pct>66?'#FF7D00':'#00B42A')+'"></i></span></div>';
+  }
+
+  /* ---------- PCS 矩阵 ---------- */
+  var oCnt={},hCntP={warn:0,alarm:0,stop:0};
+  PCS.forEach(function(c){oCnt[c.u.s]=(oCnt[c.u.s]||0)+1;if(c.h!=='ok')hCntP[c.h]++});
+  document.getElementById('pcsChips').innerHTML='<span class="chip">总览 <b>'+PCS.length+'</b></span>'
+    +'<span class="chip" style="border-color:#BFCEFB;background:#F0F5FF;color:#2458C4">充电中 <b>'+(oCnt.chg||0)+'</b></span>'
+    +'<span class="chip" style="border-color:#B7E9CE;background:#F0FBF4;color:#0A7D45">放电中 <b>'+(oCnt.dis||0)+'</b></span>'
+    +'<span class="chip">待机 <b>'+(oCnt.idle||0)+'</b></span>'
+    +(hCntP.warn?'<span class="chip o">预警 <b>'+hCntP.warn+'</b></span>':'')
+    +(hCntP.alarm?'<span class="chip r">故障 <b>'+hCntP.alarm+'</b></span>':'')
+    +(hCntP.stop?'<span class="chip">停机 <b>'+hCntP.stop+'</b></span>':'')
+    +'<span class="chip" style="border-color:var(--primary);color:var(--primary)">当前显示 <b id="pcsShown">'+PCS.length+'</b></span>'
+    +'<span style="margin-left:auto" class="legend"><span><i style="background:#00B42A;border-radius:50%"></i>正常</span><span><i style="background:#FF7D00;border-radius:50%"></i>预警</span><span><i style="background:#F53F3F;border-radius:50%"></i>故障</span><span><i style="background:#86909C;border-radius:50%"></i>停机</span></span>';
+  makeMatrix({
+    grid:'pcsGrid', filter:'pcsFilter', sort:'pcsSort', order:'pcsOrder', shown:'pcsShown',
+    data:PCS, goto:'monitor-pcs',
+    cardFn:function(c){
+      var u=c.u, stp=c.stp;
+      return '<div class="cab-card" data-t="PCS-'+u.n+'|'+c.L.name.replace('35kV 中压馈线','')+'|'+OTAG[u.s][0]+'|'+HTXT[c.h]+'|有功 '+(stp?0:c.pKw)+' kW · 效率 98.'+(c.idx%4)+' %">'
+        +'<div class="cab-hd"><i class="cab-dot" style="background:'+HCOL[c.h]+'"></i><span class="cab-name">PCS-'+u.n+'</span><span class="tag '+OTAG[u.s][1]+'">'+OTAG[u.s][0]+'</span></div>'
+        +hero('有功功率',stp?'--':c.pKw,' kW',stp?0:c.pKw/1500*100)
+        +'<div class="cab-kv"><span>运行状态<b>'+OTAG[u.s][0]+'</b></span>'
+        +'<span>无功功率<b>'+(stp?'--':c.qKvar+'<small> kVar</small>')+'</b></span>'
+        +'<span>直流电压<b>'+(stp?'--':c.dcV+'<small> V</small>')+'</b></span>'
+        +'<span>IGBT 最高温度<b>'+(stp?'--':c.igbt+'<small> ℃</small>')+'</b></span></div>'
+        +'<div class="cab-strip">'+strip(c.h,stp)+'</div>'
+        +'<div class="cab-foot"><span>'+c.L.name.replace('35kV 中压馈线','')+'</span><span>电池舱-'+u.n+'</span></div>'
+        +'</div>';
+    }
+  });
+
+  /* ---------- 箱变矩阵 ---------- */
+  var hCntR={warn:0,alarm:0};
+  RVT.forEach(function(c){if(c.h!=='ok')hCntR[c.h]++});
+  document.getElementById('rvtChips').innerHTML='<span class="chip">总览 <b>'+RVT.length+'</b></span>'
+    +'<span class="chip" style="border-color:#B7E9CE;background:#F0FBF4;color:#0A7D45">正常 <b>'+(RVT.length-(hCntR.warn||0)-(hCntR.alarm||0))+'</b></span>'
+    +(hCntR.warn?'<span class="chip o">预警 <b>'+hCntR.warn+'</b></span>':'')
+    +(hCntR.alarm?'<span class="chip r">故障 <b>'+hCntR.alarm+'</b></span>':'')
+    +'<span class="chip" style="border-color:var(--primary);color:var(--primary)">当前显示 <b id="rvtShown">'+RVT.length+'</b></span>'
+    +'<span style="margin-left:auto" class="legend"><span><i style="background:#00B42A;border-radius:50%"></i>正常</span><span><i style="background:#FF7D00;border-radius:50%"></i>预警</span><span><i style="background:#F53F3F;border-radius:50%"></i>故障</span></span>';
+  makeMatrix({
+    grid:'rvtGrid', filter:'rvtFilter', sort:'rvtSort', order:'rvtOrder', shown:'rvtShown',
+    data:RVT, goto:'monitor-transformer',
+    cardFn:function(c){
+      var name='0'+(c.i+1)+' 储能单元箱变';
+      return '<div class="cab-card" data-t="'+name+'|'+c.L.code+'|运行中|'+HTXT[c.h]+'|'+c.L.code+' · '+c.L.units.length+' 台储能单元">'
+        +'<div class="cab-hd"><i class="cab-dot" style="background:'+HCOL[c.h]+'"></i><span class="cab-name">'+name+'</span><span class="tag tag-'+(c.h==='alarm'?'red':c.h==='warn'?'orange':'green')+'">'+HTXT[c.h]+'</span></div>'
+        +hero('绕组最高温度',c.tW,' ℃',c.tW/130*100)
+        +'<div class="cab-kv"><span>交流电流 IA<b>'+c.ia+'<small> A</small></b></span>'
+        +'<span>交流电流 IB<b>'+c.ib+'<small> A</small></b></span>'
+        +'<span>交流电流 IC<b>'+c.ic+'<small> A</small></b></span>'
+        +'<span>测温点<b>'+c.spot+'</b></span></div>'
+        +'<div class="cab-strip">'+strip(c.h,false)+'</div>'
+        +'<div class="cab-foot"><span>'+c.L.code+'</span><span>'+c.L.units.length+' 台储能单元</span></div>'
+        +'</div>';
+    }
+  });
+})();
+
 /* ================= 视图切换 ================= */
 (function(){
   var seg=document.getElementById('viewSeg');
   seg.querySelectorAll('button').forEach(function(b){
     b.addEventListener('click',function(){
       seg.querySelector('.active').classList.remove('active');b.classList.add('active');
-      document.getElementById('viewSld').style.display=(b.dataset.v==='sld')?'':'none';
-      document.getElementById('viewGrid').style.display=(b.dataset.v==='grid')?'':'none';
+      var VIEWS={sld:'viewSld',grid:'viewGrid',pcs:'viewPcs',rvt:'viewRvt'};
+      Object.keys(VIEWS).forEach(function(k){var el=document.getElementById(VIEWS[k]);if(el)el.style.display=(k===b.dataset.v)?'':'none'});
     });
   });
   var rs=document.getElementById('rangeSeg');
