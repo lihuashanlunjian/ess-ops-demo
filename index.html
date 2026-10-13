@@ -3,7 +3,7 @@
 <head data-page-node-id="4R3UKsQFEvh62YnVE15iLw">
 <meta charset="utf-8" data-page-node-id="M0owZIONJ00cT273oQbtMX" />
 <meta name="viewport" content="width=device-width,initial-scale=1" data-page-node-id="oCfAatH5krPB2C72zpB4RZ" />
-<title>储能电站智能运维系统 · 示范页面 v8.26</title>
+<title>储能电站智能运维系统 · 示范页面 v8.27</title>
 <style>
 :root{--blue:#2E6BE6;--blue2:#5B8DEF;--text:#1F2329;--text2:#4E5560;--muted:#9AA1AB;--bg:#F5F7FA;--card:#fff;--line:#E5E8EE;--linesoft:#EFF1F5;--green:#2BA471;--green-soft:#E8F6F0;--orange:#F7931E;--orange-soft:#FEF4E5;--red:#F0453B;--red-soft:#FDEEED;--blue-soft:#EBF2FD;--violet:#7B61E0;--shadow:0 1px 2px rgba(31,35,41,.04),0 4px 16px rgba(31,35,41,.06)}
 :root[data-theme="classic-white"]{--bg:#FFFFFF;--card:#FFFFFF;--line:#E8EBF1;--linesoft:#F2F4F8;--shadow:0 1px 2px rgba(31,35,41,.04),0 4px 14px rgba(31,35,41,.05)}
@@ -3450,7 +3450,7 @@ select{height:32px;border:1px solid var(--border);border-radius:6px;padding:0 10
 .kpi .bar{position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--primary)}
 .kpi.g .bar{background:var(--green)}.kpi.o .bar{background:var(--orange)}.kpi.r .bar{background:var(--red)}
 /* 单线图 */
-.sld{position:relative;background:#FCFDFF;border:1px solid #EEF1F6;border-radius:8px;padding:8px}
+.sld{position:relative;background:#FCFDFF;border:1px solid #EEF1F6;border-radius:8px;padding:8px;overflow:auto;max-height:640px}
 .sld svg{display:block;width:100%;height:auto}
 .node-hit{cursor:pointer}
 .node-hit:hover rect{stroke:#2E6BE6;stroke-width:2}
@@ -3544,21 +3544,26 @@ select{height:32px;border:1px solid var(--border);border-radius:6px;padding:0 10
     <div class="kpi r"><div class="bar"></div><div class="l">故障条数</div><div class="v">2<i>条</i></div></div>
   </div>
 
-  <!-- 一次系统图 -->
+  <!-- 电站拓扑（V8.27：双母线 · 单元电池图形 · 缩放） -->
   <div class="card" id="viewSld">
-    <div class="card-t">一次系统图 <span class="cnt">24 台 PCS · 24 个储能单元</span>
+    <div class="card-t">电站拓扑 <span class="cnt">24 台 PCS · 24 个储能单元 · 6 台箱变</span>
       <span class="more" onclick="alert('打开全网拓扑编辑')">拓扑编辑 ›</span>
     </div>
     <div class="alert-inline" style="margin-bottom:12px">
-      <span class="chip o">预警设备 <b>2</b></span>
-      <span class="chip r">故障设备 <b>3</b></span>
-      <span style="margin-left:auto;display:flex;gap:16px" class="legend">
-        <span><i style="background:#00B42A"></i>正常</span>
+      <span class="chip o">预警设备 <b>1</b></span>
+      <span class="chip r">告警设备 <b>1</b></span>
+      <span style="margin-left:auto;display:flex;gap:14px;align-items:center" class="legend">
+        <span><i style="background:#2E6BE6"></i>正常</span>
         <span><i style="background:#FF7D00"></i>预警</span>
         <span><i style="background:#F53F3F"></i>故障</span>
+        <span style="display:flex;gap:4px;margin-left:6px">
+          <button class="btn" style="height:26px;padding:0 10px;font-size:14px" id="zoomOut" aria-label="缩小">−</button>
+          <button class="btn" style="height:26px;padding:0 10px;font-size:14px" id="zoomIn" aria-label="放大">＋</button>
+          <button class="btn" style="height:26px;padding:0 10px;font-size:12px" id="zoomReset" aria-label="重置缩放">⛶</button>
+        </span>
       </span>
     </div>
-    <div class="sld"><div id="sldSvg"></div></div>
+    <div class="sld" id="sldWrap"><div id="sldSvg" style="transform-origin:0 0;transition:transform .18s"></div></div>
   </div>
 
   <!-- 电池舱态势矩阵（V8.24：全场站电池舱平铺 · 可滚动） -->
@@ -3637,75 +3642,80 @@ var LINES=[
 var SSTATE={chg:['#2E6BE6','充电'],dis:['#00B42A','放电'],idle:['#E5E6EB','待机'],warn:['#FF7D00','预警'],alarm:['#F53F3F','告警'],stop:['#4E5969','停机']};
 var UMAX=5, DMIN=6;
 
-/* ================= 一次系统图 ================= */
+/* ================= 电站拓扑（V8.27：双母线 · 单元电池图形 · 三类悬停） ================= */
 (function(){
-  var W=1560, H=470, BUSY=64, x0=100, step=((W-2*x0)/LINES.length);
+  var W=1560, H=580;
+  /* 运行态图标（顶部小方块）：颜色 + 字形 */
+  var OTINT={chg:'#F79009',dis:'#2E6BE6',idle:'#98A2B3',warn:'#FF7D00',alarm:'#F53F3F',stop:'#4E5969'};
+  var OGLYPH={chg:'⚡',dis:'▼',idle:'○',warn:'!',alarm:'✕',stop:'■'};
+  var OLBL={chg:'充电中',dis:'放电中',idle:'待机',warn:'运行中',alarm:'运行中',stop:'停机'};
+  /* 健康态电池填充色 */
+  var HCOL={ok:'#2E6BE6',warn:'#FF7D00',alarm:'#F53F3F',stop:'#98A2B3'};
+  var HTXT={ok:'正常',warn:'预警',alarm:'故障',stop:'停机'};
   var g='';
-  // 母线
-  g+='<line x1="'+x0+'" y1="'+BUSY+'" x2="'+(W-x0+30)+'" y2="'+BUSY+'" stroke="#F0B429" stroke-width="4" stroke-linecap="round"/>';
-  g+='<circle cx="'+x0+'" cy="'+BUSY+'" r="6" fill="#F0B429"/>';
-  g+='<text x="'+x0+'" y="'+(BUSY-16)+'" font-size="14" font-weight="600" fill="#1D2129">35kV 并网点母线</text>';
-  g+='<text x="'+(W-x0+30)+'" y="'+(BUSY+26)+'" font-size="12" fill="#86909C" text-anchor="end">UAB 675.88V · UBC 674.32V · UCA 680.52V</text>';
-
-  LINES.forEach(function(L,i){
-    var xc=x0+step*(i+0.5);
-    // 馈线竖线
-    g+='<line x1="'+xc+'" y1="'+BUSY+'" x2="'+xc+'" y2="112" stroke="#B6C2D4" stroke-width="2"/>';
-    // 断路器
-    g+='<rect x="'+(xc-11)+'" y="112" width="22" height="16" rx="3" fill="#fff" stroke="#B6C2D4" stroke-width="1.6"/>';
-    g+='<line x1="'+(xc-6)+'" y1="112" x2="'+(xc+6)+'" y2="128" stroke="#B6C2D4" stroke-width="1.6"/>';
-    g+='<line x1="'+xc+'" y1="128" x2="'+xc+'" y2="162" stroke="#B6C2D4" stroke-width="2"/>';
-    // 变压器（双圆符号）
-    var hot = (i===2);
-    var tc = hot?'#F53F3F':'#B6C2D4';
-    g+='<circle cx="'+xc+'" cy="175" r="11" fill="#fff" stroke="'+tc+'" stroke-width="1.8"/>';
-    g+='<circle cx="'+xc+'" cy="191" r="11" fill="#fff" stroke="'+tc+'" stroke-width="1.8"/>';
-    g+='<path d="M '+(xc-90)+' 203 L '+(xc-90)+' 218 L '+(xc+90)+' 218 L '+(xc+90)+' 203" fill="none" stroke="'+(hot?'#FFD3CE':'#E5E6EB')+'" stroke-width="1.4"/>';
-    g+='<line x1="'+xc+'" y1="202" x2="'+xc+'" y2="218" stroke="'+(hot?'#FFD3CE':'#E5E6EB')+'" stroke-width="1.4"/>';
-    // 箱变标签
-    g+='<text x="'+xc+'" y="'+(BUSY+40)+'" font-size="12" font-weight="600" fill="'+(hot?'#F53F3F':'#4E5969')+'" text-anchor="middle">'+L.tx+'</text>';
-    g+='<text x="'+xc+'" y="'+(BUSY+56)+'" font-size="11" fill="#86909C" text-anchor="middle">'+L.txT+'</text>';
-
-    // 储能单元
-    var uw=34, gap=10, n=L.units.length, total=n*uw+(n-1)*gap;
-    var sx=xc-total/2;
-    L.units.forEach(function(u,j){
-      var ux=sx+j*(uw+gap), col=SSTATE[u.s][0], uc=(u.s==='idle')?'#86909C':'#fff';
-      g+='<g class="node-hit" data-t="'+L.tx+'|'+u.n+'|'+SSTATE[u.s][1]+'|'+u.soc+'|'+u.p+'|'+u.u+'">';
-      g+='<line x1="'+(ux+uw/2)+'" y1="218" x2="'+(ux+uw/2)+'" y2="240" stroke="'+(u.s==='warn'||u.s==='alarm'?'#FFB4A8':'#DCE2EA')+'" stroke-width="1.4"/>';
-      g+='<rect x="'+ux+'" y="240" width="'+uw+'" height="58" rx="5" fill="'+col+'" stroke="'+(u.s==='warn'||u.s==='alarm'?'#F53F3F':'none')+'" stroke-width="'+(u.s==='warn'||u.s==='alarm'?1.6:0)+'"/>';
-      // 电池图形
-      g+='<rect x="'+(ux+9)+'" y="248" width="16" height="22" rx="2.5" fill="rgba(255,255,255,.34)" stroke="'+uc+'" stroke-width="1.1"/>';
-      g+='<rect x="'+(ux+13)+'" y="245" width="8" height="3" rx="1.5" fill="'+uc+'" opacity=".8"/>';
-      g+='<text x="'+(ux+uw/2)+'" y="285" font-size="10" fill="'+uc+'" text-anchor="middle">'+(u.s==='stop'?'--':u.soc.toFixed(1))+'%</text>';
-      g+='<text x="'+(ux+uw/2)+'" y="311" font-size="10" fill="#6B7480" text-anchor="middle">'+u.n+'</text>';
-      g+='</g>';
+  var rows=[LINES.slice(0,3),LINES.slice(3,6)];
+  rows.forEach(function(rowLines,ri){
+    var BUSY=64+ri*264;
+    /* 母线 */
+    g+='<line x1="80" y1="'+BUSY+'" x2="'+(W-70)+'" y2="'+BUSY+'" stroke="#2E6BE6" stroke-opacity=".5" stroke-width="4" stroke-linecap="round"/>';
+    g+='<circle cx="80" cy="'+BUSY+'" r="5" fill="#2E6BE6" fill-opacity=".75"/>';
+    g+='<text x="96" y="'+(BUSY-14)+'" font-size="13" font-weight="600" fill="#1D2129">35kV 并网点母线</text>';
+    rowLines.forEach(function(L,li){
+      var gi=ri*3+li, Lx=112+li*478;
+      /* ---- 箱变符号（悬停出箱变浮窗 · 点击进入箱变监测） ---- */
+      var rh=gi===2?'alarm':gi===1?'warn':'ok';
+      var rcol=rh==='alarm'?'#F53F3F':rh==='warn'?'#FF7D00':'#B6C2D4';
+      var tW=rh==='alarm'?118:rh==='warn'?96:86+(gi%4)*2;
+      var base=1348+gi*23, ib=base+(rh==='alarm'?Math.round(base*0.06):12+gi*3), ic=base-(8+gi*2);
+      g+='<g class="topo-hit" data-k="rvt" data-t="'+L.tx+'|'+L.code+'|绕组最高温度|'+tW+' ℃|交流电流 IA|'+base+' A|交流电流 IB|'+ib+' A|交流电流 IC|'+ic+' A|测温点|'+L.txT+'" style="cursor:pointer">'
+        +'<line x1="'+Lx+'" y1="'+BUSY+'" x2="'+Lx+'" y2="'+(BUSY+12)+'" stroke="'+rcol+'" stroke-width="1.6"/>'
+        +'<circle cx="'+Lx+'" cy="'+(BUSY+22)+'" r="9" fill="#fff" stroke="'+rcol+'" stroke-width="1.8"/>'
+        +'<circle cx="'+Lx+'" cy="'+(BUSY+40)+'" r="9" fill="#fff" stroke="'+rcol+'" stroke-width="1.8"/>'
+        +'<text x="'+Lx+'" y="'+(BUSY+26)+'" font-size="9" fill="'+rcol+'" text-anchor="middle" font-weight="600">A</text>'
+        +'</g>';
+      /* ---- 储能单元（状态图标 → PCS 浮窗；电池图形 → 电池舱浮窗） ---- */
+      L.units.forEach(function(u,j){
+        var idx=gi*4+j, ux=Lx+62+j*104, stp=u.s==='stop';
+        var h=u.s==='warn'?'warn':u.s==='alarm'?'alarm':stp?'stop':'ok';
+        /* 电池舱派生（与电池舱矩阵同公式） */
+        var tMax=33+(idx%4)+(u.s==='warn'?6:u.s==='alarm'?8:0), tMin=tMax-4-(u.s==='warn'?6:u.s==='alarm'?9:2);
+        var vMax=3418+(idx%3)*2, vMin=u.s==='warn'?3129+(idx%7):3340-(idx%5)*6;
+        /* PCS 派生（与 PCS 矩阵同公式） */
+        var pKw=Math.round(u.p*1000), qKvar=Math.round(u.p*300)+(idx%3)*7;
+        var dcV=1458+(idx%7)*8+(u.s==='warn'?-62:u.s==='alarm'?-88:0);
+        var y0=BUSY+58;
+        /* 状态小图标（PCS 悬停点） */
+        g+='<g class="topo-hit" data-k="pcs" data-t="PCS-'+u.n+'|'+L.name.replace('35kV 中压馈线','')+'|运行状态|'+OLBL[u.s]+(u.s==='warn'||u.s==='alarm'?'（'+HTXT[h]+'）':'')+'|有功功率|'+(stp?'--':pKw+' kW')+'|无功功率|'+(stp?'--':qKvar+' kVar')+'|直流电压|'+(stp?'--':dcV+' V')+'" style="cursor:pointer">'
+          +'<rect x="'+(ux-9)+'" y="'+y0+'" width="18" height="18" rx="4" fill="#fff" stroke="'+OTINT[u.s]+'" stroke-width="1.6"/>'
+          +'<text x="'+ux+'" y="'+(y0+13)+'" font-size="10" fill="'+OTINT[u.s]+'" text-anchor="middle" font-weight="700">'+OGLYPH[u.s]+'</text>'
+          +'</g>';
+        /* 电池图形（电池舱悬停点） */
+        var bh=34, fw=stp?0:Math.round(bh*u.soc/100), fcol=HCOL[h];
+        g+='<g class="topo-hit" data-k="cab" data-t="电池舱-'+u.n+'|'+L.name.replace('35kV 中压馈线','')+'|SOC|'+(stp?'--':u.soc.toFixed(1)+' %')+'|电芯最高温度|'+(stp?'--':tMax+' ℃')+'|电芯最低温度|'+(stp?'--':tMin+' ℃')+'|电芯最高电压|'+(stp?'--':vMax+' mV')+'|电芯最低电压|'+(stp?'--':vMin+' mV')+'" style="cursor:pointer">'
+          +'<rect x="'+(ux-7)+'" y="'+(y0+24)+'" width="8" height="3.5" rx="1.5" fill="#C4CCD8"/>'
+          +'<rect x="'+(ux-11)+'" y="'+(y0+27.5)+'" width="22" height="'+bh+'" rx="3" fill="#fff" stroke="#B6C2D4" stroke-width="1.4"/>'
+          +'<rect x="'+(ux-9.5)+'" y="'+(y0+29+bh-fw)+'" width="19" height="'+Math.max(0,fw-1.5)+'" rx="2" fill="'+fcol+'" fill-opacity=".85"/>'
+          +'</g>';
+        /* 四行小字 */
+        var rowsTxt=[['SOC(%)',stp?'--':u.soc.toFixed(1)+'%'],['P(kW)',stp?'--':String(pKw)],['Q(kVar)',stp?'--':String(qKvar)],['编号',u.n]];
+        rowsTxt.forEach(function(r,k){
+          g+='<text x="'+ux+'" y="'+(y0+80+k*13)+'" font-size="9.5" text-anchor="middle">'
+            +'<tspan fill="#98A2B3">'+r[0]+'　</tspan><tspan fill="'+(k===3?'#98A2B3':'#1D2129')+'" font-weight="600">'+r[1]+'</tspan></text>';
+        });
+      });
     });
-    // 馈线名
-    g+='<text x="'+xc+'" y="338" font-size="11" fill="#6B7480" text-anchor="middle">'+L.name+'</text>';
-    g+='<text x="'+xc+'" y="354" font-size="10" fill="#A6ADB8" text-anchor="middle">'+L.code+'</text>';
   });
+  /* 底部口径说明 */
+  g+='<text x="80" y="'+(H-18)+'" font-size="11" fill="#86909C">单元自上而下：运行状态图标（悬停看 PCS）· 电池图形（悬停看电池舱，填充高度 = SOC，颜色 = 健康态）· SOC / P / Q / 编号；箱变符号悬停看绕组温度与三相电流。数据为模拟数据。</text>';
+  document.getElementById('sldSvg').innerHTML='<svg viewBox="0 0 '+W+' '+H+'" style="min-width:'+W+'px;display:block">'+g+'</svg>';
 
-  // 底部图例行（U / I / P / Q 口径说明）
-  g+='<line x1="'+x0+'" y1="382" x2="'+(W-x0+30)+'" y2="382" stroke="#F0F1F3"/>';
-  g+='<text x="'+x0+'" y="404" font-size="11" fill="#86909C">单元标签：方块内为 SOC，下方为储能单元编号；悬停查看 U / I / P / Q 明细。数据为模拟数据。</text>';
-  g+='<text x="'+(W-x0+30)+'" y="404" font-size="11" fill="#86909C" text-anchor="end">更新 2026-09-18 15:58:12</text>';
-
-  document.getElementById('sldSvg').innerHTML='<svg viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="xMidYMid meet">'+g+'</svg>';
-
-  // 悬停浮窗
+  /* ---- 悬停浮窗（三类命中点共用 #tip） ---- */
   var tip=document.getElementById('tip');
-  document.querySelectorAll('.node-hit').forEach(function(el){
-    el.addEventListener('mouseenter',function(e){
-      var d=el.dataset.t.split('|');
-      tip.innerHTML='<div class="tt">'+d[1]+' 储能单元'+(d[3]==='warn'||d[2]==='预警'?' <span class="tag tag-orange">预警</span>':'')+'</div>'+
-        '<div class="r"><span>所属箱变</span><b>'+d[0]+'</b></div>'+
-        '<div class="r"><span>运行状态</span><b>'+d[2]+'</b></div>'+
-        '<div class="r"><span>有功功率</span><b>'+d[4]+' MW</b></div>'+
-        '<div class="r"><span>交流线电压</span><b>'+d[5]+' kV</b></div>'+
-        '<div class="r"><span>SOC</span><b>'+d[3]+'%</b></div>'+
-		'<div class="r"><span>电芯最高温度</span><b>'+39+' ℃</b></div>'+
-		'<div class="r"><span>电芯最低电压</span><b>'+2910+' mV</b></div>';
+  document.querySelectorAll('#sldSvg .topo-hit').forEach(function(el){
+    el.addEventListener('mouseenter',function(){
+      var d=el.dataset.t.split('|'), head=d[0], rows='';
+      for(var k=2;k<d.length;k+=2){rows+='<div class="r"><span>'+d[k]+'</span><b>'+d[k+1]+'</b></div>'}
+      tip.innerHTML='<div class="tt">'+head+'</div>'+rows;
       tip.style.display='block';
     });
     el.addEventListener('mousemove',function(e){
@@ -3713,8 +3723,17 @@ var UMAX=5, DMIN=6;
       tip.style.top=(e.clientY+14)+'px';
     });
     el.addEventListener('mouseleave',function(){tip.style.display='none'});
-    el.addEventListener('click',function(){var d=el.dataset.t.split('|');go('monitor-transformer')});
+    el.addEventListener('click',function(){
+      go(el.dataset.k==='pcs'?'monitor-pcs':el.dataset.k==='cab'?'monitor-cabin':'monitor-transformer');
+    });
   });
+
+  /* ---- 缩放控件 ---- */
+  var z=1, svg=document.getElementById('sldSvg');
+  function apply(){svg.style.transform='scale('+z+')'}
+  document.getElementById('zoomIn').addEventListener('click',function(){z=Math.min(2,+(z+0.2).toFixed(2));apply()});
+  document.getElementById('zoomOut').addEventListener('click',function(){z=Math.max(0.6,+(z-0.2).toFixed(2));apply()});
+  document.getElementById('zoomReset').addEventListener('click',function(){z=1;apply()});
 })();
 
 /* ================= 电池舱态势矩阵（V8.25：平铺卡 + 状态筛选 + 指标排序） ================= */
