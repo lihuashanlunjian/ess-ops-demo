@@ -3,7 +3,7 @@
 <head data-page-node-id="4R3UKsQFEvh62YnVE15iLw">
 <meta charset="utf-8" data-page-node-id="M0owZIONJ00cT273oQbtMX" />
 <meta name="viewport" content="width=device-width,initial-scale=1" data-page-node-id="oCfAatH5krPB2C72zpB4RZ" />
-<title>储能电站智能运维系统 · 示范页面 v8.27</title>
+<title>储能电站智能运维系统 · 示范页面 v8.28</title>
 <style>
 :root{--blue:#2E6BE6;--blue2:#5B8DEF;--text:#1F2329;--text2:#4E5560;--muted:#9AA1AB;--bg:#F5F7FA;--card:#fff;--line:#E5E8EE;--linesoft:#EFF1F5;--green:#2BA471;--green-soft:#E8F6F0;--orange:#F7931E;--orange-soft:#FEF4E5;--red:#F0453B;--red-soft:#FDEEED;--blue-soft:#EBF2FD;--violet:#7B61E0;--shadow:0 1px 2px rgba(31,35,41,.04),0 4px 16px rgba(31,35,41,.06)}
 :root[data-theme="classic-white"]{--bg:#FFFFFF;--card:#FFFFFF;--line:#E8EBF1;--linesoft:#F2F4F8;--shadow:0 1px 2px rgba(31,35,41,.04),0 4px 14px rgba(31,35,41,.05)}
@@ -3533,7 +3533,7 @@ select{height:32px;border:1px solid var(--border);border-radius:6px;padding:0 10
   </div>
 
   <!-- KPI -->
-  <div class="kpis">
+  <div class="kpis" id="kpiStrip">
     <div class="kpi"><div class="bar"></div><div class="l">总有功功率</div><div class="v">86.4<i>MW</i></div></div>
     <div class="kpi o"><div class="bar"></div><div class="l">全站 SOC</div><div class="v">62.4<i>%</i></div></div>
     <div class="kpi g"><div class="bar"></div><div class="l">可用容量</div><div class="v">75.2<i>MWh</i></div></div>
@@ -3568,8 +3568,7 @@ select{height:32px;border:1px solid var(--border);border-radius:6px;padding:0 10
 
   <!-- 电池舱态势矩阵（V8.24：全场站电池舱平铺 · 可滚动） -->
   <div class="card" id="viewGrid" style="display:none">
-    <div class="card-t">电池舱态势矩阵 <span class="cnt">全场站 24 台电池舱平铺 · 铺不下可向下滚动查看</span>
-      <span class="more" onclick="alert('导出态势快照')">导出快照 ›</span>
+    <div class="card-t">电池舱态势矩阵 <span class="cnt">全场站 24 台电池舱平铺 · 可向下滚动查看</span>
     </div>
     <div class="alert-inline" id="cabChips" style="margin-bottom:12px"></div>
     <div class="cab-tools">
@@ -3582,8 +3581,7 @@ select{height:32px;border:1px solid var(--border);border-radius:6px;padding:0 10
 
   <!-- PCS态势矩阵（V8.26） -->
   <div class="card" id="viewPcs" style="display:none">
-    <div class="card-t">PCS 态势矩阵 <span class="cnt">全场站 24 台 PCS 平铺 · 铺不下可向下滚动查看</span>
-      <span class="more" onclick="alert('导出态势快照')">导出快照 ›</span>
+    <div class="card-t">PCS 态势矩阵 <span class="cnt">全场站 24 台 PCS 平铺 · 可向下滚动查看</span>
     </div>
     <div class="alert-inline" id="pcsChips" style="margin-bottom:12px"></div>
     <div class="cab-tools">
@@ -3596,8 +3594,7 @@ select{height:32px;border:1px solid var(--border);border-radius:6px;padding:0 10
 
   <!-- 箱变态势矩阵（V8.26） -->
   <div class="card" id="viewRvt" style="display:none">
-    <div class="card-t">箱变态势矩阵 <span class="cnt">全场站 6 台储能单元箱变平铺 · 铺不下可向下滚动查看</span>
-      <span class="more" onclick="alert('导出态势快照')">导出快照 ›</span>
+    <div class="card-t">箱变态势矩阵 <span class="cnt">全场站 6 台储能单元箱变平铺 · 可向下滚动查看</span>
     </div>
     <div class="alert-inline" id="rvtChips" style="margin-bottom:12px"></div>
     <div class="cab-tools">
@@ -3779,7 +3776,6 @@ var UMAX=5, DMIN=6;
       +'<span>电芯最低温度<b>'+(stp?'--':c.tMin+'<small> ℃</small>')+'</b></span>'
       +'<span>电芯最高电压<b>'+(stp?'--':c.vMax+'<small> mV</small>')+'</b></span>'
       +'<span>电芯最低电压<b>'+(stp?'--':c.vMin+'<small> mV</small>')+'</b></span></div>'
-      +'<div class="cab-strip">'+strip+'</div>'
       +'<div class="cab-foot"><span>'+c.line.name.replace('35kV 中压馈线','')+'</span><span>PCS-'+u.n+'</span></div>'
       +'</div>';
   }
@@ -3787,14 +3783,7 @@ var UMAX=5, DMIN=6;
     box.querySelectorAll('.cab-card').forEach(function(el){
       el.addEventListener('mouseenter',function(){
         var d=el.dataset.t.split('|');
-        tip.innerHTML='<div class="tt">'+d[1]+(d[3]!=='正常'?' <span class="tag tag-'+(d[3]==='故障'?'red':'orange')+'">'+d[3]+'</span>':'')+'</div>'
-          +'<div class="r"><span>所属箱变</span><b>'+d[0]+'</b></div>'
-          +'<div class="r"><span>运行状态</span><b>'+d[2]+'</b></div>'
-          +'<div class="r"><span>健康状态</span><b>'+d[3]+'</b></div>'
-          +'<div class="r"><span>有功功率</span><b>'+d[4]+' MW</b></div>'
-          +'<div class="r"><span>交流线电压</span><b>'+d[5]+' kV</b></div>'
-          +'<div class="r"><span>SOC</span><b>'+d[6]+' %</b></div>';
-        tip.style.display='block';
+
       });
       el.addEventListener('mousemove',function(e){
         tip.style.left=Math.min(e.clientX+14,window.innerWidth-230)+'px';
@@ -3822,15 +3811,13 @@ var UMAX=5, DMIN=6;
   /* 3) 统计徽标（总量静态 + 当前显示动态） */
   var oCnt={},hCnt={warn:0,alarm:0,stop:0};
   CAB.forEach(function(c){oCnt[c.u.s]=(oCnt[c.u.s]||0)+1;if(c.h!=='ok')hCnt[c.h]++});
-  chips.innerHTML='<span class="chip">总览 <b>'+CAB.length+'</b></span>'
-    +'<span class="chip" style="border-color:#BFCEFB;background:#F0F5FF;color:#2458C4">充电中 <b>'+(oCnt.chg||0)+'</b></span>'
-    +'<span class="chip" style="border-color:#B7E9CE;background:#F0FBF4;color:#0A7D45">放电中 <b>'+(oCnt.dis||0)+'</b></span>'
+  chips.innerHTML=
+    '<span class="chip" style="border-color:#BFCEFB;background:#F0F5FF;color:#2458C4">充电 <b>'+(oCnt.chg||0)+'</b></span>'
+    +'<span class="chip" style="border-color:#B7E9CE;background:#F0FBF4;color:#0A7D45">放电 <b>'+(oCnt.dis||0)+'</b></span>'
     +'<span class="chip">待机 <b>'+(oCnt.idle||0)+'</b></span>'
-    +(hCnt.warn?'<span class="chip o">预警 <b>'+hCnt.warn+'</b></span>':'')
-    +(hCnt.alarm?'<span class="chip r">故障 <b>'+hCnt.alarm+'</b></span>':'')
-    +(hCnt.stop?'<span class="chip">停机 <b>'+hCnt.stop+'</b></span>':'')
-    +'<span class="chip" style="border-color:var(--primary);color:var(--primary)">当前显示 <b id="cabShown">'+CAB.length+'</b></span>'
-    +'<span style="margin-left:auto" class="legend"><span><i style="background:#00B42A;border-radius:50%"></i>正常</span><span><i style="background:#FF7D00;border-radius:50%"></i>预警</span><span><i style="background:#F53F3F;border-radius:50%"></i>故障</span><span><i style="background:#86909C;border-radius:50%"></i>停机</span></span>';
+    
+   
+    +'<span style="margin-left:auto" class="legend"><span><i style="background:#00B42A;border-radius:50%"></i>正常</span><span><i style="background:#FF7D00;border-radius:50%"></i>预警</span><span><i style="background:#F53F3F;border-radius:50%"></i>故障</span></span>';
   document.getElementById('cabFilter').addEventListener('change',function(){F.f=this.value;renderCab()});
   document.getElementById('cabSort').addEventListener('change',function(){F.sort=this.value;renderCab()});
   document.getElementById('cabOrder').querySelectorAll('button').forEach(function(b){
@@ -3880,12 +3867,8 @@ var UMAX=5, DMIN=6;
       box.querySelectorAll('.cab-card').forEach(function(el){
         el.addEventListener('mouseenter',function(){
           var d=el.dataset.t.split('|');
-          tip.innerHTML='<div class="tt">'+d[0]+(d[3]!=='正常'?' <span class="tag tag-'+(d[3]==='故障'?'red':'orange')+'">'+d[3]+'</span>':'')+'</div>'
-            +'<div class="r"><span>所属馈线</span><b>'+d[1]+'</b></div>'
-            +'<div class="r"><span>运行状态</span><b>'+d[2]+'</b></div>'
-            +'<div class="r"><span>健康状态</span><b>'+d[3]+'</b></div>'
-            +'<div class="r"><span>说明</span><b>'+d[4]+'</b></div>';
-          tip.style.display='block';
+         
+        
         });
         el.addEventListener('mousemove',function(e){
           tip.style.left=Math.min(e.clientX+14,window.innerWidth-230)+'px';
@@ -3939,15 +3922,12 @@ var UMAX=5, DMIN=6;
   /* ---------- PCS 矩阵 ---------- */
   var oCnt={},hCntP={warn:0,alarm:0,stop:0};
   PCS.forEach(function(c){oCnt[c.u.s]=(oCnt[c.u.s]||0)+1;if(c.h!=='ok')hCntP[c.h]++});
-  document.getElementById('pcsChips').innerHTML='<span class="chip">总览 <b>'+PCS.length+'</b></span>'
-    +'<span class="chip" style="border-color:#BFCEFB;background:#F0F5FF;color:#2458C4">充电中 <b>'+(oCnt.chg||0)+'</b></span>'
-    +'<span class="chip" style="border-color:#B7E9CE;background:#F0FBF4;color:#0A7D45">放电中 <b>'+(oCnt.dis||0)+'</b></span>'
+  document.getElementById('pcsChips').innerHTML=
+    '<span class="chip" style="border-color:#BFCEFB;background:#F0F5FF;color:#2458C4">充电<b>'+(oCnt.chg||0)+'</b></span>'
+    +'<span class="chip" style="border-color:#B7E9CE;background:#F0FBF4;color:#0A7D45">放电<b>'+(oCnt.dis||0)+'</b></span>'
     +'<span class="chip">待机 <b>'+(oCnt.idle||0)+'</b></span>'
-    +(hCntP.warn?'<span class="chip o">预警 <b>'+hCntP.warn+'</b></span>':'')
-    +(hCntP.alarm?'<span class="chip r">故障 <b>'+hCntP.alarm+'</b></span>':'')
-    +(hCntP.stop?'<span class="chip">停机 <b>'+hCntP.stop+'</b></span>':'')
-    +'<span class="chip" style="border-color:var(--primary);color:var(--primary)">当前显示 <b id="pcsShown">'+PCS.length+'</b></span>'
-    +'<span style="margin-left:auto" class="legend"><span><i style="background:#00B42A;border-radius:50%"></i>正常</span><span><i style="background:#FF7D00;border-radius:50%"></i>预警</span><span><i style="background:#F53F3F;border-radius:50%"></i>故障</span><span><i style="background:#86909C;border-radius:50%"></i>停机</span></span>';
+    
+    +'<span style="margin-left:auto" class="legend"><span><i style="background:#00B42A;border-radius:50%"></i>正常</span><span><i style="background:#FF7D00;border-radius:50%"></i>预警</span><span><i style="background:#F53F3F;border-radius:50%"></i>故障</span></span>';
   makeMatrix({
     grid:'pcsGrid', filter:'pcsFilter', sort:'pcsSort', order:'pcsOrder', shown:'pcsShown',
     data:PCS, goto:'monitor-pcs',
@@ -3960,7 +3940,6 @@ var UMAX=5, DMIN=6;
         +'<span>无功功率<b>'+(stp?'--':c.qKvar+'<small> kVar</small>')+'</b></span>'
         +'<span>直流电压<b>'+(stp?'--':c.dcV+'<small> V</small>')+'</b></span>'
         +'<span>IGBT 最高温度<b>'+(stp?'--':c.igbt+'<small> ℃</small>')+'</b></span></div>'
-        +'<div class="cab-strip">'+strip(c.h,stp)+'</div>'
         +'<div class="cab-foot"><span>'+c.L.name.replace('35kV 中压馈线','')+'</span><span>电池舱-'+u.n+'</span></div>'
         +'</div>';
     }
@@ -3969,12 +3948,9 @@ var UMAX=5, DMIN=6;
   /* ---------- 箱变矩阵 ---------- */
   var hCntR={warn:0,alarm:0};
   RVT.forEach(function(c){if(c.h!=='ok')hCntR[c.h]++});
-  document.getElementById('rvtChips').innerHTML='<span class="chip">总览 <b>'+RVT.length+'</b></span>'
-    +'<span class="chip" style="border-color:#B7E9CE;background:#F0FBF4;color:#0A7D45">正常 <b>'+(RVT.length-(hCntR.warn||0)-(hCntR.alarm||0))+'</b></span>'
-    +(hCntR.warn?'<span class="chip o">预警 <b>'+hCntR.warn+'</b></span>':'')
-    +(hCntR.alarm?'<span class="chip r">故障 <b>'+hCntR.alarm+'</b></span>':'')
-    +'<span class="chip" style="border-color:var(--primary);color:var(--primary)">当前显示 <b id="rvtShown">'+RVT.length+'</b></span>'
-    +'<span style="margin-left:auto" class="legend"><span><i style="background:#00B42A;border-radius:50%"></i>正常</span><span><i style="background:#FF7D00;border-radius:50%"></i>预警</span><span><i style="background:#F53F3F;border-radius:50%"></i>故障</span></span>';
+  document.getElementById('rvtChips').innerHTML=
+
+    '<span style="margin-left:auto" class="legend"><span><i style="background:#00B42A;border-radius:50%"></i>正常</span><span><i style="background:#FF7D00;border-radius:50%"></i>预警</span><span><i style="background:#F53F3F;border-radius:50%"></i>故障</span></span>';
   makeMatrix({
     grid:'rvtGrid', filter:'rvtFilter', sort:'rvtSort', order:'rvtOrder', shown:'rvtShown',
     data:RVT, goto:'monitor-transformer',
@@ -3987,7 +3963,6 @@ var UMAX=5, DMIN=6;
         +'<span>交流电流 IB<b>'+c.ib+'<small> A</small></b></span>'
         +'<span>交流电流 IC<b>'+c.ic+'<small> A</small></b></span>'
         +'<span>测温点<b>'+c.spot+'</b></span></div>'
-        +'<div class="cab-strip">'+strip(c.h,false)+'</div>'
         +'<div class="cab-foot"><span>'+c.L.code+'</span><span>'+c.L.units.length+' 台储能单元</span></div>'
         +'</div>';
     }
@@ -4002,6 +3977,7 @@ var UMAX=5, DMIN=6;
       seg.querySelector('.active').classList.remove('active');b.classList.add('active');
       var VIEWS={sld:'viewSld',grid:'viewGrid',pcs:'viewPcs',rvt:'viewRvt'};
       Object.keys(VIEWS).forEach(function(k){var el=document.getElementById(VIEWS[k]);if(el)el.style.display=(k===b.dataset.v)?'':'none'});
+      var _ks=document.getElementById('kpiStrip');if(_ks)_ks.style.display=(b.dataset.v==='sld')?'':'none';
     });
   });
   var rs=document.getElementById('rangeSeg');
@@ -4135,11 +4111,10 @@ select{height:32px;border:1px solid var(--border);border-radius:6px;padding:0 10
     <button class="arrow" id="prevC">‹</button>
     <select id="cabinSel"></select>
     <button class="arrow" id="nextC">›</button>
-    <span class="tag tag-green" id="cabinSt">运行正常</span>
+    <span class="tag tag-green" id="cabinSt"></span>
     <span class="tag tag-gray">数据刷新：2026-09-18 15:58:12</span>
     <span style="margin-left:auto;display:flex;gap:10px">
-      <button class="btn">簇级详情</button>
-      <button class="btn btn-primary">立即刷新</button>
+
     </span>
   </div>
 
@@ -4156,7 +4131,6 @@ select{height:32px;border:1px solid var(--border);border-radius:6px;padding:0 10
         </div>
         <div>
           <div class="t1" id="mcTitle">01-1 电池舱</div>
-          <div class="t2">12 簇 · 384 节电芯 · 投运 2024-11-20</div>
         </div>
       </div>
       <div class="mgrid">
@@ -4168,9 +4142,9 @@ select{height:32px;border:1px solid var(--border);border-radius:6px;padding:0 10
           <div class="mrow"><span class="k">总功率</span><span class="v">0<i>kW</i></span></div>
           <div class="mrow"><span class="k">簇 SOC 极差</span><span class="v">0<i>%</i></span></div>
           <div class="mrow"><span class="k">最低电压</span><span class="v">12<i>V</i></span></div>
-          <div class="mrow"><span class="k">可充容量</span><span class="v">0<i>Wh</i></span></div>
-          <div class="mrow"><span class="k">可放容量</span><span class="v">4932<i>Wh</i></span></div>
-          <div class="mrow"><span class="k">累计充电量</span><span class="v">1357719<i>Wh</i></span></div>
+          <div class="mrow"><span class="k">可充容量</span><span class="v">0<i>MWh</i></span></div>
+          <div class="mrow"><span class="k">可放容量</span><span class="v">4932<i>MWh</i></span></div>
+          <div class="mrow"><span class="k">累计充电量</span><span class="v">13519<i>MWh</i></span></div>
         </div>
         <div style="padding-left:14px;border-left:1px solid #F2F3F5">
           <div class="mrow"><span class="k">最高单体电压</span><span class="v">3350<i>mV</i></span></div>
@@ -4181,27 +4155,24 @@ select{height:32px;border:1px solid var(--border);border-radius:6px;padding:0 10
           <div class="mrow"><span class="k">最高温度簇号</span><span class="v">#3</span></div>
           <div class="mrow"><span class="k">最低单体温度</span><span class="v up">24.5<i>℃</i></span></div>
           <div class="mrow"><span class="k">最低温度簇号</span><span class="v">#42</span></div>
-          <div class="mrow"><span class="k">累计放电量</span><span class="v">1306410<i>Wh</i></span></div>
+          <div class="mrow"><span class="k">累计放电量</span><span class="v">13310<i>MWh</i></span></div>
           <div class="mrow"><span class="k">舱内温差</span><span class="v up">12.4<i>℃</i></span></div>
         </div>
       </div>
-      <div style="margin-top:12px;background:#FFF7E8;border:1px solid #FFE4BA;border-radius:6px;padding:10px 12px;font-size:12px;color:#B76E00;line-height:1.7">
-        <b>⚠ 舱内温差 12.4℃ 超阈值（10℃）</b><br>建议核查 #3 簇集风道与冷机送风量，2 小时内完成复核。
-      </div>
+  
     </div>
 
     <!-- 右：性能对比 -->
     <div class="card">
-      <div class="card-t">性能对比 <span class="cnt">簇级能量 / 功率对比</span>
+      <div class="card-t">性能对比 <span class="cnt">簇单体最高温度 / 簇单体最低电压对比</span>
         <span class="seg" style="margin-left:auto;font-weight:400" id="metricSeg">
-          <button class="active" data-m="e">日充 / 日放</button><button data-m="p">功率</button><button data-m="t">温度</button><button data-m="v">电压</button>
+          <button class="active" data-m="℃">簇单体最高温度</button><button data-m="v">簇单体最低电压对比</button>
         </span>
       </div>
       <div id="barChart"></div>
       <div class="legend" style="margin-top:10px;justify-content:center">
-        <span><i style="background:#5B8DEF"></i>充电量（kWh）</span>
-        <span><i style="background:#7C5CF0"></i>放电量（kWh）</span>
-        <span><i style="background:#F0B429"></i>功率（MW）</span>
+        <span><i style="background:#5B8DEF"></i>簇单体最高温度（℃）</span>
+        <span><i style="background:#7C5CF0"></i>簇单体最低电压对比（mV）</span>
       </div>
     </div>
   </div>
@@ -4209,6 +4180,7 @@ select{height:32px;border:1px solid var(--border);border-radius:6px;padding:0 10
   <!-- 电池簇列表 -->
   <div class="card">
     <div class="card-t">电池簇阵列 <span class="cnt">12 簇 · 点击查看簇级详情</span>
+
       <span class="more" onclick="go('analysis-consistency')">一致性分析 ›</span>
     </div>
     <div class="clusters" id="clBox"></div>
@@ -4233,7 +4205,6 @@ var CABINS=[];
     var st=document.getElementById('cabinSt');
     var bad=(idx===0);
     st.className='tag '+(bad?'tag-orange':'tag-green');
-    st.textContent=bad?'温差预警':'运行正常';
   }
   sel.onchange=function(){idx=CABINS.indexOf(sel.value);sync()};
   document.getElementById('prevC').onclick=function(){idx=(idx-1+CABINS.length)%CABINS.length;sync()};
@@ -4253,7 +4224,7 @@ var CABINS=[];
     var name=(i<10?'0'+i:''+i);
     html+='<div class="cl'+(isBad?' bad':'')+'" data-n="'+name+'">'+
       '<div class="cl-hd"><span class="num">'+name+'</span>簇 '+name+
-        '<span class="st" style="color:'+(isBad?'#F53F3F':'#00B42A')+'">'+(isBad?'异常':'正常')+'</span></div>'+
+        '<span class="st" style="color:'+(isBad?'#F53F3F':'#00B42A')+'">'+(isBad?'故障':'正常')+'</span></div>'+
       '<div class="cl-row"><span>总电压</span><b>'+volt+' V</b></div>'+
       '<div class="cl-row"><span>总电流</span><b>0 A</b></div>'+
       '<div class="cl-row"><span>SOC</span><b'+(isBad?' class="up"':'')+'>'+soc+' %</b></div>'+
@@ -4404,10 +4375,8 @@ tbody tr:hover td{background:#F7FAFF}
     <select id="pcsSel"></select>
     <button class="arrow" id="nextP">›</button>
     <span class="tag tag-gray" id="pcsSt">运行状态：待机</span>
-    <span class="seg" id="powSeg"><button class="active">有功 / 无功</button><button>三相电流</button><button>IGBT 温度</button><button>线电压</button></span>
     <span style="margin-left:auto;display:flex;gap:10px;align-items:center">
-      <input type="date" value="2026-09-18"><span class="tag tag-gray">→</span><input type="date" value="2026-09-18">
-      <button class="btn btn-primary">查询</button>
+
     </span>
   </div>
 
@@ -4423,18 +4392,17 @@ tbody tr:hover td{background:#F7FAFF}
           </svg>
         </div>
         <div class="n" id="pcsName">PCS 0101</div>
-        <div class="s" id="pcsSub">01 箱变 · 电池舱 01-1 · 500kW 储能变流器</div>
       </div>
       <div class="drow"><span class="k">运行状态</span><b id="dSt">待机</b></div>
       <div class="drow"><span class="k">通信状态</span><b style="color:#00B42A">● 在线</b></div>
       <div class="drow"><span class="k">转换效率</span><b>98.6 %</b></div>
-      <div class="drow"><span class="k">今日运行时长</span><b>7.4 h</b></div>
-      <div class="drow"><span class="k">累计运行</span><b>12,486 h</b></div>
-      <div class="drow"><span class="k">固件版本</span><b>V3.2.1</b></div>
-      <div class="drow"><span class="k">最近告警</span><b style="color:#FF7D00">09-18 11:20 通信中断</b></div>
+      <div class="drow"><span class="k">放电电阻附件温度</span><b>95 ℃</b></div>
+      <div class="drow"><span class="k">直流输入腔温度</span><b>55 ℃</b></div>
+      <div class="drow"><span class="k">直流电容腔温度</span><b>58 ℃</b></div>
+	  <div class="drow"><span class="k">交流腔温度</span><b>59 ℃</b></div>
+      <div class="drow"><span class="k">电抗器温度</span><b style="color:#FF7D00">90 ℃</b></div>
       <div style="display:flex;gap:8px;margin-top:14px">
-        <button class="btn" style="flex:1;justify-content:center">参数设置</button>
-        <button class="btn" style="flex:1;justify-content:center" onclick="go('om-ota')">升级</button>
+
       </div>
     </div>
 
@@ -4485,15 +4453,7 @@ tbody tr:hover td{background:#F7FAFF}
   </div>
 
   <!-- PCS 阵列 -->
-  <div class="card">
-    <div class="card-t">PCS 阵列 <span class="cnt">全站 24 台 · 按装设位置</span>
-      <span class="more" onclick="go('monitor-station')">返回整站视图 ›</span>
-    </div>
-    <table>
-      <thead><tr><th>编号</th><th>装设位置</th><th>运行状态</th><th>有功功率(kW)</th><th>无功功率(kVar)</th><th>转换效率(%)</th><th>最高 IGBT 温度(℃)</th><th>通信状态</th><th>操作</th></tr></thead>
-      <tbody id="pcsTbody"></tbody>
-    </table>
-  </div>
+
 
 </div>
 
@@ -4528,23 +4488,7 @@ var PCSLIST=[];
   document.getElementById('nextP').onclick=function(){idx=(idx+1)%PCSLIST.length;sync()};
   sync();
 })();
-(function(){
-  var tb=document.getElementById('pcsTbody'),html='';
-  PCSLIST.forEach(function(p,i){
-    var bad=(i===2), chg=(i%5===1);
-    var st=bad?'通信异常':(chg?'充电':'待机');
-    var col=bad?'#FF7D00':(chg?'#2E6BE6':'#86909C');
-    html+='<tr><td><b>'+p.id+'</b></td><td>'+p.box+'</td>'+
-      '<td><span class="dot" style="background:'+col+'"></span>'+st+'</td>'+
-      '<td>'+(bad?'--':(chg?'420.6':'0.0'))+'</td>'+
-      '<td>'+(bad?'--':'71.0')+'</td>'+
-      '<td>'+(bad?'--':'98.6')+'</td>'+
-      '<td>'+(bad?'--':'35.2')+'</td>'+
-      '<td>'+(bad?'<span style="color:#FF7D00">中断 412s</span>':'<span style="color:#00B42A">正常</span>')+'</td>'+
-      '<td><span style="color:var(--primary);cursor:pointer">详情</span></td></tr>';
-  });
-  tb.innerHTML=html;
-})();
+
 
 /* ================= 趋势曲线 ================= */
 function drawPcsChart(mode){
@@ -4707,14 +4651,10 @@ tbody tr:hover td{background:#F7FAFF}
         <div class="n" id="txName">01 储能单元箱变</div>
         <div class="s" id="txSub">馈线十一线 · 容量 2500 kVA</div>
       </div>
-      <div class="wn-hd">预警指示</div>
-      <div class="warn-row bad"><span class="ico">!</span><span>A 相温度报警</span><span class="st">58.4℃</span></div>
-      <div class="warn-row ok"><span class="ico">✓</span><span>B 相温度报警</span><span class="st">无报警</span></div>
-      <div class="warn-row bad"><span class="ico">!</span><span>C 相温度报警</span><span class="st">58.1℃</span></div>
-      <div class="warn-row bad"><span class="ico">!</span><span>铁芯温度报警</span><span class="st">80.0℃</span></div>
-      <div style="margin-top:12px;background:#FFF7E8;border:1px solid #FFE4BA;border-radius:6px;padding:10px 12px;font-size:12px;color:#B76E00;line-height:1.7">
-        <b>⚠ 铁芯温度 80℃ 已达告警阈值（75℃）</b><br>建议核查箱变通风与负荷率，安排红外测温复核。
-      </div>
+      <div class="warn-row ok"><span class="ico">!</span><span>A 相温度</span><span class="st">58.4℃</span></div>
+      <div class="warn-row ok"><span class="ico">✓</span><span>B 相温度</span><span class="st">50℃</span></div>
+      <div class="warn-row ok"><span class="ico">!</span><span>C 相温度</span><span class="st">58.1℃</span></div>
+      <div class="warn-row bad"><span class="ico">!</span><span>铁芯温度</span><span class="st">80.0℃</span></div>
     </div>
 
     <!-- 右栏：KPI -->
@@ -4747,7 +4687,7 @@ tbody tr:hover td{background:#F7FAFF}
   <!-- 一二次单线图 -->
   <div class="card" id="viewSld">
     <div class="card-t">一二次单线图 <span class="cnt" id="sldCap">01 储能单元箱变 · 35kV 进线 → 箱变 → 低压侧 → 4 组 PCS / 电池舱</span>
-      <span class="more" onclick="alert('打开接线图编辑')">编辑接线 ›</span>
+    
     </div>
     <div class="sld"><div id="sldSvg"></div></div>
   </div>
