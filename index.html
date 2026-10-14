@@ -3,7 +3,7 @@
 <head data-page-node-id="4R3UKsQFEvh62YnVE15iLw">
 <meta charset="utf-8" data-page-node-id="M0owZIONJ00cT273oQbtMX" />
 <meta name="viewport" content="width=device-width,initial-scale=1" data-page-node-id="oCfAatH5krPB2C72zpB4RZ" />
-<title>储能电站智能运维系统 · 示范页面 v8.28</title>
+<title>储能电站智能运维系统 · 示范页面 v8.29</title>
 <style>
 :root{--blue:#2E6BE6;--blue2:#5B8DEF;--text:#1F2329;--text2:#4E5560;--muted:#9AA1AB;--bg:#F5F7FA;--card:#fff;--line:#E5E8EE;--linesoft:#EFF1F5;--green:#2BA471;--green-soft:#E8F6F0;--orange:#F7931E;--orange-soft:#FEF4E5;--red:#F0453B;--red-soft:#FDEEED;--blue-soft:#EBF2FD;--violet:#7B61E0;--shadow:0 1px 2px rgba(31,35,41,.04),0 4px 16px rgba(31,35,41,.06)}
 :root[data-theme="classic-white"]{--bg:#FFFFFF;--card:#FFFFFF;--line:#E8EBF1;--linesoft:#F2F4F8;--shadow:0 1px 2px rgba(31,35,41,.04),0 4px 14px rgba(31,35,41,.05)}
@@ -3020,7 +3020,8 @@ window.__dfInit=function(){
  var ex=document.getElementById('dfExport');if(ex)ex.addEventListener('click',function(){dfNotify('导出为演示入口，不生成真实文件')});
 };
 
-render();
+/* V8.29：等待全部 iframe 模板完成解析后再执行首屏渲染，避免默认首页空白 */
+window.addEventListener('DOMContentLoaded',render,{once:true});
 </script>
 
 <!-- ============ V4 新增：新版页面模板（来自 prototype-demo/pages，iframe srcdoc 嵌入） ============ -->
@@ -4151,12 +4152,12 @@ select{height:32px;border:1px solid var(--border);border-radius:6px;padding:0 10
           <div class="mrow"><span class="k">最高电压簇号</span><span class="v">#50</span></div>
           <div class="mrow"><span class="k">最低单体电压</span><span class="v">3338<i>mV</i></span></div>
           <div class="mrow"><span class="k">最低电压簇号</span><span class="v">#39</span></div>
-          <div class="mrow"><span class="k">最高单体温度</span><span class="v up">27.7<i>℃</i></span></div>
+          <div class="mrow"><span class="k">最高单体温度</span><span class="v ">27.7<i>℃</i></span></div>
           <div class="mrow"><span class="k">最高温度簇号</span><span class="v">#3</span></div>
-          <div class="mrow"><span class="k">最低单体温度</span><span class="v up">24.5<i>℃</i></span></div>
+          <div class="mrow"><span class="k">最低单体温度</span><span class="v ">24.5<i>℃</i></span></div>
           <div class="mrow"><span class="k">最低温度簇号</span><span class="v">#42</span></div>
           <div class="mrow"><span class="k">累计放电量</span><span class="v">13310<i>MWh</i></span></div>
-          <div class="mrow"><span class="k">舱内温差</span><span class="v up">12.4<i>℃</i></span></div>
+          <div class="mrow"><span class="k">舱内温差</span><span class="v ">12.4<i>℃</i></span></div>
         </div>
       </div>
   
@@ -4394,13 +4395,13 @@ tbody tr:hover td{background:#F7FAFF}
         <div class="n" id="pcsName">PCS 0101</div>
       </div>
       <div class="drow"><span class="k">运行状态</span><b id="dSt">待机</b></div>
-      <div class="drow"><span class="k">通信状态</span><b style="color:#00B42A">● 在线</b></div>
+      <div class="drow"><span class="k">通信状态</span><b >● 在线</b></div>
       <div class="drow"><span class="k">转换效率</span><b>98.6 %</b></div>
       <div class="drow"><span class="k">放电电阻附件温度</span><b>95 ℃</b></div>
       <div class="drow"><span class="k">直流输入腔温度</span><b>55 ℃</b></div>
       <div class="drow"><span class="k">直流电容腔温度</span><b>58 ℃</b></div>
 	  <div class="drow"><span class="k">交流腔温度</span><b>59 ℃</b></div>
-      <div class="drow"><span class="k">电抗器温度</span><b style="color:#FF7D00">90 ℃</b></div>
+      <div class="drow"><span class="k">电抗器温度</span><b >90 ℃</b></div>
       <div style="display:flex;gap:8px;margin-top:14px">
 
       </div>
@@ -4412,30 +4413,30 @@ tbody tr:hover td{background:#F7FAFF}
         <span class="more" onclick="go('analysis-trend')">趋势分析 ›</span>
       </div>
       <div class="kgrid">
-        <div class="kbox"><div class="k">日充电量</div><div class="v">5062.5<i>kWh</i></div><div class="m">今日 00:00 起累计</div></div>
-        <div class="kbox"><div class="k">日放电量</div><div class="v">558.7<i>kWh</i></div><div class="m">今日 00:00 起累计</div></div>
-        <div class="kbox"><div class="k">总充电量</div><div class="v">1421506<i>kWh</i></div><div class="m">投运累计</div></div>
-        <div class="kbox"><div class="k">总放电量</div><div class="v">1292525<i>kWh</i></div><div class="m">投运累计</div></div>
+        <div class="kbox"><div class="k">日充电量</div><div class="v">5062.5<i>kWh</i></div></div>
+        <div class="kbox"><div class="k">日放电量</div><div class="v">558.7<i>kWh</i></div></div>
+        <div class="kbox"><div class="k">总充电量</div><div class="v">1421506<i>kWh</i></div></div>
+        <div class="kbox"><div class="k">总放电量</div><div class="v">1292525<i>kWh</i></div></div>
 
-        <div class="kbox"><div class="k">交流有功功率</div><div class="v">0<i>kW</i></div><div class="m">当前待机</div></div>
-        <div class="kbox"><div class="k">交流无功功率</div><div class="v">71<i>kVar</i></div><div class="m">无功补偿运行中</div></div>
-        <div class="kbox"><div class="k">变流器最大可充功率</div><div class="v">0<i>kW</i></div><div class="m">受 SOC 上限约束</div></div>
-        <div class="kbox hi"><div class="k">变流器最大可放功率</div><div class="v">1333<i>kW</i></div><div class="m">可参与调度</div></div>
+        <div class="kbox"><div class="k">交流有功功率</div><div class="v">0<i>kW</i></div></div>
+        <div class="kbox"><div class="k">交流无功功率</div><div class="v">71<i>kVar</i></div></div>
+        <div class="kbox"><div class="k">变流器最大可充功率</div><div class="v">0<i>kW</i></div></div>
+        <div class="kbox"><div class="k">变流器最大可放功率</div><div class="v">1333<i>kW</i></div></div>
 
-        <div class="kbox"><div class="k">母线电压</div><div class="v">6000<i>V</i></div><div class="m">直流母线</div></div>
-        <div class="kbox"><div class="k">交流侧 A 相充电电流</div><div class="v">63.4<i>A</i></div><div class="m">额定 72A</div></div>
-        <div class="kbox"><div class="k">交流侧 B 相充电电流</div><div class="v">61.0<i>A</i></div><div class="m">三相不平衡 3.8%</div></div>
-        <div class="kbox"><div class="k">交流侧 C 相充电电流</div><div class="v">62.8<i>A</i></div><div class="m">三相不平衡 3.8%</div></div>
+        <div class="kbox"><div class="k">母线电压</div><div class="v">6000<i>V</i></div></div>
+        <div class="kbox"><div class="k">交流侧 A 相充电电流</div><div class="v">63.4<i>A</i></div></div>
+        <div class="kbox"><div class="k">交流侧 B 相充电电流</div><div class="v">61.0<i>A</i></div></div>
+        <div class="kbox"><div class="k">交流侧 C 相充电电流</div><div class="v">62.8<i>A</i></div></div>
 
-        <div class="kbox"><div class="k">直流电压</div><div class="v">1391.3<i>V</i></div><div class="m">对应舱总电压</div></div>
-        <div class="kbox"><div class="k">交流 AB 线电压</div><div class="v">672.1<i>V</i></div><div class="m">额定 690V</div></div>
-        <div class="kbox"><div class="k">交流 BC 线电压</div><div class="v">670.5<i>V</i></div><div class="m">偏差 0.24%</div></div>
-        <div class="kbox"><div class="k">交流 CA 线电压</div><div class="v">676.1<i>V</i></div><div class="m">偏差 0.59%</div></div>
+        <div class="kbox"><div class="k">直流电压</div><div class="v">1391.3<i>V</i></div></div>
+        <div class="kbox"><div class="k">交流 AB 线电压</div><div class="v">672.1<i>V</i></div></div>
+        <div class="kbox"><div class="k">交流 BC 线电压</div><div class="v">670.5<i>V</i></div></div>
+        <div class="kbox"><div class="k">交流 CA 线电压</div><div class="v">676.1<i>V</i></div></div>
 
-        <div class="kbox"><div class="k">功率因数</div><div class="v">0.99</div><div class="m">目标 ≥ 0.99</div></div>
-        <div class="kbox"><div class="k">A 相 IGBT 温度</div><div class="v">35.2<i>℃</i></div><div class="m">报警 85℃</div></div>
-        <div class="kbox"><div class="k">B 相 IGBT 温度</div><div class="v">34.4<i>℃</i></div><div class="m">报警 85℃</div></div>
-        <div class="kbox"><div class="k">C 相 IGBT 温度</div><div class="v">35.2<i>℃</i></div><div class="m">报警 85℃</div></div>
+        <div class="kbox"><div class="k">功率因数</div><div class="v">0.99</div></div>
+        <div class="kbox"><div class="k">A 相 IGBT 温度</div><div class="v">35.2<i>℃</i></div></div>
+        <div class="kbox"><div class="k">B 相 IGBT 温度</div><div class="v">34.4<i>℃</i></div></div>
+        <div class="kbox"><div class="k">C 相 IGBT 温度</div><div class="v">35.2<i>℃</i></div></div>
       </div>
     </div>
   </div>
@@ -4476,7 +4477,8 @@ var PCSLIST=[];
   function sync(){
     var p=PCSLIST[idx];
     document.getElementById('pcsName').textContent=p.id;
-    document.getElementById('pcsSub').textContent=p.box+' · 500kW 储能变流器';
+    var sub=document.getElementById('pcsSub');
+    if(sub)sub.textContent=p.box+' · 500kW 储能变流器';
     var st=(idx===2)?'通信异常':(idx%5===1?'充电':'待机');
     var el=document.getElementById('pcsSt');
     el.className='tag '+(st==='通信异常'?'tag-orange':(st==='充电'?'tag-blue':'tag-gray'));
@@ -4541,13 +4543,16 @@ function drawPcsChart(mode){
   document.getElementById('pcsChart').innerHTML='<svg viewBox="0 0 '+W+' '+H+'" style="width:100%;height:auto;display:block">'+g+'</svg>';
 }
 (function(){
+  /* V8.29：曲线切换控件可按页面配置缺省；无论控件是否存在都绘制演示曲线 */
   var seg=document.getElementById('powSeg');
-  seg.querySelectorAll('button').forEach(function(b,i){
-    b.onclick=function(){
-      seg.querySelector('.active').classList.remove('active');b.classList.add('active');
-      drawPcsChart(i===2?'c':'a');
-    };
-  });
+  if(seg){
+    seg.querySelectorAll('button').forEach(function(b,i){
+      b.onclick=function(){
+        seg.querySelector('.active').classList.remove('active');b.classList.add('active');
+        drawPcsChart(i===2?'c':'a');
+      };
+    });
+  }
   drawPcsChart('a');
 })();
 </script>
@@ -4610,9 +4615,6 @@ select,input[type=date]{height:32px;border:1px solid var(--border);border-radius
 .kbox.hi{background:#FFF8EC;border-color:#FFE0B2}
 .kbox.hi .v{color:#B76E00}
 .kbox.blue{background:#F2F7FF;border-color:#D6E4FF}
-/* 单线图 */
-.sld{background:#FCFDFF;border:1px solid #EEF1F6;border-radius:8px;padding:8px}
-.sld svg{display:block;width:100%;height:auto}
 /* 表格 */
 table{width:100%;border-collapse:collapse}
 th{background:#F7F8FA;color:var(--text2);font-weight:500;font-size:12px;text-align:left;padding:0 10px;height:36px;white-space:nowrap}
@@ -4631,7 +4633,6 @@ tbody tr:hover td{background:#F7FAFF}
     <select id="txSel"></select>
     <button class="arrow" id="nextT">›</button>
     <span class="tag tag-green" id="txSt">运行正常</span>
-    <span class="seg" id="viewSeg"><button class="active" data-v="sld">一二次单线图</button><button data-v="tab">设备列表</button></span>
     <span style="margin-left:auto;display:flex;gap:10px">
       <button class="btn">全屏</button>
       <button class="btn btn-primary">立即刷新</button>
@@ -4651,10 +4652,10 @@ tbody tr:hover td{background:#F7FAFF}
         <div class="n" id="txName">01 储能单元箱变</div>
         <div class="s" id="txSub">馈线十一线 · 容量 2500 kVA</div>
       </div>
-      <div class="warn-row ok"><span class="ico">!</span><span>A 相温度</span><span class="st">58.4℃</span></div>
-      <div class="warn-row ok"><span class="ico">✓</span><span>B 相温度</span><span class="st">50℃</span></div>
-      <div class="warn-row ok"><span class="ico">!</span><span>C 相温度</span><span class="st">58.1℃</span></div>
-      <div class="warn-row bad"><span class="ico">!</span><span>铁芯温度</span><span class="st">80.0℃</span></div>
+      <div class="kbox"><span>A 相温度</span><span class="st">58.4℃</span></div>
+      <div class="kbox"><span>B 相温度</span><span class="st">50℃</span></div>
+      <div class="kbox"> <span>C 相温度</span><span class="st">58.1℃</span></div>
+      <div class="kbox"> <span>铁芯温度</span><span class="st">80.0℃</span></div>
     </div>
 
     <!-- 右栏：KPI -->
@@ -4663,50 +4664,34 @@ tbody tr:hover td{background:#F7FAFF}
         <span class="more" onclick="go('analysis-trend')">趋势分析 ›</span>
       </div>
       <div class="kgrid">
-        <div class="kbox blue"><div class="k">低压侧电流 IA</div><div class="v">100<i>A</i></div><div class="m">额定 144A</div></div>
-        <div class="kbox blue"><div class="k">低压侧电流 IB</div><div class="v">100<i>A</i></div><div class="m">三相平衡</div></div>
-        <div class="kbox blue"><div class="k">低压侧电流 IC</div><div class="v">100<i>A</i></div><div class="m">三相平衡</div></div>
-        <div class="kbox"><div class="k">低压侧 UAB</div><div class="v">675.88<i>V</i></div><div class="m">额定 690V</div></div>
-        <div class="kbox"><div class="k">低压侧 UBC</div><div class="v">674.32<i>V</i></div><div class="m">偏差 0.23%</div></div>
+        <div class="kbox "><div class="k">低压侧电流 IA</div><div class="v">100<i>A</i></div></div>
+        <div class="kbox "><div class="k">低压侧电流 IB</div><div class="v">100<i>A</i></div></div>
+        <div class="kbox "><div class="k">低压侧电流 IC</div><div class="v">100<i>A</i></div></div>
+        <div class="kbox"><div class="k">低压侧 UAB</div><div class="v">675.88<i>V</i></div></div>
+        <div class="kbox"><div class="k">低压侧 UBC</div><div class="v">674.32<i>V</i></div></div>
 
-        <div class="kbox"><div class="k">低压侧 UCA</div><div class="v">680.52<i>V</i></div><div class="m">偏差 0.68%</div></div>
-        <div class="kbox"><div class="k">高压侧 IA</div><div class="v">0<i>A</i></div><div class="m">高压侧空载</div></div>
-        <div class="kbox"><div class="k">高压侧 IB</div><div class="v">0<i>A</i></div><div class="m">高压侧空载</div></div>
-        <div class="kbox"><div class="k">高压侧 IC</div><div class="v">0<i>A</i></div><div class="m">高压侧空载</div></div>
-        <div class="kbox hi"><div class="k">A 相温度</div><div class="v">58.4<i>℃</i></div><div class="m">报警 75℃</div></div>
+        <div class="kbox"><div class="k">低压侧 UCA</div><div class="v">680.52<i>V</i></div></div>
+        <div class="kbox"><div class="k">高压侧 IA</div><div class="v">0<i>A</i></div></div>
+        <div class="kbox"><div class="k">高压侧 IB</div><div class="v">0<i>A</i></div></div>
+        <div class="kbox"><div class="k">高压侧 IC</div><div class="v">0<i>A</i></div></div>
+        <div class="kbox "><div class="k">A 相温度</div><div class="v">58.4<i>℃</i></div></div>
 
-        <div class="kbox"><div class="k">B 相温度</div><div class="v">55.0<i>℃</i></div><div class="m">报警 75℃</div></div>
-        <div class="kbox hi"><div class="k">C 相温度</div><div class="v">58.1<i>℃</i></div><div class="m">报警 75℃</div></div>
-        <div class="kbox hi"><div class="k">铁芯温度</div><div class="v">80.0<i>℃</i></div><div class="m">报警 75℃ · 已超限</div></div>
-        <div class="kbox"><div class="k">低压侧有功 P</div><div class="v">0.83<i>kW</i></div><div class="m">空载损耗</div></div>
-        <div class="kbox"><div class="k">低压侧无功 Q</div><div class="v">144.17<i>kVar</i></div><div class="m">励磁无功</div></div>
+        <div class="kbox"><div class="k">B 相温度</div><div class="v">55.0<i>℃</i></div></div>
+        <div class="kbox "><div class="k">C 相温度</div><div class="v">58.1<i>℃</i></div></div>
+        <div class="kbox "><div class="k">铁芯温度</div><div class="v">80.0<i>℃</i></div></div>
+        <div class="kbox"><div class="k">低压侧有功 P</div><div class="v">0.83<i>kW</i></div></div>
+        <div class="kbox"><div class="k">低压侧无功 Q</div><div class="v">144.17<i>kVar</i></div></div>
       </div>
     </div>
   </div>
 
-  <!-- 一二次单线图 -->
-  <div class="card" id="viewSld">
-    <div class="card-t">一二次单线图 <span class="cnt" id="sldCap">01 储能单元箱变 · 35kV 进线 → 箱变 → 低压侧 → 4 组 PCS / 电池舱</span>
-    
-    </div>
-    <div class="sld"><div id="sldSvg"></div></div>
-  </div>
-
+  <!-- V8.29：按页面定义移除一二次单线图与设备列表，仅保留实时指标和趋势分析 -->
   <!-- 趋势分析 -->
   <div class="card">
     <div class="card-t">趋势分析 <span class="cnt">2026-09-18 00:00 - 15:58 · 有功 / 无功 / 三相温度</span>
       <span class="more" onclick="go('analysis-custom')">自定义曲线 ›</span>
     </div>
     <div id="txChart"></div>
-  </div>
-
-  <!-- 设备列表 -->
-  <div class="card" id="viewTab" style="display:none">
-    <div class="card-t">箱变设备列表 <span class="cnt">全站 6 台储能单元箱变</span></div>
-    <table>
-      <thead><tr><th>箱变编号</th><th>所属馈线</th><th>容量(kVA)</th><th>低压侧 IA/IB/IC(A)</th><th>低压侧 UAB/UBC/UCA(V)</th><th>A/B/C 相温度(℃)</th><th>铁芯温度(℃)</th><th>P(kW) / Q(kVar)</th><th>状态</th></tr></thead>
-      <tbody id="txTbody"></tbody>
-    </table>
   </div>
 
 </div>
@@ -4730,133 +4715,16 @@ var TXS=[
     var t=TXS[idx];
     sel.value=t.n;
     document.getElementById('txName').textContent=t.n;
-    document.getElementById('txSub').textContent=t.line+' · 容量 '+t.cap+' kVA';
+    document.getElementById('txSub').textContent=t.line;
     var st=document.getElementById('txSt');
     st.className='tag '+(t.bad?'tag-orange':'tag-green');
-    st.textContent=t.bad?'铁芯温度预警':'运行正常';
-    document.getElementById('sldCap').textContent=t.n+' · 35kV 进线 → 箱变 → 低压侧 → 4 组 PCS / 电池舱';
-    drawSld(t);
+    st.textContent=t.bad?'温度预警':'运行正常';
   }
   sel.onchange=function(){idx=TXS.map(function(t){return t.n}).indexOf(sel.value);sync()};
   document.getElementById('prevT').onclick=function(){idx=(idx-1+TXS.length)%TXS.length;sync()};
   document.getElementById('nextT').onclick=function(){idx=(idx+1)%TXS.length;sync()};
   window.__syncTx=sync;
   sync();
-})();
-
-/* ================= 一二次单线图（左→右：35kV → QF1 → 箱变 → QF2 → 竖直低压母线 → 4 分支） ================= */
-function drawSld(t){
-  var W=1520,H=600, chainY=270, busX=452, busTop=118, busBot=540;
-  var ia0=t.ia0||0, ib0=t.ib0||0, ic0=t.ic0||0;
-  var tc=t.bad?'#F53F3F':'#B6C2D4';
-  var bxN=t.n.slice(0,2);
-  var g='';
-
-  /* ---- 35kV 进线 ---- */
-  g+='<text x="56" y="'+(chainY-52)+'" font-size="13" font-weight="600" fill="#1D2129">35kV 并网点</text>';
-  g+='<line x1="66" y1="'+(chainY-34)+'" x2="66" y2="'+(chainY+34)+'" stroke="#F0B429" stroke-width="4" stroke-linecap="round"/>';
-  g+='<line x1="66" y1="'+chainY+'" x2="168" y2="'+chainY+'" stroke="#B6C2D4" stroke-width="2.4"/>';
-  g+='<text x="66" y="'+(chainY+56)+'" font-size="11" fill="#86909C" text-anchor="middle">35kV</text>';
-
-  /* ---- QF1 ---- */
-  g+='<rect x="168" y="'+(chainY-21)+'" width="34" height="42" rx="4" fill="#fff" stroke="#B6C2D4" stroke-width="1.8"/>';
-  g+='<line x1="176" y1="'+(chainY-21)+'" x2="194" y2="'+(chainY+21)+'" stroke="#B6C2D4" stroke-width="1.8"/>';
-  g+='<text x="185" y="'+(chainY-32)+'" font-size="11.5" fill="#4E5969" text-anchor="middle">QF1</text>';
-  g+='<text x="185" y="'+(chainY+42)+'" font-size="11" fill="#86909C" text-anchor="middle">高压侧 IA/IB/IC</text>';
-  g+='<text x="185" y="'+(chainY+59)+'" font-size="11.5" fill="#4E5969" text-anchor="middle">'+ia0+' / '+ib0+' / '+ic0+' A</text>';
-
-  /* ---- 箱变（双圆变压器符号） ---- */
-  g+='<line x1="202" y1="'+chainY+'" x2="262" y2="'+chainY+'" stroke="#B6C2D4" stroke-width="2.4"/>';
-  g+='<circle cx="283" cy="'+chainY+'" r="20" fill="#fff" stroke="'+tc+'" stroke-width="2.2"/>';
-  g+='<circle cx="323" cy="'+chainY+'" r="20" fill="#fff" stroke="'+tc+'" stroke-width="2.2"/>';
-  g+='<text x="303" y="'+(chainY-44)+'" font-size="12.5" font-weight="600" fill="'+(t.bad?'#F53F3F':'#1D2129')+'" text-anchor="middle">'+t.n+'</text>';
-  g+='<text x="303" y="'+(chainY+46)+'" font-size="11" fill="#86909C" text-anchor="middle">'+t.cap+' kVA · '+t.line+'</text>';
-  g+='<text x="303" y="'+(chainY+63)+'" font-size="11" fill="'+(t.bad?'#F53F3F':'#86909C')+'" text-anchor="middle">铁芯温度 '+t.core+'℃'+(t.bad?'（超限）':'')+'</text>';
-
-  /* ---- QF2 ---- */
-  g+='<line x1="343" y1="'+chainY+'" x2="388" y2="'+chainY+'" stroke="#B6C2D4" stroke-width="2.4"/>';
-  g+='<rect x="388" y="'+(chainY-21)+'" width="34" height="42" rx="4" fill="#fff" stroke="#B6C2D4" stroke-width="1.8"/>';
-  g+='<line x1="396" y1="'+(chainY-21)+'" x2="414" y2="'+(chainY+21)+'" stroke="#B6C2D4" stroke-width="1.8"/>';
-  g+='<text x="405" y="'+(chainY-32)+'" font-size="11.5" fill="#4E5969" text-anchor="middle">QF2</text>';
-
-  /* ---- 竖直低压母线 ---- */
-  g+='<line x1="422" y1="'+chainY+'" x2="'+busX+'" y2="'+chainY+'" stroke="#2E6BE6" stroke-width="3.4"/>';
-  g+='<line x1="'+busX+'" y1="'+busTop+'" x2="'+busX+'" y2="'+busBot+'" stroke="#2E6BE6" stroke-width="4" stroke-linecap="round"/>';
-  g+='<text x="'+busX+'" y="'+(busTop-14)+'" font-size="12" font-weight="600" fill="#2E6BE6" text-anchor="middle">0.4kV 低压母线</text>';
-  g+='<text x="'+(busX+96)+'" y="'+(busTop-14)+'" font-size="11.5" fill="#4E5969">IA/IB/IC '+t.ia+' / '+t.ib+' / '+t.ic+' A　·　UAB/UBC/UCA '+t.uab+' / '+t.ubc+' / '+t.uca+' V</text>';
-
-  /* ---- 4 个储能单元分支 ---- */
-  var ys=[140,250,360,470];
-  var socv=[99.9,98.6,99.9,99.9];
-  var pv=[0.83,0.79,0.86,0.80];
-  var qv=[144.17,140.06,133.20,129.88];
-  var cabTxt=['充电','放电','预警','放电'];
-  for(var j=0;j<4;j++){
-    var y=ys[j];
-    var isWarn=(j===2 && t.bad);
-    var pc=isWarn?'#FF7D00':(j===0?'#2E6BE6':(j===3?'#2E6BE6':'#00B42A'));
-    var bc=isWarn?'#FF7D00':(j===2?'#4E5969':'#00B42A');
-    /* 母线 → PCS */
-    g+='<line x1="'+busX+'" y1="'+y+'" x2="500" y2="'+y+'" stroke="#DCE2EA" stroke-width="2"/>';
-    g+='<circle cx="'+busX+'" cy="'+y+'" r="4" fill="#2E6BE6"/>';
-    /* PCS 块 */
-    g+='<rect x="500" y="'+(y-30)+'" width="150" height="60" rx="7" fill="'+pc+'"/>';
-    g+='<text x="575" y="'+(y-3)+'" font-size="13" font-weight="600" fill="#fff" text-anchor="middle">PCS '+bxN+'0'+(j+1)+'</text>';
-    g+='<text x="575" y="'+(y+16)+'" font-size="11" fill="rgba(255,255,255,.92)" text-anchor="middle">'+cabTxt[j]+'</text>';
-    /* PCS → 电池舱 */
-    g+='<line x1="650" y1="'+y+'" x2="700" y2="'+y+'" stroke="#DCE2EA" stroke-width="2"/>';
-    /* 电池舱块 */
-    g+='<rect x="700" y="'+(y-32)+'" width="196" height="64" rx="7" fill="#fff" stroke="'+bc+'" stroke-width="2"/>';
-    g+='<rect x="718" y="'+(y-18)+'" width="34" height="36" rx="4" fill="rgba(0,180,42,.10)" stroke="'+bc+'" stroke-width="1.2"/>';
-    g+='<rect x="726" y="'+(y-24)+'" width="18" height="6" rx="3" fill="'+bc+'" opacity=".75"/>';
-    g+='<text x="766" y="'+(y-6)+'" font-size="12.5" font-weight="600" fill="#1D2129">电池舱 '+bxN+'-'+(j+1)+'</text>';
-    g+='<text x="766" y="'+(y+16)+'" font-size="11" fill="#86909C">SOC '+socv[j]+'%</text>';
-    /* 右侧数值 */
-    g+='<text x="928" y="'+(y-14)+'" font-size="11.5" fill="#4E5969">U(V) '+t.uab+'</text>';
-    g+='<text x="1060" y="'+(y-14)+'" font-size="11.5" fill="#4E5969">I(A) '+t.ia+'</text>';
-    g+='<text x="1180" y="'+(y-14)+'" font-size="11.5" fill="#4E5969">P(kW) '+pv[j]+'</text>';
-    g+='<text x="1300" y="'+(y-14)+'" font-size="11.5" fill="#4E5969">Q(kVar) '+qv[j]+'</text>';
-    var un=(+bxN-1)*4+(j+1);g+='<text x="928" y="'+(y+14)+'" font-size="11" fill="#86909C">U'+(un<10?'0'+un:''+un)+' 储能单元　电池舱状态：'+cabTxt[j]+'</text>';
-    if(isWarn){
-      g+='<rect x="496" y="'+(y-34)+'" width="404" height="72" rx="9" fill="none" stroke="#FF7D00" stroke-width="1.6" stroke-dasharray="6 4"/>';
-      g+='<text x="916" y="'+(y+38)+'" font-size="11" fill="#FF7D00">温差异常分支</text>';
-    }
-  }
-
-  /* ---- 底部说明 ---- */
-  g+='<line x1="66" y1="'+(H-34)+'" x2="'+(W-40)+'" y2="'+(H-34)+'" stroke="#F0F1F3"/>';
-  g+='<text x="66" y="'+(H-12)+'" font-size="11" fill="#86909C">接线层级：35kV 并网点 → QF1 高压侧断路器 → 箱变 → QF2 低压侧断路器 → 0.4kV 低压母线 → PCS → 电池舱（共 4 组）。高压侧空载，负荷集中于 0.4kV 侧。数据为模拟数据。</text>';
-
-  document.getElementById('sldSvg').innerHTML='<svg viewBox="0 0 '+W+' '+H+'" style="width:100%;height:auto;display:block">'+g+'</svg>';
-}
-
-// 补两个高压侧默认值
-TXS.forEach(function(t){t.ia0=0;t.ib0=0;t.ic0=0});
-
-/* ================= 箱变列表 ================= */
-(function(){
-  var tb=document.getElementById('txTbody');
-  tb.innerHTML=TXS.map(function(t){
-    return '<tr><td><b>'+t.n+'</b></td><td>'+t.line+'</td><td>'+t.cap+'</td>'+
-      '<td>'+t.ia+' / '+t.ib+' / '+t.ic+'</td>'+
-      '<td>'+t.uab+' / '+t.ubc+' / '+t.uca+'</td>'+
-      '<td>'+t.t[0]+' / '+t.t[1]+' / '+t.t[2]+'</td>'+
-      '<td style="'+(t.core>=75?'color:#F53F3F;font-weight:600':'')+'">'+t.core+'</td>'+
-      '<td>'+t.p+' / '+t.q+'</td>'+
-      '<td><span class="dot" style="background:'+(t.bad?'#FF7D00':'#00B42A')+'"></span>'+(t.bad?'温度预警':'正常')+'</td></tr>';
-  }).join('');
-})();
-
-/* ================= 视图切换 ================= */
-(function(){
-  var seg=document.getElementById('viewSeg');
-  seg.querySelectorAll('button').forEach(function(b){
-    b.onclick=function(){
-      seg.querySelector('.active').classList.remove('active');b.classList.add('active');
-      document.getElementById('viewSld').style.display=(b.dataset.v==='sld')?'':'none';
-      document.getElementById('viewTab').style.display=(b.dataset.v==='tab')?'':'none';
-    };
-  });
 })();
 
 /* ================= 趋势曲线 ================= */
