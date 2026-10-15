@@ -3527,7 +3527,7 @@ select{height:32px;border:1px solid var(--border);border-radius:6px;padding:0 10
 
   <div class="toolbar">
     <span class="seg" id="viewSeg"><button class="active" data-v="sld">一次系统图</button><button data-v="grid">电池舱态势矩阵</button><button data-v="pcs">PCS态势矩阵</button><button data-v="rvt">箱变态势矩阵</button></span>
-    <span class="tag tag-gray">数据刷新时间：2026-09-18 15:58:12</span>
+    <span class="tag tag-gray">数据刷新：2026-09-18 15:58:12</span>
     <span style="margin-left:auto;display:flex;gap:10px">
       <button class="btn">全屏</button>
     </span>
@@ -4038,7 +4038,7 @@ var UMAX=5, DMIN=6;
   var di=0;for(var i=0;i<dis.length;i++)if(dis[i]>dis[di])di=i;
   g+='<circle cx="'+X(di).toFixed(1)+'" cy="'+YP(-dis[di]).toFixed(1)+'" r="3.5" fill="#fff" stroke="#00B42A" stroke-width="2"/>';
   g+='<text x="'+(X(di)-4).toFixed(1)+'" y="'+(YP(-dis[di])+18).toFixed(1)+'" font-size="11" fill="#00B42A" text-anchor="middle">放电峰值 '+dis[di].toFixed(1)+'MW</text>';
-  g+='<text x="'+PL+'" y="'+(H-10)+'" font-size="11" fill="#86909C">纵轴左：有功功率 MW（正值充电 / 负值放电） · 纵轴右：SOC %</text>';
+  g+='<text x="'+PL+'" y="'+(H-10)+'" font-size="0" fill="#86909C">纵轴左：有功功率 MW（正值充电 / 负值放电） · 纵轴右：SOC %</text>';
 
   var _tc=document.getElementById('trendChart');if(_tc)_tc.innerHTML='<svg viewBox="0 0 '+W+' '+H+'" style="width:100%;height:auto;display:block">'+g+'</svg>';
 })();
@@ -4113,7 +4113,7 @@ select{height:32px;border:1px solid var(--border);border-radius:6px;padding:0 10
     <select id="cabinSel"></select>
     <button class="arrow" id="nextC">›</button>
     <span class="tag tag-green" id="cabinSt"></span>
-    <span class="tag tag-gray">数据刷新：2026-09-18 15:58:12</span>
+    <span class="tag tag-gray">数据刷新：2026-09-18 15:58:10</span>
     <span style="margin-left:auto;display:flex;gap:10px">
 
     </span>
@@ -4165,7 +4165,7 @@ select{height:32px;border:1px solid var(--border);border-radius:6px;padding:0 10
 
     <!-- 右：性能对比 -->
     <div class="card">
-      <div class="card-t">性能对比 <span class="cnt">簇单体最高温度 / 簇单体最低电压对比</span>
+      <div class="card-t">电池簇性能 <span class="cnt">簇单体最高温度 / 簇单体最低电压对比</span>
         <span class="seg" style="margin-left:auto;font-weight:400" id="metricSeg">
           <button class="active" data-m="℃">簇单体最高温度</button><button data-m="v">簇单体最低电压对比</button>
         </span>
@@ -4374,8 +4374,9 @@ tbody tr:hover td{background:#F7FAFF}
     <span style="font-size:13px;font-weight:600">PCS</span>
     <button class="arrow" id="prevP">‹</button>
     <select id="pcsSel"></select>
-    <button class="arrow" id="nextP">›</button>
-    <span class="tag tag-gray" id="pcsSt">运行状态：待机</span>
+    <button class="arrow" id="nextP">›</button>  
+	<span class="tag tag-gray">数据刷新：2026-09-18 15:48:10</span>	
+    <span class="tag tag-gray" id="pcsSt"></span>
     <span style="margin-left:auto;display:flex;gap:10px;align-items:center">
 
     </span>
@@ -4409,7 +4410,7 @@ tbody tr:hover td{background:#F7FAFF}
 
     <!-- 右侧 KPI -->
     <div class="card">
-      <div class="card-t">运行指标 <span class="cnt">实时值 · 2026-09-18 15:58:12</span>
+      <div class="card-t">运行指标 <span class="cnt"></span>
         <span class="more" onclick="go('analysis-trend')">趋势分析 ›</span>
       </div>
       <div class="kgrid">
@@ -4443,7 +4444,7 @@ tbody tr:hover td{background:#F7FAFF}
 
   <!-- 趋势分析 -->
   <div class="card">
-    <div class="card-t">趋势分析 <span class="cnt">2026-09-18 00:00 - 15:58 · 采样间隔 1 分钟</span>
+    <div class="card-t">数据分析 </span>
       <span class="more" onclick="go('analysis-custom')">自定义曲线 ›</span>
     </div>
     <div id="pcsChart"></div>
@@ -4482,7 +4483,7 @@ var PCSLIST=[];
     var st=(idx===2)?'通信异常':(idx%5===1?'充电':'待机');
     var el=document.getElementById('pcsSt');
     el.className='tag '+(st==='通信异常'?'tag-orange':(st==='充电'?'tag-blue':'tag-gray'));
-    el.textContent='运行状态：'+st;
+
     document.getElementById('dSt').textContent=st;
   }
   sel.onchange=function(){idx=PCSLIST.map(function(p){return p.id}).indexOf(sel.value);sync()};
@@ -4539,7 +4540,7 @@ function drawPcsChart(mode){
       g+='<text x="'+(W-PR+8)+'" y="'+(+y2+4)+'" font-size="11" fill="#FF7D00">'+k+'</text>';
     }
   }
-  g+='<text x="'+PL+'" y="'+(H-10)+'" font-size="11" fill="#86909C">左轴：功率 kW（正值充电 / 负值放电）'+(mode==='c'?' · 右轴：IGBT 温度 ℃':'')+'</text>';
+  g+='<text x="'+PL+'" y="'+(H-10)+'" font-size="0" fill="#86909C">左轴：功率 kW（正值充电 / 负值放电）'+(mode==='c'?' · 右轴：IGBT 温度 ℃':'')+'</text>';
   document.getElementById('pcsChart').innerHTML='<svg viewBox="0 0 '+W+' '+H+'" style="width:100%;height:auto;display:block">'+g+'</svg>';
 }
 (function(){
@@ -4632,10 +4633,11 @@ tbody tr:hover td{background:#F7FAFF}
     <button class="arrow" id="prevT">‹</button>
     <select id="txSel"></select>
     <button class="arrow" id="nextT">›</button>
-    <span class="tag tag-green" id="txSt">运行正常</span>
+    <span class="tag tag-green" id="txSt"> </span>
+	<span class="tag tag-gray">数据刷新：2026-09-18 15:58:10</span>
+
     <span style="margin-left:auto;display:flex;gap:10px">
-      <button class="btn">全屏</button>
-      <button class="btn btn-primary">立即刷新</button>
+    
     </span>
   </div>
 
@@ -4660,7 +4662,7 @@ tbody tr:hover td{background:#F7FAFF}
 
     <!-- 右栏：KPI -->
     <div class="card">
-      <div class="card-t">运行指标 <span class="cnt">储能单元箱变 · 实时值</span>
+      <div class="card-t">运行指标 <span class="cnt"> </span>
         <span class="more" onclick="go('analysis-trend')">趋势分析 ›</span>
       </div>
       <div class="kgrid">
@@ -4688,10 +4690,15 @@ tbody tr:hover td{background:#F7FAFF}
   <!-- V8.29：按页面定义移除一二次单线图与设备列表，仅保留实时指标和趋势分析 -->
   <!-- 趋势分析 -->
   <div class="card">
-    <div class="card-t">趋势分析 <span class="cnt">2026-09-18 00:00 - 15:58 · 有功 / 无功 / 三相温度</span>
+    <div class="card-t">数据分析 </span>
       <span class="more" onclick="go('analysis-custom')">自定义曲线 ›</span>
     </div>
     <div id="txChart"></div>
+	<div class="legend" style="margin-top:10px;justify-content:center;display:flex;gap:20px;font-size:12px;color:var(--text2)">
+      <span><i style="display:inline-block;width:8px;height:8px;border-radius:2px;background:#2E6BE6;margin-right:5px"></i>A相温度（℃）</span>
+      <span><i style="display:inline-block;width:8px;height:8px;border-radius:2px;background:#F0B429;margin-right:5px"></i>B相温度（℃）</span>
+	  <span><i style="display:inline-block;width:8px;height:8px;border-radius:2px;background:#F0B429;margin-right:5px"></i>C相温度（℃）</span>
+    </div>
   </div>
 
 </div>
@@ -4718,7 +4725,6 @@ var TXS=[
     document.getElementById('txSub').textContent=t.line;
     var st=document.getElementById('txSt');
     st.className='tag '+(t.bad?'tag-orange':'tag-green');
-    st.textContent=t.bad?'温度预警':'运行正常';
   }
   sel.onchange=function(){idx=TXS.map(function(t){return t.n}).indexOf(sel.value);sync()};
   document.getElementById('prevT').onclick=function(){idx=(idx-1+TXS.length)%TXS.length;sync()};
@@ -4767,7 +4773,7 @@ var TXS=[
   var yl=YT(75).toFixed(1);
   g+='<line x1="'+PL+'" y1="'+yl+'" x2="'+(W-PR)+'" y2="'+yl+'" stroke="#F53F3F" stroke-width="1.2" stroke-dasharray="6 4" opacity=".7"/>';
   g+='<text x="'+(W-PR-6)+'" y="'+(+yl-6)+'" font-size="11" fill="#F53F3F" text-anchor="end">温度报警阈值 75℃</text>';
-  g+='<text x="'+PL+'" y="'+(H-10)+'" font-size="11" fill="#86909C">左轴：低压侧 P(kW) / Q(kVar，缩放) · 右轴：三相温度(℃)</text>';
+  g+='<text x="'+PL+'" y="'+(H-10)+'" font-size="0" fill="#86909C">左轴：低压侧 P(kW) / Q(kVar，缩放) · 右轴：三相温度(℃)</text>';
   document.getElementById('txChart').innerHTML='<svg viewBox="0 0 '+W+' '+H+'" style="width:100%;height:auto;display:block">'+g+'</svg>';
 })();
 </script>
