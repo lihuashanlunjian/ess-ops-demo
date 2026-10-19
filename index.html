@@ -3,7 +3,7 @@
 <head data-page-node-id="4R3UKsQFEvh62YnVE15iLw">
 <meta charset="utf-8" data-page-node-id="M0owZIONJ00cT273oQbtMX" />
 <meta name="viewport" content="width=device-width,initial-scale=1" data-page-node-id="oCfAatH5krPB2C72zpB4RZ" />
-<title>储能电站智能运维系统 · 示范页面 v8.29</title>
+<title>储能电站智能运维系统 · 示范页面 v8.30</title>
 <style>
 :root{--blue:#2E6BE6;--blue2:#5B8DEF;--text:#1F2329;--text2:#4E5560;--muted:#9AA1AB;--bg:#F5F7FA;--card:#fff;--line:#E5E8EE;--linesoft:#EFF1F5;--green:#2BA471;--green-soft:#E8F6F0;--orange:#F7931E;--orange-soft:#FEF4E5;--red:#F0453B;--red-soft:#FDEEED;--blue-soft:#EBF2FD;--violet:#7B61E0;--shadow:0 1px 2px rgba(31,35,41,.04),0 4px 16px rgba(31,35,41,.06)}
 :root[data-theme="classic-white"]{--bg:#FFFFFF;--card:#FFFFFF;--line:#E8EBF1;--linesoft:#F2F4F8;--shadow:0 1px 2px rgba(31,35,41,.04),0 4px 14px rgba(31,35,41,.05)}
@@ -2902,23 +2902,20 @@ function dfStats(){
  var avg=rs.length?rs.reduce(function(a,b){return a+b.resp},0)/rs.length:0;
  return {l1:l1,l1d:l1d,pend:pend,over:over,avg:avg,month:42,closed:31};
 }
-function deviceFaultPage(){
+function deviceFaultPage(){ 
  var s=dfStats(),catList=[],seen={};
  dfRows().forEach(function(r){if(!seen[r.cat]){seen[r.cat]=1;catList.push(r.cat)}});
  return '<div class="df">'
- +'<div class="page-head"><div><h1 class="title">设备故障</h1><div class="subtitle">预警中心 · 设备故障告警查询与处置 · 本页为交互演示数据 · 更新时间 2026-09-28 15:35</div></div>'
- +'<div class="actions"><button class="secondary" onclick="openDrawer()">字段说明</button><button class="primary" id="dfExport" type="button">导出</button></div></div>'
- +'<div class="df-banner"><span class="ic" aria-hidden="true">!</span><div class="bd">'
- +'<p class="t">当前有 '+s.l1+' 条一级严重故障待处理</p>'
- +'<p class="d">包括：通讯中断、直流过压、单体压差超限　·　平均响应时长 '+Math.round(s.avg)+' 分钟　·　待处理总数 '+s.pend+' 条（含超时 '+s.over+' 条）</p></div>'
- +'<button class="df-btn dang" id="dfDispatch" type="button">一键派单</button></div>'
+ +'<div class="page-head"><div><h1 class="title">设备故障</h1></div>'
+ +'<div class="actions"></div></div>'
+
  +'<div class="df-kpis">'
- +'<div class="df-kpi r"><div class="l">一级故障</div><div class="v">'+s.l1+'<small>条</small></div><div class="d">已派单 <b>'+s.l1d+'</b></div></div>'
- +'<div class="df-kpi b"><div class="l">待处理总数</div><div class="v">'+s.pend+'<small>条</small></div><div class="d">含超时 <b>'+s.over+'</b> 条</div></div>'
- +'<div class="df-kpi o"><div class="l">平均响应时长</div><div class="v">'+Math.round(s.avg)+'<small>min</small></div><div class="d">SLA：<b>60 min</b></div></div>'
- +'<div class="df-kpi g"><div class="l">本月故障总数</div><div class="v">'+s.month+'<small>条</small></div><div class="d">已闭环 <b>'+s.closed+'</b> 条</div></div></div>'
- +'<div class="df-panel"><h3 class="df-pt">告警查询<span class="hint">下方列表为今日告警明细；本月累计 '+s.month+' 条、已闭环 '+s.closed+' 条</span></h3>'
+ +'<div class="df-kpi r"><div class="l">一级故障</div><div class="v">'+s.l1+'<small>条</small></div></div>'
+ +'<div class="df-kpi b"><div class="l">待处理总数</div><div class="v">'+s.pend+'<small>条</small></div></div>'
+ +'<div class="df-kpi g"><div class="l">本月故障总数</div><div class="v">'+s.month+'<small>条</small></div></div></div>'
+ +'<div class="df-panel"><h3 class="df-pt">告警查询<span class="hint">  </span></h3>'
  +'<div class="df-filter">'
+
  +'<label class="df-f"><span>告警分类:</span><select id="dfCat"><option value="">请选择</option>'+catList.map(function(c){return '<option>'+c+'</option>'}).join('')+'</select></label>'
  +'<label class="df-f"><span>恢复状态:</span><select id="dfState"><option value="">请选择</option><option>未恢复</option><option>已恢复</option></select></label>'
  +'<label class="df-f"><span>确认状态:</span><select id="dfAck"><option value="">请选择</option><option>待确认</option><option>已确认</option><option>已派单</option></select></label>'
@@ -2934,7 +2931,7 @@ function deviceFaultPage(){
  +'<th>序号</th><th>逻辑设备名称</th><th>设备类型</th><th>告警来源</th><th>告警分类</th><th>告警等级</th>'
  +'<th>告警发生时间</th><th>告警时长</th><th>恢复状态</th><th>恢复时间</th><th>确认状态</th><th>事件 ID</th><th>操作</th>'
  +'</tr></thead><tbody id="dfBody"></tbody></table></div>'
- +'<p class="df-note">说明：本页数据为模拟数据，用于演示故障告警的查询、确认与派单流程；一键派单与批量确认仅改变页面状态，不产生真实工单。</p></div></div>';
+ +'</div></div>';
 }
 function dfRender(){
  var body=document.getElementById('dfBody');if(!body)return;
@@ -2959,7 +2956,6 @@ function dfRender(){
    +(r.state==='未恢复'?'<button class="df-link" data-disp="'+r.i+'" type="button">派单</button>':'')+'</span></td></tr>'
   +'<tr class="df-row-det" id="dfDet'+r.i+'" hidden><td colspan="14"><div class="df-det">'
    +'<span>事件 ID：<b>EV2026'+String(900+r.i)+'</b></span><span>告警来源：<b>'+r.src+'</b></span>'
-   +'<span>响应时长：<b>'+(typeof r.resp==='number'?r.resp+' min':'未响应')+'</b></span>'
    +'<span>确认状态：<b>'+r.ack+'</b></span>'
    +'<span>处置建议：<b>'+(r.level==='一级'?'立即派单，30 分钟内到场核实并做安全隔离':'纳入常规巡检，24 小时内闭环')+'</b></span>'
    +'</div></td></tr>'}).join(''):'<tr><td colspan="14" class="df-empty">没有符合筛选条件的告警记录<br><small>可重置筛选条件后重新查询</small></td></tr>';
@@ -2993,11 +2989,8 @@ function dfRefreshKpi(){
  var s=dfStats(),K=document.querySelectorAll('.df .df-kpi');
  if(K.length<4)return;
  K[0].querySelector('.v').innerHTML=s.l1+'<small>条</small>';K[0].querySelector('.d').innerHTML='已派单 <b>'+s.l1d+'</b>';
- K[1].querySelector('.v').innerHTML=s.pend+'<small>条</small>';K[1].querySelector('.d').innerHTML='含超时 <b>'+s.over+'</b> 条';
  K[2].querySelector('.v').innerHTML=Math.round(s.avg)+'<small>min</small>';
- var b=document.querySelector('.df .df-banner .t');if(b)b.textContent='当前有 '+s.l1+' 条一级严重故障待处理';
  var bd=document.querySelector('.df .df-banner .d');
- if(bd)bd.textContent='包括：通讯中断、直流过压、单体压差超限　·　平均响应时长 '+Math.round(s.avg)+' 分钟　·　待处理总数 '+s.pend+' 条（含超时 '+s.over+' 条）';
 }
 window.__dfInit=function(){
  if(!document.getElementById('dfBody'))return;
@@ -3143,12 +3136,12 @@ tbody tr:hover td{background:#F7FAFF}
 
   <!-- ===== 总揽全局 KPI ===== -->
   <div class="kpis">
-    <div class="kpi p"><div class="bar"></div><div class="l">装机规模</div><div class="v">200<i>MWh</i></div><div class="d">100MW / 2 个储能分区</div></div>
-    <div class="kpi"><div class="bar"></div><div class="l">实时有功功率</div><div class="v">86.4<i>MW</i></div><div class="d">调度指令 <em>86.0MW</em> · 偏差 0.5%</div></div>
-    <div class="kpi g"><div class="bar"></div><div class="l">设备在线率</div><div class="v">98.3<i>%</i></div><div class="d">离线 2 台 <em class="down">↓ 0.3%</em></div></div>
-    <div class="kpi o"><div class="bar"></div><div class="l">平均 SOC</div><div class="v">62.4<i>%</i></div><div class="d">簇间极差 <em>3.1%</em></div></div>
-    <div class="kpi g"><div class="bar"></div><div class="l">当日充电量</div><div class="v">128.6<i>MWh</i></div><div class="d">较昨日 <em class="up">↑ 4.2%</em></div></div>
-    <div class="kpi r"><div class="bar"></div><div class="l">待处理预警</div><div class="v">13<i>条</i></div><div class="d">高风险 <em class="up">3</em> · 超期 <em class="up">2</em></div></div>
+    <div class="kpi p"><div class="bar"></div><div class="l">装机规模</div><div class="v">200<i>MWh</i></div></div>
+    <div class="kpi"><div class="bar"></div><div class="l">实时有功功率</div><div class="v">86.4<i>MW</i></div></div>
+    <div class="kpi g"><div class="bar"></div><div class="l">设备在线率</div><div class="v">98.3<i>%</i></div></div>
+    <div class="kpi o"><div class="bar"></div><div class="l">平均 SOC</div><div class="v">62.4<i>%</i></div></div>
+    <div class="kpi g"><div class="bar"></div><div class="l">当日充电量</div><div class="v">128.6<i>MWh</i></div></div>
+    <div class="kpi r"><div class="bar"></div><div class="l">待处理预警</div><div class="v">13<i>条</i></div> </div>
   </div>
 
   <!-- ===== 待办置顶 + 重点风险 ===== -->
@@ -3226,7 +3219,7 @@ tbody tr:hover td{background:#F7FAFF}
         <div>
           <div class="t1">01-2 电池舱 绝缘性能劣化</div>
           <div class="t2">绝缘阻值连续 3 天下降（0.61→0.32 MΩ），冷却液电导率超标，已接近保护定值</div>
-          <div class="t3" onclick="go('monitor-cabin')">查看电池舱 ›</div>
+          <div class="t3" onclick="go('analysis-trend')">查看趋势分析 ›</div>
         </div>
       </div>
       <div class="risk b">
@@ -3299,9 +3292,7 @@ tbody tr:hover td{background:#F7FAFF}
             <td>—</td><td><button class="btn">重试</button></td></tr>
         </tbody>
       </table>
-      <div style="margin-top:12px;background:#FFF7E8;border:1px solid #FFE4BA;border-radius:6px;padding:10px 12px;font-size:12px;color:#B76E00;line-height:1.7">
-        <b>失败原因：</b>储能单元充放电报表 — 数据源 <span style="font-family:Consolas,monospace">ems.unit.energy</span> 在 09-17 02:00 存在 3 个采样断点，未通过完整性校验。请补充数据后重试，或调整为「按日汇总」口径重新生成。
-      </div>
+
     </div>
   </div>
 
@@ -4445,7 +4436,7 @@ tbody tr:hover td{background:#F7FAFF}
   <!-- 趋势分析 -->
   <div class="card">
     <div class="card-t">数据分析 </span>
-      <span class="more" onclick="go('analysis-custom')">自定义曲线 ›</span>
+      <span class="more" onclick="go('analysis-custom')">自定义曲线分析 ›</span>
     </div>
     <div id="pcsChart"></div>
     <div class="legend" style="margin-top:10px;justify-content:center;display:flex;gap:20px;font-size:12px;color:var(--text2)">
@@ -4691,7 +4682,7 @@ tbody tr:hover td{background:#F7FAFF}
   <!-- 趋势分析 -->
   <div class="card">
     <div class="card-t">数据分析 </span>
-      <span class="more" onclick="go('analysis-custom')">自定义曲线 ›</span>
+      <span class="more" onclick="go('analysis-custom')">自定义曲线分析 ›</span>
     </div>
     <div id="txChart"></div>
 	<div class="legend" style="margin-top:10px;justify-content:center;display:flex;gap:20px;font-size:12px;color:var(--text2)">
@@ -4725,6 +4716,7 @@ var TXS=[
     document.getElementById('txSub').textContent=t.line;
     var st=document.getElementById('txSt');
     st.className='tag '+(t.bad?'tag-orange':'tag-green');
+    st.textContent=t.bad?'温度预警':'运行正常';
   }
   sel.onchange=function(){idx=TXS.map(function(t){return t.n}).indexOf(sel.value);sync()};
   document.getElementById('prevT').onclick=function(){idx=(idx-1+TXS.length)%TXS.length;sync()};
@@ -4842,27 +4834,23 @@ tbody tr:hover td{background:#F7F8FA}
 
   <!-- 统计卡片区 -->
   <div class="stats">
-    <div class="stat" style="--c:var(--primary)"><div class="label">本月巡检任务</div><div class="value">42</div><div class="sub">完成 36 · 进行中 4 · 失败 2</div></div>
-    <div class="stat" style="--c:var(--green)"><div class="label">完成率</div><div class="value">85.7%</div><div class="sub">较上月 <span class="up">+3.2%</span></div></div>
-    <div class="stat" style="--c:var(--orange)"><div class="label">异常项点</div><div class="value">128</div><div class="sub">已处理 96 · 处理中 20</div></div>
-    <div class="stat" style="--c:var(--red)"><div class="label">待整改</div><div class="value" id="overdueNum" style="cursor:pointer">12</div><div class="sub" style="color:var(--red)">超时 3</div></div>
+    <div class="stat" style="--c:var(--primary)"><div class="label">本月巡检任务</div><div class="value">42</div></div>
+    <div class="stat" style="--c:var(--green)"><div class="label">完成率</div><div class="value">85.7%</div></div>
+    <div class="stat" style="--c:var(--orange)"><div class="label">异常项点</div><div class="value">128</div></div>
+    <div class="stat" style="--c:var(--red)"><div class="label">待整改</div><div class="value" id="overdueNum" style="cursor:pointer">12</div></div>
   </div>
 
-  <!-- 标准化巡检规则说明条 -->
-  <div class="rule-bar">
-    <span class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#2E6BE6" stroke-width="1.8"/><path d="M12 8v.5M12 11v5" stroke="#2E6BE6" stroke-width="1.8" stroke-linecap="round"/></svg></span>
-    <span><b>标准化巡检规则（内置，自动加载）</b>：周巡检每 7 天一次，覆盖电池温度、压差、SOC、SOH、连接件、线缆、冷机、消防等 28 项基础项；月巡检每 30 天一次，覆盖 PCS 效率、BMS 校准、绝缘电阻、接地电阻等 18 项深度项；特殊巡检由高温、台风、暴雨天气自动触发。项点阈值动态加载自【配置中心-基础项点】，规则变更自动同步。</span>
-  </div>
+
 
   <div class="card">
     <!-- 巡检类型 Tab -->
     <div class="tabs" id="typeTabs">
       <div class="tab active" data-t="all">全部</div>
-      <div class="tab" data-t="day">日巡检</div>
-      <div class="tab" data-t="week">周巡检</div>
-      <div class="tab" data-t="month">月巡检</div>
-      <div class="tab" data-t="special">特殊巡检</div>
       <div class="tab" data-t="season">夏冬季普查巡检</div>
+      <div class="tab" data-t="special">PCS炸机巡检</div>
+	  <div class="tab" data-t="special">高温巡检</div>
+	  <div class="tab" data-t="special">特殊巡检</div>
+  
     </div>
 
     <div class="filters" style="margin-bottom:14px">
@@ -4995,7 +4983,7 @@ document.getElementById('btnReset').onclick=function(){
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>体检报告</title>
 <style>
-:root{--primary:#2E6BE6;--red:#F53F3F;--orange:#FF7D00;--info:#6B7FF0;--green:#00B42A;--warn-bg:#FFF7E8;--bg:#F5F7FA;--text:#1D2129;--text2:#86909C;--border:#E5E6EB}
+:root{--primary:#2E6BE6;--red:#F53F3F;--orange:#FF7D00;--info:#6B7FF0;--green:#00B42A;--warn-bg:#FFF7E8;--bg:#F5F7FA;--text:#1D2129;--text2:#86909C;--border:#E5E6EB;--blue-soft:#F2F6FF}
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:"PingFang SC","Microsoft YaHei","Helvetica Neue",Arial,sans-serif;background:var(--bg);color:var(--text);font-size:13px}
 .page{padding:16px;min-width:1080px}
@@ -5008,9 +4996,47 @@ body{font-family:"PingFang SC","Microsoft YaHei","Helvetica Neue",Arial,sans-ser
 .btn[disabled]{opacity:.45;cursor:not-allowed}
 .tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:12px;line-height:18px;white-space:nowrap}
 .tag-green{background:#E8FFEA;color:#00B42A}.tag-red{background:#FFECE8;color:#F53F3F}.tag-orange{background:#FFF7E8;color:#FF7D00}
+.tag-blue{background:#E8F0FF;color:#2E6BE6}.tag-gray{background:#F2F3F5;color:#86909C}
 .opbar{display:flex;flex-wrap:wrap;gap:12px 16px;align-items:flex-end}
 .field label{display:block;color:var(--text2);font-size:12px;margin-bottom:6px}
 .field select,.field input{height:32px;border:1px solid var(--border);border-radius:6px;padding:0 10px;font-size:13px;color:var(--text);background:#fff;min-width:170px;font-family:inherit}
+.field input[type=date]{min-width:138px}
+#tplSel{min-width:186px}
+/* ---- 单设备选择器 ---- */
+.dev-field{position:relative}
+.dev-field .req{color:var(--red);margin-left:2px}
+.dev-pick{display:flex;align-items:center;height:32px;border:1px solid var(--border);border-radius:6px;background:#fff;transition:border-color .18s,box-shadow .18s}
+.dev-pick:focus-within{border-color:var(--primary);box-shadow:0 0 0 3px rgba(46,107,230,.10)}
+.dev-pick.filled{border-color:var(--primary);background:var(--blue-soft)}
+.dev-pick select{border:none;height:30px;min-width:186px;background:transparent;padding:0 4px 0 10px;color:var(--primary);font-weight:500}
+.dev-pick select:focus{outline:none}
+.dev-pick.filled select{color:#2458C4}
+.dev-pick .clr{width:26px;height:30px;flex:none;border:none;background:transparent;color:var(--text2);font-size:15px;line-height:1;cursor:pointer;border-radius:0 6px 6px 0;visibility:hidden}
+.dev-pick.filled .clr{visibility:visible}
+.dev-pick .clr:hover{color:var(--red);background:#FFF1F0}
+.dev-field.hide{display:none}
+@keyframes fieldIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.dev-field.enter{animation:fieldIn .26s ease-out}
+/* ---- 体检对象分段 + 锁定态 ---- */
+.obj-seg{display:inline-flex;background:#F2F3F5;border-radius:6px;padding:2px}
+.obj-seg button{border:none;background:transparent;height:26px;padding:0 12px;border-radius:4px;cursor:pointer;font-size:12px;color:var(--text2);font-family:inherit;transition:.15s}
+.obj-seg button.active{background:var(--primary);color:#fff}
+.obj-seg button.locked{color:#C9CDD4;cursor:not-allowed}
+.obj-seg button.locked:hover{color:#A9AEB8}
+/* ---- 提示条 ---- */
+.tipbar{display:flex;align-items:center;gap:6px;font-size:12px;margin-top:12px;padding:8px 10px;border-radius:6px;line-height:1.5}
+.tipbar.warn{background:var(--warn-bg);color:#B25E00}
+.tipbar.ok{background:var(--blue-soft);color:#2458C4}
+.tipbar.info{background:#F7F8FA;color:var(--text2)}
+.tipbar b{font-weight:600}
+/* ---- 设备概要 ---- */
+.devbrief{display:flex;align-items:center;gap:10px 18px;flex-wrap:wrap;margin-top:10px;padding:10px 12px;border:1px dashed #BFD3FA;background:#F7FAFF;border-radius:6px;font-size:12px;color:var(--text2)}
+.devbrief .nm{font-size:13px;font-weight:600;color:var(--text)}
+.devbrief .kv b{color:var(--text);font-weight:600;font-variant-numeric:tabular-nums;margin-left:4px}
+.devbrief .lnk{margin-left:auto;color:var(--primary);cursor:pointer;font-size:12px}
+.devbrief .lnk:hover{text-decoration:underline}
+.devbrief.hide{display:none}
+/* ---- 结果区 ---- */
 .sumgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
 .sumitem{padding:12px 16px;border-right:1px dashed var(--border)}
 .sumitem:nth-child(4n){border-right:none}
@@ -5018,14 +5044,24 @@ body{font-family:"PingFang SC","Microsoft YaHei","Helvetica Neue",Arial,sans-ser
 .sumitem .k{font-size:12px;color:var(--text2);margin-bottom:6px}
 .sumitem .v{font-size:20px;font-weight:700;font-variant-numeric:tabular-nums}
 .advice{font-size:13px;line-height:1.9;color:var(--text)}
-.empty{padding:56px 0;text-align:center;color:var(--text2)}
-.empty svg{margin-bottom:10px}
 table{width:100%;border-collapse:collapse}
 th{background:#F7F8FA;color:var(--text2);font-weight:500;font-size:13px;text-align:left;padding:0 10px;height:40px;white-space:nowrap}
 td{padding:0 10px;height:48px;border-bottom:1px solid var(--border);font-size:13px;white-space:nowrap}
-.obj-seg{display:inline-flex;background:#F2F3F5;border-radius:6px;padding:2px;margin-left:auto}
-.obj-seg button{border:none;background:transparent;height:26px;padding:0 12px;border-radius:4px;cursor:pointer;font-size:12px;color:var(--text2)}
-.obj-seg button.active{background:var(--primary);color:#fff}
+.dimrow{display:flex;align-items:center;gap:10px;padding:7px 0}
+.dimrow .nm{width:96px;font-size:12px;color:var(--text2);flex:none}
+.dimrow .bar{flex:1;height:8px;background:#F2F3F5;border-radius:4px;overflow:hidden}
+.dimrow .bar i{display:block;height:100%;border-radius:4px;transition:width .45s ease}
+.dimrow b{width:28px;text-align:right;font-variant-numeric:tabular-nums}
+/* ---- 空态 ---- */
+.emptycard{border:1px dashed #C9D6EE;background:#FCFDFF}
+.empty-in{display:flex;flex-direction:column;align-items:center;text-align:center;padding:26px 12px 30px}
+.empty-in h4{font-size:15px;font-weight:600;margin:12px 0 6px}
+.empty-in p{font-size:12.5px;color:var(--text2);line-height:1.7;max-width:520px}
+.recs{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:16px}
+.rec{display:flex;align-items:center;gap:8px;height:34px;padding:0 14px;border:1px solid #D6E2FA;background:#fff;border-radius:17px;font-size:12.5px;color:var(--text);cursor:pointer;font-family:inherit;transition:.16s}
+.rec:hover{border-color:var(--primary);background:var(--blue-soft);transform:translateY(-1px)}
+.rec span{color:var(--orange);font-size:11.5px}
+.rec b{font-weight:600}
 @keyframes spin{to{transform:rotate(360deg)}}
 .spin{display:inline-block;width:12px;height:12px;border:2px solid #fff;border-top-color:transparent;border-radius:50%;animation:spin .8s linear infinite}
 </style>
@@ -5036,10 +5072,29 @@ td{padding:0 10px;height:48px;border-bottom:1px solid var(--border);font-size:13
   <!-- 顶部操作区 -->
   <div class="card">
     <div class="opbar">
-      <div class="field"><label>体检时间范围</label><span style="display:flex;align-items:center;gap:8px"><input type="date" value="2026-08-04"><span style="color:var(--text2)">→</span><input type="date" value="2026-09-04"></span></div>
-      <div class="field"><label>模板</label><select id="tplSel"><option value="">请选择模板</option><option>整站标准体检模板</option><option>电池专项体检模板</option><option>PCS 专项体检模板</option></select></div>
+      <div class="field"><label>体检时间范围</label><span style="display:flex;align-items:center;gap:8px"><input type="date" id="dFrom" value="2026-08-04"><span style="color:var(--text2)">→</span><input type="date" id="dTo" value="2026-09-04"></span></div>
+      <div class="field"><label>模板</label><select id="tplSel">
+        <option value="">请选择模板</option>
+        <optgroup label="整站模板">
+          <option value="site">整站标准体检模板</option>
+        </optgroup>
+        <optgroup label="专项模板 · 单设备">
+          <option value="cabin">电池舱专项体检模板</option>
+          <option value="pcs">PCS 专项体检模板</option>
+          <option value="rvt">箱变专项体检模板</option>
+        </optgroup>
+      </select></div>
       <div class="field"><label>体检对象</label>
-        <span class="obj-seg" style="height:32px;align-items:center;display:inline-flex"><button class="active">整站</button><button>单舱</button></span>
+        <span class="obj-seg" id="objSeg" style="height:32px;align-items:center;display:inline-flex">
+          <button class="active" data-scope="site">整站</button><button data-scope="device">单设备</button>
+        </span>
+      </div>
+      <div class="field dev-field hide" id="devField">
+        <label>体检设备<span class="req">*</span></label>
+        <div class="dev-pick" id="devPick">
+          <select id="devSel"><option value="">请选择电池舱</option></select>
+          <button class="clr" id="devClear" type="button" title="清除选择" aria-label="清除选择">×</button>
+        </div>
       </div>
       <div class="field" style="margin-left:auto"><label>&nbsp;</label>
         <span style="display:flex;gap:10px">
@@ -5048,115 +5103,514 @@ td{padding:0 10px;height:48px;border-bottom:1px solid var(--border);font-size:13
         </span>
       </div>
     </div>
-    <div id="tplTip" style="font-size:12px;color:var(--orange);margin-top:8px">未选择模板时无法开始体检，请先选择模板。</div>
+    <div class="tipbar warn" id="tipBar">未选择模板时无法开始体检，请先选择模板。</div>
+    <div class="devbrief hide" id="devBrief"></div>
   </div>
+
+  <!-- 未选择设备时的空态（专项模板专用） -->
+  <div class="card emptycard" id="reportEmpty" style="display:none">
+    <div class="empty-in">
+      <svg width="64" height="64" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+        <rect x="15" y="12" width="26" height="40" rx="4" stroke="#C9D6EE" stroke-width="2"/>
+        <path d="M21 20h14M21 27h14M21 34h8" stroke="#DCE4F2" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="45" cy="43" r="10" fill="#F5F9FF" stroke="#2E6BE6" stroke-width="2"/>
+        <path d="M52 50l5 5" stroke="#2E6BE6" stroke-width="2.4" stroke-linecap="round"/>
+        <path d="M41 43h8M45 39v8" stroke="#2E6BE6" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <h4 id="empTitle">请选择体检设备</h4>
+      <p id="empDesc">已选择专项模板，请在上方「体检设备」中选择 1 台设备，或直接点击下方推荐对象。</p>
+      <div class="recs" id="recs"></div>
+    </div>
+  </div>
+
+  <!-- 结果区 -->
+  <div id="reportBody">
 
   <!-- 整体表现总结卡 -->
   <div class="card">
     <div class="card-t">整体表现总结</div>
     <div class="sumgrid">
       <div class="sumitem"><div class="k">体检时间范围</div><div class="v" id="sRange" style="font-size:14px">2026-08-04 ~ 2026-09-04</div></div>
-      <div class="sumitem"><div class="k">整站健康评分</div><div class="v" id="sScore" style="color:var(--green)">92</div></div>
+      <div class="sumitem"><div class="k" id="kScore">整站健康评分</div><div class="v" id="sScore" style="color:var(--green)">92</div></div>
       <div class="sumitem"><div class="k">当前选择的体检对象</div><div class="v" id="sObj" style="font-size:14px">整站</div></div>
       <div class="sumitem"><div class="k">运行天数</div><div class="v" id="sDays">108</div></div>
       <div class="sumitem"><div class="k">异常项点</div><div class="v" id="sAbn" style="color:var(--red)">2 项</div></div>
-      <div class="sumitem"><div class="k">总电池组数</div><div class="v" id="sBat">18 组</div></div>
-      <div class="sumitem"><div class="k">总容量</div><div class="v" id="sCap">4.8 MWh</div></div>
+      <div class="sumitem"><div class="k" id="kA">总电池组数</div><div class="v" id="sBat">18 组</div></div>
+      <div class="sumitem"><div class="k" id="kB">总容量</div><div class="v" id="sCap">4.8 MWh</div></div>
       <div class="sumitem"><div class="k">风险等级</div><div class="v" id="sRisk"><span class="tag tag-green">低风险</span></div></div>
     </div>
   </div>
 
-  <!-- V5 新增：健康评分环图 + 分项得分条形图 -->
+  <!-- 健康评分环图 + 分项得分条形图 -->
   <div class="card">
-    <div class="card-t">健康评分与分项表现</div>
+    <div class="card-t">健康评分与分项表现<span id="scoreSub" style="margin-left:auto;font-size:12px;color:var(--text2);font-weight:400"></span></div>
     <div style="display:grid;grid-template-columns:220px 1fr;gap:24px;align-items:center">
       <div style="text-align:center"><svg viewBox="0 0 180 180" style="width:180px;height:180px">
 <circle cx="90" cy="90" r="76" fill="none" stroke="#F2F3F5" stroke-width="14"/>
-<circle cx="90" cy="90" r="76" fill="none" stroke="#00B42A" stroke-width="14" stroke-linecap="round" stroke-dasharray="477.3" stroke-dashoffset="38.2" transform="rotate(-90 90 90)"/>
-<text x="90" y="86" text-anchor="middle" font-size="34" font-weight="700" fill="#00B42A">92</text>
-<text x="90" y="110" text-anchor="middle" font-size="12" fill="#86909C">整站健康评分 / 100</text>
-<text x="90" y="130" text-anchor="middle" font-size="11" fill="#00B42A">低风险 · 环比 +1.8</text>
+<circle id="ringArc" cx="90" cy="90" r="76" fill="none" stroke="#00B42A" stroke-width="14" stroke-linecap="round" stroke-dasharray="477.5" stroke-dashoffset="38.2" transform="rotate(-90 90 90)" style="transition:stroke-dashoffset .5s ease,stroke .3s"/>
+<text id="ringNum" x="90" y="86" text-anchor="middle" font-size="34" font-weight="700" fill="#00B42A">92</text>
+<text id="ringCap" x="90" y="110" text-anchor="middle" font-size="12" fill="#86909C">整站健康评分 / 100</text>
+<text id="ringNote" x="90" y="130" text-anchor="middle" font-size="11" fill="#00B42A">低风险 · 环比 +1.8</text>
 </svg></div>
-      <div><div style="display:flex;align-items:center;gap:10px;padding:7px 0"><span style="width:90px;font-size:12px;color:var(--text2)">电池系统</span><span style="flex:1;height:8px;background:#F2F3F5;border-radius:4px;overflow:hidden"><i style="display:block;height:100%;width:94%;background:#2E6BE6;border-radius:4px"></i></span><b style="width:28px;text-align:right;font-variant-numeric:tabular-nums">94</b></div><div style="display:flex;align-items:center;gap:10px;padding:7px 0"><span style="width:90px;font-size:12px;color:var(--text2)">PCS 与电气</span><span style="flex:1;height:8px;background:#F2F3F5;border-radius:4px;overflow:hidden"><i style="display:block;height:100%;width:91%;background:#2E6BE6;border-radius:4px"></i></span><b style="width:28px;text-align:right;font-variant-numeric:tabular-nums">91</b></div><div style="display:flex;align-items:center;gap:10px;padding:7px 0"><span style="width:90px;font-size:12px;color:var(--text2)">冷机系统</span><span style="flex:1;height:8px;background:#F2F3F5;border-radius:4px;overflow:hidden"><i style="display:block;height:100%;width:89%;background:#2E6BE6;border-radius:4px"></i></span><b style="width:28px;text-align:right;font-variant-numeric:tabular-nums">89</b></div><div style="display:flex;align-items:center;gap:10px;padding:7px 0"><span style="width:90px;font-size:12px;color:var(--text2)">消防系统</span><span style="flex:1;height:8px;background:#F2F3F5;border-radius:4px;overflow:hidden"><i style="display:block;height:100%;width:96%;background:#00B42A;border-radius:4px"></i></span><b style="width:28px;text-align:right;font-variant-numeric:tabular-nums">96</b></div><div style="display:flex;align-items:center;gap:10px;padding:7px 0"><span style="width:90px;font-size:12px;color:var(--text2)">通信与采集</span><span style="flex:1;height:8px;background:#F2F3F5;border-radius:4px;overflow:hidden"><i style="display:block;height:100%;width:93%;background:#2E6BE6;border-radius:4px"></i></span><b style="width:28px;text-align:right;font-variant-numeric:tabular-nums">93</b></div><div style="display:flex;align-items:center;gap:10px;padding:7px 0"><span style="width:90px;font-size:12px;color:var(--text2)">结构与安防</span><span style="flex:1;height:8px;background:#F2F3F5;border-radius:4px;overflow:hidden"><i style="display:block;height:100%;width:95%;background:#00B42A;border-radius:4px"></i></span><b style="width:28px;text-align:right;font-variant-numeric:tabular-nums">95</b></div></div>
+      <div id="dimBox"></div>
     </div>
   </div>
 
-  <!-- V5 新增：近 30 天健康度趋势 -->
+  <!-- 近 30 天健康度趋势 -->
   <div class="card">
-    <div class="card-t">近 30 天健康度趋势<span style="margin-left:auto;font-size:12px;color:var(--text2);font-weight:400">均值 91.2 · 最高 93 · 最低 88</span></div>
-    <svg viewBox="0 0 760 220" style="width:100%;height:220px;display:block"><line x1="34" x2="726" y1="34.0" y2="34.0" stroke="#EEF1F5"/><line x1="34" x2="726" y1="72.0" y2="72.0" stroke="#EEF1F5"/><line x1="34" x2="726" y1="110.0" y2="110.0" stroke="#EEF1F5"/><line x1="34" x2="726" y1="148.0" y2="148.0" stroke="#EEF1F5"/><line x1="34" x2="726" y1="186.0" y2="186.0" stroke="#EEF1F5"/><text x="28" y="38.0" font-size="10" fill="#86909C" text-anchor="end">95</text><text x="28" y="76.0" font-size="10" fill="#86909C" text-anchor="end">93</text><text x="28" y="114.0" font-size="10" fill="#86909C" text-anchor="end">91</text><text x="28" y="152.0" font-size="10" fill="#86909C" text-anchor="end">89</text><text x="28" y="190.0" font-size="10" fill="#86909C" text-anchor="end">87</text><text x="28" y="228.0" font-size="10" fill="#86909C" text-anchor="end">85</text><polygon points="34,186 34.0,140.4 57.9,125.2 81.7,140.4 105.6,110.0 129.4,94.8 153.3,110.0 177.2,125.2 201.0,94.8 224.9,79.6 248.8,94.8 272.6,110.0 296.5,79.6 320.3,64.4 344.2,79.6 368.1,94.8 391.9,79.6 415.8,79.6 439.7,64.4 463.5,79.6 487.4,79.6 511.2,94.8 535.1,79.6 559.0,64.4 582.8,79.6 606.7,94.8 630.6,79.6 654.4,79.6 678.3,64.4 702.1,79.6 726.0,79.6 726,186" fill="#2E6BE6" opacity="0.08"/><polyline points="34.0,140.4 57.9,125.2 81.7,140.4 105.6,110.0 129.4,94.8 153.3,110.0 177.2,125.2 201.0,94.8 224.9,79.6 248.8,94.8 272.6,110.0 296.5,79.6 320.3,64.4 344.2,79.6 368.1,94.8 391.9,79.6 415.8,79.6 439.7,64.4 463.5,79.6 487.4,79.6 511.2,94.8 535.1,79.6 559.0,64.4 582.8,79.6 606.7,94.8 630.6,79.6 654.4,79.6 678.3,64.4 702.1,79.6 726.0,79.6" fill="none" stroke="#2E6BE6" stroke-width="2.5"/><circle cx="726.0" cy="79.6" r="4" fill="#2E6BE6"/><text x="718.0" y="69.6" font-size="11" fill="#2E6BE6" font-weight="600">92</text><text x="34" y="212" font-size="10" fill="#86909C">08-06</text><text x="726" y="212" font-size="10" fill="#86909C" text-anchor="end">09-04</text></svg>
+    <div class="card-t">近 30 天健康度趋势<span id="trendMeta" style="margin-left:auto;font-size:12px;color:var(--text2);font-weight:400">均值 91.2 · 最高 93 · 最低 88</span></div>
+    <div id="trendBox"></div>
   </div>
 
   <!-- 整体运维建议卡 -->
   <div class="card">
-    <div class="card-t">整体运维建议</div>
-    <div class="advice" id="advice">本次体检覆盖 82 项点，发现 <b style="color:var(--red)">2 项异常</b>（均在 #2-1 舱电池系统：单体温度一致性偏差、#2-4 簇压差缓慢扩大）。建议：1）7 天内安排 #2-1 舱专项巡检并复核 BMS 温度采样；2）将 #2-4 簇加入一致性分析周观察清单；3）其余系统运行良好，维持现有周巡检频率。</div>
+    <div class="card-t">整体运维建议<span id="adviceSub" style="margin-left:auto;font-size:12px;color:var(--text2);font-weight:400"></span></div>
+    <div class="advice" id="advice"></div>
   </div>
 
   <!-- 整体健康明细卡 -->
   <div class="card">
-    <div class="card-t">整体健康明细</div>
-    <div id="detailBox">
-      <table><thead><tr><th>体检项分类</th><th>项点数</th><th>正常</th><th>异常</th><th>得分</th><th>结论</th></tr></thead><tbody>
-      <tr><td>电池系统（温度 / 压差 / SOC / SOH）</td><td>28</td><td>26</td><td><b style="color:var(--red)">2</b></td><td>94</td><td><span class="tag tag-orange">注意</span></td></tr>
-      <tr><td>PCS 与电气（效率 / 绝缘 / 接地）</td><td>18</td><td>18</td><td>0</td><td>91</td><td><span class="tag tag-green">正常</span></td></tr>
-      <tr><td>冷机系统（温度 / 液位 / 流量）</td><td>12</td><td>12</td><td>0</td><td>89</td><td><span class="tag tag-green">正常</span></td></tr>
-      <tr><td>消防系统（探测器 / 联动 / 气灭）</td><td>8</td><td>8</td><td>0</td><td>96</td><td><span class="tag tag-green">正常</span></td></tr>
-      <tr><td>通信与采集（BMS / EMS 链路）</td><td>10</td><td>10</td><td>0</td><td>93</td><td><span class="tag tag-green">正常</span></td></tr>
-      <tr><td>结构与安防</td><td>6</td><td>6</td><td>0</td><td>95</td><td><span class="tag tag-green">正常</span></td></tr>
-      </tbody></table>
-    </div>
+    <div class="card-t">整体健康明细<span id="detailSub" style="margin-left:auto;font-size:12px;color:var(--text2);font-weight:400"></span></div>
+    <div id="detailBox"></div>
   </div>
+
+  </div><!-- /reportBody -->
 </div>
 
 <script>
-/* 未选模板禁用开始体检 */
-var tplSel=document.getElementById('tplSel'),btnRun=document.getElementById('btnRun'),tplTip=document.getElementById('tplTip');
-tplSel.addEventListener('change',function(){
-  btnRun.disabled=!tplSel.value;
-  tplTip.style.display=tplSel.value?'none':'block';
-});
+(function(){
+  var $=function(id){return document.getElementById(id)};
+  var tplSel=$('tplSel'), devSel=$('devSel'), devField=$('devField'), devPick=$('devPick'),
+      devBrief=$('devBrief'), tipBar=$('tipBar'), btnRun=$('btnRun'), objSeg=$('objSeg'),
+      body=$('reportBody'), empty=$('reportEmpty');
+  var cur={tpl:'',dev:null};
 
-/* 体检对象切换 */
-Array.prototype.forEach.call(document.querySelectorAll('.obj-seg button'),function(b){
-  b.addEventListener('click',function(){
-    document.querySelector('.obj-seg button.active').classList.remove('active');
-    b.classList.add('active');
-    document.getElementById('sObj').textContent=b.textContent;
+  var p2=function(n){return n<10?'0'+n:''+n};
+
+  /* ================= 设备库 ================= */
+  var DEV_LISTS={};
+  (function(){
+    var cab=[];
+    for(var i=1;i<=6;i++){
+      for(var j=1;j<=4;j++){
+        var no=i+'-'+j, warn=(no==='2-1'||no==='2-4');
+        cab.push({id:'#'+no,name:'#'+no+' 电池舱',unit:p2(i)+' 储能单元',abn:warn?(no==='2-1'?2:1):0,
+          score:warn?(no==='2-1'?86:89):(93+((i*4+j)%4)),
+          soc:'99.'+((i+j)%10)+' %',soh:'98.'+((i+j)%5)+' %',
+          dt:warn?(no==='2-1'?'12.4 ℃':'8.6 ℃'):('2.'+((i+j)%6)+' ℃')});
+      }
+    }
+    DEV_LISTS.cabin=cab;
+
+    var pcs=[];
+    for(var k=1;k<=24;k++){
+      var w=(k===7);
+      pcs.push({id:'PCS-'+p2(k),name:'PCS-'+p2(k),unit:p2(Math.ceil(k/4))+' 储能单元',abn:w?1:0,
+        score:w?88:(92+(k%5)),eff:'98.'+(k%5)+' %',igbt:(w?76:52+(k%11))+' ℃',dc:'7'+(20+k%40)+' V'});
+    }
+    DEV_LISTS.pcs=pcs;
+
+    var rvt=[];
+    for(var m=1;m<=6;m++){
+      var wr=(m===3);
+      rvt.push({id:p2(m),name:p2(m)+' 储能单元箱变',unit:p2(m)+' 储能单元',abn:wr?1:0,
+        score:wr?87:(93+(m%4)),temp:wr?'82.6 ℃':'63.'+(m+2)+' ℃',kva:'1000 kVA',load:(wr?91:62+m*3)+' %'});
+    }
+    DEV_LISTS.rvt=rvt;
+  })();
+
+  var DEVTYPE={
+    cabin:{title:'电池舱',ph:'请选择电池舱',unitLabel:'储能单元',
+      dims:[['电芯一致性',86],['温度管理',90],['绝缘与安全',95],['BMS 采样与通信',92],['热管理（冷机）',88]],
+      rows:[['电芯一致性（电压 / 内阻 / SOC）',6,86],['温度管理（极值 / 温差 / 温升）',5,90],['绝缘与安全（绝缘 / 继电器）',4,95],['BMS 采样与通信',5,92],['热管理（冷机 / 流量 / 压差）',4,88],['消防与结构',2,96]],
+      capK:'电池簇数',capV:'12 簇',powK:'额定容量',powV:'200 kWh'},
+    pcs:{title:'PCS',ph:'请选择 PCS',unitLabel:'储能单元',
+      dims:[['功率模块',88],['直流电容与母排',93],['散热系统',90],['绝缘与接地',95],['并网质量',92]],
+      rows:[['功率模块（IGBT / 驱动）',5,88],['直流电容与母排',4,93],['散热系统（风机 / 风道）',5,90],['绝缘与接地',3,95],['并网质量与保护',5,92]],
+      capK:'功率模块',capV:'3 组',powK:'额定功率',powV:'500 kW'},
+    rvt:{title:'箱变',ph:'请选择箱变',unitLabel:'储能单元',
+      dims:[['绕组与温升',88],['油温与油质',93],['局部放电',95],['低压侧回路',91],['保护与联锁',96]],
+      rows:[['绕组与温升',4,88],['油温与油质',4,93],['局部放电',3,95],['低压侧回路',5,91],['保护与联锁',4,96]],
+      capK:'低压出线',capV:'4 回',powK:'额定容量',powV:'1000 kVA'}
+  };
+
+  var TPL={
+    site :{name:'整站标准体检模板',scope:'site',  type:'site', points:82},
+    cabin:{name:'电池舱专项体检模板',scope:'device',type:'cabin',points:26},
+    pcs  :{name:'PCS 专项体检模板',  scope:'device',type:'pcs',  points:22},
+    rvt  :{name:'箱变专项体检模板',  scope:'device',type:'rvt',  points:20}
+  };
+
+  var SITE={
+    score:92,abn:2,days:108,
+    dims:[['电池系统',94],['PCS 与电气',91],['冷机系统',89],['消防系统',96],['通信与采集',93]],
+    rows:[['电池系统（温度 / 压差 / SOC / SOH）',28,26,2,94,'注意'],['PCS 与电气（效率 / 绝缘 / 接地）',18,18,0,91,'正常'],['冷机系统（温度 / 液位 / 流量）',12,12,0,89,'正常'],['消防系统（探测器 / 联动 / 气灭）',8,8,0,96,'正常'],['通信与采集（BMS / EMS 链路）',10,10,0,93,'正常'],['结构与安防',6,6,0,95,'正常']],
+    advice:'本次体检覆盖 82 项点，发现 <b style="color:var(--red)">2 项异常</b>（均在 #2-1 舱电池系统：单体温度一致性偏差、#2-4 簇压差缓慢扩大）。建议：1）7 天内安排 #2-1 舱专项巡检并复核 BMS 温度采样；2）将 #2-4 簇加入一致性分析周观察清单；3）其余系统运行良好，维持现有周巡检频率。'
+  };
+
+  /* ================= 工具 ================= */
+  function level(score){
+    if(score>=90) return ['低风险','tag-green','var(--green)'];
+    if(score>=85) return ['中风险','tag-orange','var(--orange)'];
+    return ['高风险','tag-red','var(--red)'];
+  }
+  function rangeText(){
+    return ($('dFrom').value||'2026-08-04')+' ~ '+($('dTo').value||'2026-09-04');
+  }
+  function nowHM(){
+    var d=new Date();
+    return p2(d.getHours())+':'+p2(d.getMinutes());
+  }
+  function clamp(v,a,b){return Math.max(a,Math.min(b,v))}
+
+  /* ================= 提示条 ================= */
+  function tip(kind,html){
+    tipBar.className='tipbar '+kind;
+    tipBar.innerHTML=html;
+  }
+
+  /* ================= 体检对象锁定 ================= */
+  function paintScope(scope){
+    Array.prototype.forEach.call(objSeg.querySelectorAll('button'),function(b){
+      var on=b.dataset.scope===scope;
+      b.classList.toggle('active',on);
+      b.classList.toggle('locked',!!cur.tpl && !on);
+      b.title=on?'':(cur.tpl?('当前模板限定为「'+(scope==='device'?'单设备':'整站')+'」体检'):'请先选择模板');
+    });
+  }
+
+  /* ================= 设备选择器 ================= */
+  function fillDevices(type){
+    var list=DEV_LISTS[type], meta=DEVTYPE[type], html='<option value="">'+meta.ph+'</option>';
+    var label=function(d){
+      return d.name+(d.abn?(' · 预警 '+d.abn+' 项'):' · 正常');
+    };
+    if(type==='rvt'){
+      list.forEach(function(d){html+='<option value="'+d.id+'">'+label(d)+'</option>'});
+    }else{
+      var groups={},order=[];
+      list.forEach(function(d){
+        if(!groups[d.unit]){groups[d.unit]=[];order.push(d.unit)}
+        groups[d.unit].push(d);
+      });
+      order.forEach(function(u){
+        html+='<optgroup label="'+u+'">';
+        groups[u].forEach(function(d){html+='<option value="'+d.id+'">'+label(d)+'</option>'});
+        html+='</optgroup>';
+      });
+    }
+    devSel.innerHTML=html;
+    devSel.value='';
+    devPick.classList.remove('filled');
+    devBrief.classList.add('hide');
+  }
+  function showDevField(){
+    if(devField.classList.contains('hide')){
+      devField.classList.remove('hide');
+      devField.classList.add('enter');
+      setTimeout(function(){devField.classList.remove('enter')},300);
+    }
+  }
+  function hideDevField(){
+    devField.classList.add('hide');
+    devBrief.classList.add('hide');
+  }
+
+  /* ================= 设备概要 ================= */
+  function paintBrief(type,d){
+    var meta=DEVTYPE[type], extra='';
+    if(type==='cabin') extra=[['电池簇','12 簇'],['SOH',d.soh],['簇内温差',d.dt]];
+    if(type==='pcs')   extra=[['额定功率','500 kW'],['效率',d.eff],['IGBT 温度',d.igbt]];
+    if(type==='rvt')   extra=[['容量',d.kva],['绕组温度',d.temp],['负载率',d.load]];
+    devBrief.innerHTML='<span class="nm">'+d.name+'</span>'
+      +'<span class="tag '+(d.abn?'tag-orange':'tag-green')+'">'+(d.abn?('预警 '+d.abn+' 项'):'正常')+'</span>'
+      +'<span class="kv">'+meta.unitLabel+'<b>'+d.unit.replace(' 储能单元',' 号')+'</b></span>'
+      +extra.map(function(e){return '<span class="kv">'+e[0]+'<b>'+e[1]+'</b></span>'}).join('')
+      +'<span class="lnk" id="dbLink">查看设备详情 ›</span>';
+    devBrief.classList.remove('hide');
+    $('dbLink').onclick=function(){
+      if(window.parent!==window){window.parent.location.hash='#monitor-cabin'}
+      else{location.hash='#monitor-cabin'}
+    };
+  }
+
+  /* ================= 结果画像 ================= */
+  function profile(type,d){
+    if(type==='site'){
+      return {score:SITE.score,abn:SITE.abn,days:SITE.days,
+        capK:'总电池组数',capV:'18 组',powK:'总容量',powV:'4.8 MWh',
+        dims:SITE.dims,rows:SITE.rows,advice:SITE.advice,
+        obj:'整站',objTag:'',sub:'全站 · 82 项点'};
+    }
+    var meta=DEVTYPE[type], sc=d.score, abn=d.abn;
+    var dims=meta.dims.map(function(x,i){
+      var v=clamp(x[1]+(sc-92)+(i===0&&abn?-2:0),70,99);
+      return [x[0],v];
+    });
+    var rows=meta.rows.map(function(r,i){
+      var a=(i===0?Math.min(abn,1):0)+((i===1&&abn>1)?(abn-1):0);
+      var s=clamp(r[2]+(sc-92)-(a?3:0),68,99);
+      return [r[0],r[1],r[1]-a,a,s,a>0?(s<85?'关注':'注意'):'正常'];
+    });
+    var adv;
+    if(type==='cabin'){
+      adv=abn
+        ? '本次体检覆盖 <b>26 项点</b>，发现 <b style="color:var(--red)">'+abn+' 项异常</b>（'+d.name+'：簇内温差 '+d.dt+'、单体电压极差 96 mV）。建议：1）7 天内安排该舱专项巡检，复核 BMS 温度采样与冷机流量；2）将该舱 12 簇纳入一致性分析周观察清单；3）其余项点正常，维持现有巡检频率。'
+        : '本次体检覆盖 <b>26 项点</b>，未发现异常（'+d.name+'：簇内温差 '+d.dt+'、SOH '+d.soh+'）。建议：维持现有巡检频率，按 30 天周期复检；关注簇间 SOC 偏差变化。';
+    }else if(type==='pcs'){
+      adv=abn
+        ? '本次体检覆盖 <b>22 项点</b>，发现 <b style="color:var(--red)">'+abn+' 项异常</b>（'+d.name+'：IGBT 最高温度 '+d.igbt+'，超预警阈值）。建议：1）检查散热风道与滤网堵塞情况；2）复核三相电流不平衡度与驱动板状态；3）异常未消除前建议降额 10% 运行。'
+        : '本次体检覆盖 <b>22 项点</b>，未发现异常（'+d.name+'：效率 '+d.eff+'、IGBT 最高温度 '+d.igbt+'）。建议：维持现有巡检频率，季度清洗散热滤网；关注直流电容容值衰减趋势。';
+    }else{
+      adv=abn
+        ? '本次体检覆盖 <b>20 项点</b>，发现 <b style="color:var(--red)">'+abn+' 项异常</b>（'+d.name+'：绕组最高温度 '+d.temp+'，接近告警阈值）。建议：1）复核负载率与冷却风机运行状态；2）安排红外测温与油色谱复测；3）高峰时段将该箱变负载控制在 85% 以内。'
+        : '本次体检覆盖 <b>20 项点</b>，未发现异常（'+d.name+'：绕组最高温度 '+d.temp+'、负载率 '+d.load+'）。建议：维持现有巡检频率，半年一次油色谱与局放检测；关注低压侧接头温升。';
+    }
+    return {score:sc,abn:abn,days:108,
+      capK:meta.capK,capV:meta.capV,powK:meta.powK,powV:meta.powV,
+      dims:dims,rows:rows,advice:adv,
+      obj:d.name,objTag:'<span class="tag tag-blue" style="margin-left:6px">专项</span>',
+      sub:d.name+' · '+meta.title+'专项 · '+TPL[cur.tpl].points+' 项点'};
+  }
+
+  /* ================= 渲染：汇总 ================= */
+  function renderSummary(type,d,p){
+    var lv=level(p.score);
+    $('kScore').textContent=(type==='site'?'整站':'设备')+'健康评分';
+    $('sScore').textContent=p.score;
+    $('sScore').style.color=lv[2];
+    $('sObj').innerHTML=p.obj+p.objTag;
+    $('sDays').textContent=p.days;
+    $('sAbn').textContent=p.abn+' 项';
+    $('sAbn').style.color=p.abn?'var(--red)':'var(--green)';
+    $('kA').textContent=p.capK;$('sBat').textContent=p.capV;
+    $('kB').textContent=p.powK;$('sCap').textContent=p.powV;
+    $('sRisk').innerHTML='<span class="tag '+lv[1]+'">'+lv[0]+'</span>';
+    $('sRange').textContent=rangeText();
+  }
+
+  /* ================= 渲染：评分环 + 分项 ================= */
+  function renderScore(p){
+    var C=2*Math.PI*76, lv=level(p.score);
+    $('ringArc').setAttribute('stroke-dasharray',C.toFixed(1));
+    $('ringArc').setAttribute('stroke-dashoffset',(C*(1-p.score/100)).toFixed(1));
+    $('ringArc').setAttribute('stroke',lv[2]);
+    $('ringNum').textContent=p.score;
+    $('ringNum').setAttribute('fill',lv[2]);
+    $('ringCap').textContent=(p.obj==='整站'?'整站':'设备')+'健康评分 / 100';
+    $('ringNote').textContent=lv[0]+' · 环比 '+(p.score>=90?'+1.8':'−0.6');
+    $('ringNote').setAttribute('fill',lv[2]);
+    $('scoreSub').textContent=p.sub;
+    $('dimBox').innerHTML=p.dims.map(function(x){
+      var c=x[1]>=93?'#00B42A':(x[1]<85?'#FF7D00':'#2E6BE6');
+      return '<div class="dimrow"><span class="nm">'+x[0]+'</span><span class="bar"><i style="width:'+x[1]+'%;background:'+c+'"></i></span><b>'+x[1]+'</b></div>';
+    }).join('');
+  }
+
+  /* ================= 渲染：30 天趋势 ================= */
+  function renderTrend(p,seed){
+    var x0=34,x1=726,yTop=34,yBot=186;
+    var r=(seed||7)%233280;
+    var rnd=function(){r=(r*9301+49297)%233280;return r/233280};
+    var vals=[],v=p.score-3.6,i;
+    for(i=0;i<30;i++){
+      var target=p.score-2.4+(i/29)*2.4;
+      v=v+(target-v)*0.3+(rnd()-0.5)*1.8;
+      vals.push(v);
+    }
+    vals[29]=p.score;
+    var mx=Math.max.apply(null,vals),mn=Math.min.apply(null,vals);
+    /* 自适应纵轴：4 段等距、整数刻度，避免曲线贴底 */
+    var step=10,pad=1.2,stp=[1,2,5,10];
+    var span=(Math.ceil(mx+pad)-Math.floor(mn-pad));
+    for(i=0;i<stp.length;i++){ if(span<=stp[i]*4){step=stp[i];break;} }
+    var bot=Math.floor((mn-pad)/step)*step;
+    var top=bot+step*4;
+    var y=function(val){return +(yBot-(val-bot)/(top-bot)*(yBot-yTop)).toFixed(1)};
+    var g='';
+    for(i=0;i<5;i++){
+      var lv=top-i*step;
+      g+='<line x1="'+x0+'" x2="'+x1+'" y1="'+y(lv)+'" y2="'+y(lv)+'" stroke="#EEF1F5"/>';
+      g+='<text x="26" y="'+(y(lv)+4)+'" font-size="10" fill="#86909C" text-anchor="end">'+lv+'</text>';
+    }
+    var avg=vals.reduce(function(a,b){return a+b},0)/vals.length;
+    var pts=vals.map(function(val,idx){return +(x0+idx*(x1-x0)/29).toFixed(1)+','+y(val)}).join(' ');
+    var area=x0+','+yBot+' '+pts+' '+x1+','+yBot;
+    g+='<polygon points="'+area+'" fill="#2E6BE6" opacity="0.08"/>';
+    g+='<polyline points="'+pts+'" fill="none" stroke="#2E6BE6" stroke-width="2.5" stroke-linejoin="round"/>';
+    g+='<circle cx="'+x1+'" cy="'+y(p.score)+'" r="4" fill="#2E6BE6"/>';
+    g+='<text x="'+(x1-8)+'" y="'+(y(p.score)-10)+'" font-size="11" fill="#2E6BE6" font-weight="600" text-anchor="end">'+p.score+'</text>';
+    g+='<text x="'+x0+'" y="212" font-size="10" fill="#86909C">08-06</text>';
+    g+='<text x="'+x1+'" y="212" font-size="10" fill="#86909C" text-anchor="end">09-04</text>';
+    $('trendBox').innerHTML='<svg viewBox="0 0 760 220" style="width:100%;height:220px;display:block">'+g+'</svg>';
+    $('trendMeta').textContent='均值 '+avg.toFixed(1)+' · 最高 '+Math.round(mx)+' · 最低 '+Math.round(mn);
+  }
+
+  /* ================= 渲染：建议 + 明细 ================= */
+  function renderAdvice(p){
+    $('adviceSub').textContent=p.obj;
+    $('advice').innerHTML=p.advice;
+  }
+  function renderDetail(p){
+    $('detailSub').textContent=p.obj;
+    $('detailBox').innerHTML='<table><thead><tr><th>体检项分类</th><th>项点数</th><th>正常</th><th>异常</th><th>得分</th><th>结论</th></tr></thead><tbody>'
+      +p.rows.map(function(r){
+        var tag=r[5]==='正常'?'tag-green':(r[5]==='关注'?'tag-red':'tag-orange');
+        return '<tr><td>'+r[0]+'</td><td>'+r[1]+'</td><td>'+r[2]+'</td>'
+          +'<td>'+(r[3]?'<b style="color:var(--red)">'+r[3]+'</b>':'0')+'</td>'
+          +'<td>'+r[4]+'</td><td><span class="tag '+tag+'">'+r[5]+'</span></td></tr>';
+      }).join('')+'</tbody></table>';
+  }
+
+  /* ================= 空态 ================= */
+  function renderEmpty(type){
+    var meta=DEVTYPE[type], list=DEV_LISTS[type];
+    var recs=list.filter(function(d){return d.abn>0}).slice(0,3);
+    if(!recs.length) recs=list.slice(0,3);
+    $('empTitle').textContent='请选择'+meta.title+'后生成体检报告';
+    $('empDesc').textContent='已选择「'+TPL[cur.tpl].name+'」，请在上方「体检设备」中选择 1 台'+meta.title+'，或直接点击下方推荐对象。';
+    $('recs').innerHTML=recs.map(function(d){
+      return '<button class="rec" data-id="'+d.id+'"><b>'+d.name+'</b><span>'+(d.abn?('预警 '+d.abn+' 项'):'运行正常')+'</span><span style="color:var(--text2)">选择 →</span></button>';
+    }).join('');
+    Array.prototype.forEach.call($('recs').querySelectorAll('.rec'),function(b){
+      b.onclick=function(){
+        devSel.value=b.dataset.id;
+        onDevChange();
+        devField.scrollIntoView({block:'nearest'});
+      };
+    });
+  }
+
+  /* ================= 主渲染 ================= */
+  function renderAll(type,d,seed){
+    var isDev=type!=='site';
+    if(isDev&&!d){
+      body.style.display='none';
+      empty.style.display='';
+      renderEmpty(type);
+      return;
+    }
+    empty.style.display='none';
+    body.style.display='';
+    var p=profile(type,d);
+    renderSummary(type,d,p);
+    renderScore(p);
+    renderTrend(p,seed||(d?d.id.length*7+d.score:11));
+    renderAdvice(p);
+    renderDetail(p);
+  }
+
+  /* ================= 可用性 ================= */
+  function setRun(){
+    var t=TPL[cur.tpl];
+    var ok=!!t&&(t.scope==='site'||!!cur.dev);
+    btnRun.disabled=!ok;
+    btnRun.title=!t?'请先选择体检模板':(!ok?'请先选择体检设备':'开始体检');
+    return ok;
+  }
+
+  /* ================= 事件 ================= */
+  tplSel.addEventListener('change',function(){
+    var key=tplSel.value, t=TPL[key];
+    cur.tpl=key; cur.dev=null;
+    if(!key){
+      hideDevField();
+      paintScope('site');
+      setRun();
+      tip('warn','未选择模板时无法开始体检，请先选择模板。');
+      renderAll('site',null);
+      return;
+    }
+    if(t.scope==='site'){
+      hideDevField();
+      paintScope('site');
+      tip('ok','将按「整站标准体检模板」对全站执行体检，共 <b>82</b> 个项点。');
+      renderAll('site',null);
+      setRun();
+      return;
+    }
+    paintScope('device');
+    fillDevices(t.type);
+    showDevField();
+    tip('warn','已选择「'+t.name+'」，请先选择要体检的'+DEVTYPE[t.type].title+'。');
+    setRun();
+    renderAll(t.type,null);
   });
-});
 
-/* 开始体检：loading → 填充结果 */
-btnRun.addEventListener('click',function(){
-  btnRun.disabled=true;
-  btnRun.innerHTML='<span class="spin"></span> 体检中…';
-  setTimeout(function(){
-    btnRun.innerHTML='开始体检';
-    btnRun.disabled=false;
-    document.getElementById('sRange').textContent='2026-08-04 ~ 2026-09-04';
-    document.getElementById('sScore').textContent='92';
-    document.getElementById('sScore').style.color='var(--green)';
-    document.getElementById('sDays').textContent='108';
-    document.getElementById('sBat').textContent='18 组';
-    document.getElementById('sCap').textContent='4.8 MWh';
-    document.getElementById('sRisk').innerHTML='<span class="tag tag-green">低风险</span>';
-    document.getElementById('advice').innerHTML='本次体检覆盖 82 项点，发现 <b style="color:var(--red)">2 项异常</b>（均在 #2-1 舱电池系统）。建议 7 天内安排专项巡检并复核 BMS 温度采样，其余系统运行良好。';
-    document.getElementById('sAbn').textContent='2 项';
-    document.getElementById('detailBox').innerHTML=
-      '<table><thead><tr><th>体检项分类</th><th>项点数</th><th>正常</th><th>异常</th><th>得分</th><th>结论</th></tr></thead><tbody>'+
-      '<tr><td>电池系统（温度 / 压差 / SOC / SOH）</td><td>28</td><td>26</td><td><b style="color:var(--red)">2</b></td><td>94</td><td><span class="tag tag-orange">注意</span></td></tr>'+
-      '<tr><td>PCS 与电气（效率 / 绝缘 / 接地）</td><td>18</td><td>18</td><td>0</td><td>91</td><td><span class="tag tag-green">正常</span></td></tr>'+
-      '<tr><td>冷机系统（温度 / 液位 / 流量）</td><td>12</td><td>12</td><td>0</td><td>89</td><td><span class="tag tag-green">正常</span></td></tr>'+
-      '<tr><td>消防系统（探测器 / 联动 / 气灭）</td><td>8</td><td>8</td><td>0</td><td>96</td><td><span class="tag tag-green">正常</span></td></tr>'+
-      '<tr><td>通信与采集（BMS / EMS 链路）</td><td>10</td><td>10</td><td>0</td><td>93</td><td><span class="tag tag-green">正常</span></td></tr>'+
-      '<tr><td>结构与安防</td><td>6</td><td>6</td><td>0</td><td>95</td><td><span class="tag tag-green">正常</span></td></tr>'+
-      '</tbody></table>';
-  },1200);
-});
+  function onDevChange(){
+    var t=TPL[cur.tpl];
+    if(!t||t.scope!=='device') return;
+    var id=devSel.value;
+    var d=DEV_LISTS[t.type].filter(function(x){return x.id===id})[0]||null;
+    cur.dev=d;
+    if(!d){
+      devPick.classList.remove('filled');
+      devBrief.classList.add('hide');
+      tip('warn','已选择「'+t.name+'」，请先选择要体检的'+DEVTYPE[t.type].title+'。');
+      setRun();
+      renderAll(t.type,null);
+      return;
+    }
+    devPick.classList.add('filled');
+    paintBrief(t.type,d);
+    tip('ok','将按「'+t.name+'」对 <b>'+d.name+'</b> 执行单设备体检，共 <b>'+t.points+'</b> 个项点。');
+    setRun();
+    renderAll(t.type,d);
+  }
+  devSel.addEventListener('change',onDevChange);
+
+  $('devClear').addEventListener('click',function(){
+    devSel.value='';
+    onDevChange();
+  });
+
+  /* 体检对象分段：锁定态给出解释 */
+  Array.prototype.forEach.call(objSeg.querySelectorAll('button'),function(b){
+    b.addEventListener('click',function(){
+      var scope=b.dataset.scope;
+      if(!cur.tpl){
+        tip('warn','请先选择模板，体检对象将随模板自动确定。');
+        return;
+      }
+      if(b.classList.contains('locked')){
+        if(TPL[cur.tpl].scope==='device'){
+          tip('warn','专项模板仅支持单设备体检；如需整站体检，请将模板切换为「整站标准体检模板」。');
+        }else{
+          tip('warn','整站标准模板覆盖全站项点；如需单台设备体检，请选择对应的专项模板。');
+        }
+        return;
+      }
+      paintScope(scope);
+      if(scope==='site'){renderAll('site',null)}
+    });
+  });
+
+  /* 开始体检 */
+  btnRun.addEventListener('click',function(){
+    var t=TPL[cur.tpl];
+    if(!t) return;
+    if(t.scope==='device'&&!cur.dev) return;
+    btnRun.disabled=true;
+    btnRun.innerHTML='<span class="spin"></span> 体检中…';
+    setTimeout(function(){
+      btnRun.innerHTML='开始体检';
+      btnRun.disabled=false;
+      setRun();
+      renderAll(t.scope==='site'?'site':t.type,cur.dev,t.type?Date.now()%997:11);
+      tip('ok','体检完成 · '+t.name+(cur.dev?(' · '+cur.dev.name):' · 全站')+' · 更新于 '+nowHM());
+    },1100);
+  });
+
+  /* 初始：整站结果 */
+  paintScope('site');
+  setRun();
+  renderAll('site',null);
+})();
 </script>
 </body>
 </html>
 
+</template>
 </template>
 <template id="tpl-report-statistics">
 <!DOCTYPE html>
@@ -5416,10 +5870,10 @@ tbody tr{cursor:pointer}
 
   <!-- 统计卡片区 -->
   <div class="stats">
-    <div class="stat" style="--c:var(--primary)"><div class="label">本月工单</div><div class="value">33</div><div class="sub">告警联动 12 · MRO 导入 15 · 人工创建 6</div></div>
-    <div class="stat" style="--c:var(--green)"><div class="label">已闭环</div><div class="value">21</div><div class="sub">较上月 <span class="up">+3.2%</span></div></div>
-    <div class="stat" style="--c:var(--orange)"><div class="label">进行中</div><div class="value">9</div><div class="sub">待派单 3 · 处理中 4 · 待验收 2</div></div>
-    <div class="stat" style="--c:var(--red)"><div class="label">超时</div><div class="value" style="color:var(--red)">3</div><div class="sub dn" style="color:var(--red)">超过 SLA 时限 3 单</div></div>
+    <div class="stat" style="--c:var(--primary)"><div class="label">本月工单</div><div class="value">33</div></div>
+    <div class="stat" style="--c:var(--green)"><div class="label">已闭环</div><div class="value">21</div></div>
+    <div class="stat" style="--c:var(--orange)"><div class="label">进行中</div><div class="value">9</div></div>
+    <div class="stat" style="--c:var(--red)"><div class="label">超时</div><div class="value" style="color:var(--red)">3</div></div>
   </div>
 
   <div class="cols">
@@ -5652,19 +6106,11 @@ tbody tr:hover td:first-child{background:#F7F8FA}
 <body>
 <div class="page">
 
-  <div class="stats">
-    <div class="stat" style="--c:var(--primary)"><div class="label">本月补电建议</div><div class="value">34</div><div class="sub">需人工复核后执行</div></div>
-    <div class="stat" style="--c:var(--orange)"><div class="label">待处理工单</div><div class="value">6</div><div class="sub">建议 24 小时内处理</div></div>
-    <div class="stat" style="--c:var(--green)"><div class="label">本月已完成</div><div class="value">26</div><div class="sub">较上月 <span style="color:var(--green)">+4</span></div></div>
-    <div class="stat" style="--c:var(--red)"><div class="label">紧急工单</div><div class="value" style="color:var(--red)">2</div><div class="sub">需立即处理</div></div>
-  </div>
+
 
   <div class="card">
-    <div style="background:#F0F7FF;border:1px solid #BED4F7;border-radius:8px;padding:10px 14px;margin-bottom:14px;font-size:13px;color:#1D2129;line-height:1.7">
-      诊断证据链：#2-4 簇在一致性分析中压差 <b style="color:var(--red)">86mV</b>，超出 50mV 阈值 → 已生成补电建议（155 号电芯，建议电量 13.64kWh）。
-      <a style="color:var(--primary);cursor:pointer;font-weight:600" onclick="go('analysis-consistency')">查看一致性分析 →</a>
-    </div>
-    <div class="card-t">电芯补电建议</div>
+  
+    <div class="card-t">电芯补电建议  <a style="color:var(--primary);cursor:pointer;font-weight:600" onclick="go('analysis-consistency')">查看一致性分析 →</a></div>
     <div class="filters" style="margin-bottom:16px">
       <div class="field"><label>电池舱</label><select><option>请选择电池舱</option><option>#15 电池舱</option><option>#08 电池舱</option><option>#07 电池舱</option><option>#12 电池舱</option></select></div>
       <div class="field"><label>预警时间</label><span style="display:flex;align-items:center;gap:6px"><input type="date" value="2026-08-01"><span style="color:var(--text2)">→</span><input type="date" value="2026-08-28"></span></div>
@@ -5850,19 +6296,13 @@ td{padding:0 10px;height:48px;border-bottom:1px solid var(--border);font-size:13
 <body>
 <div class="page">
 
-  <div class="card" style="padding-bottom:0">
-    <div class="tabs">
-      <div class="tab active" data-t="plan">检修计划</div>
-      <div class="tab" data-t="record">检修记录</div>
-      <div class="tab" data-t="status">冷机状态</div>
-    </div>
-  </div>
+ 
 
   <div class="stats">
-    <div class="stat" style="--c:var(--primary)"><div class="label">在线冷机</div><div class="value">18</div><div class="sub">台 · 覆盖 18 个电池舱</div></div>
-    <div class="stat" style="--c:var(--orange)"><div class="label">待检修</div><div class="value">2</div><div class="sub">1 待检修 · 1 检修中</div></div>
-    <div class="stat" style="--c:var(--green)"><div class="label">本月完成</div><div class="value">6</div><div class="sub">计划完成率 100%</div></div>
-    <div class="stat" style="--c:var(--red)"><div class="label">超期未检</div><div class="value">0</div><div class="sub">超期时红色闪烁提醒</div></div>
+    <div class="stat" style="--c:var(--primary)"><div class="label">在线冷机</div><div class="value">18</div></div>
+    <div class="stat" style="--c:var(--orange)"><div class="label">待检修</div><div class="value">2</div></div>
+    <div class="stat" style="--c:var(--green)"><div class="label">本月完成</div><div class="value">6</div></div>
+    <div class="stat" style="--c:var(--red)"><div class="label">超期未检</div><div class="value">0</div></div>
   </div>
 
   <!-- Tab1：检修计划 -->
@@ -5870,7 +6310,7 @@ td{padding:0 10px;height:48px;border-bottom:1px solid var(--border);font-size:13
     <div class="card">
       <div class="filters" style="margin-bottom:16px">
         <div class="field"><label>冷机编号</label><input placeholder="请输入冷机编号"></div>
-        <div class="field"><label>所属电站</label><select><option>全部</option><option>宜兴中环 10MW/20MWh</option><option>华润曹妃甸</option></select></div>
+        <div class="field"><label>所属电站</label><select><option>全部</option><option>华润曹妃甸</option></select></div>
         <div class="field"><label>检修类型</label><select><option>全部</option><option>巡检</option><option>保养</option><option>维修</option></select></div>
         <div class="field"><label>状态</label><select><option>全部</option><option>待检修</option><option>检修中</option><option>已完成</option></select></div>
         <div class="field" style="margin-left:auto"><label>&nbsp;</label><span style="display:flex;gap:10px"><button class="btn" id="btnReset">重置</button><button class="btn btn-primary">查询</button></span></div>
@@ -5890,7 +6330,7 @@ td{padding:0 10px;height:48px;border-bottom:1px solid var(--border);font-size:13
         <tr><td>2</td><td>CL-04</td><td>华润曹妃甸</td><td>#4 电池舱</td><td>维修（液位低）</td><td>2026-09-06</td><td>李工</td><td><span class="tag tag-blue">检修中</span></td><td><a style="color:var(--primary);cursor:pointer">详情</a></td></tr>
         <tr><td>3</td><td>CL-02</td><td>华润曹妃甸</td><td>#2 电池舱</td><td>保养</td><td>2026-09-10</td><td>张工</td><td><span class="tag tag-orange">待检修</span></td><td><a style="color:var(--primary);cursor:pointer">开始</a></td></tr>
         <tr><td>4</td><td>CL-03</td><td>华润曹妃甸</td><td>#3 电池舱</td><td>巡检</td><td>2026-09-02</td><td>王工</td><td><span class="tag tag-green">已完成</span></td><td><a style="color:var(--primary);cursor:pointer">记录</a></td></tr>
-        <tr><td>5</td><td>CL-05</td><td>宜兴中环 10MW/20MWh</td><td>#5 电池舱</td><td>保养</td><td>2026-08-28</td><td>李工</td><td><span class="tag tag-green">已完成</span></td><td><a style="color:var(--primary);cursor:pointer">记录</a></td></tr>
+        <tr><td>5</td><td>CL-05</td><td>华润曹妃甸</td><td>#5 电池舱</td><td>保养</td><td>2026-08-28</td><td>李工</td><td><span class="tag tag-green">已完成</span></td><td><a style="color:var(--primary);cursor:pointer">记录</a></td></tr>
         <tr><td>6</td><td>CL-06</td><td>华润曹妃甸</td><td>#6 电池舱</td><td>巡检</td><td>2026-08-25</td><td>王工</td><td><span class="tag tag-green">已完成</span></td><td><a style="color:var(--primary);cursor:pointer">记录</a></td></tr>
         </tbody>
       </table>
@@ -6058,15 +6498,12 @@ td{padding:0 10px;height:48px;border-bottom:1px solid var(--border);font-size:13
 <div class="page">
 
   <!-- 顶部警示条（黄色横幅，高风险操作提示） -->
-  <div class="warn-bar">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 3 2.5 20h19L12 3z" stroke="#B25E09" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 10v4" stroke="#B25E09" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="16.8" r="1" fill="#B25E09"/></svg>
-    <span>SOC 标定会影响电站放电量计算、剩余能量预测等核心功能，请谨慎操作。建议在低负载时段执行，并提前通知相关人员。</span>
-  </div>
+
 
   <div class="card" style="padding-bottom:0">
     <div class="tabs">
       <div class="tab active" data-t="record">标定记录</div>
-      <div class="tab" data-t="manual">手动标定</div>
+     
       <div class="tab" data-t="auto">自动标定策略</div>
     </div>
   </div>
@@ -6074,10 +6511,10 @@ td{padding:0 10px;height:48px;border-bottom:1px solid var(--border);font-size:13
   <!-- Tab1：标定记录 -->
   <div id="tab-record">
     <div class="stats">
-      <div class="stat" style="--c:var(--primary)"><div class="label">本月标定次数</div><div class="value">5</div><div class="sub">统计周期 2026-09-01 ~ 2026-09-04</div></div>
-      <div class="stat" style="--c:var(--orange)"><div class="label">建议标定簇数</div><div class="value">3</div><div class="sub">SOC 偏差 &gt; 5% 的电池簇</div></div>
-      <div class="stat" style="--c:var(--green)"><div class="label">已标定</div><div class="value">5</div><div class="sub">本月完成标定的电池簇</div></div>
-      <div class="stat" style="--c:var(--red)"><div class="label">超期未标定</div><div class="value" style="color:var(--red)">2</div><div class="sub">超过 30 天未标定</div></div>
+      <div class="stat" style="--c:var(--primary)"><div class="label">本月标定次数</div><div class="value">5</div></div>
+      <div class="stat" style="--c:var(--orange)"><div class="label">建议标定簇数</div><div class="value">3</div></div>
+      <div class="stat" style="--c:var(--green)"><div class="label">已标定</div><div class="value">5</div></div>
+      <div class="stat" style="--c:var(--red)"><div class="label">超期未标定</div><div class="value" style="color:var(--red)">2</div></div>
     </div>
 
     <div class="card">
@@ -6102,9 +6539,9 @@ td{padding:0 10px;height:48px;border-bottom:1px solid var(--border);font-size:13
         <tbody>
         <tr><td>1</td><td>华润曹妃甸</td><td>#1-1 簇</td><td><span class="tag tag-blue">手动标定</span></td><td>71.8%</td><td>79.0%</td><td>+7.2</td><td>张工</td><td>2026-09-03 02:10</td><td><span class="tag tag-green">已完成</span></td><td><a style="color:var(--primary);cursor:pointer">详情</a></td></tr>
         <tr><td>2</td><td>华润曹妃甸</td><td>#2-4 簇</td><td><span class="tag tag-orange">自动标定</span></td><td>68.5%</td><td>74.2%</td><td>+5.7</td><td>系统</td><td>2026-09-02 03:00</td><td><span class="tag tag-green">已完成</span></td><td><a style="color:var(--primary);cursor:pointer">详情</a></td></tr>
-        <tr><td>3</td><td>宜兴中环 10MW/20MWh</td><td>#3-2 簇</td><td><span class="tag tag-blue">手动标定</span></td><td>74.1%</td><td>79.3%</td><td>+5.2</td><td>李工</td><td>2026-08-30 01:40</td><td><span class="tag tag-green">已完成</span></td><td><a style="color:var(--primary);cursor:pointer">详情</a></td></tr>
+        <tr><td>3</td><td>华润曹妃甸</td><td>#3-2 簇</td><td><span class="tag tag-blue">手动标定</span></td><td>74.1%</td><td>79.3%</td><td>+5.2</td><td>李工</td><td>2026-08-30 01:40</td><td><span class="tag tag-green">已完成</span></td><td><a style="color:var(--primary);cursor:pointer">详情</a></td></tr>
         <tr><td>4</td><td>华润曹妃甸</td><td>#1-3 簇</td><td><span class="tag tag-orange">自动标定</span></td><td>80.2%</td><td>80.0%</td><td>-0.2</td><td>系统</td><td>2026-08-22 04:15</td><td><span class="tag tag-green">已完成</span></td><td><a style="color:var(--primary);cursor:pointer">详情</a></td></tr>
-        <tr><td>5</td><td>宜兴中环 10MW/20MWh</td><td>#2-2 簇</td><td><span class="tag tag-blue">手动标定</span></td><td>65.3%</td><td>72.8%</td><td>+7.5</td><td>张工</td><td>2026-08-18 02:30</td><td><span class="tag tag-green">已完成</span></td><td><a style="color:var(--primary);cursor:pointer">详情</a></td></tr>
+        <tr><td>5</td><td>华润曹妃甸</td><td>#2-2 簇</td><td><span class="tag tag-blue">手动标定</span></td><td>65.3%</td><td>72.8%</td><td>+7.5</td><td>张工</td><td>2026-08-18 02:30</td><td><span class="tag tag-green">已完成</span></td><td><a style="color:var(--primary);cursor:pointer">详情</a></td></tr>
         </tbody>
       </table>
       <div class="pagination"><span>共 5 条</span><span class="pg">‹</span><span class="pg">1</span><span class="pg">›</span></div>
@@ -6131,7 +6568,7 @@ td{padding:0 10px;height:48px;border-bottom:1px solid var(--border);font-size:13
       <div class="card-t">自动标定策略</div>
       <div class="switch-row"><span class="switch on"></span><span style="flex:1">触发条件一：SOC 估算偏差 &gt; 5% 自动触发</span></div>
       <div class="switch-row"><span class="switch on"></span><span style="flex:1">触发条件二：周期超过 30 天未标定自动触发</span></div>
-      <div class="switch-row"><span class="switch"></span><span style="flex:1">执行前短信/邮件通知值班人员</span></div>
+      <div class="switch-row"><span class="switch on"></span><span style="flex:1">执行前通知值班人员值守</span></div>
       <div class="frow" style="margin-top:16px"><label>执行窗口（低负载时段）</label>
         <span style="display:flex;align-items:center;gap:8px"><input type="time" value="00:00" style="width:140px"><span style="color:var(--text2)">→</span><input type="time" value="06:00" style="width:140px"></span>
         <div class="hint">自动标定仅在执行窗口内下发，避免影响日间充放电调度。</div>
@@ -6307,16 +6744,13 @@ tbody tr:hover td{background:#F7F8FA}
 <div class="page">
 
   <!-- 在线故障常驻提醒 -->
-  <div class="alert-bar">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 3 2.5 20h19L12 3z" stroke="#F53F3F" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 10v4" stroke="#F53F3F" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="16.8" r="1" fill="#F53F3F"/></svg>
-    当前存在 <b>&nbsp;2&nbsp;</b> 起在线 UPS 故障，请立即处理。
-  </div>
+
 
   <div class="stats">
-    <div class="stat" style="--c:var(--red)"><div class="label">在线故障</div><div class="value" style="color:var(--red)">2</div><div class="sub">需立即处理</div></div>
-    <div class="stat" style="--c:var(--orange)"><div class="label">处理中</div><div class="value">1</div><div class="sub">已派单，待现场处置</div></div>
-    <div class="stat" style="--c:var(--green)"><div class="label">本月已恢复</div><div class="value">1</div><div class="sub">恢复后自动同步工单闭环</div></div>
-    <div class="stat" style="--c:var(--primary)"><div class="label">UPS 总数</div><div class="value">24</div><div class="sub">在线率 91.7%</div></div>
+    <div class="stat" style="--c:var(--red)"><div class="label">在线故障</div><div class="value" style="color:var(--red)">2</div></div>
+    <div class="stat" style="--c:var(--orange)"><div class="label">处理中</div><div class="value">1</div></div>
+    <div class="stat" style="--c:var(--green)"><div class="label">本月已恢复</div><div class="value">1</div></div>
+    <div class="stat" style="--c:var(--primary)"><div class="label">UPS 总数</div><div class="value">24</div></div>
   </div>
 
   <div class="card">
@@ -6520,10 +6954,10 @@ tbody tr{cursor:pointer}
 <div class="page">
 
   <div class="stats">
-    <div class="stat" style="--c:var(--primary)"><div class="label">待升级设备</div><div class="value">11</div><div class="sub">覆盖 2 个电池舱 · 3 台 PCS</div></div>
-    <div class="stat" style="--c:var(--orange)"><div class="label">升级中</div><div class="value">2</div><div class="sub">正在推送 v2.4.0</div></div>
-    <div class="stat" style="--c:var(--green)"><div class="label">本月已完成</div><div class="value">19</div><div class="sub">成功率 95.2%</div></div>
-    <div class="stat" style="--c:var(--red)"><div class="label">失败待处理</div><div class="value" style="color:var(--red)">1</div><div class="sub">#2-1 舱 BMS1 · 需重试</div></div>
+    <div class="stat" style="--c:var(--primary)"><div class="label">待升级设备</div><div class="value">11</div></div>
+    <div class="stat" style="--c:var(--orange)"><div class="label">升级中</div><div class="value">2</div></div>
+    <div class="stat" style="--c:var(--green)"><div class="label">本月已完成</div><div class="value">19</div></div>
+    <div class="stat" style="--c:var(--red)"><div class="label">失败待处理</div><div class="value" style="color:var(--red)">1</div></div>
   </div>
 
   <div class="cols">
