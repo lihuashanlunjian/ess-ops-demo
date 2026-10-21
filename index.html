@@ -5072,7 +5072,6 @@ td{padding:0 10px;height:48px;border-bottom:1px solid var(--border);font-size:13
   <!-- 顶部操作区 -->
   <div class="card">
     <div class="opbar">
-      <div class="field"><label>体检时间范围</label><span style="display:flex;align-items:center;gap:8px"><input type="date" id="dFrom" value="2026-08-04"><span style="color:var(--text2)">→</span><input type="date" id="dTo" value="2026-09-04"></span></div>
       <div class="field"><label>模板</label><select id="tplSel">
         <option value="">请选择模板</option>
         <optgroup label="整站模板">
@@ -5080,7 +5079,7 @@ td{padding:0 10px;height:48px;border-bottom:1px solid var(--border);font-size:13
         </optgroup>
         <optgroup label="专项模板 · 单设备">
           <option value="cabin">电池舱专项体检模板</option>
-          <option value="pcs">PCS 专项体检模板</option>
+          <option value="pcs">PCS专项体检模板</option>
           <option value="rvt">箱变专项体检模板</option>
         </optgroup>
       </select></div>
@@ -5255,7 +5254,8 @@ td{padding:0 10px;height:48px;border-bottom:1px solid var(--border);font-size:13
     return ['高风险','tag-red','var(--red)'];
   }
   function rangeText(){
-    return ($('dFrom').value||'2026-08-04')+' ~ '+($('dTo').value||'2026-09-04');
+    var a=$('dFrom'), b=$('dTo');
+    return ((a&&a.value)||'2026-08-04')+' ~ '+((b&&b.value)||'2026-09-04');
   }
   function nowHM(){
     var d=new Date();
